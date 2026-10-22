@@ -1,75 +1,160 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AI 客服預約機器人 - 客戶自主設定後台</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Onboarding Portal | AI Receptionist SaaS</title>
   <style>
-    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; line-height: 1.6; }
-    .form-group { margin-bottom: 15px; }
-    label { display: block; font-weight: bold; margin-bottom: 5px; }
-    input, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-    button { background: #0d9488; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; }
-    button:hover { background: #0f766e; }
-    .code-box { background: #f4f4f5; padding: 15px; border-radius: 6px; font-family: monospace; word-break: break-all; margin-top: 15px; display: none; }
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.6; padding: 2rem 1rem; }
+    .container { max-width: 800px; margin: 0 auto; }
+    
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem; }
+    .logo { font-size: 1.25rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .back-link { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+    .back-link:hover { color: #fff; }
+
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem; margin-bottom: 2rem; }
+    h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff; }
+    p.subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
+
+    .form-group { margin-bottom: 1.5rem; }
+    label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; color: #cbd5e1; }
+    input[type="text"], select { width: 100%; padding: 0.75rem 1rem; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; color: #fff; font-size: 1rem; }
+    input:focus, select:focus { outline: none; border-color: var(--primary); }
+
+    .plan-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+    .plan-radio-card { border: 1px solid var(--border); border-radius: 8px; padding: 1rem; cursor: pointer; transition: 0.2s; background: #0f172a; }
+    .plan-radio-card.selected { border-color: var(--primary); background: rgba(37, 99, 235, 0.1); }
+    .plan-radio-card input { display: none; }
+    .plan-title { font-weight: bold; color: #fff; margin-bottom: 0.25rem; }
+    .plan-sub { font-size: 0.85rem; color: var(--text-muted); }
+
+    .vapi-settings { background: rgba(15, 23, 42, 0.6); border: 1px dashed var(--border); padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; display: none; }
+    .vapi-settings.active { display: block; }
+
+    .btn { background: var(--primary); color: #fff; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; width: 100%; transition: 0.2s; }
+    .btn:hover { background: var(--primary-hover); }
+
+    .output-box { background: #0b0f19; border: 1px solid var(--border); padding: 1.25rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; color: #60a5fa; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin-top: 1rem; display: none; }
+    .success-msg { color: #34d399; font-size: 0.9rem; margin-top: 0.5rem; display: none; }
   </style>
 </head>
 <body>
 
-  <h2>🤖 AI 客服機器人設定面板</h2>
-  <p>填寫下方資訊，即可完成專屬 AI 接線員設定並取得嵌入程式碼。</p>
+  <div class="container">
+    <header>
+      <a href="/" class="logo">🐢 AI Receptionist Console</a>
+      <a href="/" class="back-link">← Back to Home</a>
+    </header>
 
-  <form id="clientForm">
-    <div class="form-group">
-      <label for="clientId">專屬客戶代碼 (Client ID)</label>
-      <input type="text" id="clientId" placeholder="例如：clinic_a 或 cram_school_b" required>
+    <div class="card">
+      <h1>Client Onboarding & Widget Generator</h1>
+      <p class="subtitle">Configure your AI receptionist parameters and generate your custom website integration snippet.</p>
+
+      <form id="onboardingForm">
+        <!-- 方案選擇 -->
+        <div class="form-group">
+          <label>Select Your License Plan</label>
+          <div class="plan-selector">
+            <div class="plan-radio-card selected" id="cardStarter" onclick="setPlan('starter')">
+              <input type="radio" name="plan" value="starter" checked>
+              <div class="plan-title">Starter Plan</div>
+              <div class="plan-sub">Text Chat & FAQ</div>
+            </div>
+            <div class="plan-radio-card" id="cardPro" onclick="setPlan('pro')">
+              <input type="radio" name="plan" value="pro">
+              <div class="plan-title">Pro Plan</div>
+              <div class="plan-sub">Vapi Voice AI Call Engine</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="clientId">Client ID / Store Name</label>
+          <input type="text" id="clientId" placeholder="e.g. tainan-turtle-cafe" required>
+        </div>
+
+        <!-- Pro 方案專屬：Vapi 語音設定 -->
+        <div class="vapi-settings" id="vapiSection">
+          <div class="form-group">
+            <label for="vapiPublicKey">Vapi Public API Key</label>
+            <input type="text" id="vapiPublicKey" placeholder="e.g. 8a3f9e... (from vapi.ai dashboard)">
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="vapiAssistantId">Vapi Assistant ID</label>
+            <input type="text" id="vapiAssistantId" placeholder="e.g. ast_7b2c... (voice assistant id)">
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem;">
+          <button type="button" class="btn" onclick="generateSnippet()">Generate Embed Code ➔</button>
+        </div>
+      </form>
+
+      <div id="resultContainer" style="margin-top: 2rem; display: none;">
+        <label>Your Custom Integration Snippet (Paste into HTML &lt;/body&gt;):</label>
+        <div class="output-box" id="snippetOutput"></div>
+        <div class="success-msg" id="copyMsg">✓ Snippet copied to clipboard!</div>
+      </div>
     </div>
-
-    <div class="form-group">
-      <label for="clientName">貴公司/機構名稱</label>
-      <input type="text" id="clientName" placeholder="例如：安康診所" required>
-    </div>
-
-    <div class="form-group">
-      <label for="systemPrompt">AI 客服人設與知識庫 (System Prompt)</label>
-      <textarea id="systemPrompt" rows="8" placeholder="例如：你現在是安康診所的 AI 櫃檯。語氣親切溫和，負責解答門診時間、衛教資訊與引導掛號預約..." required></textarea>
-    </div>
-
-    <button type="submit">儲存設定並產生嵌入碼</button>
-  </form>
-
-  <div id="resultBox" class="code-box">
-    <h3>🎉 設定成功！請將下方代碼複製貼到官網 </body> 之前：</h3>
-    <textarea id="embedCode" rows="4" readonly></textarea>
   </div>
 
   <script>
-    // 貼上您的 Supabase 連線資訊
-    const SUPABASE_URL = 'https://YOUR_SUPABASE_PROJECT_ID.supabase.co';
-    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    let currentPlan = 'starter';
 
-    document.getElementById('clientForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const clientId = document.getElementById('clientId').value.trim();
-      const clientName = document.getElementById('clientName').value.trim();
-      const systemPrompt = document.getElementById('systemPrompt').value.trim();
+    function setPlan(plan) {
+      currentPlan = plan;
+      const cardStarter = document.getElementById('cardStarter');
+      const cardPro = document.getElementById('cardPro');
+      const vapiSection = document.getElementById('vapiSection');
 
-      // 1. 寫入或更新 Supabase 'clients' 表格
-      const { data, error } = await supabase
-        .from('clients')
-        .upsert([{ client_id: clientId, client_name: clientName, system_prompt: systemPrompt }], { onConflict: 'client_id' });
+      if (plan === 'starter') {
+        cardStarter.classList.add('selected');
+        cardPro.classList.remove('selected');
+        vapiSection.classList.remove('active');
+      } else {
+        cardPro.classList.add('selected');
+        cardStarter.classList.remove('selected');
+        vapiSection.classList.add('active');
+      }
+    }
 
-      if (error) {
-        alert('儲存失敗：' + error.message);
-        return;
+    function generateSnippet() {
+      const clientId = document.getElementById('clientId').value.trim() || 'my-store';
+      const vapiPublicKey = document.getElementById('vapiPublicKey').value.trim();
+      const vapiAssistantId = document.getElementById('vapiAssistantId').value.trim();
+      
+      const baseUrl = window.location.origin;
+      let snippet = '';
+
+      if (currentPlan === 'starter') {
+        snippet = `<script \n  src="${baseUrl}/widget.js"\n  data-client-id="${clientId}"\n  data-plan="starter"\n  async>\n<\/script>`;
+      } else {
+        snippet = `<script \n  src="${baseUrl}/widget.js"\n  data-client-id="${clientId}"\n  data-plan="pro"\n  data-vapi-key="${vapiPublicKey}"\n  data-assistant-id="${vapiAssistantId}"\n  async>\n<\/script>`;
       }
 
-      // 2. 顯示專屬內嵌腳本
-      const scriptCode = `<script src="${window.location.origin}/widget.js?client=${clientId}" async><\/script>`;
-      document.getElementById('embedCode').value = scriptCode;
-      document.getElementById('resultBox').style.display = 'block';
-    });
+      const outputBox = document.getElementById('snippetOutput');
+      const resultContainer = document.getElementById('resultContainer');
+      
+      outputBox.textContent = snippet;
+      resultContainer.style.display = 'block';
+
+      // 自動複製
+      navigator.clipboard.writeText(snippet);
+      const copyMsg = document.getElementById('copyMsg');
+      copyMsg.style.display = 'block';
+      setTimeout(() => { copyMsg.style.display = 'none'; }, 3000);
+    }
   </script>
 </body>
 </html>
