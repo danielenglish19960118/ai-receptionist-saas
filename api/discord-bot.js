@@ -1,21 +1,43 @@
+import { verifyKey } from 'discord-interactions';
 import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
-  // ⭐️ 核心關鍵：不管 Discord 怎麼打，只要是 PING 驗證或 GET/POST 測試，直接回傳 200 與 type: 1
-  if (req.method === 'GET' || (req.body && req.body.type === 1) || !req.body || Object.keys(req.body).length === 0) {
-    return res.status(200).json({ type: 1 });
-  }
-
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // 處理斜線指令 (Type 2)
-  if (req.body && req.body.type === 2) {
-    const commandName = req.body.data.name;
+  // 1. 取得 Discord 傳遞過來的安全簽章 Header
+  const signature = req.headers['x-signature-ed25519'];
+  const timestamp = req.headers['x-signature-timestamp'];
+  
+  // 為了安全驗證，我們需要讀取原始的 body 字串
+  // 注意：Vercel 預設會自動解析 JSON，如果 req.body 已經是物件，我們把它轉回字串來驗證
+  const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+
+  // 2. 從 Discord Developer Portal 取得的 Public Key (需要去填入 Vercel 環境變數 DISCORD_PUBLIC_KEY)
+  const PUBLIC_KEY = process.env.DISCORD_PUBLIC_KEY;
+
+  if (PUBLIC_KEY && signature && timestamp) {
+    const isValidRequest = verifyKey(rawBody, signature, timestamp, PUBLIC_KEY);
+    if (!isValidRequest) {
+      return res.status(401).send('Bad request signature');
+    }
+  }
+
+  // 3. 解析 body
+  const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+
+  // 4. 處理 Discord 的 PING (Type 1)
+  if (body && body.type === 1) {
+    return res.status(200).json({ type: 1 });
+  }
+
+  // 5. 處理斜線指令 (Type 2)
+  if (body && body.type === 2) {
+    const commandName = body.data.name;
 
     if (commandName === 'deploy') {
-      const options = req.body.data.options || [];
+      const options = body.data.options || [];
       const businessName = options.find(o => o.name === 'name')?.value || 'Client Business';
       const businessType = options.find(o => o.name === 'type')?.value || 'General';
 
