@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Receptionist SaaS & Client Suite</title>
+  <title>Turtle English - AI Receptionist & Enterprise Suite</title>
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Supabase JS Client SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -23,65 +21,67 @@
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
 
-  <!-- Top Header -->
+  <!-- Header -->
   <header class="border-b border-slate-800 bg-slate-950 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-xl shadow-lg shadow-indigo-500/20">
-        🤖
+      <div class="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center font-bold text-xl shadow-lg shadow-emerald-600/20">
+        🐢
       </div>
       <div>
-        <h1 class="font-bold text-lg leading-tight">AI Receptionist SaaS</h1>
-        <p class="text-xs text-slate-400">Powered by Gemini API & Supabase</p>
+        <h1 class="font-bold text-lg leading-tight">Turtle English AI Suite</h1>
+        <p class="text-xs text-emerald-400">跨國企業英文內訓 ｜ 文學鑑賞與語言療癒</p>
       </div>
     </div>
 
-    <!-- Navigation Tabs -->
-    <nav class="flex items-center gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800">
-      <button id="tab-simulator" onclick="switchTab('simulator')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-600 text-white shadow-md">
-        📞 Live Simulator
+    <!-- Navigation -->
+    <nav class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800 overflow-x-auto">
+      <button id="tab-simulator" onclick="switchTab('simulator')" class="px-3 py-2 rounded-lg text-xs font-medium bg-emerald-600 text-white transition-all shadow-md">
+        📞 Live Call
       </button>
-      <button id="tab-leads" onclick="switchTab('leads')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
-        📋 Lead CRM
+      <button id="tab-leads" onclick="switchTab('leads')" class="px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all">
+        📋 Client Leads
       </button>
-      <button id="tab-kb" onclick="switchTab('kb')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
-        📚 Knowledge Base
+      <button id="tab-bookings" onclick="switchTab('bookings')" class="px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all">
+        📅 Consultations
       </button>
-      <button id="tab-embed" onclick="switchTab('embed')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
-        ⚙️ Embed & Setup
+      <button id="tab-persona" onclick="switchTab('persona')" class="px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all">
+        🎙️ Voice & Brand
+      </button>
+      <button id="tab-kb" onclick="switchTab('kb')" class="px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all">
+        📚 Service Rules
+      </button>
+      <button id="tab-embed" onclick="switchTab('embed')" class="px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all">
+        ⚙️ Embed Widget
       </button>
     </nav>
   </header>
 
-  <!-- Main Workspace Area -->
   <main class="flex-1 p-6 max-w-7xl w-full mx-auto">
 
-    <!-- TAB 1: LIVE SIMULATOR -->
+    <!-- TAB 1: SIMULATOR -->
     <section id="content-simulator" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
-      <!-- Voice Call Console -->
       <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-xl">
         <div class="w-full">
-          <span id="call-status-badge" class="inline-block px-3 py-1 rounded-full bg-slate-800 text-xs text-slate-400 font-mono mb-4">
-            LINE READY
+          <span id="call-status-badge" class="inline-block px-3 py-1 rounded-full bg-slate-800 text-xs text-emerald-400 font-mono mb-4">
+            TURTLE CONCIERGE READY
           </span>
           <h2 class="text-xl font-bold" id="display-business-name">Turtle English</h2>
-          <p class="text-sm text-slate-400">Agent: <span id="display-agent-name">Alex</span></p>
+          <p class="text-xs text-slate-400 mt-1">Corporate Training & Literary Healing</p>
+          <p class="text-sm text-slate-300 mt-2">Agent: <span id="display-agent-name">Alex</span> (<span id="display-voice-gender">Female</span>)</p>
         </div>
 
-        <!-- Call Status Indicator -->
         <div class="my-8 flex flex-col items-center">
           <div id="call-avatar" class="w-32 h-32 rounded-full flex items-center justify-center border-4 border-slate-800 bg-slate-900 transition-all">
-            <span id="call-avatar-icon" class="text-5xl">📞</span>
+            <span id="call-avatar-icon" class="text-5xl">🐢</span>
           </div>
           <div id="call-timer" class="mt-4 font-mono text-2xl font-bold text-emerald-400 hidden">
             00:00
           </div>
         </div>
 
-        <!-- Call Controls -->
         <div class="w-full flex items-center gap-3">
           <button id="btn-start-call" onclick="startCall()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 font-semibold rounded-xl transition-all shadow-lg shadow-emerald-600/20">
-            Start Live Audio Call
+            Start Audio Call
           </button>
           <button id="btn-mute" onclick="toggleMute()" class="p-3.5 rounded-xl border border-slate-800 hover:bg-slate-900 hidden">
             🔊 Audio On
@@ -92,190 +92,209 @@
         </div>
       </div>
 
-      <!-- Live Interactive Transcript Console -->
       <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col h-[580px] shadow-xl">
         <div class="border-b border-slate-800 pb-3 mb-4 flex items-center justify-between">
-          <h3 class="font-semibold text-slate-200">Gemini Live Call & Chat Console</h3>
-          <span class="text-xs text-slate-500">Real-time Transcript</span>
+          <h3 class="font-semibold text-slate-200">Turtle AI Interactive Console</h3>
+          <span class="text-xs text-slate-500">Live Transcript</span>
         </div>
 
-        <!-- Transcript History -->
-        <div id="transcript-container" class="flex-1 overflow-y-auto space-y-4 pr-2">
-          <!-- Dynamically populated messages -->
-        </div>
+        <div id="transcript-container" class="flex-1 overflow-y-auto space-y-4 pr-2"></div>
 
-        <!-- Input Form -->
         <form onsubmit="handleSendMessage(event)" class="mt-4 flex gap-2 pt-3 border-t border-slate-800">
           <input 
             type="text" 
             id="user-input"
-            placeholder="Type a message or response..."
-            class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+            placeholder="Inquire about corporate training or literature healing..."
+            class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
           />
-          <button type="submit" class="px-5 bg-indigo-600 hover:bg-indigo-500 font-medium rounded-xl text-sm transition-all">
+          <button type="submit" class="px-5 bg-emerald-600 hover:bg-emerald-500 font-medium rounded-xl text-sm transition-all">
             Send
           </button>
         </form>
       </div>
-
     </section>
 
-    <!-- TAB 2: LEAD CRM (Supabase Powered) -->
+    <!-- TAB 2: LEAD CRM -->
     <section id="content-leads" class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl hidden">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold">Captured Inbound Leads (Supabase)</h2>
+        <div>
+          <h2 class="text-xl font-bold">Client & Corporate Leads</h2>
+          <p class="text-xs text-slate-400">Enterprise HR & Individual Literature Healing Inquiries</p>
+        </div>
         <button onclick="fetchLeads()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 rounded-lg border border-slate-700 transition-all">
-          🔄 Refresh Leads
+          🔄 Refresh
         </button>
       </div>
       <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="border-b border-slate-800 text-xs text-slate-400 uppercase tracking-wider">
-              <th class="py-3 px-4">Caller Name</th>
-              <th class="py-3 px-4">Phone Number</th>
-              <th class="py-3 px-4">Intent / Service</th>
-              <th class="py-3 px-4">Status</th>
+              <th class="py-3 px-4">Client Name</th>
+              <th class="py-3 px-4">Contact Phone</th>
+              <th class="py-3 px-4">Service Category</th>
+              <th class="py-3 px-4">AI Score Tag</th>
               <th class="py-3 px-4">Date</th>
             </tr>
           </thead>
-          <tbody id="leads-table-body" class="divide-y divide-slate-800 text-sm">
-            <!-- Dynamically populated leads from Supabase -->
-          </tbody>
+          <tbody id="leads-table-body" class="divide-y divide-slate-800 text-sm"></tbody>
         </table>
       </div>
     </section>
 
-    <!-- TAB 3: KNOWLEDGE BASE -->
-    <section id="content-kb" class="grid grid-cols-1 lg:grid-cols-3 gap-6 hidden">
-      <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
-        <h3 class="font-bold text-lg mb-4">Add Knowledge Rule</h3>
-        <form onsubmit="handleAddFaq(event)" class="space-y-4">
-          <div>
-            <label class="block text-xs font-medium text-slate-400 mb-1">Customer Question / Trigger</label>
-            <input 
-              type="text" 
-              id="faq-question"
-              placeholder="e.g. Where are you located?"
-              class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500"
-              required
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-medium text-slate-400 mb-1">AI Receptionist Response</label>
-            <textarea 
-              id="faq-answer"
-              rows="3"
-              placeholder="e.g. We are located in the East District of Tainan City."
-              class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500"
-              required
-            ></textarea>
-          </div>
-          <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 font-medium rounded-xl text-sm transition-all">
-            Save FAQ
-          </button>
-        </form>
-      </div>
-
-      <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
-        <h3 class="font-bold text-lg mb-4">Active Knowledge Base Rules</h3>
-        <div id="faqs-container" class="space-y-3">
-          <!-- Dynamically populated FAQs -->
+    <!-- TAB 3: CONSULTATION BOOKINGS -->
+    <section id="content-bookings" class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl hidden">
+      <div class="flex justify-between items-center mb-4">
+        <div>
+          <h2 class="text-xl font-bold">Consultation Calendar</h2>
+          <p class="text-xs text-slate-400">Scheduled Corporate Needs Analysis & Literature Trial Sessions</p>
         </div>
+        <button onclick="fetchBookings()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 rounded-lg border border-slate-700 transition-all">
+          🔄 Refresh
+        </button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-slate-800 text-xs text-slate-400 uppercase tracking-wider">
+              <th class="py-3 px-4">Client / Company</th>
+              <th class="py-3 px-4">Phone</th>
+              <th class="py-3 px-4">Booking Date</th>
+              <th class="py-3 px-4">Booking Time</th>
+              <th class="py-3 px-4">Session Type</th>
+            </tr>
+          </thead>
+          <tbody id="bookings-table-body" class="divide-y divide-slate-800 text-sm"></tbody>
+        </table>
       </div>
     </section>
 
-    <!-- TAB 4: EMBED & SETUP -->
+    <!-- TAB 4: PERSONA SETTINGS -->
+    <section id="content-persona" class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl max-w-2xl mx-auto hidden">
+      <h2 class="text-xl font-bold mb-4">Voice & Brand Persona Settings</h2>
+      <form onsubmit="saveSettings(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">Brand Name</label>
+          <input type="text" id="setting-biz-name" value="Turtle English" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">Receptionist Agent Name</label>
+          <input type="text" id="setting-agent-name" value="Alex" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">Language Mode</label>
+          <select id="setting-lang-mode" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200">
+            <option value="bilingual">Bilingual (English + Traditional Chinese)</option>
+            <option value="english">Strictly English</option>
+            <option value="chinese">Strictly Traditional Chinese</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">Voice Tone Accent</label>
+          <select id="setting-voice-gender" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200">
+            <option value="female">Warm & Articulate Female Voice</option>
+            <option value="male">Calm & Professional Male Voice</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 font-medium rounded-xl text-sm transition-all">
+          Save Settings
+        </button>
+      </form>
+    </section>
+
+    <!-- TAB 5: KNOWLEDGE BASE -->
+    <section id="content-kb" class="grid grid-cols-1 lg:grid-cols-3 gap-6 hidden">
+      <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
+        <h3 class="font-bold text-lg mb-4">Add Core Service Rule</h3>
+        <form onsubmit="handleAddFaq(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Service Question / Inquiry</label>
+            <input type="text" id="faq-question" placeholder="e.g. 企業內訓如何收費？" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm" required />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">AI Response & Offer Details</label>
+            <textarea id="faq-answer" rows="3" placeholder="e.g. 我們提供量身打造的線上跨國企業內訓，歡迎預約 15 分鐘需求訪談。" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm" required></textarea>
+          </div>
+          <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 font-medium rounded-xl text-sm transition-all">Save Service Rule</button>
+        </form>
+      </div>
+      <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
+        <h3 class="font-bold text-lg mb-4">Active Service Offerings (Knowledge Base)</h3>
+        <div id="faqs-container" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- TAB 6: EMBED -->
     <section id="content-embed" class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl max-w-3xl mx-auto hidden">
       <h2 class="text-xl font-bold mb-2">Embed Code Snippet</h2>
-      <p class="text-sm text-slate-400 mb-6">Copy and paste this script tag into any client website to load the AI receptionist widget.</p>
-      
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 font-mono text-xs text-indigo-300 overflow-x-auto">
-        <pre>&lt;script 
-  src="https://ai-receptionist-saas.vercel.app/widget.js" 
-  data-business="turtle-english"
-  data-agent="alex"
-  async&gt;
-&lt;/script&gt;</pre>
+      <p class="text-sm text-slate-400 mb-6">Copy and paste this script tag into Turtle English website to load the AI receptionist widget.</p>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 font-mono text-xs text-emerald-300 overflow-x-auto">
+        <pre>&lt;script src="https://ai-receptionist-saas.vercel.app/widget.js" async&gt;&lt;/script&gt;</pre>
       </div>
     </section>
 
   </main>
 
-  <!-- JavaScript Application Logic -->
   <script>
-    // Supabase Configuration
     const SUPABASE_URL = 'https://soemujvvjnscchzncceo.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_LtLxBrGCr3sDmJ9pNXnZgQ_lsRSJI2R';
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // State Variables
     let businessName = "Turtle English";
     let agentName = "Alex";
-    let callActive = false;
-    let isMuted = false;
-    let callDuration = 0;
-    let timerInterval = null;
+    let languageMode = "bilingual";
+    let voiceGender = "female";
 
-    let messages = [
-      {
-        sender: 'agent',
-        text: `Thank you for calling Turtle English! My name is Alex. How can I help you today?`,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      }
-    ];
-
-    let leads = [];
-
+    let callActive = false, isMuted = false, callDuration = 0, timerInterval = null;
+    let messages = [{ 
+      sender: 'agent', 
+      text: `Welcome to Turtle English. I am Alex. Are you inquiring about our Global Online Corporate Training or our Literature Appreciation & Healing sessions today?`, 
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+    }];
+    let leads = [], bookings = [];
+    
+    // Turtle English 專屬業務 FAQ
     let faqs = [
-      { question: 'What are your operating hours?', answer: 'We are open Monday through Friday from 9:00 AM to 8:00 PM.' },
-      { question: 'How do I book a trial lesson?', answer: 'I can schedule a trial lesson for you right now on this call!' }
+      { 
+        question: '什麼是跨國線上企業英文內訓？ (Corporate Training)', 
+        answer: '我們專為跨國企業與外商團隊提供定制線上內訓，涵蓋商務簡報、跨文化領導力溝通、構詞詞源寫作與商務談判技巧。' 
+      },
+      { 
+        question: '什麼是文學鑑賞與文學療癒？ (Literature Healing)', 
+        answer: '專為忙碌職場人設計的沉浸式英文文學鑑賞課程，結合古典文學經典閱讀、詞源探索與語言療癒，讓人在學習語言的同時獲得心靈滋養。' 
+      },
+      { 
+        question: '如何預約企業內訓諮詢或體驗課？', 
+        answer: '您可以直接在對話中告知您的方便時間與聯絡電話，我將為您預約 15 分鐘線上記者或免費文學試聽體驗。' 
+      }
     ];
 
-    // Fetch Leads from Supabase Database
     async function fetchLeads() {
-      try {
-        const { data, error } = await supabaseClient
-          .from('leads')
-          .select('*')
-          .order('id', { ascending: false });
-
-        if (error) {
-          console.error('Error fetching leads:', error);
-          return;
-        }
-
-        if (data) {
-          leads = data;
-          renderLeads();
-        }
-      } catch (err) {
-        console.error('Supabase Client Error:', err);
-      }
+      const { data } = await supabaseClient.from('leads').select('*').order('id', { ascending: false });
+      if (data) { leads = data; renderLeads(); }
     }
 
-    // Navigation Switcher
+    async function fetchBookings() {
+      const { data } = await supabaseClient.from('appointments').select('*').order('id', { ascending: false });
+      if (data) { bookings = data; renderBookings(); }
+    }
+
     function switchTab(tabName) {
-      const tabs = ['simulator', 'leads', 'kb', 'embed'];
-      tabs.forEach(t => {
+      ['simulator', 'leads', 'bookings', 'persona', 'kb', 'embed'].forEach(t => {
         document.getElementById(`content-${t}`).classList.add('hidden');
-        document.getElementById(`tab-${t}`).className = "px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white";
+        document.getElementById(`tab-${t}`).className = "px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all";
       });
-
       document.getElementById(`content-${tabName}`).classList.remove('hidden');
-      document.getElementById(`tab-${tabName}`).className = "px-4 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-600 text-white shadow-md";
+      document.getElementById(`tab-${tabName}`).className = "px-3 py-2 rounded-lg text-xs font-medium bg-emerald-600 text-white transition-all shadow-md";
 
-      if (tabName === 'leads') {
-        fetchLeads();
-      }
+      if (tabName === 'leads') fetchLeads();
+      if (tabName === 'bookings') fetchBookings();
     }
 
-    // Render Transcript Messages
     function renderMessages() {
       const container = document.getElementById('transcript-container');
       container.innerHTML = messages.map(msg => `
         <div class="flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}">
-          <div class="max-w-[80%] rounded-2xl px-4 py-3 text-sm ${msg.sender === 'user' ? 'bg-indigo-600 text-white rounded-br-none' : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-bl-none'}">
+          <div class="max-w-[80%] rounded-2xl px-4 py-3 text-sm ${msg.sender === 'user' ? 'bg-emerald-700 text-white rounded-br-none' : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-bl-none'}">
             ${msg.text}
           </div>
           <span class="text-[10px] text-slate-500 mt-1 px-1">${msg.timestamp}</span>
@@ -284,62 +303,63 @@
       container.scrollTop = container.scrollHeight;
     }
 
-    // Render Leads Table
     function renderLeads() {
       const tbody = document.getElementById('leads-table-body');
-      if (leads.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500">No leads captured yet. Try adding one via API or SQL Editor!</td></tr>`;
-        return;
-      }
-
-      tbody.innerHTML = leads.map(lead => `
+      if (leads.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500">No client leads captured yet.</td></tr>`; return; }
+      tbody.innerHTML = leads.map(l => `
         <tr class="hover:bg-slate-900/50">
-          <td class="py-3 px-4 font-medium">${lead.name || 'Anonymous'}</td>
-          <td class="py-3 px-4 font-mono text-slate-400">${lead.phone || 'N/A'}</td>
-          <td class="py-3 px-4">${lead.intent || 'General Inquiry'}</td>
+          <td class="py-3 px-4 font-medium text-emerald-300">${l.name || 'Anonymous'}</td>
+          <td class="py-3 px-4 font-mono text-slate-400">${l.phone || 'N/A'}</td>
+          <td class="py-3 px-4">${l.intent || 'Corporate/Literature Inquiry'}</td>
           <td class="py-3 px-4">
-            <span class="px-2.5 py-1 rounded-full text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-              ${lead.status || 'New Lead'}
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold ${l.status === 'HIGH' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'}">
+              ${l.status || 'HIGH INTENT'}
             </span>
           </td>
-          <td class="py-3 px-4 text-slate-500">${lead.created_at ? new Date(lead.created_at).toLocaleDateString() : 'Today'}</td>
+          <td class="py-3 px-4 text-slate-500">${l.created_at ? new Date(l.created_at).toLocaleDateString() : 'Today'}</td>
         </tr>
       `).join('');
     }
 
-    // Render FAQs
+    function renderBookings() {
+      const tbody = document.getElementById('bookings-table-body');
+      if (bookings.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500">No consultations booked yet.</td></tr>`; return; }
+      tbody.innerHTML = bookings.map(b => `
+        <tr class="hover:bg-slate-900/50">
+          <td class="py-3 px-4 font-medium text-emerald-300">${b.name}</td>
+          <td class="py-3 px-4 font-mono text-slate-400">${b.phone}</td>
+          <td class="py-3 px-4 font-semibold text-emerald-400">${b.booking_date || 'TBD'}</td>
+          <td class="py-3 px-4 font-mono text-amber-300">${b.booking_time || 'TBD'}</td>
+          <td class="py-3 px-4 text-slate-300">${b.service || 'Corporate/Literature Session'}</td>
+        </tr>
+      `).join('');
+    }
+
     function renderFaqs() {
-      const container = document.getElementById('faqs-container');
-      container.innerHTML = faqs.map(faq => `
+      document.getElementById('faqs-container').innerHTML = faqs.map(f => `
         <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl">
-          <p class="font-medium text-sm text-indigo-400">Q: ${faq.question}</p>
-          <p class="text-sm text-slate-300 mt-1">A: ${faq.answer}</p>
+          <p class="font-medium text-sm text-emerald-400">Q: ${f.question}</p>
+          <p class="text-sm text-slate-300 mt-1">A: ${f.answer}</p>
         </div>
       `).join('');
     }
 
-    // Speech Synthesis
     function speakText(text) {
       if ('speechSynthesis' in window && !isMuted) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 1.0;
-        utterance.pitch = 1.0;
+        utterance.rate = 0.95;
+        utterance.pitch = voiceGender === 'female' ? 1.15 : 0.9;
         window.speechSynthesis.speak(utterance);
       }
     }
 
-    // Call Actions
     function startCall() {
-      callActive = true;
-      callDuration = 0;
-      
+      callActive = true; callDuration = 0;
       document.getElementById('call-status-badge').textContent = 'CALL IN PROGRESS';
       document.getElementById('call-status-badge').className = 'inline-block px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono mb-4';
-      
       document.getElementById('call-avatar').className = 'w-32 h-32 rounded-full flex items-center justify-center border-4 border-emerald-500 bg-emerald-500/10 pulse-animation transition-all';
       document.getElementById('call-avatar-icon').textContent = '🎙️';
-      
       document.getElementById('call-timer').classList.remove('hidden');
       document.getElementById('btn-start-call').classList.add('hidden');
       document.getElementById('btn-mute').classList.remove('hidden');
@@ -352,23 +372,16 @@
         document.getElementById('call-timer').textContent = `${mins}:${secs}`;
       }, 1000);
 
-      const greeting = `Hello! Thanks for calling ${businessName}. My name is ${agentName}. How can I help you today?`;
-      speakText(greeting);
+      speakText(`Welcome to Turtle English. My name is ${agentName}. How may I assist you with corporate training or literary healing today?`);
     }
 
     function endCall() {
-      callActive = false;
-      clearInterval(timerInterval);
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-
-      document.getElementById('call-status-badge').textContent = 'LINE READY';
-      document.getElementById('call-status-badge').className = 'inline-block px-3 py-1 rounded-full bg-slate-800 text-xs text-slate-400 font-mono mb-4';
-
+      callActive = false; clearInterval(timerInterval);
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      document.getElementById('call-status-badge').textContent = 'TURTLE CONCIERGE READY';
+      document.getElementById('call-status-badge').className = 'inline-block px-3 py-1 rounded-full bg-slate-800 text-xs text-emerald-400 font-mono mb-4';
       document.getElementById('call-avatar').className = 'w-32 h-32 rounded-full flex items-center justify-center border-4 border-slate-800 bg-slate-900 transition-all';
-      document.getElementById('call-avatar-icon').textContent = '📞';
-
+      document.getElementById('call-avatar-icon').textContent = '🐢';
       document.getElementById('call-timer').classList.add('hidden');
       document.getElementById('btn-start-call').classList.remove('hidden');
       document.getElementById('btn-mute').classList.add('hidden');
@@ -378,89 +391,74 @@
     function toggleMute() {
       isMuted = !isMuted;
       const btn = document.getElementById('btn-mute');
-      if (isMuted) {
-        btn.textContent = '🔇 Muted';
-        btn.className = 'p-3.5 rounded-xl border bg-amber-500/20 border-amber-500 text-amber-400';
-        window.speechSynthesis.cancel();
-      } else {
-        btn.textContent = '🔊 Audio On';
-        btn.className = 'p-3.5 rounded-xl border border-slate-800 hover:bg-slate-900';
-      }
+      btn.textContent = isMuted ? '🔇 Muted' : '🔊 Audio On';
+      if (isMuted) window.speechSynthesis.cancel();
     }
 
-    // Handle Send Message (Gemini Backend Integration with FAQs)
     async function handleSendMessage(e) {
       e.preventDefault();
       const input = document.getElementById('user-input');
       const text = input.value.trim();
       if (!text) return;
 
-      messages.push({
-        sender: 'user',
-        text: text,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      });
-
+      messages.push({ sender: 'user', text, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       input.value = '';
       renderMessages();
 
       const thinkingId = messages.length;
-      messages.push({
-        sender: 'agent',
-        text: 'Thinking...',
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      });
+      messages.push({ sender: 'agent', text: 'Thinking...', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       renderMessages();
 
       try {
         const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, businessName, agentName, faqs })
+          body: JSON.stringify({ message: text, businessName, agentName, faqs, languageMode })
         });
 
         const data = await response.json();
-        const reply = data.reply || "I'm here to help!";
+        const reply = data.reply || "How can I assist you with Turtle English services?";
 
-        messages[thinkingId] = {
-          sender: 'agent',
-          text: reply,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        };
+        messages[thinkingId] = { sender: 'agent', text: reply, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
         renderMessages();
 
-        if (callActive) {
-          speakText(reply);
-        }
+        if (callActive) speakText(reply);
       } catch (err) {
-        messages[thinkingId] = {
-          sender: 'agent',
-          text: "Sorry, I'm having trouble connecting right now.",
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        };
+        messages[thinkingId] = { sender: 'agent', text: "Service temporarily unavailable.", timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
         renderMessages();
       }
     }
 
-    // Add FAQ
     function handleAddFaq(e) {
       e.preventDefault();
-      const qInput = document.getElementById('faq-question');
-      const aInput = document.getElementById('faq-answer');
-      
-      if (qInput.value.trim() && aInput.value.trim()) {
-        faqs.push({ question: qInput.value.trim(), answer: aInput.value.trim() });
-        qInput.value = '';
-        aInput.value = '';
+      const q = document.getElementById('faq-question').value.trim();
+      const a = document.getElementById('faq-answer').value.trim();
+      if (q && a) {
+        faqs.push({ question: q, answer: a });
+        document.getElementById('faq-question').value = '';
+        document.getElementById('faq-answer').value = '';
         renderFaqs();
       }
     }
 
-    // Initial Load
+    function saveSettings(e) {
+      e.preventDefault();
+      businessName = document.getElementById('setting-biz-name').value;
+      agentName = document.getElementById('setting-agent-name').value;
+      languageMode = document.getElementById('setting-lang-mode').value;
+      voiceGender = document.getElementById('setting-voice-gender').value;
+
+      document.getElementById('display-business-name').textContent = businessName;
+      document.getElementById('display-agent-name').textContent = agentName;
+      document.getElementById('display-voice-gender').textContent = voiceGender === 'female' ? 'Warm Female' : 'Calm Male';
+      alert('Turtle English brand persona updated!');
+    }
+
     window.onload = function() {
       renderMessages();
       renderFaqs();
       fetchLeads();
+      fetchBookings();
     };
   </script>
 </body>
