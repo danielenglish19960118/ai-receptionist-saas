@@ -16,8 +16,8 @@ An enterprise-ready, AI-powered automated receptionist platform designed to hand
 
 ## 🛠️ Tech Stack
 
-- **Frontend & Dashboard**: [Next.js](https://nextjs.org/) (React), [Tailwind CSS](https://tailwindcss.com/)
-- **Backend / Bot Framework**: Node.js, [discord.js](https://discord.js.org/)
+- **Frontend & Dashboard**: Next.js (React), Tailwind CSS
+- **Backend / Bot Framework**: Node.js, discord.js
 - **AI Integrations**: OpenAI API / Custom LLM Gateways
 - **Deployment & Hosting**: Vercel, GitHub Actions, GitHub Pages
 
@@ -40,13 +40,7 @@ ai-receptionist-saas/
 └── package.json          # Node.js dependencies and scripts
 🚀 Quick Start
 Prerequisites
-Make sure you have the following installed on your local environment:
-
-Node.js (v18.0.0 or higher)
-
-npm or pnpm
-
-Git
+Make sure you have Node.js (v18.0.0 or higher), npm, and Git installed.
 
 1. Clone the Repository
 Bash
@@ -59,20 +53,13 @@ npm install
 Create a .env.local file in the root directory:
 
 Code snippet
-# Discord Configuration
 DISCORD_CLIENT_ID=your_discord_client_id
 DISCORD_BOT_TOKEN=your_discord_bot_token
-
-# AI / LLM Keys
 OPENAI_API_KEY=your_openai_api_key
-
-# Application Settings
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 4. Run Development Server
 Bash
 npm run dev
-Visit http://localhost:3000 in your browser to access the management interface.
-
 ⚖️ Compliance & Legal Documents
 For platform verification (e.g., Discord Developer Portal verification, OAuth2 compliance) and user transparency:
 
@@ -82,9 +69,7 @@ For platform verification (e.g., Discord Developer Portal verification, OAuth2 c
 
 🚢 Deployment
 Deploying Legal Pages via GitHub Pages
-Navigate to your repository settings on GitHub:
-
-https://github.com/danielenglish19960118/ai-receptionist-saas/settings
+Navigate to repository settings on GitHub: https://github.com/danielenglish19960118/ai-receptionist-saas/settings
 
 Select Pages from the left navigation menu.
 
@@ -92,10 +77,5 @@ Under Build and deployment > Source, choose Deploy from a branch.
 
 Set the branch to main / / (root) and click Save.
 
-Deploying Web App via Vercel
-Bash
-npm run build
-Link your GitHub repository directly to Vercel for automated CI/CD deployments on every push to the main branch.
-
 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
