@@ -1,18 +1,20 @@
 import { verifyKey } from 'discord-interactions';
 import fetch from 'node-fetch';
 
+// 必須關閉 Vercel 預設的 body parser，以取得未被修改的原始資料流
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
+// 穩定讀取 Vercel 原始 Request Body 的標準方式
 async function getRawBody(req) {
   const chunks = [];
   for await (const chunk of req) {
-    chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+    chunks.push(chunk);
   }
-  return Buffer.concat(chunks);
+  return Buffer.concat(chunks).toString('utf8');
 }
 
 export default async function handler(req, res) {
@@ -21,29 +23,31 @@ export default async function handler(req, res) {
   }
 
   try {
-    const rawBodyBuffer = await getRawBody(req);
-    const rawBodyString = rawBodyBuffer.toString('utf8');
-    const body = JSON.parse(rawBodyString);
-
-    // ⭐️ 1. 絕對優先處理 Discord 的 PING (Type 1) 驗證
-    // 直接回傳 200，讓 Discord 瞬間打勾通過，不被任何簽章錯誤卡住！
-    if (body && body.type === 1) {
-      return res.status(200).json({ type: 1 });
-    }
-
-    // 2. 對於後續的真實互動指令 (Type 2)，才進行嚴格的數位簽章驗證
+    const rawBody = await getRawBody(req);
     const signature = req.headers['x-signature-ed25519'];
     const timestamp = req.headers['x-signature-timestamp'];
     const PUBLIC_KEY = process.env.DISCORD_PUBLIC_KEY;
 
-    if (PUBLIC_KEY && signature && timestamp) {
-      const isValidRequest = verifyKey(rawBodyBuffer, signature, timestamp, PUBLIC_KEY);
-      if (!isValidRequest) {
-        return res.status(401).send('Invalid request signature');
-      }
+    // 1. 嚴格進行 Discord 數位簽章驗證
+    if (!PUBLIC_KEY) {
+      console.error('Missing DISCORD_PUBLIC_KEY environment variable!');
+      return res.status(500).json({ error: 'Server configuration error' });
     }
 
-    // 3. 處理斜線指令 (Type 2: /deploy)
+    const isValidRequest = verifyKey(rawBody, signature, timestamp, PUBLIC_KEY);
+    if (!isValidRequest) {
+      return res.status(401).send('Invalid request signature');
+    }
+
+    // 2. 解析 JSON 內容
+    const body = JSON.parse(rawBody);
+
+    // 3. 處理 Discord PING (Type 1)
+    if (body && body.type === 1) {
+      return res.status(200).json({ type: 1 });
+    }
+
+    // 4. 處理斜線指令 (Type 2: /deploy)
     if (body && body.type === 2) {
       const commandName = body.data.name;
 
@@ -97,6 +101,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Unknown interaction' });
 
   } catch (error) {
+    console.error('Error handling request:', error);
     return res.status(500).json({ error: error.message });
   }
 }
