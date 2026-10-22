@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>AI 客服預約機器人 - 客戶自主設定後台</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; line-height: 1.6; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; font-weight: bold; margin-bottom: 5px; }
+    input, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+    button { background: #0d9488; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; }
+    button:hover { background: #0f766e; }
+    .code-box { background: #f4f4f5; padding: 15px; border-radius: 6px; font-family: monospace; word-break: break-all; margin-top: 15px; display: none; }
+  </style>
+</head>
+<body>
+
+  <h2>🤖 AI 客服機器人設定面板</h2>
+  <p>填寫下方資訊，即可完成專屬 AI 接線員設定並取得嵌入程式碼。</p>
+
+  <form id="clientForm">
+    <div class="form-group">
+      <label for="clientId">專屬客戶代碼 (Client ID)</label>
+      <input type="text" id="clientId" placeholder="例如：clinic_a 或 cram_school_b" required>
+    </div>
+
+    <div class="form-group">
+      <label for="clientName">貴公司/機構名稱</label>
+      <input type="text" id="clientName" placeholder="例如：安康診所" required>
+    </div>
+
+    <div class="form-group">
+      <label for="systemPrompt">AI 客服人設與知識庫 (System Prompt)</label>
+      <textarea id="systemPrompt" rows="8" placeholder="例如：你現在是安康診所的 AI 櫃檯。語氣親切溫和，負責解答門診時間、衛教資訊與引導掛號預約..." required></textarea>
+    </div>
+
+    <button type="submit">儲存設定並產生嵌入碼</button>
+  </form>
+
+  <div id="resultBox" class="code-box">
+    <h3>🎉 設定成功！請將下方代碼複製貼到官網 </body> 之前：</h3>
+    <textarea id="embedCode" rows="4" readonly></textarea>
+  </div>
+
+  <script>
+    // 貼上您的 Supabase 連線資訊
+    const SUPABASE_URL = 'https://YOUR_SUPABASE_PROJECT_ID.supabase.co';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    document.getElementById('clientForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const clientId = document.getElementById('clientId').value.trim();
+      const clientName = document.getElementById('clientName').value.trim();
+      const systemPrompt = document.getElementById('systemPrompt').value.trim();
+
+      // 1. 寫入或更新 Supabase 'clients' 表格
+      const { data, error } = await supabase
+        .from('clients')
+        .upsert([{ client_id: clientId, client_name: clientName, system_prompt: systemPrompt }], { onConflict: 'client_id' });
+
+      if (error) {
+        alert('儲存失敗：' + error.message);
+        return;
+      }
+
+      // 2. 顯示專屬內嵌腳本
+      const scriptCode = `<script src="${window.location.origin}/widget.js?client=${clientId}" async><\/script>`;
+      document.getElementById('embedCode').value = scriptCode;
+      document.getElementById('resultBox').style.display = 'block';
+    });
+  </script>
+</body>
+</html>

@@ -1,114 +1,148 @@
+import { createClient } from '@supabase/supabase-js';
+
+// 初始化 Supabase 客戶端
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
+);
+
+// 定義 Gemini 的 Function Calling 工具規格 (供 AI 自動擷取預約與名單)
+const tools = [
+  {
+    function_declarations: [
+      {
+        name: 'save_lead_and_appointment',
+        description: '當訪客提供姓名、聯絡方式（Email 或電話）、預約日期或事項時，呼叫此函式儲存客戶資料與預約。',
+        parameters: {
+          type: 'OBJECT',
+          properties: {
+            name: { type: 'STRING', description: '訪客姓名或稱呼' },
+            email: { type: 'STRING', description: '電子郵件地址' },
+            phone: { type: 'STRING', description: '聯絡電話' },
+            appointment_date: { type: 'STRING', description: '預約日期與時間 (例如：2026-11-01 14:00)' },
+            notes: { type: 'STRING', description: '諮詢需求、備註或特殊事項' }
+          },
+          required: ['name']
+        }
+      }
+    ]
+  }
+];
+
 export default async function handler(req, res) {
+  // 只允許 POST 請求
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { message, businessName, agentName, faqs, languageMode } = req.body;
-  const apiKey = process.env.GEMINI_API_KEY;
+  const { message, clientId = 'turtle_english', history = [] } = req.body;
 
-  if (!apiKey) {
-    return res.status(500).json({ error: 'GEMINI_API_KEY is not configured on Vercel' });
+  if (!message) {
+    return res.status(400).json({ error: 'Message is required' });
   }
 
   try {
-    let kbContext = "";
-    if (faqs && Array.isArray(faqs) && faqs.length > 0) {
-      kbContext = "\nKnowledge Base & Service Offerings:\n" + 
-        faqs.map((f, i) => `${i + 1}. Q: ${f.question} -> A: ${f.answer}`).join("\n");
-    }
+    // ----------------------------------------------------
+    // 1. 自動從 Supabase 讀取該客戶 (clientId) 的專屬提示詞
+    // ----------------------------------------------------
+    const { data: clientData, error: clientError } = await supabase
+      .from('clients')
+      .select('system_prompt, client_name')
+      .eq('client_id', clientId)
+      .single();
 
-    const langInstruction = languageMode === 'english' 
-      ? 'Respond strictly in English.' 
-      : languageMode === 'chinese' 
-      ? 'Respond strictly in Traditional Chinese.' 
-      : 'Respond naturally in the language used by the user (Bilingual in English and Traditional Chinese).';
+    // 若查無該客戶設定，則退回預設提示詞
+    const systemInstruction = clientData?.system_prompt || `你現在是 AI 預約客服專員。語氣禮貌專業，負責解答疑問並引導訪客留下姓名、聯絡方式與預約時間。`;
 
-    const prompt = `You are ${agentName || 'Alex'}, an articulate and empathetic AI receptionist for "${businessName || 'Turtle English'}".
+    // ----------------------------------------------------
+    // 2. 呼叫 Gemini 1.5 Flash API (帶入 System Prompt 與 Tools)
+    // ----------------------------------------------------
+    const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`;
 
-Core Business Focus of Turtle English:
-1. Global Online Corporate English Training (跨國線上企業英文內訓): Tailored business communications, executive presentation, etymological insights for cross-cultural leadership, and professional writing for international organizations.
-2. Literature Appreciation & Literary Healing (文學鑑賞與文學療癒): Self-paced and guided classic literary exploration, etymology-driven mindful reading, and restorative language learning sessions for working professionals.
+    const payload = {
+      system_instruction: {
+        parts: [{ text: systemInstruction }]
+      },
+      tools: tools,
+      contents: [
+        ...history,
+        { role: 'user', parts: [{ text: message }] }
+      ]
+    };
 
-Tone & Style: Elegant, empathetic, professional, inspiring, and soothing.
-
-${langInstruction}
-${kbContext}
-
-Task:
-1. Provide a warm, concise, and helpful response aligned with Turtle English's dual core services.
-2. Analyze if the caller provided contact information (name, phone, company, email, interest) OR requested a trial session/corporate consultation (date, time).
-3. Tag lead quality: "HIGH" (Corporate training inquiry or literature trial booking), "MEDIUM" (General course question), "LOW" (Casual chat).
-4. Output STRICT JSON format with these exact keys:
-   - "reply": (string) Your response text.
-   - "lead": (object or null) {"name": "...", "phone": "...", "intent": "Corporate Training | Literature Healing | General", "tag": "HIGH|MEDIUM|LOW"} or null.
-   - "booking": (object or null) {"name": "...", "phone": "...", "date": "YYYY-MM-DD", "time": "HH:MM", "service": "Corporate Training Consultation | Literary Healing Trial"} or null.
-
-User Message: "${message}"`;
-
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    const response = await fetch(geminiEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { responseMimeType: "application/json" }
-      })
+      body: JSON.stringify(payload)
     });
 
     const data = await response.json();
-    const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
-    
-    let parsedResult = { reply: "Thank you for reaching out to Turtle English!", lead: null, booking: null };
-    try {
-      parsedResult = JSON.parse(rawText);
-    } catch (e) {
-      parsedResult.reply = rawText;
+
+    if (data.error) {
+      console.error('Gemini API Error:', data.error);
+      return res.status(500).json({ error: data.error.message || 'Gemini API Error' });
     }
 
-    const SUPABASE_URL = 'https://soemujvvjnscchzncceo.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_LtLxBrGCr3sDmJ9pNXnZgQ_lsRSJI2R';
+    const candidate = data.candidates?.[0];
+    const firstPart = candidate?.content?.parts?.[0];
 
-    // 自動寫入名單資料庫
-    if (parsedResult.lead && (parsedResult.lead.name || parsedResult.lead.phone)) {
-      await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({
-          name: parsedResult.lead.name || 'Anonymous',
-          phone: parsedResult.lead.phone || 'N/A',
-          intent: parsedResult.lead.intent || 'Corporate/Literature Inquiry',
-          status: parsedResult.lead.tag || 'HIGH'
-        })
-      });
+    // ----------------------------------------------------
+    // 3. 檢查 AI 是否觸發了 Function Call (自動寫入 Supabase)
+    // ----------------------------------------------------
+    if (firstPart && firstPart.functionCall) {
+      const { name: functionName, args } = firstPart.functionCall;
+
+      if (functionName === 'save_lead_and_appointment') {
+        const { name, email, phone, appointment_date, notes } = args;
+
+        // A. 寫入 leads 資料表 (附帶 client_id)
+        const { data: leadData, error: leadError } = await supabase
+          .from('leads')
+          .insert([
+            {
+              client_id: clientId,
+              name: name || '未提供姓名',
+              email: email || null,
+              phone: phone || null,
+              notes: notes || null
+            }
+          ])
+          .select()
+          .single();
+
+        if (leadError) console.error('Supabase Lead Insert Error:', leadError);
+
+        // B. 若有提供預約時間，同步寫入 appointments 資料表
+        if (appointment_date) {
+          const { error: aptError } = await supabase
+            .from('appointments')
+            .insert([
+              {
+                client_id: clientId,
+                lead_id: leadData?.id || null,
+                appointment_date: appointment_date,
+                status: 'pending',
+                notes: notes || null
+              }
+            ]);
+
+          if (aptError) console.error('Supabase Appointment Insert Error:', aptError);
+        }
+
+        // C. 回覆訪客預約成功的訊息
+        const confirmMessage = `感謝您，${name}！已為您登記預約資料${appointment_date ? `（時間：${appointment_date}）` : ''}。我們的專人會儘快透過電話或 Email 與您確認！`;
+        return res.status(200).json({ reply: confirmMessage });
+      }
     }
 
-    // 自動寫入預約資料庫
-    if (parsedResult.booking && (parsedResult.booking.date || parsedResult.booking.time)) {
-      await fetch(`${SUPABASE_URL}/rest/v1/appointments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({
-          name: parsedResult.booking.name || parsedResult.lead?.name || 'Anonymous',
-          phone: parsedResult.booking.phone || parsedResult.lead?.phone || 'N/A',
-          booking_date: parsedResult.booking.date,
-          booking_time: parsedResult.booking.time,
-          service: parsedResult.booking.service || 'Corporate/Literature Consultation'
-        })
-      });
-    }
+    // ----------------------------------------------------
+    // 4. 一般對話，直接回傳 AI 回覆文字
+    // ----------------------------------------------------
+    const replyText = firstPart?.text || '抱歉，我現在無法回答這個問題，請稍後再試。';
+    return res.status(200).json({ reply: replyText });
 
-    return res.status(200).json({ reply: parsedResult.reply, booking: parsedResult.booking });
   } catch (error) {
-    console.error('Gemini API Error:', error);
-    return res.status(500).json({ error: 'Failed to communicate with Gemini API' });
+    console.error('Server Handler Error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }
