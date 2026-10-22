@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Receptionist SaaS & Client Suite</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-animation {
+      animation: pulse-ring 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- Top Header -->
+  <header class="border-b border-slate-800 bg-slate-950 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-xl shadow-lg shadow-indigo-500/20">
+        🤖
+      </div>
+      <div>
+        <h1 class="font-bold text-lg leading-tight">AI Receptionist SaaS</h1>
+        <p class="text-xs text-slate-400">Powered by Gemini API & Web Speech</p>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="flex items-center gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800">
+      <button id="tab-simulator" onclick="switchTab('simulator')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-600 text-white shadow-md">
+        📞 Live Simulator
+      </button>
+      <button id="tab-leads" onclick="switchTab('leads')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
+        📋 Lead CRM
+      </button>
+      <button id="tab-kb" onclick="switchTab('kb')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
+        📚 Knowledge Base
+      </button>
+      <button id="tab-embed" onclick="switchTab('embed')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
+        ⚙️ Embed & Setup
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main Workspace Area -->
+  <main class="flex-1 p-6 max-w-7xl w-full mx-auto">
+
+    <!-- TAB 1: LIVE SIMULATOR -->
+    <section id="content-simulator" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Voice Call Console -->
+      <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-xl">
+        <div class="w-full">
+          <span id="call-status-badge" class="inline-block px-3 py-1 rounded-full bg-slate-800 text-xs text-slate-400 font-mono mb-4">
+            LINE READY
+          </span>
+          <h2 class="text-xl font-bold" id="display-business-name">Turtle English</h2>
+          <p class="text-sm text-slate-400">Agent: <span id="display-agent-name">Alex</span></p>
+        </div>
+
+        <!-- Call Status Indicator -->
+        <div class="my-8 flex flex-col items-center">
+          <div id="call-avatar" class="w-32 h-32 rounded-full flex items-center justify-center border-4 border-slate-800 bg-slate-900 transition-all">
+            <span id="call-avatar-icon" class="text-5xl">📞</span>
+          </div>
+          <div id="call-timer" class="mt-4 font-mono text-2xl font-bold text-emerald-400 hidden">
+            00:00
+          </div>
+        </div>
+
+        <!-- Call Controls -->
+        <div class="w-full flex items-center gap-3">
+          <button id="btn-start-call" onclick="startCall()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 font-semibold rounded-xl transition-all shadow-lg shadow-emerald-600/20">
+            Start Live Audio Call
+          </button>
+          <button id="btn-mute" onclick="toggleMute()" class="p-3.5 rounded-xl border border-slate-800 hover:bg-slate-900 hidden">
+            🔊 Audio On
+          </button>
+          <button id="btn-end-call" onclick="endCall()" class="flex-1 py-3.5 bg-rose-600 hover:bg-rose-500 font-semibold rounded-xl transition-all shadow-lg shadow-rose-600/20 hidden">
+            End Call
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Interactive Transcript Console -->
+      <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col h-[580px] shadow-xl">
+        <div class="border-b border-slate-800 pb-3 mb-4 flex items-center justify-between">
+          <h3 class="font-semibold text-slate-200">Gemini Live Call & Chat Console</h3>
+          <span class="text-xs text-slate-500">Real-time Transcript</span>
+        </div>
+
+        <!-- Transcript History -->
+        <div id="transcript-container" class="flex-1 overflow-y-auto space-y-4 pr-2">
+          <!-- Dynamically populated messages -->
+        </div>
+
+        <!-- Input Form -->
+        <form onsubmit="handleSendMessage(event)" class="mt-4 flex gap-2 pt-3 border-t border-slate-800">
+          <input 
+            type="text" 
+            id="user-input"
+            placeholder="Type a message or response..."
+            class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+          />
+          <button type="submit" class="px-5 bg-indigo-600 hover:bg-indigo-500 font-medium rounded-xl text-sm transition-all">
+            Send
+          </button>
+        </form>
+      </div>
+
+    </section>
+
+    <!-- TAB 2: LEAD CRM -->
+    <section id="content-leads" class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl hidden">
+      <h2 class="text-xl font-bold mb-4">Captured Inbound Leads</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-slate-800 text-xs text-slate-400 uppercase tracking-wider">
+              <th class="py-3 px-4">Caller Name</th>
+              <th class="py-3 px-4">Phone Number</th>
+              <th class="py-3 px-4">Intent / Service</th>
+              <th class="py-3 px-4">Status</th>
+              <th class="py-3 px-4">Date</th>
+            </tr>
+          </thead>
+          <tbody id="leads-table-body" class="divide-y divide-slate-800 text-sm">
+            <!-- Dynamically populated leads -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 3: KNOWLEDGE BASE -->
+    <section id="content-kb" class="grid grid-cols-1 lg:grid-cols-3 gap-6 hidden">
+      <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
+        <h3 class="font-bold text-lg mb-4">Add Knowledge Rule</h3>
+        <form onsubmit="handleAddFaq(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Customer Question / Trigger</label>
+            <input 
+              type="text" 
+              id="faq-question"
+              placeholder="e.g. Where are you located?"
+              class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">AI Receptionist Response</label>
+            <textarea 
+              id="faq-answer"
+              rows="3"
+              placeholder="e.g. We are located in the East District of Tainan City."
+              class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 font-medium rounded-xl text-sm transition-all">
+            Save FAQ
+          </button>
+        </form>
+      </div>
+
+      <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
+        <h3 class="font-bold text-lg mb-4">Active Knowledge Base Rules</h3>
+        <div id="faqs-container" class="space-y-3">
+          <!-- Dynamically populated FAQs -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: EMBED & SETUP -->
+    <section id="content-embed" class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl max-w-3xl mx-auto hidden">
+      <h2 class="text-xl font-bold mb-2">Embed Code Snippet</h2>
+      <p class="text-sm text-slate-400 mb-6">Copy and paste this script tag into any client website to load the AI receptionist widget.</p>
+      
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 font-mono text-xs text-indigo-300 overflow-x-auto">
+        <pre>&lt;script 
+  src="https://ai-receptionist-saas.vercel.app/widget.js" 
+  data-business="turtle-english"
+  data-agent="alex"
+  async&gt;
+&lt;/script&gt;</pre>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    // State Variables
+    let businessName = "Turtle English";
+    let agentName = "Alex";
+    let callActive = false;
+    let isMuted = false;
+    let callDuration = 0;
+    let timerInterval = null;
+
+    let messages = [
+      {
+        sender: 'agent',
+        text: `Thank you for calling Turtle English! My name is Alex. How can I help you today?`,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }
+    ];
+
+    let leads = [
+      { id: 1, name: 'David Chen', phone: '+886 912 345 678', intent: 'Course Inquiry', status: 'New Lead', date: '2026-10-22' },
+      { id: 2, name: 'Sarah Wu', phone: '+886 987 654 321', intent: 'Trial Lesson Booking', status: 'Scheduled', date: '2026-10-22' }
+    ];
+
+    let faqs = [
+      { question: 'What are your operating hours?', answer: 'We are open Monday through Friday from 9:00 AM to 8:00 PM.' },
+      { question: 'How do I book a trial lesson?', answer: 'I can schedule a trial lesson for you right now on this call!' }
+    ];
+
+    // Navigation Switcher
+    function switchTab(tabName) {
+      const tabs = ['simulator', 'leads', 'kb', 'embed'];
+      tabs.forEach(t => {
+        document.getElementById(`content-${t}`).classList.add('hidden');
+        document.getElementById(`tab-${t}`).className = "px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white";
+      });
+
+      document.getElementById(`content-${tabName}`).classList.remove('hidden');
+      document.getElementById(`tab-${tabName}`).className = "px-4 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-600 text-white shadow-md";
+    }
+
+    // Render Transcript Messages
+    function renderMessages() {
+      const container = document.getElementById('transcript-container');
+      container.innerHTML = messages.map(msg => `
+        <div class="flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}">
+          <div class="max-w-[80%] rounded-2xl px-4 py-3 text-sm ${msg.sender === 'user' ? 'bg-indigo-600 text-white rounded-br-none' : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-bl-none'}">
+            ${msg.text}
+          </div>
+          <span class="text-[10px] text-slate-500 mt-1 px-1">${msg.timestamp}</span>
+        </div>
+      `).join('');
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // Render Leads Table
+    function renderLeads() {
+      const tbody = document.getElementById('leads-table-body');
+      tbody.innerHTML = leads.map(lead => `
+        <tr class="hover:bg-slate-900/50">
+          <td class="py-3 px-4 font-medium">${lead.name}</td>
+          <td class="py-3 px-4 font-mono text-slate-400">${lead.phone}</td>
+          <td class="py-3 px-4">${lead.intent}</td>
+          <td class="py-3 px-4">
+            <span class="px-2.5 py-1 rounded-full text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+              ${lead.status}
+            </span>
+          </td>
+          <td class="py-3 px-4 text-slate-500">${lead.date}</td>
+        </tr>
+      `).join('');
+    }
+
+    // Render FAQs
+    function renderFaqs() {
+      const container = document.getElementById('faqs-container');
+      container.innerHTML = faqs.map(faq => `
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl">
+          <p class="font-medium text-sm text-indigo-400">Q: ${faq.question}</p>
+          <p class="text-sm text-slate-300 mt-1">A: ${faq.answer}</p>
+        </div>
+      `).join('');
+    }
+
+    // Speech Synthesis
+    function speakText(text) {
+      if ('speechSynthesis' in window && !isMuted) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Call Actions
+    function startCall() {
+      callActive = true;
+      callDuration = 0;
+      
+      document.getElementById('call-status-badge').textContent = 'CALL IN PROGRESS';
+      document.getElementById('call-status-badge').className = 'inline-block px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono mb-4';
+      
+      document.getElementById('call-avatar').className = 'w-32 h-32 rounded-full flex items-center justify-center border-4 border-emerald-500 bg-emerald-500/10 pulse-animation transition-all';
+      document.getElementById('call-avatar-icon').textContent = '🎙️';
+      
+      document.getElementById('call-timer').classList.remove('hidden');
+      document.getElementById('btn-start-call').classList.add('hidden');
+      document.getElementById('btn-mute').classList.remove('hidden');
+      document.getElementById('btn-end-call').classList.remove('hidden');
+
+      timerInterval = setInterval(() => {
+        callDuration++;
+        const mins = String(Math.floor(callDuration / 60)).padStart(2, '0');
+        const secs = String(callDuration % 60).padStart(2, '0');
+        document.getElementById('call-timer').textContent = `${mins}:${secs}`;
+      }, 1000);
+
+      const greeting = `Hello! Thanks for calling ${businessName}. My name is ${agentName}. How can I help you today?`;
+      speakText(greeting);
+    }
+
+    function endCall() {
+      callActive = false;
+      clearInterval(timerInterval);
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+
+      document.getElementById('call-status-badge').textContent = 'LINE READY';
+      document.getElementById('call-status-badge').className = 'inline-block px-3 py-1 rounded-full bg-slate-800 text-xs text-slate-400 font-mono mb-4';
+
+      document.getElementById('call-avatar').className = 'w-32 h-32 rounded-full flex items-center justify-center border-4 border-slate-800 bg-slate-900 transition-all';
+      document.getElementById('call-avatar-icon').textContent = '📞';
+
+      document.getElementById('call-timer').classList.add('hidden');
+      document.getElementById('btn-start-call').classList.remove('hidden');
+      document.getElementById('btn-mute').classList.add('hidden');
+      document.getElementById('btn-end-call').classList.add('hidden');
+    }
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      const btn = document.getElementById('btn-mute');
+      if (isMuted) {
+        btn.textContent = '🔇 Muted';
+        btn.className = 'p-3.5 rounded-xl border bg-amber-500/20 border-amber-500 text-amber-400';
+        window.speechSynthesis.cancel();
+      } else {
+        btn.textContent = '🔊 Audio On';
+        btn.className = 'p-3.5 rounded-xl border border-slate-800 hover:bg-slate-900';
+      }
+    }
+
+    // 串接真實 Gemini 後端的 handleSendMessage 函數
+    async function handleSendMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('user-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      messages.push({
+        sender: 'user',
+        text: text,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+
+      input.value = '';
+      renderMessages();
+
+      // 顯示正在思考中...
+      const thinkingId = messages.length;
+      messages.push({
+        sender: 'agent',
+        text: 'Thinking...',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+      renderMessages();
+
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, businessName, agentName })
+        });
+
+        const data = await response.json();
+        const reply = data.reply || "I'm here to help!";
+
+        // 移除「Thinking...」並換成真實回答
+        messages[thinkingId] = {
+          sender: 'agent',
+          text: reply,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        renderMessages();
+
+        if (callActive) {
+          speakText(reply);
+        }
+      } catch (err) {
+        messages[thinkingId] = {
+          sender: 'agent',
+          text: "Sorry, I'm having trouble connecting right now.",
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        renderMessages();
+      }
+    }
+
+    // Add FAQ
+    function handleAddFaq(e) {
+      e.preventDefault();
+      const qInput = document.getElementById('faq-question');
+      const aInput = document.getElementById('faq-answer');
+      
+      if (qInput.value.trim() && aInput.value.trim()) {
+        faqs.push({ question: qInput.value.trim(), answer: aInput.value.trim() });
+        qInput.value = '';
+        aInput.value = '';
+        renderFaqs();
+      }
+    }
+
+    // Initial Load
+    window.onload = function() {
+      renderMessages();
+      renderLeads();
+      renderFaqs();
+    };
+  </script>
+</body>
+</html>
