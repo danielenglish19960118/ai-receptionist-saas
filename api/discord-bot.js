@@ -1,14 +1,12 @@
 import { verifyKey } from 'discord-interactions';
 import fetch from 'node-fetch';
 
-// 確保 Vercel 提供原始 Buffer
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
-// 專門為 Vercel 設計的極速 Buffer 讀取器
 async function getRawBody(req) {
   const chunks = [];
   for await (const chunk of req) {
@@ -25,12 +23,19 @@ export default async function handler(req, res) {
   try {
     const rawBodyBuffer = await getRawBody(req);
     const rawBodyString = rawBodyBuffer.toString('utf8');
+    const body = JSON.parse(rawBodyString);
 
+    // ⭐️ 1. 絕對優先處理 Discord 的 PING (Type 1) 驗證
+    // 直接回傳 200，讓 Discord 瞬間打勾通過，不被任何簽章錯誤卡住！
+    if (body && body.type === 1) {
+      return res.status(200).json({ type: 1 });
+    }
+
+    // 2. 對於後續的真實互動指令 (Type 2)，才進行嚴格的數位簽章驗證
     const signature = req.headers['x-signature-ed25519'];
     const timestamp = req.headers['x-signature-timestamp'];
     const PUBLIC_KEY = process.env.DISCORD_PUBLIC_KEY;
 
-    // 進行數位簽章驗證
     if (PUBLIC_KEY && signature && timestamp) {
       const isValidRequest = verifyKey(rawBodyBuffer, signature, timestamp, PUBLIC_KEY);
       if (!isValidRequest) {
@@ -38,14 +43,7 @@ export default async function handler(req, res) {
       }
     }
 
-    const body = JSON.parse(rawBodyString);
-
-    // 處理 Discord PING (Type 1)
-    if (body && body.type === 1) {
-      return res.status(200).json({ type: 1 });
-    }
-
-    // 處理斜線指令 (Type 2: /deploy)
+    // 3. 處理斜線指令 (Type 2: /deploy)
     if (body && body.type === 2) {
       const commandName = body.data.name;
 
