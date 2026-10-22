@@ -1,25 +1,20 @@
 import { verifyKey } from 'discord-interactions';
 import fetch from 'node-fetch';
 
+// 確保 Vercel 提供原始 Buffer
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
+// 專門為 Vercel 設計的極速 Buffer 讀取器
 async function getRawBody(req) {
-  return new Promise((resolve, reject) => {
-    let data = '';
-    req.on('data', chunk => {
-      data += chunk;
-    });
-    req.on('end', () => {
-      resolve(data);
-    });
-    req.on('error', err => {
-      reject(err);
-    });
-  });
+  const chunks = [];
+  for await (const chunk of req) {
+    chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+  }
+  return Buffer.concat(chunks);
 }
 
 export default async function handler(req, res) {
@@ -28,23 +23,24 @@ export default async function handler(req, res) {
   }
 
   try {
-    const rawBody = await getRawBody(req);
+    const rawBodyBuffer = await getRawBody(req);
+    const rawBodyString = rawBodyBuffer.toString('utf8');
+
     const signature = req.headers['x-signature-ed25519'];
     const timestamp = req.headers['x-signature-timestamp'];
     const PUBLIC_KEY = process.env.DISCORD_PUBLIC_KEY;
 
-    // 進行安全簽章驗證
+    // 進行數位簽章驗證
     if (PUBLIC_KEY && signature && timestamp) {
-      const isValidRequest = verifyKey(rawBody, signature, timestamp, PUBLIC_KEY);
+      const isValidRequest = verifyKey(rawBodyBuffer, signature, timestamp, PUBLIC_KEY);
       if (!isValidRequest) {
-        console.error('Invalid signature! Check if DISCORD_PUBLIC_KEY is correct.');
-        return res.status(401).send('Bad request signature');
+        return res.status(401).send('Invalid request signature');
       }
     }
 
-    const body = JSON.parse(rawBody);
+    const body = JSON.parse(rawBodyString);
 
-    // 處理 PING (Type 1)
+    // 處理 Discord PING (Type 1)
     if (body && body.type === 1) {
       return res.status(200).json({ type: 1 });
     }
@@ -103,7 +99,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Unknown interaction' });
 
   } catch (error) {
-    console.error('API Error:', error);
     return res.status(500).json({ error: error.message });
   }
 }
