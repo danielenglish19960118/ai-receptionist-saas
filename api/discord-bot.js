@@ -1,7 +1,14 @@
 import { verifyKey } from 'discord-interactions';
 import fetch from 'node-fetch';
 
-// 協助讀取 Vercel 原始 Request Body 的小工具
+// ⭐️ 關鍵設定：關閉 Vercel 預設的 body parser，保留原始資料流給 Discord 驗證
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+// 讀取 Vercel 原始 Request Body 的工具
 async function getRawBody(req) {
   return new Promise((resolve, reject) => {
     let data = '';
@@ -29,7 +36,7 @@ export default async function handler(req, res) {
     const timestamp = req.headers['x-signature-timestamp'];
     const PUBLIC_KEY = process.env.DISCORD_PUBLIC_KEY;
 
-    // 2. 驗證數位簽章（如果 Public Key 存在）
+    // 2. 驗證數位簽章
     if (PUBLIC_KEY && signature && timestamp) {
       const isValidRequest = verifyKey(rawBody, signature, timestamp, PUBLIC_KEY);
       if (!isValidRequest) {
