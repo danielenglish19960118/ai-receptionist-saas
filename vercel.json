@@ -1,0 +1,17 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/widget.js",
+      "destination": "/public/widget.js"
+    },
+    {
+      "source": "/onboarding",
+      "destination": "/public/onboarding.html"
+    },
+    {
+      "source": "/onboarding.html",
+      "destination": "/public/onboarding.html"
+    }
+  ]
+}
