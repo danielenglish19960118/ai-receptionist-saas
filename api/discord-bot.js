@@ -1,20 +1,19 @@
 import { verifyKey } from 'discord-interactions';
 import fetch from 'node-fetch';
 
-// 必須關閉 Vercel 預設的 body parser，以取得未被修改的原始資料流
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
-// 穩定讀取 Vercel 原始 Request Body 的標準方式
-async function getRawBody(req) {
+// 嚴格讀取原始 Buffer 資料流
+async function getRawBodyBuffer(req) {
   const chunks = [];
   for await (const chunk of req) {
     chunks.push(chunk);
   }
-  return Buffer.concat(chunks).toString('utf8');
+  return Buffer.concat(chunks);
 }
 
 export default async function handler(req, res) {
@@ -23,33 +22,34 @@ export default async function handler(req, res) {
   }
 
   try {
-    const rawBody = await getRawBody(req);
+    const rawBuffer = await getRawBodyBuffer(req);
     const signature = req.headers['x-signature-ed25519'];
     const timestamp = req.headers['x-signature-timestamp'];
     const PUBLIC_KEY = process.env.DISCORD_PUBLIC_KEY;
 
-    // 1. 嚴格進行 Discord 數位簽章驗證
+    // 1. 檢查有沒有設定 Public Key
     if (!PUBLIC_KEY) {
-      console.error('Missing DISCORD_PUBLIC_KEY environment variable!');
+      console.error('Missing DISCORD_PUBLIC_KEY in environment variables.');
       return res.status(500).json({ error: 'Server configuration error' });
     }
 
-    const isValidRequest = verifyKey(rawBody, signature, timestamp, PUBLIC_KEY);
+    // 2. 嚴格進行 Discord 數位簽章驗證（使用 Buffer）
+    const isValidRequest = verifyKey(rawBuffer, signature, timestamp, PUBLIC_KEY);
     if (!isValidRequest) {
       return res.status(401).send('Invalid request signature');
     }
 
-    // 2. 解析 JSON 內容
-    const body = JSON.parse(rawBody);
+    // 3. 解析 JSON 內容
+    const body = JSON.parse(rawBuffer.toString('utf8'));
 
-    // 3. 處理 Discord PING (Type 1)
+    // 4. 處理 Discord PING (Type 1) 驗證
     if (body && body.type === 1) {
       return res.status(200).json({ type: 1 });
     }
 
-    // 4. 處理斜線指令 (Type 2: /deploy)
+    // 5. 處理斜線指令 (Type 2: /deploy)
     if (body && body.type === 2) {
-      const commandName = body.data.name;
+      const commandName = body.data?.name;
 
       if (commandName === 'deploy') {
         const options = body.data.options || [];
@@ -101,7 +101,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Unknown interaction' });
 
   } catch (error) {
-    console.error('Error handling request:', error);
+    console.error('Interaction error:', error);
     return res.status(500).json({ error: error.message });
   }
 }
