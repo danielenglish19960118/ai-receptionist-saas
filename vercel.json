@@ -1,17 +1,18 @@
 {
+  "version": 2,
   "cleanUrls": true,
-  "rewrites": [
+  "routes": [
     {
-      "source": "/widget.js",
-      "destination": "/public/widget.js"
+      "src": "/",
+      "dest": "/index.html"
     },
     {
-      "source": "/onboarding",
-      "destination": "/public/onboarding.html"
+      "src": "/onboarding.html",
+      "dest": "/public/onboarding.html"
     },
     {
-      "source": "/onboarding.html",
-      "destination": "/public/onboarding.html"
+      "src": "/widget.js",
+      "dest": "/public/widget.js"
     }
   ]
 }
