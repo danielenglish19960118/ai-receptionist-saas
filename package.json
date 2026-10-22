@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "discord-interactions": "^4.4.0"
+    "discord-interactions": "^4.4.0",
+    "node-fetch": "^3.3.2"
   }
 }
