@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { message, businessName, agentName } = req.body;
+  const { message, businessName, agentName, faqs } = req.body;
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
@@ -11,12 +11,19 @@ export default async function handler(req, res) {
   }
 
   try {
-    // 提示詞：要求 Gemini 同時輸出回答與擷取的訪客資訊 (JSON 格式)
-    const prompt = `You are ${agentName}, an AI receptionist for "${businessName}".
+    // 整理知識庫規則作為 Context
+    let kbContext = "";
+    if (faqs && Array.isArray(faqs) && faqs.length > 0) {
+      kbContext = "\nKnowledge Base Rules to refer to when answering:\n" + 
+        faqs.map((f, i) => `${i + 1}. Q: ${f.question} -> A: ${f.answer}`).join("\n");
+    }
+
+    const prompt = `You are ${agentName || 'Alex'}, an AI receptionist for "${businessName || 'Turtle English'}".
 Answer customer questions politely, professionally, and concisely in the same language the customer uses (English or Traditional Chinese).
+${kbContext}
 
 Task:
-1. Provide a natural response to the customer.
+1. Provide a natural response to the customer based on the knowledge base rules if applicable.
 2. Check if the customer shared any contact information (name, phone number, or intent/service interest) in their message or conversation.
 3. Output your response in STRICT JSON format with two keys:
    - "reply": (string) Your response to the customer.
@@ -43,7 +50,7 @@ Customer says: "${message}"`;
       parsedResult.reply = rawText;
     }
 
-    // 如果 Gemini 偵測到訪客留下聯絡資訊，自動寫入 Supabase
+    // 若擷取到訪客資訊，自動寫入 Supabase
     if (parsedResult.lead && (parsedResult.lead.name || parsedResult.lead.phone)) {
       const SUPABASE_URL = 'https://soemujvvjnscchzncceo.supabase.co';
       const SUPABASE_ANON_KEY = 'sb_publishable_LtLxBrGCr3sDmJ9pNXnZgQ_lsRSJI2R';

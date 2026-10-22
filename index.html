@@ -254,23 +254,6 @@
       }
     }
 
-    // Save Lead to Supabase Database
-    async function saveLead(name, phone, intent) {
-      try {
-        const { data, error } = await supabaseClient
-          .from('leads')
-          .insert([{ name, phone, intent, status: 'New Lead' }]);
-
-        if (!error) {
-          fetchLeads();
-        } else {
-          console.error('Error saving lead:', error);
-        }
-      } catch (err) {
-        console.error('Supabase Save Error:', err);
-      }
-    }
-
     // Navigation Switcher
     function switchTab(tabName) {
       const tabs = ['simulator', 'leads', 'kb', 'embed'];
@@ -405,7 +388,7 @@
       }
     }
 
-    // Handle Send Message (Gemini Backend Integration)
+    // Handle Send Message (Gemini Backend Integration with FAQs)
     async function handleSendMessage(e) {
       e.preventDefault();
       const input = document.getElementById('user-input');
@@ -433,7 +416,7 @@
         const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, businessName, agentName })
+          body: JSON.stringify({ message: text, businessName, agentName, faqs })
         });
 
         const data = await response.json();

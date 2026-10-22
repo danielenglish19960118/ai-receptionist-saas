@@ -1,0 +1,64 @@
+(function() {
+  // 建立右下角浮動按鈕
+  const button = document.createElement('div');
+  button.id = 'ai-receptionist-widget-btn';
+  button.style.cssText = `
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4f46e5;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+    z-index: 99999;
+    transition: transform 0.2s ease;
+  `;
+  button.innerHTML = '🤖';
+  button.onmouseover = () => button.style.transform = 'scale(1.08)';
+  button.onmouseout = () => button.style.transform = 'scale(1)';
+
+  // 建立對話彈窗 Iframe 容器
+  const modal = document.createElement('div');
+  modal.id = 'ai-receptionist-widget-modal';
+  modal.style.cssText = `
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    width: 380px;
+    height: 580px;
+    max-width: calc(100vw - 48px);
+    max-height: calc(100vh - 120px);
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    z-index: 99999;
+    display: none;
+    overflow: hidden;
+  `;
+
+  // 載入主系統視窗
+  const hostUrl = document.currentScript ? new URL(document.currentScript.src).origin : 'https://ai-receptionist-saas.vercel.app';
+  modal.innerHTML = `<iframe src="${hostUrl}" style="width:100%; height:100%; border:none;"></iframe>`;
+
+  document.body.appendChild(button);
+  document.body.appendChild(modal);
+
+  // 點擊按鈕切換顯示/隱藏
+  button.onclick = function() {
+    if (modal.style.display === 'none' || modal.style.display === '') {
+      modal.style.display = 'block';
+      button.innerHTML = '✕';
+    } else {
+      modal.style.display = 'none';
+      button.innerHTML = '🤖';
+    }
+  };
+})();
