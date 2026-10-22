@@ -14,6 +14,7 @@
       --text-main: #f8fafc;
       --text-muted: #9ca3af;
       --error: #ef4444;
+      --success: #10b981;
     }
 
     body {
@@ -76,7 +77,34 @@
       color: var(--text-muted);
     }
 
-    .form-input {
+    /* Main App Container */
+    .main-container {
+      max-width: 650px;
+      margin: 50px auto;
+      padding: 40px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 { margin-top: 0; font-size: 24px; font-weight: 600; }
+    p.subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-input, .form-textarea {
       width: 100%;
       padding: 12px 16px;
       border-radius: 8px;
@@ -87,24 +115,29 @@
       outline: none;
       box-sizing: border-box;
       transition: border-color 0.2s;
-      margin-bottom: 16px;
     }
 
-    .form-input:focus {
+    .form-input:focus, .form-textarea:focus {
       border-color: var(--primary);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
     }
 
     .btn-primary {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       background: var(--primary);
       color: white;
       border: none;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s;
+      margin-top: 10px;
     }
 
     .btn-primary:hover {
@@ -114,21 +147,38 @@
     .error-msg {
       color: var(--error);
       font-size: 13px;
-      margin: 12px 0 0 0;
+      margin-top: 8px;
       display: none;
     }
 
-    /* Main App Container */
-    .main-container {
-      max-width: 800px;
-      margin: 60px auto;
-      padding: 30px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
+    /* Result Box */
+    #result-box {
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 8px;
+      background: #1f2937;
+      border: 1px solid #374151;
+      display: none;
     }
 
-    h1 { margin-top: 0; font-size: 26px; }
+    #result-box.success {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .result-title {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 8px;
+      color: var(--success);
+    }
+
+    .result-content {
+      font-family: monospace;
+      font-size: 13px;
+      word-break: break-all;
+      color: var(--text-muted);
+    }
   </style>
 </head>
 <body>
@@ -140,35 +190,57 @@
       <h2>Access Verification</h2>
       <p>This is a private B2B SaaS platform. Please enter your secure access key to continue.</p>
       
-      <input type="password" id="access-password" class="form-input" placeholder="Enter 32-bit secure access key...">
-      <button id="login-btn" class="btn-primary" onclick="verifyPassword()">Verify & Enter</button>
-      <p id="error-msg" class="error-msg"></p>
+      <input type="password" id="access-password" class="form-input" placeholder="Enter secure access key..." style="margin-bottom: 16px;">
+      <button id="login-btn" class="btn-primary" onclick="verifyPassword()" style="margin-top: 0;">Verify & Enter</button>
+      <p id="auth-error" class="error-msg"></p>
     </div>
   </div>
 
   <!-- ================= Main SaaS Application Interface ================= -->
   <div class="main-container">
-    <h1>🤖 AI Voice Receptionist — Tenant Provisioning Portal</h1>
-    <p style="color: var(--text-muted);">Configure overseas business client details below to automatically deploy a dedicated Vapi AI assistant via backend API.</p>
+    <h1>🤖 AI Voice Receptionist</h1>
+    <p class="subtitle">Client Tenant Provisioning Portal — Automatically deploy a dedicated Vapi AI assistant for overseas businesses.</p>
     
-    <!-- Your Onboarding Form / Content Goes Here -->
-    <div style="margin-top: 30px;">
-      <p style="color: #10b981; font-weight: 500;">✨ Security gateway fully activated and secure.</p>
+    <form id="tenant-form" onsubmit="createTenant(event)">
+      <div class="form-group">
+        <label class="form-label">Client / Business Name</label>
+        <input type="text" id="business-name" class="form-input" placeholder="e.g., Austin Dental Clinic" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Business Type / Industry</label>
+        <input type="text" id="business-type" class="form-input" placeholder="e.g., Healthcare / Dental Services" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Initial Greeting / Prompt Instructions</label>
+        <textarea id="prompt-instructions" class="form-textarea" placeholder="Describe how the AI receptionist should greet callers and handle inquiries..." required>Hello! Thank you for calling. How can I assist you with our services today?</textarea>
+      </div>
+
+      <button type="submit" id="submit-btn" class="btn-primary">Deploy AI Receptionist Assistant</button>
+      <p id="form-error" class="error-msg"></p>
+    </form>
+
+    <!-- Success / Result Display -->
+    <div id="result-box">
+      <div class="result-title">✨ Tenant Provisioned Successfully!</div>
+      <div id="result-details" class="result-content"></div>
     </div>
   </div>
 
   <script>
-    // Check session verification status on load
+    // 1. Check session verification status on load
     window.addEventListener('DOMContentLoaded', () => {
       if (sessionStorage.getItem('saas_auth_token') === 'verified') {
         document.getElementById('auth-overlay').style.display = 'none';
       }
     });
 
+    // 2. Password Verification Handler
     async function verifyPassword() {
       const passwordInput = document.getElementById('access-password');
       const loginBtn = document.getElementById('login-btn');
-      const errorMsg = document.getElementById('error-msg');
+      const errorMsg = document.getElementById('auth-error');
       const password = passwordInput.value.trim();
 
       if (!password) {
@@ -208,10 +280,61 @@
       }
     }
 
-    // Support Enter key shortcut
     document.getElementById('access-password').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') verifyPassword();
     });
+
+    // 3. Tenant Creation Form Handler (Calls api/create-tenant.js)
+    async function createTenant(event) {
+      event.preventDefault();
+
+      const businessName = document.getElementById('business-name').value.trim();
+      const businessType = document.getElementById('business-type').value.trim();
+      const promptInstructions = document.getElementById('prompt-instructions').value.trim();
+      const submitBtn = document.getElementById('submit-btn');
+      const formError = document.getElementById('form-error');
+      const resultBox = document.getElementById('result-box');
+      const resultDetails = document.getElementById('result-details');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Deploying Assistant...';
+      formError.style.display = 'none';
+      resultBox.style.display = 'none';
+
+      try {
+        const response = await fetch('/api/create-tenant', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            businessName,
+            businessType,
+            promptInstructions
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          resultBox.className = 'success';
+          resultDetails.innerHTML = `
+            <strong>Assistant ID:</strong> ${data.assistantId || 'Created'}<br>
+            <strong>Business:</strong> ${businessName}<br>
+            <strong>Status:</strong> Live & Ready for Callers
+          `;
+          resultBox.style.display = 'block';
+          document.getElementById('tenant-form').reset();
+        } else {
+          formError.textContent = data.message || 'Failed to deploy assistant. Please check your API keys.';
+          formError.style.display = 'block';
+        }
+      } catch (err) {
+        formError.textContent = 'Network error while connecting to deployment server.';
+        formError.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Deploy AI Receptionist Assistant';
+      }
+    }
   </script>
 </body>
 </html>
