@@ -1,16 +1,17 @@
 import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
+  // 1. 確保 Vercel 能接收 POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // 1. 處理 Discord 的 Ping 驗證（確保 URL 驗證能立刻通過）
+  // 2. 絕對優先處理 Discord 的 PING (Type 1) 驗證，確保秒過網址檢查
   if (req.body && req.body.type === 1) {
     return res.status(200).json({ type: 1 });
   }
 
-  // 2. 處理使用者輸入的斜線指令 (例如 /deploy)
+  // 3. 處理使用者輸入的斜線指令 (Type 2: Application Command)
   if (req.body && req.body.type === 2) {
     const commandName = req.body.data.name;
 
@@ -53,6 +54,7 @@ export default async function handler(req, res) {
           throw new Error(vapiData.message || 'Vapi API error');
         }
 
+        // 回傳 Discord 訊息給使用者
         return res.status(200).json({
           type: 4,
           data: {
