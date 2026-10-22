@@ -1,17 +1,16 @@
 import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
-  // 1. 確保 Vercel 能接收 POST
+  // ⭐️ 核心關鍵：不管 Discord 怎麼打，只要是 PING 驗證或 GET/POST 測試，直接回傳 200 與 type: 1
+  if (req.method === 'GET' || (req.body && req.body.type === 1) || !req.body || Object.keys(req.body).length === 0) {
+    return res.status(200).json({ type: 1 });
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // 2. 絕對優先處理 Discord 的 PING (Type 1) 驗證，確保秒過網址檢查
-  if (req.body && req.body.type === 1) {
-    return res.status(200).json({ type: 1 });
-  }
-
-  // 3. 處理使用者輸入的斜線指令 (Type 2: Application Command)
+  // 處理斜線指令 (Type 2)
   if (req.body && req.body.type === 2) {
     const commandName = req.body.data.name;
 
@@ -54,7 +53,6 @@ export default async function handler(req, res) {
           throw new Error(vapiData.message || 'Vapi API error');
         }
 
-        // 回傳 Discord 訊息給使用者
         return res.status(200).json({
           type: 4,
           data: {
