@@ -1,0 +1,88 @@
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const { storeName, businessDescription, language = 'en', contactEmail } = req.body;
+
+  if (!storeName || !businessDescription || !contactEmail) {
+    return res.status(400).json({ error: 'Missing required fields: storeName, businessDescription, contactEmail' });
+  }
+
+  // 針對海外不同語系動態調整 Prompt 基準
+  const languageInstructions = {
+    en: "You are a polite, clear, warm, and efficient AI receptionist speaking in fluent English.",
+    es: "Eres una recepcionista de IA educada, clara, cálida y eficiente que habla español fluido.",
+    ja: "あなたは丁寧で明確、温かく効率的なAIレセプションです。流暢な日本語で対応してください。",
+    zh: "你是一個專業、親切且高效的 AI 智慧接線生。"
+  };
+
+  const baseInstruction = languageInstructions[language] || languageInstructions.en;
+
+  const customPrompt = `${baseInstruction} 
+You are representing the business: "${storeName}". 
+Business details & FAQ: ${businessDescription}. 
+Your goal is to assist callers with inquiries, collect their contact details (name, phone/email, and request), and maintain a professional tone. Never invent unconfirmed appointment availability.`;
+
+  try {
+    // 透過 Vapi Private API 自動在背景建立專屬 Assistant
+    const vapiResponse = await fetch('https://api.vapi.ai/assistants', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.VAPI_PRIVATE_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: `${storeName} - AI Receptionist`,
+        model: {
+          provider: 'openai',
+          model: 'gpt-4o-mini',
+          messages: [
+            {
+              role: 'system',
+              content: customPrompt
+            }
+          ]
+        },
+        server: {
+          url: 'https://ai-receptionist-saas-ivory.vercel.app/api/vapi-webhook'
+        }
+      })
+    });
+
+    const assistantData = await vapiResponse.json();
+
+    if (!vapiResponse.ok) {
+      throw new Error(assistantData.message || 'Failed to create Vapi assistant');
+    }
+
+    const assistantId = assistantData.id;
+    const clientId = storeName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    const publicKey = process.env.VAPI_PUBLIC_KEY || '';
+
+    // 產生給海外客戶貼在網站上的標準嵌入碼
+    const embedCode = `<script src="https://ai-receptionist-saas-ivory.vercel.app/widget.js" data-client-id="${clientId}" data-assistant-id="${assistantId}" data-public-key="${publicKey}" defer></script>`;
+
+    return res.status(200).json({
+      success: true,
+      message: 'Successfully generated tenant AI assistant!',
+      data: {
+        storeName,
+        assistantId,
+        embedCode
+      }
+    });
+
+  } catch (error) {
+    console.error('Create tenant error:', error);
+    return res.status(500).json({ error: error.message });
+  }
+}
