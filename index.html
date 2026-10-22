@@ -7,6 +7,8 @@
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Supabase JS Client SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     @keyframes pulse-ring {
@@ -29,7 +31,7 @@
       </div>
       <div>
         <h1 class="font-bold text-lg leading-tight">AI Receptionist SaaS</h1>
-        <p class="text-xs text-slate-400">Powered by Gemini API & Web Speech</p>
+        <p class="text-xs text-slate-400">Powered by Gemini API & Supabase</p>
       </div>
     </div>
 
@@ -118,9 +120,14 @@
 
     </section>
 
-    <!-- TAB 2: LEAD CRM -->
+    <!-- TAB 2: LEAD CRM (Supabase Powered) -->
     <section id="content-leads" class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl hidden">
-      <h2 class="text-xl font-bold mb-4">Captured Inbound Leads</h2>
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold">Captured Inbound Leads (Supabase)</h2>
+        <button onclick="fetchLeads()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 rounded-lg border border-slate-700 transition-all">
+          🔄 Refresh Leads
+        </button>
+      </div>
       <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
           <thead>
@@ -133,7 +140,7 @@
             </tr>
           </thead>
           <tbody id="leads-table-body" class="divide-y divide-slate-800 text-sm">
-            <!-- Dynamically populated leads -->
+            <!-- Dynamically populated leads from Supabase -->
           </tbody>
         </table>
       </div>
@@ -197,6 +204,11 @@
 
   <!-- JavaScript Application Logic -->
   <script>
+    // Supabase Configuration
+    const SUPABASE_URL = 'https://soemujvvjnscchzncceo.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_LtLxBrGCr3sDmJ9pNXnZgQ_lsRSJI2R';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     // State Variables
     let businessName = "Turtle English";
     let agentName = "Alex";
@@ -213,15 +225,51 @@
       }
     ];
 
-    let leads = [
-      { id: 1, name: 'David Chen', phone: '+886 912 345 678', intent: 'Course Inquiry', status: 'New Lead', date: '2026-10-22' },
-      { id: 2, name: 'Sarah Wu', phone: '+886 987 654 321', intent: 'Trial Lesson Booking', status: 'Scheduled', date: '2026-10-22' }
-    ];
+    let leads = [];
 
     let faqs = [
       { question: 'What are your operating hours?', answer: 'We are open Monday through Friday from 9:00 AM to 8:00 PM.' },
       { question: 'How do I book a trial lesson?', answer: 'I can schedule a trial lesson for you right now on this call!' }
     ];
+
+    // Fetch Leads from Supabase Database
+    async function fetchLeads() {
+      try {
+        const { data, error } = await supabaseClient
+          .from('leads')
+          .select('*')
+          .order('id', { ascending: false });
+
+        if (error) {
+          console.error('Error fetching leads:', error);
+          return;
+        }
+
+        if (data) {
+          leads = data;
+          renderLeads();
+        }
+      } catch (err) {
+        console.error('Supabase Client Error:', err);
+      }
+    }
+
+    // Save Lead to Supabase Database
+    async function saveLead(name, phone, intent) {
+      try {
+        const { data, error } = await supabaseClient
+          .from('leads')
+          .insert([{ name, phone, intent, status: 'New Lead' }]);
+
+        if (!error) {
+          fetchLeads();
+        } else {
+          console.error('Error saving lead:', error);
+        }
+      } catch (err) {
+        console.error('Supabase Save Error:', err);
+      }
+    }
 
     // Navigation Switcher
     function switchTab(tabName) {
@@ -233,6 +281,10 @@
 
       document.getElementById(`content-${tabName}`).classList.remove('hidden');
       document.getElementById(`tab-${tabName}`).className = "px-4 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-600 text-white shadow-md";
+
+      if (tabName === 'leads') {
+        fetchLeads();
+      }
     }
 
     // Render Transcript Messages
@@ -252,17 +304,22 @@
     // Render Leads Table
     function renderLeads() {
       const tbody = document.getElementById('leads-table-body');
+      if (leads.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500">No leads captured yet. Try adding one via API or SQL Editor!</td></tr>`;
+        return;
+      }
+
       tbody.innerHTML = leads.map(lead => `
         <tr class="hover:bg-slate-900/50">
-          <td class="py-3 px-4 font-medium">${lead.name}</td>
-          <td class="py-3 px-4 font-mono text-slate-400">${lead.phone}</td>
-          <td class="py-3 px-4">${lead.intent}</td>
+          <td class="py-3 px-4 font-medium">${lead.name || 'Anonymous'}</td>
+          <td class="py-3 px-4 font-mono text-slate-400">${lead.phone || 'N/A'}</td>
+          <td class="py-3 px-4">${lead.intent || 'General Inquiry'}</td>
           <td class="py-3 px-4">
             <span class="px-2.5 py-1 rounded-full text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-              ${lead.status}
+              ${lead.status || 'New Lead'}
             </span>
           </td>
-          <td class="py-3 px-4 text-slate-500">${lead.date}</td>
+          <td class="py-3 px-4 text-slate-500">${lead.created_at ? new Date(lead.created_at).toLocaleDateString() : 'Today'}</td>
         </tr>
       `).join('');
     }
@@ -348,7 +405,7 @@
       }
     }
 
-    // 串接真實 Gemini 後端的 handleSendMessage 函數
+    // Handle Send Message (Gemini Backend Integration)
     async function handleSendMessage(e) {
       e.preventDefault();
       const input = document.getElementById('user-input');
@@ -364,7 +421,6 @@
       input.value = '';
       renderMessages();
 
-      // 顯示正在思考中...
       const thinkingId = messages.length;
       messages.push({
         sender: 'agent',
@@ -383,7 +439,6 @@
         const data = await response.json();
         const reply = data.reply || "I'm here to help!";
 
-        // 移除「Thinking...」並換成真實回答
         messages[thinkingId] = {
           sender: 'agent',
           text: reply,
@@ -421,8 +476,8 @@
     // Initial Load
     window.onload = function() {
       renderMessages();
-      renderLeads();
       renderFaqs();
+      fetchLeads();
     };
   </script>
 </body>
