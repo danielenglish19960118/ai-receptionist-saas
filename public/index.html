@@ -143,10 +143,28 @@
       background: #475569;
     }
 
+    /* Section Headings */
+    .section-title {
+      text-align: center;
+      max-width: 700px;
+      margin: 6rem auto 3rem auto;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+      color: #fff;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
     /* Features Grid */
     .features {
       max-width: 1100px;
-      margin: 6rem auto;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
@@ -176,6 +194,125 @@
       line-height: 1.5;
     }
 
+    /* Pricing Section */
+    .pricing-grid {
+      max-width: 950px;
+      margin: 0 auto 6rem auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .pricing-card.popular {
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
+    }
+
+    .popular-tag {
+      position: absolute;
+      top: -14px;
+      right: 24px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .plan-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .plan-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      min-height: 40px;
+    }
+
+    .plan-price {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .plan-price span {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .feature-list li {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .feature-list li span {
+      color: #60a5fa;
+      font-weight: bold;
+    }
+
+    .plan-btn {
+      width: 100%;
+      text-align: center;
+      padding: 0.85rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+
+    .plan-btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .plan-btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .plan-btn-secondary {
+      background: #334155;
+      color: #fff;
+      border: 1px solid #475569;
+    }
+
+    .plan-btn-secondary:hover {
+      background: #475569;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -193,6 +330,7 @@
   <header>
     <a href="/" class="logo">🐢 AI Receptionist SaaS</a>
     <div class="nav-links">
+      <a href="#pricing" class="nav-link">Pricing</a>
       <a href="/onboarding.html" class="nav-link">Login</a>
       <a href="/onboarding.html" class="nav-btn">Launch Console ➔</a>
     </div>
@@ -204,8 +342,8 @@
     <h1>Automate Customer Care & Bookings with 24/7 AI Receptionist</h1>
     <p>Embed an intelligent, context-aware AI agent into any website in under 60 seconds. Handle FAQs, capture high-intent leads, and schedule appointments automatically.</p>
     <div class="cta-group">
-      <a href="/onboarding.html" class="nav-btn" style="padding: 0.88rem 2.2rem; font-size: 1.05rem;">Start Setup Portal</a>
-      <a href="/onboarding.html" class="btn-secondary" style="padding: 0.88rem 2.2rem; font-size: 1.05rem;">Login to Dashboard</a>
+      <a href="#pricing" class="nav-btn" style="padding: 0.88rem 2.2rem; font-size: 1.05rem;">View Pricing Plans</a>
+      <a href="/onboarding.html" class="btn-secondary" style="padding: 0.88rem 2.2rem; font-size: 1.05rem;">Launch Console</a>
     </div>
   </section>
 
@@ -216,8 +354,8 @@
       <p>Simply copy and paste a single JavaScript snippet into your HTML, WordPress, or Webflow site. No coding or complex backend infrastructure required.</p>
     </div>
     <div class="card">
-      <h3>🧠 Custom Knowledge & Personas</h3>
-      <p>Configure dynamic client IDs, custom brand tones, and tailored business FAQs. The AI acts as your dedicated, round-the-clock frontline customer service agent.</p>
+      <h3>🎙️ Vapi Voice AI Call Engine</h3>
+      <p>Seamlessly powered by Vapi for real-time voice agent interactions, direct phone booking handling, and human-like customer inquiry response.</p>
     </div>
     <div class="card">
       <h3>📅 High-Intent Lead Capture</h3>
@@ -225,9 +363,47 @@
     </div>
   </section>
 
+  <!-- Pricing Section -->
+  <div class="section-title" id="pricing">
+    <h2>Flexible Plans for Growing Businesses</h2>
+    <p>Choose the plan that best fits your business needs. Upgrade or cancel anytime.</p>
+  </div>
+
+  <section class="pricing-grid">
+    <!-- Starter Plan -->
+    <div class="pricing-card">
+      <div class="plan-name">Starter Plan</div>
+      <div class="plan-desc">Ideal for small business websites needing 24/7 automated text customer support.</div>
+      <div class="plan-price">$29 <span>/ month</span></div>
+      <ul class="feature-list">
+        <li><span>✓</span> Embeddable Text Chat Widget</li>
+        <li><span>✓</span> Custom Knowledge Base & Persona</li>
+        <li><span>✓</span> Automated FAQ & Lead Capture</li>
+        <li><span>✓</span> Standard Email Support</li>
+      </ul>
+      <a href="https://gumroad.com" target="_blank" class="plan-btn plan-btn-secondary">Get Starter License</a>
+    </div>
+
+    <!-- Pro Plan (Vapi Voice) -->
+    <div class="pricing-card popular">
+      <div class="popular-tag">Most Popular</div>
+      <div class="plan-name">Pro Plan (Voice AI)</div>
+      <div class="plan-desc">For enterprises requiring real-time Voice AI receptionists powered by Vapi SDK.</div>
+      <div class="plan-price">$79 <span>/ month</span></div>
+      <ul class="feature-list">
+        <li><span>✓</span> Everything in Starter Plan</li>
+        <li><span>✓</span> <strong>Vapi Voice AI Call Integration</strong></li>
+        <li><span>✓</span> Real-Time Automated Booking Engine</li>
+        <li><span>✓</span> Custom Voice Assistant Key / Webhook</li>
+        <li><span>✓</span> Priority Customer Support</li>
+      </ul>
+      <a href="https://gumroad.com" target="_blank" class="plan-btn plan-btn-primary">Get Pro Voice License</a>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
-    <p>© 2026 Turtle AI Infrastructure. Built for Global SaaS & Enterprise Workflows.</p>
+    <p>© 2026 Turtle AI Infrastructure. Powered by Vapi & Modern SaaS Architecture.</p>
   </footer>
 
 </body>
