@@ -1,44 +1,217 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP Licensing & Access Gate | Garfield AI Executive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>VIP Licensing & Enterprise Access Gate | Garfield AI Executive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { garfield: { black: '#050507', panel: '#121216', vipgold: '#D4AF37', orange: '#FF8C00' } },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], bangers: ['Bangers', 'cursive'], mono: ['JetBrains Mono', 'monospace'] },
+                    boxShadow: { 'gold-glow': '0 0 70px rgba(212, 175, 55, 0.5)', 'orange-glow': '0 0 40px rgba(255, 140, 0, 0.45)' }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; overflow-x: hidden; }
         .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.6); box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
-    <header class="bg-garfield-black/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
+<body class="min-h-screen flex flex-col selection:bg-garfield-vipgold selection:text-black">
+    <!-- Top Urgency Bar -->
+    <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
+        <span>🚨 CRITICAL DEADLINE: 100% ESCROW REFUND GUARANTEE CLOSES IN <strong class="text-white bg-black px-2 py-0.5 rounded">03:42:18</strong></span>
+        <a href="#pricingTable" class="hidden md:inline font-mono text-[11px] underline">Secure Enterprise Tier Now ➔</a>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3"><div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">👑</div><span class="font-bangers text-2xl text-white">GARFIELD <span class="gold-gradient-text">VIP LICENSING</span></span></a>
-            <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-300">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-garfield-vipgold p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">👑</div>
+                <div>
+                    <span class="font-bangers text-2xl tracking-wider text-white">GARFIELD <span class="gold-gradient-text">VIP LICENSING</span></span>
+                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">Absolute Enterprise Access Gate</span>
+                </div>
+            </a>
+            <nav class="hidden lg:flex items-center gap-5 text-xs font-bold uppercase tracking-wider text-slate-300">
                 <a href="index.html" class="hover:text-amber-400">Home</a>
-                <a href="sandbox.html" class="hover:text-amber-400">Live Sandbox</a>
-                <a href="hooks.html" class="hover:text-amber-400">10,000+ Hooks</a>
-                <a href="roi.html" class="hover:text-amber-400">ROI</a>
-                <a href="pricing.html" class="text-amber-400">Pricing</a>
+                <a href="trial.html" class="hover:text-amber-400">Voice Sandbox</a>
+                <a href="onboarding.html" class="hover:text-amber-400">Onboarding Setup</a>
+                <a href="modules.html" class="hover:text-amber-400">10,000+ Sub-Pages</a>
+                <a href="vip.html" class="text-amber-400">VIP Licensing</a>
             </nav>
+            <div class="flex items-center gap-3">
+                <span id="authBadge" class="text-xs font-mono text-amber-400 bg-amber-400/10 px-3 py-1.5 rounded-xl border border-amber-400/20">Gate: <strong class="text-white">Active</strong></span>
+            </div>
         </div>
     </header>
-    <main class="flex-grow max-w-4xl w-full mx-auto px-6 py-16 flex flex-col gap-10">
-        <div class="text-center max-w-xl mx-auto"><span class="text-xs font-extrabold text-amber-400 uppercase tracking-widest">Gumroad Integration</span><h1 class="text-4xl font-black text-white mt-1">Enterprise VIP Security Gate</h1></div>
-        <div class="bg-[#121216] rounded-3xl p-10 gold-border-glow flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-5"><div class="w-14 h-14 rounded-2xl bg-amber-400/25 text-amber-300 flex items-center justify-center text-3xl font-bold">🔐</div><div><h3 class="text-xl font-bold text-white">Enter VIP License Key</h3><p class="text-xs text-slate-400 mt-1">Use demo keys <code class="text-amber-300 font-mono">garfield</code> or <code class="text-amber-300 font-mono">lasagna</code> to unlock provisioning.</p></div></div>
-            <div class="w-full md:w-auto flex items-center gap-3"><input type="password" id="securityPassInput" placeholder="Enter License Key..." class="w-full md:w-64 px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white font-mono text-xs focus:border-amber-400"><button onclick="validateKey()" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-6 py-3 rounded-xl shadow-lg uppercase">Unlock</button></div>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 flex flex-col gap-12">
+        
+        <!-- Hero Section -->
+        <div class="text-center max-w-3xl mx-auto space-y-4">
+            <span class="text-xs font-mono font-bold text-amber-400 bg-amber-400/10 px-3.5 py-1.5 rounded-full border border-amber-400/20 uppercase">Gumroad & Lemon Squeezy Enterprise Gate</span>
+            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">Enterprise VIP Security & License Activation</h1>
+            <p class="text-xs md:text-sm text-slate-300 font-mono leading-relaxed">
+                Unlock full administrative provisioning, 10,000+ programmatic SEO sub-page nodes, and unthrottled Vapi WebRTC speech synthesis pipelines.
+            </p>
+        </div>
+
+        <!-- License Key Validation Console -->
+        <div class="bg-garfield-panel rounded-3xl p-8 md:p-10 gold-border-glow flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="flex items-center gap-5">
+                <div class="w-16 h-16 rounded-2xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-3xl font-bold border border-amber-400/30 shadow-gold-glow">🔐</div>
+                <div class="space-y-1">
+                    <h3 class="text-xl font-bold text-white">Enter Your Gumroad / VIP License Key</h3>
+                    <p class="text-xs text-slate-400 font-mono">
+                        Test access with demo keys <code class="text-amber-300 bg-black/60 px-2 py-0.5 rounded border border-white/10 font-bold">garfield</code> or <code class="text-amber-300 bg-black/60 px-2 py-0.5 rounded border border-white/10 font-bold">lasagna</code>.
+                    </p>
+                </div>
+            </div>
+            <div class="w-full md:w-auto flex flex-col sm:flex-row items-center gap-3">
+                <input type="password" id="securityPassInput" placeholder="Enter License Key..." class="w-full md:w-72 px-4 py-3.5 rounded-xl bg-black/80 border border-white/20 text-white font-mono text-xs focus:border-amber-400 outline-none" />
+                <button onclick="validateKey()" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-8 py-3.5 rounded-xl shadow-lg uppercase transition-all whitespace-nowrap">
+                    Verify & Unlock 🚀
+                </button>
+            </div>
+        </div>
+
+        <!-- Why the Pricing is Unrefutably Rational (ROI & Cost Breakdown) -->
+        <div class="space-y-8" id="pricingTable">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-mono font-bold text-amber-400 uppercase">Financial Logic & Value Justification</span>
+                <h2 class="text-3xl font-black text-white">Why Garfield AI Executive Pricing is an Immediate ROI</h2>
+                <p class="text-xs text-slate-300 font-mono">
+                    Traditional human receptionist and sales-development teams cost upwards of $65,000 to $120,000 annually per headcount—with 8-hour work limits and emotional fatigue.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tier 1 -->
+                <div class="bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6 flex flex-col justify-between hover:border-amber-400/50 transition-all">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-slate-400 uppercase">Starter Executive</span>
+                            <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded border border-amber-400/20">Essential</span>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-black text-white">$1,997 <span class="text-xs text-slate-400 font-normal">/ year</span></div>
+                            <p class="text-xs text-slate-400 font-mono mt-2">Perfect for growing boutique firms looking to automate inbound inquiry routing.</p>
+                        </div>
+                        <ul class="space-y-2 text-xs font-mono text-slate-300 pt-4 border-t border-white/10">
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> 1 Dedicated Vapi Voice Line</li>
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> Sub-150ms Edge Synthesis</li>
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> 1,000 Programmatic Sub-Nodes</li>
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> Standard Escrow Protection</li>
+                        </ul>
+                    </div>
+                    <a href="onboarding.html" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs py-3.5 rounded-xl uppercase transition-all text-center block">
+                        Select Starter Tier
+                    </a>
+                </div>
+
+                <!-- Tier 2 (Master Featured) -->
+                <div class="bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6 flex flex-col justify-between relative shadow-2xl scale-[1.02]">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-[10px] uppercase px-4 py-1 rounded-full shadow-md tracking-wider">
+                        Most Popular for Enterprises
+                    </div>
+                    <div class="space-y-4 pt-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-amber-400 uppercase font-bold">Master Executive Suite</span>
+                            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20">300% ROI Guarantee</span>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-black text-white">$4,997 <span class="text-xs text-slate-400 font-normal">/ year</span></div>
+                            <p class="text-xs text-slate-300 font-mono mt-2">The complete revenue closing engine with 10,000+ PSEO nodes and escrow security.</p>
+                        </div>
+                        <ul class="space-y-2.5 text-xs font-mono text-slate-200 pt-4 border-t border-white/10">
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> <strong>Full 10,000+ PSEO Sub-Pages Index</strong></li>
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> Unlimited Vapi WebRTC Voice Pipelines</li>
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> 30-Day 100% Escrow Refund Guarantee</li>
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> Direct Founder Discord P1 Dispatch</li>
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> AES-256 Zero-Retention Encryption</li>
+                        </ul>
+                    </div>
+                    <a href="onboarding.html" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all text-center block">
+                        Claim Master Executive Suite 👑
+                    </a>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6 flex flex-col justify-between hover:border-amber-400/50 transition-all">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-slate-400 uppercase">Custom Sovereign</span>
+                            <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded border border-amber-400/20">Dedicated</span>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-black text-white">$15,000 <span class="text-xs text-slate-400 font-normal">/ custom</span></div>
+                            <p class="text-xs text-slate-400 font-mono mt-2">For multi-national holding companies requiring on-premise custom AI training.</p>
+                        </div>
+                        <ul class="space-y-2 text-xs font-mono text-slate-300 pt-4 border-t border-white/10">
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> Custom Fine-Tuned Voice Models</li>
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> On-Premise / Private Cloud Deployment</li>
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> Dedicated Executive Engineering Team</li>
+                            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i> Unlimited Programmatic SEO Scaling</li>
+                        </ul>
+                    </div>
+                    <a href="support.html" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs py-3.5 rounded-xl uppercase transition-all text-center block">
+                        Contact Founder for Custom
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Value Justification & Math Breakdown -->
+        <div class="bg-garfield-panel p-8 md:p-10 rounded-3xl border border-white/10 space-y-6">
+            <h3 class="text-xl font-black text-white border-b border-white/10 pb-4 flex items-center justify-between">
+                <span>The Executive Cost-Benefit Matrix</span>
+                <span class="text-xs font-mono text-emerald-400 font-normal">ROI Factor: 34x</span>
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
+                <div class="bg-black/60 p-6 rounded-2xl border border-white/10 space-y-3">
+                    <div class="text-red-400 font-bold uppercase">Without Garfield AI Executive:</div>
+                    <ul class="space-y-2 text-slate-300">
+                        <li>• Human Receptionist Cost: <strong>$65,000 / year</strong></li>
+                        <li>• Missed After-Hours Inbound Leads: <strong>~$120,000 lost</strong></li>
+                        <li>• Slow Response Latency: <strong>Average 2.5 hours</strong></li>
+                        <li>• Zero Programmatic SEO Web Presence</li>
+                    </ul>
+                </div>
+                <div class="bg-black/60 p-6 rounded-2xl border border-amber-500/30 space-y-3">
+                    <div class="text-emerald-400 font-bold uppercase">With Garfield AI Master Suite ($4,997/yr):</div>
+                    <ul class="space-y-2 text-slate-300">
+                        <li>• 24/7 Autonomous Voice Receptionist</li>
+                        <li>• Sub-150ms Instant Lead Engagement</li>
+                        <li>• <strong>10,000+ Programmatic SEO Sub-Pages</strong></li>
+                        <li>• 30-Day Escrow Refund Protection (Zero Risk)</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </main>
-    <footer class="bg-black border-t border-white/10 mt-20 py-8 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+
+    <footer class="bg-black border-t border-white/10 mt-20 py-8 text-center text-xs text-slate-500">
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a>
+    </footer>
+
     <script>
         function validateKey() {
             const key = document.getElementById('securityPassInput').value.trim();
-            if (key === 'garfield' || key === 'lasagna' || key.length >= 8) alert("VIP License Verified Successfully!");
-            else alert("Invalid Key. Use demo keys 'garfield' or 'lasagna'.");
+            if (key === 'garfield' || key === 'lasagna' || key.length >= 8) {
+                alert("✔ VIP License Verified Successfully! Redirecting to Enterprise Onboarding & Provisioning Gate...");
+                window.location.href = 'onboarding.html';
+            } else {
+                alert("❌ Invalid License Key. Please enter a valid Gumroad key or use demo keys 'garfield' or 'lasagna'.");
+            }
         }
     </script>
 </body>
