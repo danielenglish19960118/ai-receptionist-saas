@@ -192,7 +192,7 @@
                         GARFIELD <span class="text-garfield-yellow">AI VOICE</span> SaaS
                     </h1>
                     <p class="text-xs font-bold text-garfield-black bg-garfield-yellow px-2 py-0.5 rounded border border-black inline-block mt-0.5">
-                        Enterprise Receptionist v4.2 • Meme of the Day Edition
+                        Meme Animations of the Day Edition • 1,000 Animations
                     </p>
                 </div>
             </div>
@@ -283,7 +283,7 @@
                             <span id="statusTag" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-400 animate-pulse">ONLINE</span>
                         </div>
                         <p id="garfieldSpeechText" class="font-comic text-lg text-slate-800 font-bold mt-1">
-                            "Check out our Garfield Meme of the Day below, or browse 1,000 deep-dive AI articles!"
+                            "Eric, Martine Bear, Orla, Joe, Sadie Wolf, and Porter Garfield are watching the Meme Animation of the Day! Check it out below!"
                         </p>
                     </div>
 
@@ -305,31 +305,34 @@
             </div>
         </section>
 
-        <!-- GARFIELD MEME OF THE DAY FEATURE -->
+        <!-- MEME ANIMATIONS OF THE DAY FEATURE -->
         <section class="comic-panel bg-gradient-to-r from-garfield-yellow via-garfield-cream to-garfield-yellow rounded-3xl p-6 border-2 border-garfield-black relative overflow-hidden">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div class="flex items-center gap-4">
                     <div class="bg-garfield-lasagna text-white p-4 rounded-2xl comic-border shadow-comic-sm animate-bounce">
-                        <i class="fa-solid fa-face-laugh-squint text-3xl"></i>
+                        <i class="fa-solid fa-clapperboard text-3xl"></i>
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs bg-garfield-darkorange text-white font-bold px-2 py-0.5 rounded uppercase font-bangers tracking-wider">🔥 Daily Highlight</span>
+                            <span class="text-xs bg-garfield-darkorange text-white font-bold px-2 py-0.5 rounded uppercase font-bangers tracking-wider">🎬 Animated Highlight</span>
                             <span id="memeDate" class="text-xs font-bold text-slate-700">October 25, 2026</span>
                         </div>
-                        <h2 class="font-bangers text-3xl text-garfield-darkorange tracking-wide mt-1">GARFIELD MEME OF THE DAY</h2>
-                        <p id="memeSubtitle" class="text-xs font-bold text-slate-700">Fresh daily humor guaranteed to make Mondays bearable.</p>
+                        <h2 class="font-bangers text-3xl text-garfield-darkorange tracking-wide mt-1">MEME ANIMATIONS OF THE DAY</h2>
+                        <p id="memeSubtitle" class="text-xs font-bold text-slate-700">Live animated Garfield & Family canvas showcase!</p>
                     </div>
                 </div>
 
-                <button onclick="loadRandomMeme()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center gap-2 whitespace-nowrap">
-                    <i class="fa-solid fa-dice"></i> Generate Random Meme 🎲
+                <button onclick="loadRandomAnimatedMeme()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Switch Animation 🎲
                 </button>
             </div>
 
-            <!-- Meme ASCII / Graphic Display Card -->
-            <div class="mt-4 bg-slate-900 text-garfield-yellow p-4 rounded-2xl comic-border font-mono text-xs md:text-sm whitespace-pre font-bold shadow-inner overflow-x-auto" id="memeDisplayBox">
-                Loading today's masterpiece...
+            <!-- Animated Canvas Preview Screen -->
+            <div class="mt-4 bg-slate-900 rounded-2xl comic-border p-4 flex flex-col items-center justify-center relative overflow-hidden h-48 shadow-inner">
+                <canvas id="memeAnimationCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                <div id="memeCaptionBox" class="relative z-10 bg-black/70 text-garfield-yellow px-4 py-2 rounded-xl border border-garfield-orange font-bangers text-lg tracking-wider text-center max-w-lg shadow-lg">
+                    Loading animated meme...
+                </div>
             </div>
         </section>
 
@@ -417,7 +420,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Client Tenant Name</label>
-                                <input type="text" id="tenantName" value="Garfield Lasagna House HQ" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white transition-all">
+                                <input type="text" id="tenantName" value="Garfield & Family HQ" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white transition-all">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Industry Sector</label>
@@ -432,7 +435,7 @@
 
                         <div>
                             <label class="block text-xs font-bold text-slate-700 mb-1">Garfield Persona System Prompt</label>
-                            <textarea id="systemPrompt" rows="3" class="w-full p-3 rounded-xl comic-border text-xs font-bold bg-garfield-cream leading-relaxed">You are Garfield, the witty, lasagna-loving AI Voice Receptionist. Answer incoming corporate calls with relaxed charm, take orders for Italian food, avoid Mondays, and forward urgent business leads to the human manager.</textarea>
+                            <textarea id="systemPrompt" rows="3" class="w-full p-3 rounded-xl comic-border text-xs font-bold bg-garfield-cream leading-relaxed">You are Garfield, supported by Eric, Martine Bear, Orla, Joe, Sadie Wolf, and Porter Garfield. Answer incoming calls with witty charm, take Italian lasagna orders, avoid Mondays, and forward urgent business leads.</textarea>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -514,8 +517,8 @@
                 <div id="blogListView" class="flex flex-col gap-6">
                     <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 border-garfield-orange pb-3 gap-2">
                         <div>
-                            <h3 class="font-bangers text-3xl text-garfield-darkorange">GARFIELD'S 1,000-ARTICLE SAAS & MEME LIBRARY</h3>
-                            <p class="text-xs font-bold text-slate-600">Explore 1,000 long-form (1,000+ words each) articles packed with Garfield memes & phone receptionist tactics.</p>
+                            <h3 class="font-bangers text-3xl text-garfield-darkorange">GARFIELD & FAMILY 1,000-ARTICLE LIBRARY</h3>
+                            <p class="text-xs font-bold text-slate-600">Explore 1,000 long-form articles featuring Eric, Martine Bear, Orla, Joe, Sadie Wolf, Porter, and Garfield!</p>
                         </div>
                         <span class="bg-garfield-yellow text-garfield-black font-bangers text-sm px-3 py-1 rounded-xl comic-border animate-pulse">1,000 Articles Indexed</span>
                     </div>
@@ -523,7 +526,7 @@
                     <div class="flex flex-wrap items-center justify-between gap-3 bg-garfield-cream p-3 rounded-2xl comic-border">
                         <div class="flex items-center gap-2 w-full md:w-72">
                             <i class="fa-solid fa-search text-garfield-darkorange"></i>
-                            <input type="text" id="blogSearchInput" oninput="handleSearch()" placeholder="Search 1,000 articles..." class="w-full px-3 py-1.5 rounded-xl comic-border text-xs font-bold transition-all">
+                            <input type="text" id="blogSearchInput" oninput="handleSearch()" placeholder="Search family articles..." class="w-full px-3 py-1.5 rounded-xl comic-border text-xs font-bold transition-all">
                         </div>
                         <div class="flex items-center gap-2">
                             <button onclick="prevPage()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-3 py-1 rounded-xl comic-border text-sm transition-all hover:scale-105">← Prev</button>
@@ -537,12 +540,12 @@
 
                 <div id="articleDetailView" class="hidden flex flex-col gap-6">
                     <button onclick="closeArticleView()" class="self-start bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-lg transition-all hover:scale-105 flex items-center gap-2">
-                        <i class="fa-solid fa-arrow-left"></i> Back to 1,000 Articles Directory
+                        <i class="fa-solid fa-arrow-left"></i> Back to Family Directory
                     </button>
                     
                     <div class="bg-garfield-cream p-6 rounded-3xl comic-border shadow-comic space-y-4">
                         <div class="flex items-center justify-between border-b-2 border-black pb-3">
-                            <span id="detailArticleCategory" class="text-xs font-bold bg-garfield-orange text-white px-3 py-1 rounded-full uppercase">ARTICLE CATEGORY</span>
+                            <span id="detailArticleCategory" class="text-xs font-bold bg-garfield-orange text-white px-3 py-1 rounded-full uppercase">FAMILY ARCHIVE</span>
                             <span id="detailArticleDate" class="text-xs font-bold text-slate-500">Oct 25, 2026</span>
                         </div>
                         <h2 id="detailArticleTitle" class="font-bangers text-3xl text-garfield-darkorange leading-tight">Article Title</h2>
@@ -551,7 +554,7 @@
 
                         <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
                             <button onclick="closeArticleView()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-base transition-all hover:scale-105">
-                                ← Back to 1,000 Articles Directory
+                                ← Back to Family Directory
                             </button>
                             <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-base transition-all hover:scale-105 flex items-center gap-2">
                                 <i class="fa-solid fa-cart-shopping"></i> Claim Enterprise License on Gumroad
@@ -590,8 +593,8 @@
                         <div class="flex items-center gap-3">
                             <i class="fa-brands fa-discord text-4xl text-garfield-discord"></i>
                             <div>
-                                <h3 class="font-bangers text-2xl text-white">Join Garfield SaaS Official Discord</h3>
-                                <p class="text-xs text-slate-400">Get live developer assistance, webhook templates, and community updates.</p>
+                                <h3 class="font-bangers text-2xl text-white">Join Garfield Family Official Discord</h3>
+                                <p class="text-xs text-slate-400">Get live developer assistance, webhook templates, and family community updates.</p>
                             </div>
                         </div>
                         <a href="https://discord.gg/AcsQ6DDqPB" target="_blank" class="bg-garfield-discord hover:bg-indigo-700 text-white font-bangers text-lg px-6 py-2.5 rounded-xl comic-border transition-all hover:scale-105">
@@ -639,46 +642,88 @@
         </div>
     </footer>
 
-    <!-- Interactive 1,000 Animation Engine & Meme of the Day Logic -->
+    <!-- Interactive 1,000 Animation Engine & Animated Meme Canvas Logic -->
     <script>
-        // Meme of the Day Database
-        const memeCollection = [
-            `
-  /\\_/\\  
- ( o.o )  < "I hate Mondays. And I also hate when users try to push code without unit tests."
-  > ^ <
-            `,
-            `
-  /\\_/\\  
- ( -.- )  < "My body is 90% lasagna, 5% sleep, and 5% waiting for the weekend."
-  > ^ <
-            `,
-            `
-  /\\_/\\  
- ( ^_^ )  < "Why talk to humans when you can deploy an AI Voice Receptionist to do it while you nap?"
-  > ^ <
-            `,
-            `
-  /\\_/\\  
- ( ಠ_ಠ )  < "You want me to work on Monday? Talk to the paw."
-  > ^ <
-            `,
-            `
-  /\\_/\\  
- ( ˘ ³˘)  < "Lasagna is the only framework that never breaks in production."
-  > ^ <
-            `
+        // Animated Meme of the Day Canvas Engine
+        const memeAnimations = [
+            { caption: "Eric Garfield & Porter Garfield: Deploying Code on Monday is a Trap!", type: "bounce" },
+            { caption: "Martine Bear & Sadie Wolf: Extra Triple-Cheese Lasagna Deployment!", type: "spin" },
+            { caption: "Orla Garfield & Joe Garfield: Vapi Voice Stream 20ms Latency Wave!", type: "wave" },
+            { caption: "Garfield: 'Wake me up when Friday arrives.'", type: "float" }
         ];
 
-        function loadRandomMeme() {
-            const randomIndex = Math.floor(Math.random() * memeCollection.length);
-            const box = document.getElementById('memeDisplayBox');
-            if(box) {
-                box.innerText = memeCollection[randomIndex];
+        let currentAnimIndex = 0;
+        const animCanvas = document.getElementById('memeAnimationCanvas');
+        const animCtx = animCanvas.getContext('2d');
+        let animWidth, animHeight;
+
+        function resizeAnimCanvas() {
+            animWidth = animCanvas.width = animCanvas.offsetWidth;
+            animHeight = animCanvas.height = animCanvas.offsetHeight;
+        }
+        window.addEventListener('resize', resizeAnimCanvas);
+        setTimeout(resizeAnimCanvas, 100);
+
+        let frameCount = 0;
+        function renderAnimatedMeme() {
+            if (!animCtx) return;
+            animCtx.clearRect(0, 0, animWidth, animHeight);
+
+            // Draw animated background grid
+            animCtx.strokeStyle = '#334155';
+            animCtx.lineWidth = 1;
+            for (let i = 0; i < animWidth; i += 30) {
+                animCtx.beginPath();
+                animCtx.moveTo(i, 0);
+                animCtx.lineTo(i, animHeight);
+                animCtx.stroke();
             }
+
+            const current = memeAnimations[currentAnimIndex];
+            frameCount++;
+
+            // Draw animated elements based on type
+            animCtx.save();
+            if (current.type === 'bounce') {
+                let y = animHeight / 2 + Math.sin(frameCount * 0.1) * 20;
+                animCtx.font = '40px Fredoka';
+                animCtx.textAlign = 'center';
+                animCtx.fillText('🐱🍕', animWidth / 2 + Math.cos(frameCount * 0.05) * 50, y);
+            } else if (current.type === 'spin') {
+                animCtx.translate(animWidth / 2, animHeight / 2);
+                animCtx.rotate(frameCount * 0.03);
+                animCtx.font = '45px Fredoka';
+                animCtx.textAlign = 'center';
+                animCtx.fillText('🐾🧀', 0, 0);
+            } else if (current.type === 'wave') {
+                animCtx.strokeStyle = '#FF8000';
+                animCtx.lineWidth = 4;
+                animCtx.beginPath();
+                for (let x = 0; x < animWidth; x++) {
+                    let y = animHeight / 2 + Math.sin(x * 0.05 + frameCount * 0.1) * 25;
+                    if (x === 0) animCtx.moveTo(x, y);
+                    else animCtx.lineTo(x, y);
+                }
+                animCtx.stroke();
+            } else {
+                let scale = 1 + Math.sin(frameCount * 0.05) * 0.1;
+                animCtx.translate(animWidth / 2, animHeight / 2);
+                animCtx.scale(scale, scale);
+                animCtx.font = '40px Fredoka';
+                animCtx.textAlign = 'center';
+                animCtx.fillText('😴💤', 0, 0);
+            }
+            animCtx.restore();
+
+            document.getElementById('memeCaptionBox').innerText = current.caption;
+            requestAnimationFrame(renderAnimatedMeme);
         }
 
-        // 1,000 Particle Animation Engine
+        function loadRandomAnimatedMeme() {
+            currentAnimIndex = (currentAnimIndex + 1) % memeAnimations.length;
+        }
+
+        // 1,000 Particle Background Animation Engine
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
@@ -730,7 +775,6 @@
             });
             requestAnimationFrame(animateParticles);
         }
-        animateParticles();
 
         let isLocked = false;
         let isSleep = false;
@@ -745,7 +789,8 @@
                 updateSecurityUI();
             }
             renderBlogGrid();
-            loadRandomMeme();
+            animateParticles();
+            renderAnimatedMeme();
         });
 
         async function validateSecurityKey() {
@@ -761,7 +806,7 @@
                 isLocked = false;
                 feedback.classList.add('hidden');
                 updateSecurityUI();
-                alert("License Verified Successfully! Garfield AI SaaS unlocked.");
+                alert("License Verified Successfully! Garfield Family AI SaaS unlocked.");
             } else {
                 feedback.classList.remove('hidden');
             }
@@ -796,9 +841,9 @@
             }
         }
 
-        function interactGarfield() { alert("Meow! Welcome to Garfield AI SaaS Platform!"); }
+        function interactGarfield() { alert("Meow! Eric, Martine Bear, Orla, Joe, Sadie Wolf, and Porter Garfield say hello!"); }
         function toggleGarfieldSleep() { isSleep = !isSleep; }
-        function feedLasagna() { alert("Lasagna refueled! Processing speed boosted."); }
+        function feedLasagna() { alert("Lasagna refueled for the whole family!"); }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -815,8 +860,8 @@
             }
         }
 
-        function toggleSimulatedCall() { alert("Simulating incoming phone call..."); }
-        function saveTenantConfig() { alert("Configuration deployed to Vapi Voice Engine!"); }
+        function toggleSimulatedCall() { alert("Simulating incoming call for Garfield & Friends HQ..."); }
+        function saveTenantConfig() { alert("Configuration deployed with family routing!"); }
 
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         let audioCtx = null;
@@ -839,29 +884,29 @@
             }
         }
 
-        const articleTopics = [
-            "Why Mondays Should Be Automated by AI Voice Receptionists",
-            "The Layered Architecture: Comparing SaaS Stacks to Homemade Lasagna",
-            "Building Low-Latency Voice Dispatchers with Vapi Engine & Discord",
-            "How Garfield Handles 10,000 Inbound Calls Without Leaving the Sofa",
-            "The Art of Sassy Prompts: Balancing Personality & Enterprise Support",
-            "Overcoming Phone Call Anxiety with Garfield's Automated Receptionist",
-            "Zero-Downtime Deployment Strategies for AI Receptionist Tenants",
-            "How to Integrate Discord Webhooks into Real-Time Call Summaries",
-            "Why Naps Increase System Reliability: Garfield's Infrastructure Philosophy",
-            "Handling High Peak Order Volumes in Food Delivery with Voice Agents"
+        const familyTopics = [
+            "Eric Garfield's Guide to Managing Multi-Tenant AI Receptionists",
+            "Martine Bear's Secret Triple-Cheese Lasagna Recipe for SaaS Founders",
+            "Orla Garfield on Optimizing Vapi Voice Latency Under Pressure",
+            "Joe Garfield & Porter Garfield: Building Scalable Discord Communities",
+            "Sadie Wolf's Tips on Surviving Monday Call Surges with Style",
+            "Porter Garfield's Automated Webhook Architecture for Gumroad Sales",
+            "Eric Garfield & Garfield: Why Naps is an Essential Engineering Metric",
+            "Martine Bear & Sadie Wolf on Balancing Family Life and Enterprise SaaS",
+            "Orla Garfield & Joe Garfield on Deploying Vercel Serverless Pipelines",
+            "The Ultimate Garfield Family Reunion: Lasagna, Code, and Automation"
         ];
 
         function getArticleData(index) {
-            const topic = articleTopics[index % articleTopics.length];
+            const topic = familyTopics[index % familyTopics.length];
             const title = `Article #${index + 1}: ${topic}`;
             
             const memeBanner = `
   /\\_/\\  
- ( o.o )  < "GARFIELD MEME #${index + 1}: Never deploy code on Mondays!"
+ ( o.o )  < "GARFIELD FAMILY MEME #${index + 1}: Eric, Martine, Orla, Joe, Sadie, & Porter approved!"
   > ^ <
   --------------------------------------------------------------
- [ MEME ASCII: Golden Lasagna Layer #${(index % 20) + 1} Baked to Perfection ]
+ [ FAMILY ASCII: Golden Lasagna Layer #${(index % 20) + 1} Shared by the Clan ]
   --------------------------------------------------------------
             `;
 
@@ -870,23 +915,23 @@
 ${memeBanner}
                 </div>
 
-                <h3 class="font-bangers text-2xl text-garfield-darkorange">Introduction: The 1,000-Word Comprehensive Breakdown</h3>
-                <p>Welcome to Garfield’s official deep-dive analysis #${index + 1}. In modern enterprise SaaS operations, managing inbound phone calls requires low latency, strict security gates, and witty personality. In this 1,000-word article, we explore how our architecture handles real-time caller traffic while allowing human managers to enjoy uninterrupted naps.</p>
+                <h3 class="font-bangers text-2xl text-garfield-darkorange">Introduction: The Garfield Family Enterprise Philosophy</h3>
+                <p>Welcome to family article #${index + 1}. In this comprehensive 1,000-word piece, we explore how Eric Garfield, Martine Bear, Orla Garfield, Joe Garfield, Sadie Wolf, and Porter Garfield collaborate to run our world-class AI Voice Receptionist SaaS platform.</p>
 
-                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 1: Vapi AI Voice Engine Integration</h4>
-                <p>By connecting Vapi AI audio streams with lightweight WebSockets, Garfield AI Voice Receptionist achieves sub-20ms latency. The initial greeting prompt is configured to provide immediate value while taking accurate food delivery orders or scheduling corporate appointments.</p>
+                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 1: Collaborative Roles & Vapi Integration</h4>
+                <p>With Porter Garfield managing backend webhook pipelines and Orla Garfield tuning speech recognition models, our system maintains lightning-fast response times. Meanwhile, Martine Bear ensures everyone is well-fed with fresh lasagna.</p>
 
-                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 2: Monday Automation & Discord Webhooks</h4>
-                <p>Mondays cause the highest call spikes in customer service. Our system triages caller intent using natural language processing and immediately dispatches structured JSON payloads to your Discord Support Server via automated slash commands.</p>
+                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 2: Community Support & Discord Integration</h4>
+                <p>Joe Garfield and Sadie Wolf spearhead our Discord community support servers, ensuring every user gets immediate assistance with their tenant configurations and Gumroad licensing inquiries.</p>
 
-                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 3: Scalability & Gumroad Commercial Licensing</h4>
-                <p>Whether you manage 1 tenant or 10,000 client tenants, Garfield Enterprise SaaS scales seamlessly across Vercel serverless edge nodes. To unlock full commercial rights, visit our Gumroad store today!</p>
+                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Conclusion: Scaling with Family Values</h4>
+                <p>True enterprise success comes from combining robust automation with a relaxed, family-friendly mindset—just like Garfield intended. Unlock your full license on Gumroad today!</p>
             `;
 
             return {
                 id: index + 1,
                 title: title,
-                category: (index % 2 === 0) ? "AI Architecture" : "SaaS Automation",
+                category: (index % 2 === 0) ? "Family Architecture" : "SaaS Operations",
                 date: "Oct 25, 2026",
                 body: fullText
             };
@@ -923,7 +968,7 @@ ${memeBanner}
                             </div>
                             <h4 class="font-bangers text-xl text-garfield-black mt-2 leading-tight">${item.title}</h4>
                             <p class="text-xs font-bold text-slate-700 mt-2 line-clamp-3 leading-relaxed">
-                                Complete 1,000-word analysis exploring AI voice orchestration, Garfield memes, and enterprise phone receptionist automation strategies.
+                                Complete 1,000-word family deep-dive featuring Eric, Martine Bear, Orla, Joe, Sadie Wolf, and Porter Garfield.
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-xs font-bold">
