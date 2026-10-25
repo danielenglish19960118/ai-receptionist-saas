@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Licensing & Access Gate | Garfield AI Executive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; }
+        .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-garfield-black/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3"><div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">👑</div><span class="font-bangers text-2xl text-white">GARFIELD <span class="gold-gradient-text">VIP LICENSING</span></span></a>
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-300">
+                <a href="index.html" class="hover:text-amber-400">Home</a>
+                <a href="sandbox.html" class="hover:text-amber-400">Live Sandbox</a>
+                <a href="hooks.html" class="hover:text-amber-400">10,000+ Hooks</a>
+                <a href="roi.html" class="hover:text-amber-400">ROI</a>
+                <a href="pricing.html" class="text-amber-400">Pricing</a>
+            </nav>
+        </div>
+    </header>
+    <main class="flex-grow max-w-4xl w-full mx-auto px-6 py-16 flex flex-col gap-10">
+        <div class="text-center max-w-xl mx-auto"><span class="text-xs font-extrabold text-amber-400 uppercase tracking-widest">Gumroad Integration</span><h1 class="text-4xl font-black text-white mt-1">Enterprise VIP Security Gate</h1></div>
+        <div class="bg-[#121216] rounded-3xl p-10 gold-border-glow flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-5"><div class="w-14 h-14 rounded-2xl bg-amber-400/25 text-amber-300 flex items-center justify-center text-3xl font-bold">🔐</div><div><h3 class="text-xl font-bold text-white">Enter VIP License Key</h3><p class="text-xs text-slate-400 mt-1">Use demo keys <code class="text-amber-300 font-mono">garfield</code> or <code class="text-amber-300 font-mono">lasagna</code> to unlock provisioning.</p></div></div>
+            <div class="w-full md:w-auto flex items-center gap-3"><input type="password" id="securityPassInput" placeholder="Enter License Key..." class="w-full md:w-64 px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white font-mono text-xs focus:border-amber-400"><button onclick="validateKey()" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-6 py-3 rounded-xl shadow-lg uppercase">Unlock</button></div>
+        </div>
+    </main>
+    <footer class="bg-black border-t border-white/10 mt-20 py-8 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+    <script>
+        function validateKey() {
+            const key = document.getElementById('securityPassInput').value.trim();
+            if (key === 'garfield' || key === 'lasagna' || key.length >= 8) alert("VIP License Verified Successfully!");
+            else alert("Invalid Key. Use demo keys 'garfield' or 'lasagna'.");
+        }
+    </script>
+</body>
+</html>
