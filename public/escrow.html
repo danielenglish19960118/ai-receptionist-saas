@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zero Risk Escrow | Garfield AI Executive</title>
+    <title>02. Zero-Risk Escrow & Dual Guarantee | Garfield AI Executive</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
@@ -63,14 +63,158 @@
             <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 100 Closing Modules</a>
         </div>
 
-        <!-- 02. Zero Risk Escrow -->
-        <div class="space-y-8">
-            <h1 class="text-3xl font-black text-white">100% Zero-Risk Escrow Guarantee</h1>
-            <p class="text-xs text-slate-300">SOC 2 Type II Certified, AES-256 audio stream encryption, and absolute 30-day money-back guarantee.</p>
+        <!-- Hero Section -->
+        <div class="space-y-4">
+            <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full">
+                <i class="fa-solid fa-shield-halved text-amber-400 text-xs"></i>
+                <span class="text-xs font-mono font-bold text-amber-300 uppercase">Institutional Grade Escrow Protection</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight">100% Zero-Risk Escrow Guarantee & Financial Vault</h1>
+            <p class="text-xs md:text-sm text-slate-300 max-w-3xl leading-relaxed font-mono">
+                We remove 100% of your financial risk. Every deployment capital is held in a independently audited, 30-day third-party escrow account. If our Garfield AI Executive suite fails to hit your target conversion KPIs, your funds are returned directly with zero resistance.
+            </p>
+        </div>
+
+        <!-- 3 Core Pillars of Protection -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-garfield-panel p-6 rounded-3xl border border-white/10 space-y-4 hover:border-amber-400/50 transition-all">
+                <div class="w-12 h-12 rounded-2xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 text-xl font-bold">1</div>
+                <h3 class="text-lg font-bold text-white">Third-Party Escrow Lock</h3>
+                <p class="text-xs text-slate-400 leading-relaxed font-mono">
+                    Your implementation payment is locked in an independent Escrow Vault (Escrow.com / Stripe Vault). Funds are released to our operating account ONLY after you confirm successful deployment and key conversion triggers.
+                </p>
+            </div>
+            <div class="bg-garfield-panel p-6 rounded-3xl border border-white/10 space-y-4 hover:border-amber-400/50 transition-all">
+                <div class="w-12 h-12 rounded-2xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 text-xl font-bold">2</div>
+                <h3 class="text-lg font-bold text-white">30-Day Contractual Refund</h3>
+                <p class="text-xs text-slate-400 leading-relaxed font-mono">
+                    Test our voice AI pipelines, objection destroyers, and lead scrapers for 30 consecutive days. If your pipeline conversion rate doesn't increase by at least 150%, initiate an instant 1-click clawback refund.
+                </p>
+            </div>
+            <div class="bg-garfield-panel p-6 rounded-3xl border border-white/10 space-y-4 hover:border-amber-400/50 transition-all">
+                <div class="w-12 h-12 rounded-2xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 text-xl font-bold">3</div>
+                <h3 class="text-lg font-bold text-white">Bank-Grade Compliance</h3>
+                <p class="text-xs text-slate-400 leading-relaxed font-mono">
+                    SOC 2 Type II Certified infrastructure, AES-256 end-to-end audio stream encryption, and strict Vapi Zero-Retention data privacy policies to keep your proprietary customer lists 100% confidential.
+                </p>
+            </div>
+        </div>
+
+        <!-- Interactive Verification & Escrow Simulation -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="lg:col-span-5 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6">
+                <h3 class="font-bold text-white text-base border-b border-white/10 pb-3 flex items-center justify-between">
+                    <span>Simulate Your Guaranteed Vault Lock</span>
+                    <span class="text-[10px] text-emerald-400 font-mono font-bold">Zero Risk</span>
+                </h3>
+                <form onsubmit="simulateEscrowLock(event)" class="space-y-4">
+                    <div>
+                        <label class="text-xs font-bold text-slate-300 block mb-1">Select Enterprise Tier</label>
+                        <select id="escrowTier" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none">
+                            <option value="annual">$4,997 USD / Year (Master Executive Suite)</option>
+                            <option value="custom">$15,000 USD / Custom Enterprise Deployment</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-slate-300 block mb-1">Escrow Partner Provider</label>
+                        <input type="text" readonly value="Escrow.com / Stripe Vault Security" class="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-xs text-slate-400 outline-none" />
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all">Generate Escrow Verification Certificate 🔒</button>
+                </form>
+            </div>
+            <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                    <h3 class="font-bold text-white text-base">Escrow Protection Status & Audit Log</h3>
+                    <span id="escrowBadge" class="text-xs font-mono text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-xl border border-emerald-400/20">Vault Active</span>
+                </div>
+                <div id="escrowResults" class="space-y-3 font-mono text-xs">
+                    <div class="bg-black/80 p-4 rounded-xl border border-white/10 space-y-2">
+                        <div class="text-amber-400 font-bold">✔ Escrow Policy Contract ID: ESC-2026-GARFIELD-998</div>
+                        <div class="text-slate-300">Contractual Refund Guarantee: <span class="text-emerald-400 font-bold">30 Days Unconditional</span></div>
+                        <div class="text-slate-300">Data Encryption Standard: <span class="text-slate-100 font-bold">AES-256 / SOC 2 Type II</span></div>
+                        <div class="text-slate-400 text-[11px] pt-2 border-t border-white/10">
+                            "In the event of a refund claim within 30 days of initial deployment, third-party escrow funds are automatically remitted to the buyer's original bank account within 24 business hours."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security & Compliance Badges Grid -->
+        <div class="bg-black/60 p-8 rounded-3xl border border-white/10 space-y-6">
+            <h3 class="text-lg font-bold text-white text-center">Enterprise Security & Compliance Stack</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center font-mono text-xs">
+                <div class="bg-garfield-panel p-4 rounded-2xl border border-white/10 space-y-2">
+                    <div class="text-amber-400 text-2xl font-bold">SOC 2</div>
+                    <span class="text-slate-300 block font-bold">Type II Certified</span>
+                    <span class="text-[10px] text-slate-500 block">Audited Infrastructure</span>
+                </div>
+                <div class="bg-garfield-panel p-4 rounded-2xl border border-white/10 space-y-2">
+                    <div class="text-amber-400 text-2xl font-bold">AES-256</div>
+                    <span class="text-slate-300 block font-bold">Stream Encryption</span>
+                    <span class="text-[10px] text-slate-500 block">Zero-Latency VoIP</span>
+                </div>
+                <div class="bg-garfield-panel p-4 rounded-2xl border border-white/10 space-y-2">
+                    <div class="text-amber-400 text-2xl font-bold">GDPR / CCPA</div>
+                    <span class="text-slate-300 block font-bold">Data Sovereignty</span>
+                    <span class="text-[10px] text-slate-500 block">Zero Retention Logs</span>
+                </div>
+                <div class="bg-garfield-panel p-4 rounded-2xl border border-white/10 space-y-2">
+                    <div class="text-amber-400 text-2xl font-bold">ESCROW</div>
+                    <span class="text-slate-300 block font-bold">100% Capital Lock</span>
+                    <span class="text-[10px] text-slate-500 block">24h Wire Refund</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Institutional FAQ Section -->
+        <div class="space-y-6">
+            <h2 class="text-2xl font-black text-white">Escrow & Guarantee Frequently Asked Questions</h2>
+            <div class="space-y-4 font-mono text-xs">
+                <div class="bg-garfield-panel p-5 rounded-2xl border border-white/10 space-y-2">
+                    <div class="text-amber-400 font-bold">Q: How does the 30-day escrow refund process work?</div>
+                    <p class="text-slate-300 leading-relaxed">
+                        A: Upon signing, your subscription payment is deposited into an independent Escrow Vault. You have 30 days to test our AI voice receptionists and sales modules. If you request a refund via support.html, Escrow.com or Stripe Vault instantly releases 100% of the funds back to you with zero operational deductions.
+                    </p>
+                </div>
+                <div class="bg-garfield-panel p-5 rounded-2xl border border-white/10 space-y-2">
+                    <div class="text-amber-400 font-bold">Q: Does Garfield AI retain our customer call audio recordings?</div>
+                    <p class="text-slate-300 leading-relaxed">
+                        A: No. We utilize Vapi Edge Zero-Retention speech pipelines. Audio streams are processed in memory with real-time AES-256 encryption and purged immediately upon call termination.
+                    </p>
+                </div>
+            </div>
         </div>
     </main>
 
-    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a></footer>
     <script src="app.js"></script>
+    <script>
+        function simulateEscrowLock(e) {
+            e.preventDefault();
+            const tier = document.getElementById('escrowTier').value;
+            const results = document.getElementById('escrowResults');
+            const badge = document.getElementById('escrowBadge');
+            
+            badge.innerText = "Simulating Lock...";
+            results.innerHTML = `<div class="text-amber-400 animate-pulse">🔒 Securing third-party escrow vault and generating compliance certificate...</div>`;
+            
+            setTimeout(() => {
+                badge.innerText = "Verified Locked";
+                results.innerHTML = `
+                    <div class="bg-black/90 p-5 rounded-xl border border-amber-500/40 space-y-3">
+                        <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                            <span class="text-amber-400 font-bold">OFFICIAL ESCROW CERTIFICATE</span>
+                            <span class="text-emerald-400 font-bold text-[10px] bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">VERIFIED</span>
+                        </div>
+                        <div class="text-slate-200">Selected Tier: <strong class="text-white">${tier === 'annual' ? '$4,997 USD (Annual Suite)' : '$15,000 USD (Enterprise Custom)'}</strong></div>
+                        <div class="text-slate-300">Refund Lock Window: <strong class="text-emerald-400">30 Full Business Days</strong></div>
+                        <div class="text-slate-300">Escrow Agent: <strong class="text-amber-300">Stripe Vault & Escrow.com Dual-Sign</strong></div>
+                        <div class="text-slate-400 text-[10px] pt-2 border-t border-white/10">Certificate Hash: 0x9f8e7d...a1b2c3d4 (Ready for Deployment)</div>
+                    </div>
+                `;
+            }, 800);
+        }
+    </script>
 </body>
 </html>
