@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise ROI Calculator | Garfield AI Executive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; }
+        .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-garfield-black/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3"><div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">👑</div><span class="font-bangers text-2xl text-white">GARFIELD <span class="gold-gradient-text">ROI CALCULATOR</span></span></a>
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-300">
+                <a href="index.html" class="hover:text-amber-400">Home</a>
+                <a href="sandbox.html" class="hover:text-amber-400">Live Sandbox</a>
+                <a href="hooks.html" class="hover:text-amber-400">10,000+ Hooks</a>
+                <a href="roi.html" class="text-amber-400">ROI</a>
+                <a href="pricing.html" class="hover:text-amber-400">Pricing</a>
+            </nav>
+        </div>
+    </header>
+    <main class="flex-grow max-w-5xl w-full mx-auto px-6 py-16 flex flex-col gap-10">
+        <div class="text-center max-w-2xl mx-auto"><span class="text-xs font-extrabold text-amber-400 uppercase tracking-widest">Quantifiable Value</span><h1 class="text-4xl font-black text-white mt-1">Enterprise ROI & Cost Savings Calculator</h1></div>
+        <div class="bg-[#121216] rounded-3xl p-10 gold-border-glow grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-6">
+                <div><div class="flex justify-between text-sm font-bold text-slate-300 mb-2"><span>Monthly Inbound Executive Calls:</span><span id="callVolumeVal" class="text-amber-400 font-mono">1,500</span></div><input type="range" id="callVolume" min="500" max="10000" step="500" value="1500" oninput="calculateROI()" class="w-full accent-amber-400 bg-black/50 h-2 rounded-lg"></div>
+                <div><div class="flex justify-between text-sm font-bold text-slate-300 mb-2"><span>Average Deal Value ($):</span><span id="dealVal" class="text-amber-400 font-mono">$25,000</span></div><input type="range" id="dealValue" min="5000" max="250000" step="5000" value="25000" oninput="calculateROI()" class="w-full accent-amber-400 bg-black/50 h-2 rounded-lg"></div>
+            </div>
+            <div class="bg-black/70 p-8 rounded-2xl border gold-border-glow text-center space-y-4">
+                <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Projected Annual Savings & Revenue</span>
+                <div id="annualROI" class="text-4xl font-black gold-gradient-text">$294,000 / year</div>
+                <p class="text-xs text-slate-400">Based on 85% receptionist cost reduction + 12% after-hours lead conversion.</p>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-black border-t border-white/10 mt-20 py-8 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+    <script>
+        function calculateROI() {
+            const volume = parseInt(document.getElementById('callVolume').value);
+            const dealVal = parseInt(document.getElementById('dealValue').value);
+            document.getElementById('callVolumeVal').innerText = volume.toLocaleString();
+            document.getElementById('dealVal').innerText = `$${dealVal.toLocaleString()}`;
+            const annualTotal = ((volume * 10) + Math.floor((volume * 0.04) * dealVal * 0.08)) * 12;
+            document.getElementById('annualROI').innerText = `$${annualTotal.toLocaleString()} / year`;
+        }
+        calculateROI();
+    </script>
+</body>
+</html>
