@@ -192,7 +192,7 @@
                         GARFIELD <span class="text-garfield-yellow">AI VOICE</span> SaaS
                     </h1>
                     <p class="text-xs font-bold text-garfield-black bg-garfield-yellow px-2 py-0.5 rounded border border-black inline-block mt-0.5">
-                        Family & Daniel Panda Edition • 1,000 Animations
+                        Comics Gallery & Family Edition • 1,000 Animations
                     </p>
                 </div>
             </div>
@@ -283,7 +283,7 @@
                             <span id="statusTag" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-400 animate-pulse">ONLINE</span>
                         </div>
                         <p id="garfieldSpeechText" class="font-comic text-lg text-slate-800 font-bold mt-1">
-                            "Check out Daniel Panda's Quote of the Day below, alongside Eric, Martine Bear, Orla, Joe, Sadie Wolf, and Porter Garfield!"
+                            "Check out our Garfield Comics Gallery below! Eric, Martine Bear, Orla, Joe, Sadie, Porter, and Daniel Panda are reading along!"
                         </p>
                     </div>
 
@@ -302,6 +302,34 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- GARFIELD COMICS GALLERY FEATURE -->
+        <section class="comic-panel bg-gradient-to-r from-orange-100 via-garfield-cream to-orange-100 rounded-3xl p-6 border-2 border-garfield-black relative overflow-hidden">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="bg-garfield-orange text-white p-4 rounded-2xl comic-border shadow-comic-sm animate-bounce">
+                        <i class="fa-solid fa-book-open text-3xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-garfield-darkorange text-white font-bold px-2 py-0.5 rounded uppercase font-bangers tracking-wider">📖 Classic Strip</span>
+                            <span id="comicDate" class="text-xs font-bold text-slate-700">October 25, 2026</span>
+                        </div>
+                        <h2 class="font-bangers text-3xl text-garfield-darkorange tracking-wide mt-1">GARFIELD COMICS GALLERY</h2>
+                        <p id="comicSubtitle" class="text-xs font-bold text-slate-700">Four-panel comic strips celebrating lasagna, naps, and SaaS automation.</p>
+                    </div>
+                </div>
+
+                <button onclick="loadRandomComic()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-dice"></i> Switch Comic Strip 🎲
+                </button>
+            </div>
+
+            <!-- Comic Panels Grid Display -->
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4" id="comicPanelsContainer">
+                <!-- Dynamically populated via JS -->
             </div>
         </section>
 
@@ -327,40 +355,8 @@
                 </button>
             </div>
 
-            <!-- Panda Quote Display Box -->
             <div class="mt-4 bg-slate-900 text-emerald-300 p-4 rounded-2xl comic-border font-mono text-sm md:text-base whitespace-pre font-bold shadow-inner overflow-x-auto" id="pandaQuoteDisplayBox">
                 Loading Daniel Panda wisdom...
-            </div>
-        </section>
-
-        <!-- MEME ANIMATIONS OF THE DAY FEATURE -->
-        <section class="comic-panel bg-gradient-to-r from-garfield-yellow via-garfield-cream to-garfield-yellow rounded-3xl p-6 border-2 border-garfield-black relative overflow-hidden">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="flex items-center gap-4">
-                    <div class="bg-garfield-lasagna text-white p-4 rounded-2xl comic-border shadow-comic-sm animate-bounce">
-                        <i class="fa-solid fa-clapperboard text-3xl"></i>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs bg-garfield-darkorange text-white font-bold px-2 py-0.5 rounded uppercase font-bangers tracking-wider">🎬 Animated Highlight</span>
-                            <span id="memeDate" class="text-xs font-bold text-slate-700">October 25, 2026</span>
-                        </div>
-                        <h2 class="font-bangers text-3xl text-garfield-darkorange tracking-wide mt-1">MEME ANIMATIONS OF THE DAY</h2>
-                        <p id="memeSubtitle" class="text-xs font-bold text-slate-700">Live animated Garfield & Family canvas showcase!</p>
-                    </div>
-                </div>
-
-                <button onclick="loadRandomAnimatedMeme()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center gap-2 whitespace-nowrap">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Switch Animation 🎲
-                </button>
-            </div>
-
-            <!-- Animated Canvas Preview Screen -->
-            <div class="mt-4 bg-slate-900 rounded-2xl comic-border p-4 flex flex-col items-center justify-center relative overflow-hidden h-48 shadow-inner">
-                <canvas id="memeAnimationCanvas" class="absolute inset-0 w-full h-full"></canvas>
-                <div id="memeCaptionBox" class="relative z-10 bg-black/70 text-garfield-yellow px-4 py-2 rounded-xl border border-garfield-orange font-bangers text-lg tracking-wider text-center max-w-lg shadow-lg">
-                    Loading animated meme...
-                </div>
             </div>
         </section>
 
@@ -448,7 +444,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Client Tenant Name</label>
-                                <input type="text" id="tenantName" value="Garfield & Family HQ" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white transition-all">
+                                <input type="text" id="tenantName" value="Garfield Comics HQ" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white transition-all">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Industry Sector</label>
@@ -670,12 +666,74 @@
         </div>
     </footer>
 
-    <!-- Interactive 1,000 Animation Engine & Daniel Panda Quote Logic -->
+    <!-- Interactive 1,000 Animation Engine & Garfield Comics Strip Logic -->
     <script>
-        // Daniel Panda Quote of the Day Database
+        // Garfield Comics Gallery 4-Panel Strips Database
+        const comicStrips = [
+            {
+                title: "Strip #1: The Monday Awakening",
+                panels: [
+                    "Panel 1: Garfield sleeping peacefully on the sofa.",
+                    "Panel 2: Eric Garfield announces: 'Good morning, it's Monday!'",
+                    "Panel 3: Garfield pulls the blanket entirely over his head.",
+                    "Panel 4: 'Error 404: Monday not found.'"
+                ]
+            },
+            {
+                title: "Strip #2: The Lasagna Protocol",
+                panels: [
+                    "Panel 1: Martine Bear pulls a steaming lasagna from the oven.",
+                    "Panel 2: Garfield smells it from three rooms away with radar ears.",
+                    "Panel 3: Porter Garfield tries to secure the pan with code.",
+                    "Panel 4: Garfield devours the entire pan in 0.2 seconds."
+                ]
+            },
+            {
+                title: "Strip #3: Vapi AI Switchboard Chaos",
+                panels: [
+                    "Panel 1: Orla and Joe Garfield set up the Vapi voice receptionist.",
+                    "Panel 2: The phone rings 10,000 times simultaneously.",
+                    "Panel 3: Sadie Wolf answers: 'Welcome to Garfield HQ, press 1 for lasagna.'",
+                    "Panel 4: Daniel Panda nods approvingly while sipping bamboo tea."
+                ]
+            }
+        ];
+
+        let currentComicIndex = 0;
+        function loadRandomComic() {
+            currentComicIndex = (currentComicIndex + 1) % comicStrips.length;
+            renderComicStrip();
+        }
+
+        function renderComicStrip() {
+            const strip = comicStrips[currentComicIndex];
+            const container = document.getElementById('comicPanelsContainer');
+            if (!container) return;
+
+            let html = "";
+            strip.panels.forEach((panelText, idx) => {
+                html += `
+                    <div class="bg-white p-4 rounded-2xl comic-border shadow-comic flex flex-col justify-between h-40">
+                        <div class="flex items-center justify-between text-[10px] font-bold text-slate-500 border-b border-slate-200 pb-1">
+                            <span>Panel ${idx + 1} / 4</span>
+                            <span>🐾 Garfield Strip</span>
+                        </div>
+                        <p class="font-comic text-xs font-bold text-slate-800 leading-snug my-2">
+                            "${panelText}"
+                        </p>
+                        <div class="text-right text-xs font-bangers text-garfield-darkorange">
+                            ${strip.title.split(':')[0]}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Daniel Panda's Quote of the Day Database
         const pandaQuotes = [
             `🐼 "Eats code, shoots bugs, and leaves the server running smoothly." — Daniel Panda`,
-            `🐼 " bamboo grows in silence, but robust SaaS architecture echoes across edge networks." — Daniel Panda`,
+            `🐼 "Bamboo grows in silence, but robust SaaS architecture echoes across edge networks." — Daniel Panda`,
             `🐼 "Never trust a Monday, and never push code without a cup of fresh bamboo tea." — Daniel Panda`,
             `🐼 "True wisdom is knowing when to delegate phone calls to Garfield and take a nap." — Daniel Panda`,
             `🐼 "Simplicity is the ultimate sophistication—just like a single layer of perfect lasagna." — Daniel Panda`
@@ -688,85 +746,6 @@
             if (box) {
                 box.innerText = pandaQuotes[currentPandaQuoteIndex];
             }
-        }
-
-        // Animated Meme of the Day Canvas Engine
-        const memeAnimations = [
-            { caption: "Eric Garfield & Porter Garfield: Deploying Code on Monday is a Trap!", type: "bounce" },
-            { caption: "Martine Bear & Sadie Wolf: Extra Triple-Cheese Lasagna Deployment!", type: "spin" },
-            { caption: "Orla Garfield & Joe Garfield: Vapi Voice Stream 20ms Latency Wave!", type: "wave" },
-            { caption: "Daniel Panda: 'Chew on bamboo, let the AI handle the switchboard.'", type: "float" }
-        ];
-
-        let currentAnimIndex = 0;
-        const animCanvas = document.getElementById('memeAnimationCanvas');
-        const animCtx = animCanvas.getContext('2d');
-        let animWidth, animHeight;
-
-        function resizeAnimCanvas() {
-            if(!animCanvas) return;
-            animWidth = animCanvas.width = animCanvas.offsetWidth;
-            animHeight = animCanvas.height = animCanvas.offsetHeight;
-        }
-        window.addEventListener('resize', resizeAnimCanvas);
-        setTimeout(resizeAnimCanvas, 100);
-
-        let frameCount = 0;
-        function renderAnimatedMeme() {
-            if (!animCtx) return;
-            animCtx.clearRect(0, 0, animWidth, animHeight);
-
-            // Draw animated background grid
-            animCtx.strokeStyle = '#334155';
-            animCtx.lineWidth = 1;
-            for (let i = 0; i < animWidth; i += 30) {
-                animCtx.beginPath();
-                animCtx.moveTo(i, 0);
-                animCtx.lineTo(i, animHeight);
-                animCtx.stroke();
-            }
-
-            const current = memeAnimations[currentAnimIndex];
-            frameCount++;
-
-            animCtx.save();
-            if (current.type === 'bounce') {
-                let y = animHeight / 2 + Math.sin(frameCount * 0.1) * 20;
-                animCtx.font = '40px Fredoka';
-                animCtx.textAlign = 'center';
-                animCtx.fillText('🐼🍕', animWidth / 2 + Math.cos(frameCount * 0.05) * 50, y);
-            } else if (current.type === 'spin') {
-                animCtx.translate(animWidth / 2, animHeight / 2);
-                animCtx.rotate(frameCount * 0.03);
-                animCtx.font = '45px Fredoka';
-                animCtx.textAlign = 'center';
-                animCtx.fillText('🐾🎋', 0, 0);
-            } else if (current.type === 'wave') {
-                animCtx.strokeStyle = '#FF8000';
-                animCtx.lineWidth = 4;
-                animCtx.beginPath();
-                for (let x = 0; x < animWidth; x++) {
-                    let y = animHeight / 2 + Math.sin(x * 0.05 + frameCount * 0.1) * 25;
-                    if (x === 0) animCtx.moveTo(x, y);
-                    else animCtx.lineTo(x, y);
-                }
-                animCtx.stroke();
-            } else {
-                let scale = 1 + Math.sin(frameCount * 0.05) * 0.1;
-                animCtx.translate(animWidth / 2, animHeight / 2);
-                animCtx.scale(scale, scale);
-                animCtx.font = '40px Fredoka';
-                animCtx.textAlign = 'center';
-                animCtx.fillText('😴🐼', 0, 0);
-            }
-            animCtx.restore();
-
-            document.getElementById('memeCaptionBox').innerText = current.caption;
-            requestAnimationFrame(renderAnimatedMeme);
-        }
-
-        function loadRandomAnimatedMeme() {
-            currentAnimIndex = (currentAnimIndex + 1) % memeAnimations.length;
         }
 
         // 1,000 Particle Background Animation Engine
@@ -836,7 +815,7 @@
             }
             renderBlogGrid();
             animateParticles();
-            renderAnimatedMeme();
+            renderComicStrip();
             loadRandomPandaQuote();
         });
 
@@ -853,7 +832,7 @@
                 isLocked = false;
                 feedback.classList.add('hidden');
                 updateSecurityUI();
-                alert("License Verified Successfully! Garfield & Daniel Panda AI SaaS unlocked.");
+                alert("License Verified Successfully! Garfield Comics AI SaaS unlocked.");
             } else {
                 feedback.classList.remove('hidden');
             }
@@ -907,8 +886,8 @@
             }
         }
 
-        function toggleSimulatedCall() { alert("Simulating incoming call for Garfield & Panda HQ..."); }
-        function saveTenantConfig() { alert("Configuration deployed with family & panda routing!"); }
+        function toggleSimulatedCall() { alert("Simulating incoming call for Garfield Comics HQ..."); }
+        function saveTenantConfig() { alert("Configuration deployed with family & comic routing!"); }
 
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         let audioCtx = null;
@@ -950,10 +929,10 @@
             
             const memeBanner = `
   /\\_/\\  
- ( o.o )  < "GARFIELD & PANDA MEME #${index + 1}: Daniel Panda, Eric, Martine, Orla, Joe, Sadie, & Porter approved!"
+ ( o.o )  < "GARFIELD COMIC MEME #${index + 1}: Eric, Martine, Orla, Joe, Sadie, Porter, & Daniel Panda approved!"
   > ^ <
   --------------------------------------------------------------
- [ PANDA & FAMILY ASCII: Golden Lasagna Layer #${(index % 20) + 1} ]
+ [ COMIC & FAMILY ASCII: Golden Lasagna Layer #${(index % 20) + 1} ]
   --------------------------------------------------------------
             `;
 
@@ -962,7 +941,7 @@
 ${memeBanner}
                 </div>
 
-                <h3 class="font-bangers text-2xl text-garfield-darkorange">Introduction: The Daniel Panda & Garfield Philosophy</h3>
+                <h3 class="font-bangers text-2xl text-garfield-darkorange">Introduction: The Garfield Comics & Family Philosophy</h3>
                 <p>Welcome to family article #${index + 1}. In this 1,000-word piece, we explore how Daniel Panda, Eric Garfield, Martine Bear, Orla Garfield, Joe Garfield, Sadie Wolf, and Porter Garfield collaborate to run our world-class AI Voice Receptionist SaaS platform.</p>
 
                 <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 1: Daniel Panda's Zen Architecture & Vapi Integration</h4>
@@ -978,7 +957,7 @@ ${memeBanner}
             return {
                 id: index + 1,
                 title: title,
-                category: (index % 2 === 0) ? "Panda Architecture" : "SaaS Operations",
+                category: (index % 2 === 0) ? "Comic Architecture" : "SaaS Operations",
                 date: "Oct 25, 2026",
                 body: fullText
             };
@@ -1015,7 +994,7 @@ ${memeBanner}
                             </div>
                             <h4 class="font-bangers text-xl text-garfield-black mt-2 leading-tight">${item.title}</h4>
                             <p class="text-xs font-bold text-slate-700 mt-2 line-clamp-3 leading-relaxed">
-                                Complete 1,000-word family & panda deep-dive featuring Daniel Panda, Eric, Martine, Orla, Joe, Sadie, and Porter.
+                                Complete 1,000-word family & comic deep-dive featuring Daniel Panda, Eric, Martine, Orla, Joe, Sadie, and Porter.
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-xs font-bold">
