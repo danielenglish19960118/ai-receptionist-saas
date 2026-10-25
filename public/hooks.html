@@ -1,75 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>10,000+ Interactive Hooks | Garfield AI Executive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { garfield: { black: '#050507', panel: '#121216', vipgold: '#D4AF37' } },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], bangers: ['Bangers', 'cursive'], mono: ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; }
-        .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
-    <header class="bg-garfield-black/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
+<body class="min-h-screen flex flex-col selection:bg-amber-400 selection:text-black">
+    <!-- Header -->
+    <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3"><div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">👑</div><span class="font-bangers text-2xl text-white">GARFIELD <span class="gold-gradient-text">10,000+ HOOKS</span></span></a>
-            <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-300">
-                <a href="index.html" class="hover:text-amber-400">Home</a>
-                <a href="sandbox.html" class="hover:text-amber-400">Live Sandbox</a>
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">👑</div>
+                <span class="font-bangers text-2xl text-white">GARFIELD <span class="text-amber-400">10,000+ HOOKS</span></span>
+            </a>
+            <nav class="hidden lg:flex items-center gap-5 text-xs font-bold uppercase tracking-wider text-slate-300">
+                <a href="index.html" class="hover:text-amber-400">Hot Finder</a>
+                <a href="objections.html" class="hover:text-amber-400">Objections</a>
+                <a href="roi.html" class="hover:text-amber-400">ROI Calculator</a>
                 <a href="hooks.html" class="text-amber-400">10,000+ Hooks</a>
-                <a href="roi.html" class="hover:text-amber-400">ROI</a>
-                <a href="pricing.html" class="hover:text-amber-400">Pricing</a>
+                <a href="modules.html" class="hover:text-amber-400">10,000 Modules</a>
             </nav>
         </div>
     </header>
-    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 flex flex-col gap-8">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-white/10 pb-6">
-            <div><span class="text-xs font-extrabold text-amber-400 uppercase tracking-widest">Enterprise Conversational Mastery</span><h1 class="text-3xl font-black text-white mt-1">Clickable 10,000+ Hook Library</h1><p class="text-slate-400 text-sm mt-1">Click any hook card below to instantly trigger simulation in the Sandbox.</p></div>
-            <select id="hookCategorySelect" onchange="filterHooks()" class="bg-black/60 border border-white/15 text-white text-xs font-bold px-4 py-3 rounded-xl focus:border-amber-400 cursor-pointer">
-                <option value="all">All Sectors (10,000+ Hooks)</option>
-                <option value="wealth">Private Wealth & Escrow</option>
-                <option value="luxury">Luxury Jet & Automotive</option>
-                <option value="medical">Concierge Medical</option>
-                <option value="csuite">C-Suite Executive Direct</option>
-            </select>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 space-y-8">
+        <!-- Control Bar -->
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <div>
+                <span class="text-xs font-mono font-bold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20 uppercase">Enterprise Scale Hook Library</span>
+                <h1 class="text-3xl font-black text-white mt-2">10,000+ Interactive Closing Hooks</h1>
+                <p class="text-xs text-slate-400 font-mono mt-1">Browse through 10,000 dynamically indexed voice patterns. Click any card to test live in the Sandbox.</p>
+            </div>
+            <div class="flex items-center gap-3 w-full md:w-auto">
+                <input type="text" id="hookSearchInput" onkeyup="filterHooks()" placeholder="Search hook # or keyword..." class="bg-black/60 border border-white/15 px-4 py-2.5 text-xs text-white rounded-xl font-mono outline-none w-48 md:w-64 focus:border-amber-400" />
+                <input type="number" id="jumpPageInput" min="1" max="500" placeholder="Page (1-500)" class="bg-black/60 border border-white/15 px-3 py-2.5 text-xs text-white rounded-xl font-mono outline-none w-28 focus:border-amber-400" />
+                <button onclick="jumpToPage()" class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs px-4 py-2.5 rounded-xl uppercase transition-all shadow-md">Go ➔</button>
+            </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="hookDisplayGrid"></div>
+
+        <!-- Hooks Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="hooksGrid"></div>
+
+        <!-- Pagination Controls -->
+        <div class="flex items-center justify-between border-t border-white/10 pt-6 font-mono text-xs">
+            <button onclick="changePage(-1)" id="prevBtn" class="bg-white/5 hover:bg-white/10 text-white font-bold px-4 py-2.5 rounded-xl border border-white/10 transition-all">← Previous 20</button>
+            <span id="pageIndicator" class="text-amber-400 font-bold">Page 1 of 500 (Hooks 1 - 20 of 10,000)</span>
+            <button onclick="changePage(1)" id="nextBtn" class="bg-white/5 hover:bg-white/10 text-white font-bold px-4 py-2.5 rounded-xl border border-white/10 transition-all">Next 20 →</button>
+        </div>
     </main>
-    <footer class="bg-black border-t border-white/10 mt-20 py-8 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+
+    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+
     <script>
-        const hookCategories = {
-            wealth: [
-                { hook: "Direct Escrow Routing (> $500K)", pattern: "Detects escrow transfer -> Direct bridge to Managing Director", category: "Private Wealth" },
-                { hook: "Portfolio Security Verification", pattern: "Multi-factor Voice Biometric Qualification", category: "Private Wealth" }
-            ],
-            luxury: [
-                { hook: "Gulfstream Flight Charter Priority", pattern: "Matches tail number request -> Instant Flight Dispatch", category: "Luxury Travel" },
-                { hook: "Superyacht Berth Reservation", pattern: "Correlates arrival time with harbour master API", category: "Luxury Travel" }
-            ],
-            medical: [
-                { hook: "Emergency Surgical Suite Reservation", pattern: "Direct patch to chief medical officer on call", category: "Concierge Medical" }
-            ],
-            csuite: [
-                { hook: "Series C M&A Board Bridge", pattern: "Bypasses IVR -> Direct bridge to Managing Partner", category: "C-Suite Direct" }
-            ]
-        };
-        function renderHooks(category = 'all') {
-            const grid = document.getElementById('hookDisplayGrid');
-            let items = [];
-            if (category === 'all') Object.values(hookCategories).forEach(arr => items.push(...arr));
-            else items = hookCategories[category] || [];
-            let html = "";
-            items.forEach((h, idx) => {
-                html += `<div onclick="window.location.href='sandbox.html'" class="bg-[#121216] p-6 rounded-2xl border border-white/10 hover:border-amber-400 hover:scale-[1.02] transition-all cursor-pointer shadow-lg flex flex-col justify-between gap-4"><div><div class="flex justify-between text-[10px] font-mono"><span class="bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded border border-amber-400/30">HOOK #${idx + 1}</span><span class="text-slate-400">${h.category}</span></div><h3 class="font-bold text-white text-base mt-3">${h.hook}</h3><p class="text-xs font-mono text-slate-400 mt-1">${h.pattern}</p></div><div class="text-[10px] text-amber-400 font-mono pt-2 border-t border-white/10 flex justify-between"><span><i class="fa-solid fa-hand-pointer"></i> Click To Test in Sandbox</span><span class="text-emerald-400">&lt; 150ms</span></div></div>`;
-            });
-            grid.innerHTML = html;
+        let currentPage = 1;
+        const itemsPerPage = 20;
+        const totalItems = 10000;
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+        const categories = ['Private Wealth & Escrow', 'Luxury Jet & Automotive', 'Concierge Medical', 'C-Suite Executive M&A', 'Enterprise Cloud AI', 'Global Real Estate'];
+
+        function renderHooks(page, searchQuery = '') {
+            const grid = document.getElementById('hooksGrid');
+            const startId = (page - 1) * itemsPerPage + 1;
+            const endId = Math.min(page * itemsPerPage, totalItems);
+            let html = '';
+
+            for (let i = startId; i <= endId; i++) {
+                const category = categories[i % categories.length];
+                const hookName = `Enterprise Voice Hook Scenario #${i}`;
+                const pattern = `Pattern #${i}: Detects high-intent conversational triggers -> Direct secure bridge dispatch.`;
+
+                // If searching, simple client-side filter simulation for current page items
+                if (searchQuery && !hookName.toLowerCase().includes(searchQuery.toLowerCase()) && !String(i).includes(searchQuery)) {
+                    continue;
+                }
+
+                html += `
+                    <div onclick="window.location.href='trial.html?hookId=${i}'" class="bg-[#121216] p-5 rounded-2xl border border-white/10 hover:border-amber-400 transition-all cursor-pointer shadow-lg flex flex-col justify-between space-y-3 group">
+                        <div>
+                            <div class="flex justify-between items-center text-[10px] font-mono">
+                                <span class="text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">HOOK #${i}</span>
+                                <span class="text-slate-500">${category}</span>
+                            </div>
+                            <h3 class="font-bold text-white text-sm mt-2 group-hover:text-amber-300 transition-colors">${hookName}</h3>
+                            <p class="text-[11px] font-mono text-slate-400 mt-1">${pattern}</p>
+                        </div>
+                        <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono">
+                            <span class="text-amber-400"><i class="fa-solid fa-hand-pointer mr-1"></i> Test in Sandbox</span>
+                            <span class="text-emerald-400">&lt; 130ms</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if(html === '') {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 font-mono text-xs">No matching hooks found on page ${page}.</div>`;
+            } else {
+                grid.innerHTML = html;
+            }
+
+            document.getElementById('pageIndicator').innerText = `Page ${page} of ${totalPages} (Hooks ${startId} - ${endId} of ${totalItems})`;
         }
-        function filterHooks() { renderHooks(document.getElementById('hookCategorySelect').value); }
-        renderHooks();
+
+        function changePage(delta) {
+            if (currentPage + delta >= 1 && currentPage + delta <= totalPages) {
+                currentPage += delta;
+                renderHooks(currentPage, document.getElementById('hookSearchInput').value);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function jumpToPage() {
+            const val = parseInt(document.getElementById('jumpPageInput').value);
+            if (val >= 1 && val <= totalPages) {
+                currentPage = val;
+                renderHooks(currentPage, document.getElementById('hookSearchInput').value);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function filterHooks() {
+            const query = document.getElementById('hookSearchInput').value;
+            renderHooks(currentPage, query);
+        }
+
+        renderHooks(currentPage);
     </script>
 </body>
 </html>
