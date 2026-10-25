@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/vapi.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -29,13 +28,13 @@
     <!-- Top Urgency Bar -->
     <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
         <span>🚨 CRITICAL DEADLINE: 100% ESCROW REFUND GUARANTEE CLOSES IN <strong class="text-white bg-black px-2 py-0.5 rounded">03:42:18</strong></span>
-        <span class="hidden md:inline font-mono text-[11px] underline cursor-pointer" onclick="switchView('register')">Claim Your Guaranteed Slot Now ➔</span>
+        <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline">Claim Your Guaranteed Slot Now ➔</a>
     </div>
 
     <!-- Header -->
     <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="#overview" class="flex items-center gap-3">
+            <a href="index.html" class="flex items-center gap-3">
                 <div class="bg-garfield-vipgold p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">👑</div>
                 <div>
                     <span class="font-bangers text-2xl tracking-wider text-white">GARFIELD <span class="gold-gradient-text">200% CLOSER</span></span>
@@ -44,7 +43,7 @@
             </a>
             <div class="flex items-center gap-3">
                 <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400">Visitor</strong></span>
-                <button onclick="switchView('register')" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure Deal ↗</button>
+                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure Deal ↗</a>
             </div>
         </div>
     </header>
@@ -52,20 +51,20 @@
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-10">
         <!-- Navigation Toolbar -->
         <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
-            <button onclick="switchView('closerbot')" class="view-btn bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">🔥 Hot Buyer Finder</button>
-            <button onclick="switchView('objections')" class="view-btn bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</button>
-            <button onclick="switchView('roi')" class="view-btn bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</button>
-            <button onclick="switchView('trial')" class="view-btn bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</button>
-            <button onclick="switchView('family')" class="view-btn bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">01. Closing Team</button>
-            <button onclick="switchView('product')" class="view-btn bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</button>
-            <button onclick="switchView('founder')" class="view-btn bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</button>
-            <button onclick="switchView('support')" class="view-btn bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</button>
-            <button onclick="switchView('register')" class="view-btn bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</button>
-            <button onclick="switchView('directory')" class="view-btn bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 100 Closing Modules</button>
+            <a href="index.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">🔥 Hot Buyer Finder</a>
+            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
+            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
+            <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
+            <a href="team.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">01. Closing Team</a>
+            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
+            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
+            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
+            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 100 Closing Modules</a>
         </div>
 
         <!-- 🔥 1. Hot Buyer Finder View -->
-        <div id="view-closerbot" class="view-container space-y-8">
+        <div class="space-y-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 <div class="lg:col-span-5 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6">
                     <h3 class="font-bold text-white text-base border-b border-white/10 pb-3 flex items-center justify-between">
@@ -102,343 +101,9 @@
                 </div>
             </div>
         </div>
-
-        <!-- 🛡️ 2. Objection Destroyer View -->
-        <div id="view-objections" class="view-container space-y-8 hidden">
-            <div class="border-b border-white/10 pb-4">
-                <span class="text-xs font-extrabold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3.5 py-1.5 rounded-full uppercase">Absolute Deal Reversal</span>
-                <h1 class="text-3xl font-black text-white mt-2">AI Objection Destroyer & Rebuttal Engine</h1>
-                <p class="text-xs text-slate-400 mt-1">Click any objection below to generate an unrefutable closing counter-argument instantly.</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <div class="lg:col-span-5 bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-4">
-                    <label class="text-xs font-bold text-slate-300 block">Common Executive Objections:</label>
-                    <div class="space-y-2">
-                        <button onclick="destroyObjection('price')" class="w-full text-left bg-black/60 hover:bg-white/10 text-xs text-white p-3.5 rounded-xl border border-white/10 transition-all flex justify-between"><span>"The price is too high for our budget."</span><span>➔</span></button>
-                        <button onclick="destroyObjection('timing')" class="w-full text-left bg-black/60 hover:bg-white/10 text-xs text-white p-3.5 rounded-xl border border-white/10 transition-all flex justify-between"><span>"Let's evaluate this next quarter."</span><span>➔</span></button>
-                        <button onclick="destroyObjection('risk')" class="w-full text-left bg-black/60 hover:bg-white/10 text-xs text-white p-3.5 rounded-xl border border-white/10 transition-all flex justify-between"><span>"We are worried about AI implementation risk."</span><span>➔</span></button>
-                    </div>
-                </div>
-                <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-4 font-mono text-xs" id="objectionOutput">
-                    <div class="text-amber-400 font-bold border-b border-white/10 pb-2">RECOMMENDED CLOSING REBUTTAL SCRIPT</div>
-                    <p class="text-slate-400 italic">[Click any objection on the left to load the AI closing counter-script]</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 💸 3. Cost of Delay Financial Analytics -->
-        <div id="view-roi" class="view-container space-y-8 hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-5 bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6">
-                    <h3 class="font-bold text-white text-base border-b border-white/10 pb-3">Cost of Delay & ROI Calculator</h3>
-                    <form onsubmit="calculateRoi(event)" class="space-y-4">
-                        <div>
-                            <label class="text-xs font-bold text-slate-300 block mb-1">Monthly Inbound & Outbound Pipeline Calls</label>
-                            <input type="number" id="monthlyCalls" required value="5000" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-slate-300 block mb-1">Average Closed Contract Value ($ USD)</label>
-                            <input type="number" id="avgDealSize" required value="50000" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
-                        </div>
-                        <button type="submit" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all">Calculate Cost of Delay ➔</button>
-                    </form>
-                </div>
-                <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-5 font-mono text-xs" id="roiResultsBox">
-                    <div class="text-slate-400 uppercase border-b border-white/10 pb-2 flex justify-between"><span>Financial Impact Metrics</span><span class="text-emerald-400 font-bold">Instant Payback</span></div>
-                    <p class="text-slate-300">Run calculation to reveal your exact daily loss from delaying deployment.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 🎙️ 4. Live Closing Voice Sandbox -->
-        <div id="view-trial" class="view-container space-y-8 hidden">
-            <h1 class="text-3xl font-black text-white">Live AI Voice Closing & Pitch Simulator</h1>
-            <div class="bg-garfield-panel p-8 rounded-3xl gold-border-glow max-w-xl space-y-4">
-                <p class="text-xs text-slate-300">Experience our sub-150ms speech synthesis closing pitch live in your browser.</p>
-                <button onclick="startRealVapiCall()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all">Connect Live Vapi Voice Closing Call 🎙️</button>
-                <div id="vapiStatusLog" class="text-xs font-mono text-emerald-400 bg-black/60 p-4 rounded-xl border border-emerald-500/20">Ready to initiate live session...</div>
-            </div>
-        </div>
-
-        <!-- 01. Closing Team Roster -->
-        <div id="view-family" class="view-container space-y-8 hidden">
-            <h1 class="text-3xl font-black text-white">Executive Closers & Persona Bios</h1>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-garfield-panel p-6 rounded-3xl border border-amber-500/35 space-y-3">
-                    <div class="text-4xl">🐱</div>
-                    <h3 class="font-black text-amber-300 text-lg">Joe Garfield</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">Chief Executive Closer. Specializes in multi-million dollar escrow validation and high-stakes closing pitches.</p>
-                </div>
-                <div class="bg-garfield-panel p-6 rounded-3xl border border-white/10 space-y-3">
-                    <div class="text-4xl">🐼</div>
-                    <h3 class="font-black text-white text-lg">Daniel Panda</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">VP of Voice Infrastructure. Guarantees sub-150ms speech-to-speech latency across global trunk routes.</p>
-                </div>
-                <div class="bg-garfield-panel p-6 rounded-3xl border border-white/10 space-y-3">
-                    <div class="text-4xl">🐺</div>
-                    <h3 class="font-black text-white text-lg">Sadie Wolf</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">Head of Contract Onboarding. Manages white-glove license verification gates and enterprise escrow.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 02. Zero Risk Escrow -->
-        <div id="view-product" class="view-container space-y-8 hidden">
-            <h1 class="text-3xl font-black text-white">100% Zero-Risk Escrow Guarantee</h1>
-            <p class="text-xs text-slate-300">SOC 2 Type II Certified, AES-256 audio stream encryption, and absolute 30-day money-back guarantee.</p>
-        </div>
-
-        <!-- 03. Founder's Pledge -->
-        <div id="view-founder" class="view-container space-y-8 hidden">
-            <h1 class="text-3xl font-black text-white">Founder's Unconditional Closing Pledge</h1>
-            <blockquote class="text-slate-200 text-sm italic border-l-4 border-amber-400 pl-4 py-2 bg-black/40 rounded-r-xl">
-                "If our AI voice concierges do not increase your qualified deal closing speed by at least 300% within 30 days, you receive a 100% full escrow refund—no questions asked."
-            </blockquote>
-            <p class="text-xs font-mono text-amber-300 mt-2">— Director Yang Cheng-han (楊承翰), Founder</p>
-        </div>
-
-        <!-- 04. Instant Handoff & Support Desk -->
-        <div id="view-support" class="view-container space-y-8 hidden">
-            <h1 class="text-3xl font-black text-white">Instant Deal Handoff & Closing Desk</h1>
-            <div class="bg-garfield-panel p-8 rounded-3xl gold-border-glow max-w-xl space-y-4">
-                <form onsubmit="submitCloudSupportTicket(event)" class="space-y-4">
-                    <input type="text" id="supName" required placeholder="Your Name / Title" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
-                    <input type="email" id="supEmail" required placeholder="Corporate Email" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
-                    <textarea id="supDesc" rows="3" required placeholder="Describe your deal size or custom integration needs..." class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none"></textarea>
-                    <button type="submit" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs py-3.5 rounded-xl uppercase tracking-wider transition-all shadow-lg">Request Instant Founder Callback ➔</button>
-                </form>
-                <div id="supStatus" class="hidden text-xs font-mono p-4 rounded-xl"></div>
-            </div>
-        </div>
-
-        <!-- 05. VIP Portal -->
-        <div id="view-register" class="view-container space-y-8 hidden">
-            <h1 class="text-3xl font-black text-white">VIP License Activation & Gate</h1>
-            <div class="bg-garfield-panel p-8 rounded-3xl gold-border-glow max-w-xl space-y-4">
-                <form onsubmit="verifyCloudLicense(event)" class="space-y-4">
-                    <input type="text" id="regName" required placeholder="Full Executive Name" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
-                    <input type="email" id="regEmail" required placeholder="Corporate Email Address" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
-                    <input type="text" id="licenseKeyInput" required placeholder="License Key (e.g. garfield or lasagna)" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs font-mono text-amber-300 outline-none" />
-                    <button type="submit" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-gold-glow transition-all">Verify & Unlock 200% Closing Suite ➔</button>
-                </form>
-                <div id="regStatus" class="hidden text-xs font-mono p-4 rounded-xl"></div>
-            </div>
-        </div>
-
-        <!-- 06. 100 Closing Modules Directory -->
-        <div id="view-directory" class="view-container space-y-6 hidden">
-            <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                <h2 class="text-2xl font-black text-white">All 100 High-Conversion Closing Modules</h2>
-                <span class="text-xs font-mono text-amber-400 bg-amber-400/10 px-3 py-1.5 rounded-xl border border-amber-400/20">Total: 100 Modules</span>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-3 max-h-[600px] overflow-y-auto p-2" id="hundredPagesGrid"></div>
-        </div>
     </main>
 
-    <!-- Modal for 100 Closing Modules -->
-    <div id="supremeModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-6">
-        <div class="bg-garfield-panel max-w-xl w-full p-8 rounded-3xl border border-amber-500/40 space-y-6 relative shadow-2xl">
-            <button onclick="closeSupremeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white font-bold text-lg">✕</button>
-            <div>
-                <span id="modalPageTag" class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-3 py-1 rounded-lg border border-amber-400/20">Closing Module #00</span>
-                <h3 id="modalPageTitle" class="text-xl font-black text-white mt-3">Closing Module Title</h3>
-            </div>
-            <p id="modalPageDesc" class="text-xs text-slate-300 leading-relaxed font-mono bg-black/50 p-4 rounded-xl border border-white/5">
-                Loading absolute deal closing payload...
-            </p>
-            <div class="flex justify-end gap-3 pt-2">
-                <button onclick="closeSupremeModal()" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-all">Close Preview</button>
-                <button onclick="alert('Redirecting to standalone absolute closing module...')" class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs px-6 py-2.5 rounded-xl uppercase transition-all shadow-md">Execute Module ↗</button>
-            </div>
-        </div>
-    </div>
-
     <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
-
-    <script>
-        function switchView(viewId) {
-            document.querySelectorAll('.view-container').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.view-btn').forEach(el => {
-                el.classList.remove('bg-amber-400', 'text-black', 'shadow-md');
-                el.classList.add('bg-white/5', 'text-slate-300');
-            });
-            document.getElementById('view-' + viewId).classList.remove('hidden');
-            event.target.classList.remove('bg-white/5', 'text-slate-300');
-            event.target.classList.add('bg-amber-400', 'text-black', 'shadow-md');
-        }
-
-        async function runAiLeadBot(e) {
-            e.preventDefault();
-            const targetIndustry = document.getElementById('targetIndustry').value;
-            const geoRegion = document.getElementById('geoRegion').value;
-            const minNetWorth = document.getElementById('minNetWorth').value;
-            const resultsBox = document.getElementById('leadBotResults');
-            const badge = document.getElementById('botBadge');
-
-            badge.innerText = "Filtering Whales...";
-            resultsBox.innerHTML = `<div class="text-amber-400 animate-pulse font-mono text-xs">🤖 Scanning institutional registers & identifying Decision-Makers with active buying triggers...</div>`;
-
-            try {
-                const res = await fetch('/api/lead-bot', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ targetIndustry, geoRegion, minNetWorth })
-                });
-                const data = await res.json();
-                if (data.success) {
-                    badge.innerText = `${data.qualifiedCount} Ready Whales`;
-                    let html = `<div class="text-emerald-400 mb-3 bg-emerald-500/10 p-2.5 rounded-xl border border-emerald-500/20 font-mono text-xs">✔ Session: ${data.botSessionId} | Scanned ${data.scannedTargets} targets in ${data.executionTime}</div>`;
-                    data.leads.forEach(l => {
-                        html += `
-                            <div class="bg-black/80 p-4 rounded-xl border border-white/10 flex justify-between items-center hover:border-amber-400 transition-all">
-                                <div>
-                                    <strong class="text-white text-xs block">${l.company}</strong>
-                                    <span class="text-slate-400 text-[11px]">${l.contact} | Deal Value: <span class="text-emerald-400 font-bold">${l.contractValue}</span></span>
-                                </div>
-                                <div class="text-right">
-                                    <span class="text-amber-300 font-bold text-xs bg-amber-400/10 px-2.5 py-1 rounded-lg border border-amber-400/20">${l.intentScore}</span>
-                                    <span class="block text-[9px] text-emerald-400 mt-1 font-bold">${l.strategy}</span>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    resultsBox.innerHTML = html;
-                }
-            } catch (err) {
-                resultsBox.innerHTML = `<div class="text-red-400 font-mono text-xs">✖ Failed to execute Absolute Closing Bot pipeline.</div>`;
-            }
-        }
-
-        function destroyObjection(type) {
-            const out = document.getElementById('objectionOutput');
-            if(type === 'price') {
-                out.innerHTML = `
-                    <div class="text-amber-400 font-bold border-b border-white/10 pb-2">ABSOLUTE REBUTTAL: BUDGET / PRICE OBJECTION</div>
-                    <p class="text-white text-xs leading-relaxed">"Director, I completely understand budget sensitivity. However, our financial model shows that delaying this deployment for 30 days costs your firm over $73,000 in operational waste and missed closes—which is 15x the cost of our entire annual software tier. We include a 100% money-back escrow guarantee, so your risk is literally zero. Shall we process your secure activation now?"</p>
-                `;
-            } else if(type === 'timing') {
-                out.innerHTML = `
-                    <div class="text-amber-400 font-bold border-b border-white/10 pb-2">ABSOLUTE REBUTTAL: TIMING / DELAY OBJECTION</div>
-                    <p class="text-white text-xs leading-relaxed">"Waiting until next quarter means handing three full months of uncaptured high-ticket leads directly to your top competitor. Our zero-downtime integration takes 15 minutes. Why not let our voice concierges run a parallel test this week with zero financial risk?"</p>
-                `;
-            } else if(type === 'risk') {
-                out.innerHTML = `
-                    <div class="text-amber-400 font-bold border-b border-white/10 pb-2">ABSOLUTE REBUTTAL: RISK OBJECTION</div>
-                    <p class="text-white text-xs leading-relaxed">"That is precisely why we architected our platform with SOC 2 Type II compliance and AES-256 encryption. Furthermore, our founder backs every contract with a 30-day unconditional escrow refund. You have absolute zero downside."</p>
-                `;
-            }
-        }
-
-        async function calculateRoi(e) {
-            e.preventDefault();
-            const monthlyCalls = document.getElementById('monthlyCalls').value;
-            const averageDealSize = document.getElementById('avgDealSize').value;
-            const box = document.getElementById('roiResultsBox');
-
-            try {
-                const res = await fetch('/api/roi-calculator', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ monthlyCalls, averageDealSize })
-                });
-                const data = await res.json();
-                box.innerHTML = `
-                    <div class="text-slate-400 uppercase border-b border-white/10 pb-2 flex justify-between"><span>Absolute Financial Impact</span><span class="text-emerald-400 font-bold">Guaranteed Value</span></div>
-                    <div class="flex justify-between py-2 border-b border-white/5"><span>Monthly Operational Savings:</span><strong class="text-emerald-400 text-sm">${data.monthlySavings}</strong></div>
-                    <div class="flex justify-between py-2 border-b border-white/5"><span>Extra Closed Deals / Month:</span><strong class="text-amber-300 text-sm">${data.extraDealsClosed}</strong></div>
-                    <div class="flex justify-between py-2 border-b border-white/5"><span>Net Annual Bottom-Line Boost:</span><strong class="text-amber-300 text-sm">${data.annualNetValue}</strong></div>
-                    <div class="flex justify-between py-2 border-b border-white/5"><span class="text-red-400 font-bold">Daily Cost of Delaying:</span><strong class="text-red-400 text-sm">${data.dailyCostOfDelay}</strong></div>
-                    <div class="flex justify-between py-2 border-b border-white/5"><span>Net ROI Multiplier:</span><strong class="text-amber-400 text-sm">${data.roiMultiplier}</strong></div>
-                    <div class="flex justify-between py-2"><span>Payback Period:</span><strong class="text-emerald-400 text-sm">${data.paybackPeriod}</strong></div>
-                `;
-            } catch (e) {
-                box.innerHTML = `<span class="text-red-400 font-mono text-xs">Calculation error connecting to cloud API.</span>`;
-            }
-        }
-
-        async function verifyCloudLicense(e) {
-            e.preventDefault();
-            const licenseKey = document.getElementById('licenseKeyInput').value;
-            const userName = document.getElementById('regName').value;
-            const userEmail = document.getElementById('regEmail').value;
-            const statusBox = document.getElementById('regStatus');
-            statusBox.classList.remove('hidden');
-            statusBox.className = "text-xs font-mono p-4 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30";
-            statusBox.innerText = "Authenticating with Cloud Serverless Node...";
-
-            try {
-                const res = await fetch('/api/verify-license', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ licenseKey, userName, userEmail })
-                });
-                const data = await res.json();
-                statusBox.className = data.success ? "text-xs font-mono p-4 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40" : "text-xs font-mono p-4 rounded-xl bg-red-500/20 text-red-300 border border-red-500/40";
-                statusBox.innerHTML = data.success ? `<strong>✔ ${data.message}</strong><br>Tier: ${data.tier}` : `<strong>✖ ${data.message}</strong>`;
-                if(data.success) document.getElementById('authBadge').innerHTML = `Status: <strong class="text-emerald-400">VIP Absolute Closer</strong>`;
-            } catch (err) {
-                statusBox.className = "text-xs font-mono p-4 rounded-xl bg-red-500/20 text-red-300";
-                statusBox.innerText = "✖ Network error connecting to license server.";
-            }
-        }
-
-        async function submitCloudSupportTicket(e) {
-            e.preventDefault();
-            const name = document.getElementById('supName').value;
-            const email = document.getElementById('supEmail').value;
-            const description = document.getElementById('supDesc').value;
-            const statusBox = document.getElementById('supStatus');
-            statusBox.classList.remove('hidden');
-            statusBox.className = "text-xs font-mono p-4 rounded-xl bg-amber-500/20 text-amber-300";
-            statusBox.innerText = "Escalating deal directly to founder & senior closer...";
-
-            try {
-                const res = await fetch('/api/support-ticket', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, category: 'Absolute Closing Desk', urgency: 'P1-Instant Callback', description })
-                });
-                const data = await res.json();
-                statusBox.className = "text-xs font-mono p-4 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
-                statusBox.innerHTML = `<strong>✔ DEAL ESCALATED!</strong><br>Deal ID: <span class="text-white font-bold">${data.ticketId}</span><br>Assigned SLA: ${data.sla}`;
-            } catch (e) {
-                statusBox.className = "text-xs font-mono p-4 rounded-xl bg-red-500/20 text-red-300";
-                statusBox.innerText = "✖ Failed to dispatch deal request.";
-            }
-        }
-
-        function startRealVapiCall() {
-            const log = document.getElementById('vapiStatusLog');
-            log.innerHTML = "Initializing secure Vapi Absolute Closing Session...<br>";
-            if (window.vapiSDK) {
-                window.vapiSDK.run({ apiKey: "PUBLIC_KEY", assistant: "ASSISTANT_ID" });
-                log.innerHTML += "<span class='text-emerald-400'>✔ Vapi SDK active. Connected to absolute closing engine.</span>";
-            } else {
-                log.innerHTML += "<span class='text-amber-400'>[Simulation Mode] Sub-150ms speech pipeline active. Absolute closing channel established.</span>";
-            }
-        }
-
-        function openSupremeModal(num, title) {
-            document.getElementById('modalPageTag').innerText = `Closing Module #${num < 10 ? '0' + num : num}`;
-            document.getElementById('modalPageTitle').innerText = title;
-            document.getElementById('modalPageDesc').innerText = `This is absolute closing module #${num} (${title}). It features unrefutable objection scripts, instant escrow checkout webhooks, and founder-level deal closing hooks.`;
-            document.getElementById('supremeModal').classList.remove('hidden');
-        }
-
-        function closeSupremeModal() {
-            document.getElementById('supremeModal').classList.add('hidden');
-        }
-
-        const grid = document.getElementById('hundredPagesGrid');
-        if (grid) {
-            let html = '';
-            for (let i = 1; i <= 100; i++) {
-                let category = i <= 25 ? 'Ready Whale Prospecting' : i <= 50 ? 'Absolute Closing Pitch' : i <= 75 ? 'Objection Destruction' : 'Escrow Sign-off';
-                html += `<div onclick="openSupremeModal(${i}, '${category} Module #${i}')" class="bg-garfield-panel p-3.5 rounded-xl border border-white/10 text-center cursor-pointer hover:border-amber-400 transition-all"><span class="text-[10px] text-amber-400 font-mono font-bold block">Page #${i < 10 ? '0'+i : i}</span><span class="text-xs font-bold text-white block mt-1 truncate">${category}</span></div>`;
-            }
-            grid.innerHTML = html;
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
