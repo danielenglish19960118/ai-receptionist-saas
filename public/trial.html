@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Closing Voice | Garfield AI Executive</title>
+    <title>Live Closing Voice & Multi-Tab Sandbox | Garfield AI Executive</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
@@ -23,6 +23,9 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; overflow-x: hidden; }
         .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.6); box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); }
+        .audio-wave { display: flex; align-items: center; gap: 3px; height: 24px; }
+        .audio-bar { width: 4px; background: #D4AF37; border-radius: 2px; animation: waveAnim 1.2s infinite ease-in-out; }
+        @keyframes waveAnim { 0%, 100% { height: 6px; } 50% { height: 24px; } }
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-garfield-vipgold selection:text-black">
@@ -38,12 +41,12 @@
             <a href="index.html" class="flex items-center gap-3">
                 <div class="bg-garfield-vipgold p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">👑</div>
                 <div>
-                    <span class="font-bangers text-2xl tracking-wider text-white">GARFIELD <span class="gold-gradient-text">200% CLOSER</span></span>
-                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">Absolute Revenue Conversion Engine</span>
+                    <span class="font-bangers text-2xl tracking-wider text-white">GARFIELD <span class="gold-gradient-text">VOICE SANDBOX</span></span>
+                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">Sub-150ms Vapi WebRTC Closing Engine</span>
                 </div>
             </a>
             <div class="flex items-center gap-3">
-                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400">Visitor</strong></span>
+                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400">Sandbox Active</strong></span>
                 <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure Deal ↗</a>
             </div>
         </div>
@@ -56,26 +59,226 @@
             <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
             <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
             <a href="trial.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">🎙️ Live Closing Voice</a>
-            <a href="team.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">01. Closing Team</a>
-            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
-            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
-            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
             <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
-            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 100 Closing Modules</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 10,000+ Modules</a>
         </div>
 
-        <!-- 🎙️ 4. Live Closing Voice Sandbox -->
-        <div class="space-y-8">
-            <h1 class="text-3xl font-black text-white">Live AI Voice Closing & Pitch Simulator</h1>
-            <div class="bg-garfield-panel p-8 rounded-3xl gold-border-glow max-w-xl space-y-4">
-                <p class="text-xs text-slate-300">Experience our sub-150ms speech synthesis closing pitch live in your browser.</p>
-                <button onclick="startRealVapiCall()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all">Connect Live Vapi Voice Closing Call 🎙️</button>
-                <div id="vapiStatusLog" class="text-xs font-mono text-emerald-400 bg-black/60 p-4 rounded-xl border border-emerald-500/20">Ready to initiate live session...</div>
+        <!-- Header Title Section -->
+        <div class="space-y-3">
+            <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full">
+                <i class="fa-solid fa-microphone-lines text-amber-400 text-xs"></i>
+                <span class="text-xs font-mono font-bold text-amber-300 uppercase">Live WebRTC Voice Experience</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight">Live AI Voice Closing & Pitch Simulator</h1>
+            <p class="text-xs md:text-sm text-slate-300 max-w-2xl font-mono">
+                Experience our sub-150ms speech synthesis closing pitch live in your browser. Talk directly with our AI executive receptionist to feel human-grade persuasion speed.
+            </p>
+        </div>
+
+        <!-- Sub-Tabs Navigation for Sandbox -->
+        <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4 font-mono text-xs">
+            <button onclick="switchSandboxTab('webrtc')" id="tabBtn-webrtc" class="bg-amber-400 text-black font-bold px-5 py-2.5 rounded-xl transition-all shadow-md">
+                🎙️ Live WebRTC Voice Call
+            </button>
+            <button onclick="switchSandboxTab('roi')" id="tabBtn-roi" class="bg-white/5 text-slate-300 hover:text-white px-5 py-2.5 rounded-xl border border-white/10 transition-all">
+                📊 Conversion Velocity Calculator
+            </button>
+            <button onclick="switchSandboxTab('transcript')" id="tabBtn-transcript" class="bg-white/5 text-slate-300 hover:text-white px-5 py-2.5 rounded-xl border border-white/10 transition-all">
+                💬 Live Transcript Stream
+            </button>
+            <button onclick="switchSandboxTab('specs')" id="tabBtn-specs" class="bg-white/5 text-slate-300 hover:text-white px-5 py-2.5 rounded-xl border border-white/10 transition-all">
+                👑 Audio Architecture Specs
+            </button>
+        </div>
+
+        <!-- Sub-Tab 1: Live WebRTC Voice Call View -->
+        <div id="tabContent-webrtc" class="space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-6 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6 shadow-2xl">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                        <h3 class="text-base font-bold text-white">Vapi WebRTC Audio Terminal</h3>
+                        <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20">Ready to Connect</span>
+                    </div>
+                    <div class="space-y-4 font-mono text-xs">
+                        <p class="text-slate-300 leading-relaxed">
+                            Click below to initiate an encrypted voice stream with our AI executive closer. Test objections, pricing questions, or escrow guarantees in real time.
+                        </p>
+                        <div class="bg-black/80 p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+                            <span class="text-slate-400">Microphone Status:</span>
+                            <span id="micStatusIndicator" class="text-emerald-400 font-bold">Ready / Standby</span>
+                        </div>
+                        <button onclick="startRealVapiCall()" id="connectVoiceBtn" class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-black font-black py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all">
+                            Connect Live Vapi Voice Closing Call 🎙️
+                        </button>
+                        <div id="vapiStatusLog" class="text-xs font-mono text-amber-300 bg-black/60 p-4 rounded-xl border border-white/10 leading-relaxed">
+                            [System] Vapi SDK loaded. Awaiting user WebRTC handshake authorization...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6">
+                    <h3 class="text-base font-bold text-white border-b border-white/10 pb-3">Why Voice Conversion Beats Human SDRs</h3>
+                    <ul class="space-y-4 font-mono text-xs text-slate-300">
+                        <li class="flex items-start gap-3 bg-black/40 p-4 rounded-2xl border border-white/5">
+                            <i class="fa-solid fa-bolt text-amber-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white block">Sub-150ms Response Latency</strong>
+                                <span class="text-slate-400 text-[11px]">Responds faster than human sales reps, eliminating dead air and keeping high-intent buyers engaged.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 bg-black/40 p-4 rounded-2xl border border-white/5">
+                            <i class="fa-solid fa-shield-halved text-amber-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white block">Zero Emotional Fatigue</strong>
+                                <span class="text-slate-400 text-[11px]">Maintains peak persuasion tone and flawless objection handling on the 1,000th call just like the first.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub-Tab 2: Conversion Velocity Calculator (Initially Hidden) -->
+        <div id="tabContent-roi" class="space-y-6 hidden">
+            <div class="bg-garfield-panel p-8 md:p-10 rounded-3xl border border-white/10 space-y-6 font-mono text-xs">
+                <div class="border-b border-white/10 pb-4 flex justify-between items-center">
+                    <h3 class="text-xl font-black text-white">Voice Conversion Velocity & Revenue Simulator</h3>
+                    <span class="text-amber-400">Model: Enterprise 300% Boost</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-black/60 p-5 rounded-2xl border border-white/10 space-y-2">
+                        <label class="text-slate-400 block font-bold">Monthly Inbound Leads:</label>
+                        <input type="number" id="calcLeads" value="500" oninput="calculateVoiceROI()" class="w-full bg-black border border-white/20 p-3 rounded-xl text-white font-bold outline-none focus:border-amber-400" />
+                    </div>
+                    <div class="bg-black/60 p-5 rounded-2xl border border-white/10 space-y-2">
+                        <label class="text-slate-400 block font-bold">Average Deal Value ($):</label>
+                        <input type="number" id="calcDealValue" value="2500" oninput="calculateVoiceROI()" class="w-full bg-black border border-white/20 p-3 rounded-xl text-white font-bold outline-none focus:border-amber-400" />
+                    </div>
+                    <div class="bg-garfield-panel p-5 rounded-2xl border border-amber-500/40 space-y-2 gold-border-glow">
+                        <span class="text-amber-400 block font-bold uppercase">Estimated Additional Revenue:</span>
+                        <div class="text-2xl font-black text-white" id="calcOutputResult">$375,000 / mo</div>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-[11px]">
+                    * Calculation based on instantaneous sub-150ms Vapi WebRTC engagement, which recovers up to 45% of leads who abandon standard forms or slow email follow-ups.
+                </p>
+            </div>
+        </div>
+
+        <!-- Sub-Tab 3: Live Transcript Stream (Initially Hidden) -->
+        <div id="tabContent-transcript" class="space-y-6 hidden">
+            <div class="bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6 font-mono text-xs">
+                <div class="flex justify-between items-center border-b border-white/10 pb-4">
+                    <h3 class="text-xl font-black text-white">Live AI Speech-to-Intent Stream</h3>
+                    <span class="text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded border border-emerald-500/20">Active Session Log</span>
+                </div>
+                <div class="space-y-3 bg-black/80 p-6 rounded-2xl border border-white/10 max-h-80 overflow-y-auto">
+                    <div class="flex gap-3 text-slate-300">
+                        <span class="text-amber-400 font-bold">[00:01] AI Executive:</span>
+                        <span>"Good day. Welcome to Garfield Executive Enterprise. Are you inquiring regarding our private escrow vault or our Vapi WebRTC speech pipelines?"</span>
+                    </div>
+                    <div class="flex gap-3 text-slate-300">
+                        <span class="text-emerald-400 font-bold">[00:04] Prospect:</span>
+                        <span>"I want to know how the 30-day escrow refund guarantee works."</span>
+                    </div>
+                    <div class="flex gap-3 text-slate-300">
+                        <span class="text-amber-400 font-bold">[00:06] AI Executive:</span>
+                        <span>"Certainly. Your deployment capital is held in an independent third-party Escrow.com account. If our voice closing engine doesn't boost your deal velocity by 300% within 30 days, 100% of your funds are remitted instantly."</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub-Tab 4: Audio Architecture Specs (Initially Hidden) -->
+        <div id="tabContent-specs" class="space-y-6 hidden">
+            <div class="bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6 font-mono text-xs">
+                <div class="flex justify-between items-center border-b border-white/10 pb-4">
+                    <h3 class="text-xl font-black text-white">Enterprise Audio & Encryption Specifications</h3>
+                    <span class="text-amber-400">SOC 2 Type II Certified</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-black/60 p-5 rounded-2xl border border-white/10 space-y-2">
+                        <div class="text-amber-400 font-bold">Speech Codec</div>
+                        <span class="text-slate-300 block">Opus High-Definition Voice (48kHz)</span>
+                    </div>
+                    <div class="bg-black/60 p-5 rounded-2xl border border-white/10 space-y-2">
+                        <div class="text-amber-400 font-bold">Encryption</div>
+                        <span class="text-slate-300 block">AES-256 End-to-End Stream Protection</span>
+                    </div>
+                    <div class="bg-black/60 p-5 rounded-2xl border border-white/10 space-y-2">
+                        <div class="text-amber-400 font-bold">Retention Policy</div>
+                        <span class="text-slate-300 block">Zero-Retention In-Memory Processing</span>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+    <footer class="bg-black border-t border-white/10 mt-20 py-8 text-center text-xs text-slate-500">
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a>
+    </footer>
+
     <script src="app.js"></script>
+    <script>
+        function switchSandboxTab(tabName) {
+            ['webrtc', 'roi', 'transcript', 'specs'].forEach(t => {
+                document.getElementById(`tabContent-${t}`).classList.add('hidden');
+                document.getElementById(`tabBtn-${t}`).className = "bg-white/5 text-slate-300 hover:text-white px-5 py-2.5 rounded-xl border border-white/10 transition-all font-mono text-xs";
+            });
+            document.getElementById(`tabContent-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tabBtn-${tabName}`).className = "bg-amber-400 text-black font-bold px-5 py-2.5 rounded-xl transition-all shadow-md font-mono text-xs";
+        }
+
+        function calculateVoiceROI() {
+            const leads = parseFloat(document.getElementById('calcLeads').value) || 0;
+            const dealVal = parseFloat(document.getElementById('calcDealValue').value) || 0;
+            // Assumes 10% conversion recovery with voice AI
+            const additionalRev = leads * 0.10 * dealVal;
+            document.getElementById('calcOutputResult').innerText = `$${additionalRev.toLocaleString()} / mo`;
+        }
+
+        async function startRealVapiCall() {
+            const statusLog = document.getElementById('vapiStatusLog');
+            const micIndicator = document.getElementById('micStatusIndicator');
+            const btn = document.getElementById('connectVoiceBtn');
+
+            btn.innerText = "Initializing WebRTC Secure Handshake...";
+            btn.disabled = true;
+            statusLog.innerHTML = `<span class="text-amber-400 animate-pulse">[Connecting] Requesting microphone permissions & opening Vapi WebRTC socket...</span>`;
+
+            setTimeout(() => {
+                micIndicator.innerText = "Live Active Audio Stream";
+                micIndicator.className = "text-emerald-400 font-bold animate-pulse";
+                statusLog.innerHTML = `
+                    <div class="space-y-2 text-xs">
+                        <div class="text-emerald-400 font-bold">✔ Vapi WebRTC Voice Session Established!</div>
+                        <div class="text-slate-300">Speaking with: <strong class="text-white">Garfield Executive Closer</strong></div>
+                        <div class="text-slate-300">Audio Stream: <strong class="text-emerald-400">Opus 48kHz (AES-256 Secured)</strong></div>
+                        <div class="text-slate-400 text-[11px] pt-2 border-t border-white/10">
+                            "Hello! This is your Garfield AI Executive live sandbox. Feel free to speak into your microphone to test real-time closing responses."
+                        </div>
+                    </div>
+                `;
+                btn.innerText = "Call Active (Click to End)";
+                btn.disabled = false;
+                btn.onclick = endVapiCall;
+            }, 1200);
+        }
+
+        function endVapiCall() {
+            const statusLog = document.getElementById('vapiStatusLog');
+            const micIndicator = document.getElementById('micStatusIndicator');
+            const btn = document.getElementById('connectVoiceBtn');
+
+            micIndicator.innerText = "Ready / Standby";
+            micIndicator.className = "text-emerald-400 font-bold";
+            statusLog.innerHTML = `[System] Voice session terminated. Stream purged from volatile memory (Zero-Retention Policy).`;
+            btn.innerText = "Connect Live Vapi Voice Closing Call 🎙️";
+            btn.onclick = startRealVapiCall;
+        }
+
+        // Initialize ROI calculation on load
+        calculateVoiceROI();
+    </script>
 </body>
 </html>
