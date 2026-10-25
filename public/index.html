@@ -200,16 +200,12 @@
 
                         <!-- Garfield SVG Cartoon -->
                         <svg id="garfieldSvg" class="w-40 h-40" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Ears -->
                             <polygon points="40,50 20,10 70,35" fill="#FF8000" stroke="#212121" stroke-width="4"/>
                             <polygon points="160,50 180,10 130,35" fill="#FF8000" stroke="#212121" stroke-width="4"/>
                             <polygon points="43,45 30,18 65,35" fill="#FFCA28"/>
                             <polygon points="157,45 170,18 135,35" fill="#FFCA28"/>
-                            Head Base
                             <ellipse cx="100" cy="110" rx="75" ry="60" fill="#FF8000" stroke="#212121" stroke-width="5"/>
-                            Cheeks Stripes
                             <path d="M 30 110 Q 15 115 30 120 M 25 100 Q 10 102 25 107 M 170 110 Q 185 115 170 120 M 175 100 Q 190 102 175 107" stroke="#212121" stroke-width="4" stroke-linecap="round"/>
-                            <!-- Eyes (Normal / Awake) -->
                             <g id="eyesAwake">
                                 <ellipse cx="75" cy="90" rx="22" ry="28" fill="white" stroke="#212121" stroke-width="4"/>
                                 <ellipse cx="125" cy="90" rx="22" ry="28" fill="white" stroke="#212121" stroke-width="4"/>
@@ -217,7 +213,6 @@
                                 <ellipse cx="122" cy="92" rx="7" ry="10" fill="#212121"/>
                                 <path id="eyelids" d="M 53 75 Q 75 95 97 75 M 103 75 Q 125 95 147 75" fill="#FF8000" stroke="#212121" stroke-width="4"/>
                             </g>
-                            <!-- Eyes Sleepy (Zzz Mode) -->
                             <g id="eyesAsleep" class="hidden">
                                 <path d="M 55 90 Q 75 110 95 90" stroke="#212121" stroke-width="5" fill="none" stroke-linecap="round"/>
                                 <path d="M 105 90 Q 125 110 145 90" stroke="#212121" stroke-width="5" fill="none" stroke-linecap="round"/>
@@ -243,7 +238,7 @@
                             <span id="statusTag" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-400">ONLINE</span>
                         </div>
                         <p id="garfieldSpeechText" class="font-comic text-lg text-slate-800 font-bold mt-1">
-                            "Welcome to the AI Voice Receptionist Dashboard! Need live assistance? Join our Discord Support Server!"
+                            "Welcome to the AI Voice Receptionist Dashboard! Check out our English blog posts below or join our Discord Support Server!"
                         </p>
                     </div>
 
@@ -288,11 +283,14 @@
             </div>
         </section>
 
-        <!-- Workspace Tabs -->
+        <!-- Workspace Tabs Container -->
         <section class="bg-white rounded-3xl p-6 comic-border shadow-comic-lg flex flex-col gap-6 relative">
             <div class="flex flex-wrap border-b-4 border-garfield-black gap-2 pb-2">
                 <button onclick="switchTab('tab-provisioning')" id="tabBtn-provisioning" class="tab-btn active bg-garfield-orange text-white font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0">
                     <i class="fa-solid fa-robot mr-1"></i> Tenant Provisioning
+                </button>
+                <button onclick="switchTab('tab-blog')" id="tabBtn-blog" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0">
+                    <i class="fa-solid fa-newspaper mr-1"></i> Garfield Blog
                 </button>
                 <button onclick="switchTab('tab-analytics')" id="tabBtn-analytics" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0">
                     <i class="fa-solid fa-chart-line mr-1"></i> Live Analytics & Logs
@@ -362,7 +360,86 @@
                 </div>
             </div>
 
-            <!-- TAB 3: Discord Support Server -->
+            <!-- TAB 2: Garfield English Blog -->
+            <div id="tab-blog" class="tab-content flex flex-col gap-6 hidden">
+                <div class="flex items-center justify-between border-b-2 border-garfield-orange pb-3">
+                    <div>
+                        <h3 class="font-bangers text-3xl text-garfield-darkorange">GARFIELD'S OFFICIAL SAAS BLOG</h3>
+                        <p class="text-xs font-bold text-slate-600">Insights, lasagna recipes, and automated receptionist tutorials written by Garfield.</p>
+                    </div>
+                    <span class="bg-garfield-yellow text-garfield-black font-bangers text-sm px-3 py-1 rounded-xl comic-border">English Edition</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Article 1 -->
+                    <div class="bg-garfield-cream p-5 rounded-2xl comic-border shadow-comic flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] bg-garfield-orange text-white font-bold px-2 py-0.5 rounded uppercase">Automation</span>
+                            <h4 class="font-bangers text-xl text-garfield-black mt-2">Why Mondays Should Be Automated by AI Voice Receptionists</h4>
+                            <p class="text-xs font-bold text-slate-700 mt-2 leading-relaxed">
+                                Mondays are notoriously hard. Here is how configuring an automated AI receptionist saves business owners from Monday phone chaos while keeping customer response times under 20ms.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-xs font-bold">
+                            <span class="text-slate-500">Oct 24, 2026</span>
+                            <button onclick="readBlog('mondays')" class="text-garfield-darkorange hover:underline font-bangers text-sm">Read Post ↗</button>
+                        </div>
+                    </div>
+
+                    <!-- Article 2 -->
+                    <div class="bg-garfield-cream p-5 rounded-2xl comic-border shadow-comic flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] bg-garfield-lasagna text-white font-bold px-2 py-0.5 rounded uppercase">Recipe & Code</span>
+                            <h4 class="font-bangers text-xl text-garfield-black mt-2">The Perfect Layered Architecture: Lasagna & AI Workflows</h4>
+                            <p class="text-xs font-bold text-slate-700 mt-2 leading-relaxed">
+                                Comparing traditional Web2 SaaS models to a well-baked lasagna. Learn how Next.js, Vapi voice engine, and Discord webhooks fit into a delicious tech stack.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-xs font-bold">
+                            <span class="text-slate-500">Oct 18, 2026</span>
+                            <button onclick="readBlog('lasagna')" class="text-garfield-darkorange hover:underline font-bangers text-sm">Read Post ↗</button>
+                        </div>
+                    </div>
+
+                    <!-- Article 3 -->
+                    <div class="bg-garfield-cream p-5 rounded-2xl comic-border shadow-comic flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] bg-indigo-600 text-white font-bold px-2 py-0.5 rounded uppercase">Community</span>
+                            <h4 class="font-bangers text-xl text-garfield-black mt-2">Building Multi-Channel Customer Support via Discord & Vapi</h4>
+                            <p class="text-xs font-bold text-slate-700 mt-2 leading-relaxed">
+                                How to bridge real-time phone receptionist transcripts straight into your Discord Support Server with custom slash commands like /ticket and /ask.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-xs font-bold">
+                            <span class="text-slate-500">Oct 10, 2026</span>
+                            <button onclick="readBlog('discord')" class="text-garfield-darkorange hover:underline font-bangers text-sm">Read Post ↗</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: Analytics -->
+            <div id="tab-analytics" class="tab-content flex flex-col gap-6 hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-garfield-cream p-4 rounded-2xl comic-border shadow-comic">
+                        <span class="text-xs font-bold text-slate-600 uppercase">Total Calls Handled</span>
+                        <div class="font-bangers text-4xl text-garfield-darkorange mt-1">12,845</div>
+                        <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-arrow-up"></i> +14.2% from last week</span>
+                    </div>
+                    <div class="bg-garfield-cream p-4 rounded-2xl comic-border shadow-comic">
+                        <span class="text-xs font-bold text-slate-600 uppercase">Avg Call Duration</span>
+                        <div class="font-bangers text-4xl text-garfield-lasagna mt-1">1m 42s</div>
+                        <span class="text-xs text-slate-600 font-bold">Optimization Score: 98/100</span>
+                    </div>
+                    <div class="bg-garfield-cream p-4 rounded-2xl comic-border shadow-comic">
+                        <span class="text-xs font-bold text-slate-600 uppercase">Lasagna Orders Taken</span>
+                        <div class="font-bangers text-4xl text-garfield-orange mt-1">3,420</div>
+                        <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-heart text-red-500"></i> Customer Satisfaction 99%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: Discord Support Server -->
             <div id="tab-discord" class="tab-content flex flex-col gap-6 hidden">
                 <div class="bg-[#313338] text-white p-5 rounded-2xl comic-border shadow-comic flex flex-col gap-4">
                     <div class="flex items-center justify-between border-b border-slate-700 pb-3">
@@ -380,7 +457,7 @@
                 </div>
             </div>
 
-            <!-- TAB 4: Instagram Hub -->
+            <!-- TAB 5: Instagram Hub -->
             <div id="tab-instagram" class="tab-content flex flex-col gap-6 hidden">
                 <div class="flex items-center justify-between bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white p-4 rounded-2xl comic-border shadow-comic">
                     <div class="flex items-center gap-3">
@@ -432,6 +509,9 @@
         }
         function toggleSimulatedCall() { alert("Simulating call..."); }
         function saveTenantConfig() { alert("Configuration deployed!"); }
+        function readBlog(slug) {
+            alert("Opening blog post: " + slug + ". Full Garfield blog article loaded!");
+        }
     </script>
 </body>
 </html>
