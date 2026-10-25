@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Search Console Verification Meta Tag -->
     <meta name="google-site-verification" content="hpF1GBqGEt0uX_wJF7Oxh3VHIVeTDsQieb8Mt5B8wMw" />
-    <title>Garfield AI & Child Safety Filter SaaS Enterprise Platform</title>
+    <title>Garfield AI Voice Receptionist SaaS Platform</title>
 
     <!-- Google Fonts & Tailwind CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -185,14 +184,14 @@
             
             <div class="flex items-center gap-3">
                 <div class="bg-garfield-yellow p-2 rounded-xl comic-border shadow-comic-sm animate-dynamic-wiggle">
-                    <i class="fa-solid font-bangers text-2xl text-garfield-lasagna">🐾</i>
+                    <i class="fa-solid font-bangers text-2xl text-garfield-lasagna">📞</i>
                 </div>
                 <div>
                     <h1 class="font-bangers text-3xl tracking-wider text-white drop-shadow-[0_2px_0_#212121] leading-none animate-dynamic-glow">
-                        GARFIELD <span class="text-garfield-yellow">AI VOICE</span> SaaS
+                        GARFIELD <span class="text-garfield-yellow">AI VOICE RECEPTIONIST</span> SaaS
                     </h1>
                     <p class="text-xs font-bold text-garfield-black bg-garfield-yellow px-2 py-0.5 rounded border border-black inline-block mt-0.5">
-                        Child Safety Filter SDK Trial • 1,000 Animations
+                        Interactive AI Call Simulator Engine • Vapi Powered
                     </p>
                 </div>
             </div>
@@ -279,11 +278,11 @@
                 <div class="md:col-span-8 flex flex-col gap-4">
                     <div class="speech-bubble p-4 comic-shadow">
                         <div class="flex items-start justify-between">
-                            <h3 class="font-bangers text-xl text-garfield-lasagna tracking-wide">GARFIELD RECEPTIONIST AI:</h3>
-                            <span id="statusTag" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-400 animate-pulse">ONLINE</span>
+                            <h3 class="font-bangers text-xl text-garfield-lasagna tracking-wide">GARFIELD AI VOICE RECEPTIONIST:</h3>
+                            <span id="statusTag" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-400 animate-pulse">SWITCHBOARD READY</span>
                         </div>
                         <p id="garfieldSpeechText" class="font-comic text-lg text-slate-800 font-bold mt-1">
-                            "Try out our live Child Safety & NSFW Content Moderation SDK trial below!"
+                            "Hello! I am your Garfield AI Voice Receptionist. Try simulating an incoming call in the trial sandbox below!"
                         </p>
                     </div>
 
@@ -302,76 +301,76 @@
             </div>
         </section>
 
-        <!-- LIVE SDK INTERACTIVE PLAYGROUND (試用區) -->
-        <section class="comic-panel bg-gradient-to-r from-emerald-50 via-garfield-cream to-emerald-50 rounded-3xl p-6 border-2 border-garfield-black relative overflow-hidden shadow-comic-lg">
+        <!-- LIVE AI VOICE RECEPTIONIST TRIAL SANDBOX (AI 接線員線上對話試用區) -->
+        <section class="comic-panel bg-gradient-to-r from-amber-50 via-garfield-cream to-orange-50 rounded-3xl p-6 border-2 border-garfield-black relative overflow-hidden shadow-comic-lg">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-4">
                 <div class="flex items-center gap-4">
-                    <div class="bg-emerald-600 text-white p-4 rounded-2xl comic-border shadow-comic-sm animate-bounce">
-                        <i class="fa-solid fa-shield-halved text-3xl"></i>
+                    <div class="bg-garfield-orange text-white p-4 rounded-2xl comic-border shadow-comic-sm animate-bounce">
+                        <i class="fa-solid fa-headset text-3xl"></i>
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs bg-emerald-700 text-white font-bold px-2 py-0.5 rounded uppercase font-bangers tracking-wider">🔬 Live Sandbox Trial</span>
-                            <span class="text-xs font-bold text-slate-700">Child Safety Filter SDK v1.0</span>
+                            <span class="text-xs bg-garfield-darkorange text-white font-bold px-2 py-0.5 rounded uppercase font-bangers tracking-wider">📞 Live Interactive Sandbox</span>
+                            <span class="text-xs font-bold text-slate-700">Garfield Voice Agent v2.5</span>
                         </div>
-                        <h2 class="font-bangers text-3xl text-emerald-900 tracking-wide mt-1">SDK INTERACTIVE PLAYGROUND (線上試用區)</h2>
-                        <p class="text-xs font-bold text-slate-700">Test text input against our enterprise child safety & content moderation rules instantly.</p>
+                        <h2 class="font-bangers text-3xl text-garfield-darkorange tracking-wide mt-1">AI VOICE RECEPTIONIST SIMULATOR (線上電話試用區)</h2>
+                        <p class="text-xs font-bold text-slate-700">Simulate caller speech input and watch Garfield AI answer, detect intents, and process calls instantly!</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Trial Playground Grid -->
+            <!-- Call Trial Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                 
-                <!-- Left: Input & Preset Buttons -->
+                <!-- Left: Caller Speech Input & Scenario Presets -->
                 <div class="lg:col-span-7 flex flex-col gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Enter Test Text / User Input</label>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Simulate Caller Speech / What the Customer Says:</label>
                         <textarea 
-                            id="trialInputText" 
+                            id="aiCallCallerInput" 
                             rows="4" 
-                            placeholder="Type or paste text to test moderation rules..." 
-                            class="w-full p-3 rounded-xl comic-border text-sm font-bold bg-white focus:ring-2 focus:ring-emerald-500 transition-all"
-                        >Hello everyone! Welcome to Garfield Lounge and family chats.</textarea>
+                            placeholder="Type what a customer would say when calling your business..." 
+                            class="w-full p-3 rounded-xl comic-border text-sm font-bold bg-white focus:ring-2 focus:ring-garfield-orange transition-all"
+                        >Hi! I'd like to reserve a table for 4 people at 7 PM tonight, and order two large Italian lasagnas.</textarea>
                     </div>
 
-                    <!-- Quick Preset Buttons -->
+                    <!-- Quick Caller Presets -->
                     <div>
-                        <span class="block text-xs font-bold text-slate-600 mb-2">⚡ Quick Test Presets:</span>
+                        <span class="block text-xs font-bold text-slate-600 mb-2">⚡ Quick Call Scenarios (常見電話情境測試):</span>
                         <div class="flex flex-wrap gap-2">
-                            <button onclick="setTrialPreset('safe')" class="bg-white hover:bg-emerald-50 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
-                                ✅ Safe Normal Text
+                            <button onclick="setAiCallScenario('order')" class="bg-white hover:bg-orange-50 text-garfield-darkorange text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
+                                🍕 Order Lasagna & Reservation
                             </button>
-                            <button onclick="setTrialPreset('nsfw')" class="bg-white hover:bg-red-50 text-red-800 text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
-                                ⚠️ NSFW / Explicit Term
+                            <button onclick="setAiCallScenario('hours')" class="bg-white hover:bg-amber-50 text-amber-900 text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
+                                🕒 Ask Business Hours & Location
                             </button>
-                            <button onclick="setTrialPreset('leet')" class="bg-white hover:bg-amber-50 text-amber-800 text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
-                                🔍 Leet-Speak Evasion (p0rn)
+                            <button onclick="setAiCallScenario('spam')" class="bg-white hover:bg-red-50 text-red-800 text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
+                                🚫 Telemarketing / Spam Call
                             </button>
                         </div>
                     </div>
 
-                    <button onclick="runLiveTrialInspection()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bangers text-xl py-3 rounded-xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-magnifying-glass-chart"></i> Run SDK Inspection (立即測試)
+                    <button onclick="runAiCallSimulation()" class="bg-garfield-darkorange hover:bg-orange-700 text-white font-bangers text-xl py-3 rounded-xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-phone-flip"></i> Simulate AI Phone Answer (測試 AI 接聽對話)
                     </button>
                 </div>
 
-                <!-- Right: Inspection Result Report Box -->
-                <div class="lg:col-span-5 bg-slate-900 text-white p-5 rounded-2xl comic-border shadow-inner font-mono flex flex-col justify-between h-full min-h-[220px]">
+                <!-- Right: AI Voice Receptionist Response Box -->
+                <div class="lg:col-span-5 bg-slate-900 text-white p-5 rounded-2xl comic-border shadow-inner font-mono flex flex-col justify-between h-full min-h-[240px]">
                     <div>
                         <div class="flex items-center justify-between border-b border-slate-700 pb-2 mb-3">
-                            <span class="text-xs font-bold text-slate-400 uppercase">Inspection Report Output</span>
-                            <span id="trialStatusBadge" class="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-0.5 rounded border border-emerald-500">READY</span>
+                            <span class="text-xs font-bold text-slate-400 uppercase">AI Receptionist Live Transcript</span>
+                            <span id="aiCallStatusBadge" class="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-0.5 rounded border border-emerald-500">LINE READY</span>
                         </div>
 
-                        <div id="trialResultBox" class="text-xs space-y-2 text-slate-300">
-                            <p class="italic text-slate-500">[Click "Run SDK Inspection" to evaluate input text against child safety rules]</p>
+                        <div id="aiCallTranscriptResult" class="text-xs space-y-2 text-slate-300">
+                            <p class="italic text-slate-500">[Click "Simulate AI Phone Answer" to see Garfield AI's live response]</p>
                         </div>
                     </div>
 
                     <div class="mt-4 pt-3 border-t border-slate-800 text-[10px] text-slate-500 flex justify-between">
-                        <span>Latency: &lt; 1ms (In-Memory)</span>
-                        <span>GDPR / COPPA Compliant</span>
+                        <span>Vapi Engine Latency: ~180ms</span>
+                        <span>Multi-Tenant Webhook Enabled</span>
                     </div>
                 </div>
 
@@ -585,12 +584,12 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Client Tenant Name</label>
-                                <input type="text" id="tenantName" value="Child Safety Trial HQ" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white transition-all">
+                                <input type="text" id="tenantName" value="Lasagna Palace Restaurant" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white transition-all">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Industry Sector</label>
                                 <select id="industrySector" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream">
-                                    <option>Child Online Safety & Moderation</option>
+                                    <option>Restaurant & Dining</option>
                                     <option>SaaS Customer Service</option>
                                     <option>Pet Healthcare Clinic</option>
                                     <option>Corporate Switchboard</option>
@@ -600,7 +599,7 @@
 
                         <div>
                             <label class="block text-xs font-bold text-slate-700 mb-1">Garfield Persona System Prompt</label>
-                            <textarea id="systemPrompt" rows="3" class="w-full p-3 rounded-xl comic-border text-xs font-bold bg-garfield-cream leading-relaxed">You are Garfield, supporting child safety compliance and AI content moderation. Answer incoming calls with professional security awareness, take Italian lasagna orders, avoid Mondays, and forward urgent business leads.</textarea>
+                            <textarea id="systemPrompt" rows="3" class="w-full p-3 rounded-xl comic-border text-xs font-bold bg-garfield-cream leading-relaxed">You are Garfield AI Voice Receptionist. Answer incoming restaurant calls with warm witty charm, record table reservations, process lasagna orders, decline Mondays politely, and route urgent business leads.</textarea>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -683,7 +682,7 @@
                     <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 border-garfield-orange pb-3 gap-2">
                         <div>
                             <h3 class="font-bangers text-3xl text-garfield-darkorange">GARFIELD & FAMILY 1,000-ARTICLE LIBRARY</h3>
-                            <p class="text-xs font-bold text-slate-600">Explore 1,000 long-form articles featuring child safety moderation, Eric, Martine, and Joe Garfield!</p>
+                            <p class="text-xs font-bold text-slate-600">Explore 1,000 long-form articles featuring AI voice receptionists, Eric, Martine, and Joe Garfield!</p>
                         </div>
                         <span class="bg-garfield-yellow text-garfield-black font-bangers text-sm px-3 py-1 rounded-xl comic-border animate-pulse">1,000 Articles Indexed</span>
                     </div>
@@ -734,19 +733,19 @@
             <div id="tab-analytics" class="tab-content flex flex-col gap-6 hidden">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="comic-panel bg-garfield-cream p-4 rounded-2xl shadow-comic">
-                        <span class="text-xs font-bold text-slate-600 uppercase">Total Moderation Checks</span>
-                        <div class="font-bangers text-4xl text-garfield-darkorange mt-1">1,248,540</div>
-                        <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-arrow-up"></i> +28.4% from last week</span>
+                        <span class="text-xs font-bold text-slate-600 uppercase">Total Answered Calls</span>
+                        <div class="font-bangers text-4xl text-garfield-darkorange mt-1">84,920</div>
+                        <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-arrow-up"></i> +19.2% this week</span>
                     </div>
                     <div class="comic-panel bg-garfield-cream p-4 rounded-2xl shadow-comic">
-                        <span class="text-xs font-bold text-slate-600 uppercase">Avg Response Latency</span>
-                        <div class="font-bangers text-4xl text-garfield-lasagna mt-1">0.82 ms</div>
-                        <span class="text-xs text-slate-600 font-bold">In-Memory Trie Matching</span>
+                        <span class="text-xs font-bold text-slate-600 uppercase">Average Latency</span>
+                        <div class="font-bangers text-4xl text-garfield-lasagna mt-1">182 ms</div>
+                        <span class="text-xs text-slate-600 font-bold">Vapi Speech Engine</span>
                     </div>
                     <div class="comic-panel bg-garfield-cream p-4 rounded-2xl shadow-comic">
-                        <span class="text-xs font-bold text-slate-600 uppercase">Blocked Harmful Hits</span>
-                        <div class="font-bangers text-4xl text-garfield-orange mt-1">14,210</div>
-                        <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-shield text-emerald-600"></i> 100% COPPA Compliant</span>
+                        <span class="text-xs font-bold text-slate-600 uppercase">Reservations Processed</span>
+                        <div class="font-bangers text-4xl text-garfield-orange mt-1">6,410</div>
+                        <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-check text-emerald-600"></i> Automated Booking</span>
                     </div>
                 </div>
             </div>
@@ -791,7 +790,7 @@
     <footer class="bg-garfield-black text-white comic-border border-b-0 border-x-0 mt-8 relative z-10">
         <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
-                <span class="font-bangers text-2xl text-garfield-yellow tracking-wider">GARFIELD CHILD SAFETY SaaS</span>
+                <span class="font-bangers text-2xl text-garfield-yellow tracking-wider">GARFIELD AI VOICE RECEPTIONIST SaaS</span>
                 <p class="text-xs text-slate-400">© 2026 Garfield Enterprise Inc. All rights reserved.</p>
             </div>
 
@@ -809,46 +808,48 @@
 
     <!-- Interactive Script & Trial Sandbox Logic -->
     <script>
-        // Mock Child Safety Filter SDK Engine for Live Trial
-        const mockBlocklist = ["explicit", "nsfw", "porn", "p0rn", "s3x", "grooming", "harmful_term"];
-
-        function setTrialPreset(type) {
-            const input = document.getElementById('trialInputText');
+        // AI Voice Receptionist Trial Logic
+        function setAiCallScenario(type) {
+            const input = document.getElementById('aiCallCallerInput');
             if (!input) return;
-            if (type === 'safe') {
-                input.value = "Hello! Let's schedule a family dinner and enjoy some lasagna together in Garfield Lounge.";
-            } else if (type === 'nsfw') {
-                input.value = "Warning test: checking explicit content filtering rules on this server.";
-            } else if (type === 'leet') {
-                input.value = "Evasion test string containing p0rn and s3x keywords.";
+            if (type === 'order') {
+                input.value = "Hi! I'd like to reserve a table for 4 people at 7 PM tonight, and order two large Italian lasagnas.";
+            } else if (type === 'hours') {
+                input.value = "Hello! What time do you open on weekends and where is your restaurant located?";
+            } else if (type === 'spam') {
+                input.value = "We are calling regarding your extended warranty on your commercial delivery truck...";
             }
         }
 
-        function runLiveTrialInspection() {
-            const text = document.getElementById('trialInputText').value.toLowerCase();
-            const badge = document.getElementById('trialStatusBadge');
-            const resultBox = document.getElementById('trialResultBox');
+        function runAiCallSimulation() {
+            const callerText = document.getElementById('aiCallCallerInput').value.toLowerCase();
+            const badge = document.getElementById('aiCallStatusBadge');
+            const resultBox = document.getElementById('aiCallTranscriptResult');
 
-            const matched = mockBlocklist.filter(word => text.includes(word));
-            const isSafe = matched.length === 0;
-
-            if (isSafe) {
+            if (callerText.includes("order") || callerText.includes("reserve") || callerText.includes("table") || callerText.includes("lasagna")) {
                 badge.className = "text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-0.5 rounded border border-emerald-500";
-                badge.innerText = "PASSED (SAFE)";
+                badge.innerText = "CALL PROCESSED (BOOKING)";
                 resultBox.innerHTML = `
-                    <p class="text-emerald-400 font-bold">✅ Inspection Status: PASSED</p>
-                    <p class="text-slate-300 mt-1">Risk Level: <span class="text-emerald-400">LOW</span></p>
-                    <p class="text-slate-300">Matched Categories: <span class="text-slate-100">None</span></p>
-                    <p class="text-slate-400 mt-2 font-mono text-[11px] bg-slate-800 p-2 rounded border border-slate-700">Result: { isSafe: true, riskLevel: "LOW", matchedCategories: [] }</p>
+                    <p class="text-emerald-400 font-bold">🎙️ Garfield AI: "Good choice! I've booked your table and notified our kitchen for 2 large lasagnas."</p>
+                    <p class="text-slate-300 mt-1">Detected Intent: <span class="text-garfield-yellow font-bold">RESERVATION_AND_ORDER</span> (Confidence: 99.4%)</p>
+                    <p class="text-slate-300">Action Taken: <span class="text-emerald-400">Webhook Dispatched to Restaurant CRM</span></p>
+                    <p class="text-slate-400 mt-2 font-mono text-[11px] bg-slate-800 p-2 rounded border border-slate-700">Response payload: { status: "SUCCESS", category: "RESERVATION", notification: "SENT" }</p>
+                `;
+            } else if (callerText.includes("hours") || callerText.includes("open") || callerText.includes("location") || callerText.includes("where")) {
+                badge.className = "text-xs bg-blue-500/20 text-blue-400 font-bold px-2.5 py-0.5 rounded border border-blue-500";
+                badge.innerText = "CALL ANSWERED (INFO)";
+                resultBox.innerHTML = `
+                    <p class="text-blue-400 font-bold">🎙️ Garfield AI: "We are open daily from 11 AM to 10 PM. Located right in the heart of East District, Tainan City!"</p>
+                    <p class="text-slate-300 mt-1">Detected Intent: <span class="text-blue-300 font-bold">BUSINESS_HOURS_LOCATION</span> (Confidence: 98.1%)</p>
+                    <p class="text-slate-300">Action Taken: <span class="text-slate-200">Provided Standard Operating Details</span></p>
                 `;
             } else {
-                badge.className = "text-xs bg-red-500/20 text-red-400 font-bold px-2.5 py-0.5 rounded border border-red-500";
-                badge.innerText = "BLOCKED (VIOLATION)";
+                badge.className = "text-xs bg-amber-500/20 text-amber-400 font-bold px-2.5 py-0.5 rounded border border-amber-500";
+                badge.innerText = "CALL FILTERED (SPAM/GENERAL)";
                 resultBox.innerHTML = `
-                    <p class="text-red-400 font-bold">⚠️ Inspection Status: BLOCKED</p>
-                    <p class="text-slate-300 mt-1">Risk Level: <span class="text-red-400 font-bold">HIGH (CSAE / NSFW Risk)</span></p>
-                    <p class="text-slate-300">Matched Keywords: <span class="text-amber-300 font-mono">[${matched.join(", ")}]</span></p>
-                    <p class="text-slate-400 mt-2 font-mono text-[11px] bg-slate-800 p-2 rounded border border-slate-700">Result: { isSafe: false, riskLevel: "HIGH", matchedCategories: ["nsfw_explicit", "child_safety_risk"] }</p>
+                    <p class="text-amber-400 font-bold">🎙️ Garfield AI: "I'm sorry, I cannot take telemarketing offers right now. Garfield is taking a nap. Goodbye!"</p>
+                    <p class="text-slate-300 mt-1">Detected Intent: <span class="text-red-400 font-bold">SPAM_FILTERED</span></p>
+                    <p class="text-slate-300">Action Taken: <span class="text-amber-400">Politely Disconnected Call</span></p>
                 `;
             }
         }
@@ -1042,7 +1043,6 @@
 
         let isLocked = false;
         let isSleep = false;
-        let callActive = false;
         let currentPage = 1;
         const itemsPerPage = 12;
         let searchQuery = "";
@@ -1073,7 +1073,7 @@
                 isLocked = false;
                 feedback.classList.add('hidden');
                 updateSecurityUI();
-                alert("License Verified Successfully! Garfield Child Safety SaaS unlocked.");
+                alert("License Verified Successfully! Garfield AI Voice Receptionist SaaS unlocked.");
             } else {
                 feedback.classList.remove('hidden');
             }
@@ -1108,9 +1108,9 @@
             }
         }
 
-        function interactGarfield() { alert("Meow! Test our Child Safety Filter SDK in the trial playground below!"); }
+        function interactGarfield() { alert("Meow! Test an incoming AI call in the phone simulator below!"); }
         function toggleGarfieldSleep() { isSleep = !isSleep; }
-        function feedLasagna() { alert("Lasagna refueled for the moderation engine!"); }
+        function feedLasagna() { alert("Lasagna refueled for Garfield AI Receptionist!"); }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -1119,7 +1119,11 @@
                 el.classList.add('bg-garfield-cream', 'text-garfield-black');
             });
 
-            document.getElementById(tabId).classList.remove('hidden');
+            const target = document.getElementById(tabId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
             const activeBtn = document.getElementById(`tabBtn-${tabId.replace('tab-', '')}`);
             if (activeBtn) {
                 activeBtn.classList.remove('bg-garfield-cream', 'text-garfield-black');
@@ -1127,20 +1131,20 @@
             }
         }
 
-        function toggleSimulatedCall() { alert("Simulating incoming call for Child Safety Trial HQ..."); }
-        function saveTenantConfig() { alert("Configuration deployed with moderation rules!"); }
+        function toggleSimulatedCall() { alert("Simulating live call test for Garfield AI Voice Receptionist..."); }
+        function saveTenantConfig() { alert("AI Voice Receptionist Configuration deployed successfully!"); }
 
         const familyTopics = [
-            "Child Safety Filter SDK: Zero-Latency In-Memory Moderation Architecture",
-            "Eric Garfield & Daniel Panda on Scaling Child Safety Webhooks",
-            "Martine Bear's Safe Family Recipes & Content Compliance",
-            "Orla Garfield on Optimizing Speech Recognition for Child Protection",
-            "Joe Garfield & Sadie Wolf: Building Safe Discord Communities",
-            "Daniel Panda & Joe Garfield on Zen Philosophy and Moderation",
+            "Garfield AI Voice Receptionist: Sub-200ms Latency Vapi Speech Pipelines",
+            "Eric Garfield & Daniel Panda on Scaling AI Phone Switchboards",
+            "Martine Bear's Restaurant Call Handling & Automated Lasagna Orders",
+            "Orla Garfield on Optimizing Speech Recognition & Multi-Language Voice AI",
+            "Joe Garfield & Sadie Wolf: Managing Call Surges with Garfield AI",
+            "Daniel Panda & Joe Garfield on Zen Philosophy and AI Customer Service",
             "Porter Garfield's Automated Webhook Architecture for Gumroad Sales",
             "Eric Garfield & Garfield: Why Naps are an Essential Engineering Metric",
             "Martine Bear & Sadie Wolf on Balancing Family Life and Enterprise SaaS",
-            "The Ultimate Garfield Safety Reunion: Lasagna, Filtering, and Automation"
+            "The Ultimate Garfield AI Reunion: Lasagna, Telephony, and Automation"
         ];
 
         function getArticleData(index) {
@@ -1149,10 +1153,10 @@
             
             const memeBanner = `
   /\\_/\\  
- ( o.o )  < "CHILD SAFETY TRIAL MEME #${index + 1}: COPPA & GDPR compliant!"
+ ( o.o )  < "GARFIELD AI RECEPTIONIST MEME #${index + 1}: Sub-200ms Voice Pipeline Active!"
   > ^ <
   --------------------------------------------------------------
- [ SAFETY & FAMILY ASCII: Golden Lasagna Layer #${(index % 20) + 1} ]
+ [ AI VOICE & FAMILY ASCII: Golden Lasagna Layer #${(index % 20) + 1} ]
   --------------------------------------------------------------
             `;
 
@@ -1161,23 +1165,23 @@
 ${memeBanner}
                 </div>
 
-                <h3 class="font-bangers text-2xl text-garfield-darkorange">Introduction: The Child Safety SDK Philosophy</h3>
-                <p>Welcome to family article #${index + 1}. In this 1,000-word piece, we explore how Joe Garfield, Daniel Panda, Eric Garfield, Martine Bear, Orla Garfield, Sadie Wolf, and Porter Garfield collaborate to run our world-class Child Safety & Content Moderation SDK.</p>
+                <h3 class="font-bangers text-2xl text-garfield-darkorange">Introduction: Garfield AI Voice Receptionist Engineering</h3>
+                <p>Welcome to family article #${index + 1}. In this 1,000-word piece, we explore how Joe Garfield, Daniel Panda, Eric Garfield, Martine Bear, Orla Garfield, Sadie Wolf, and Porter Garfield collaborate to power our AI Voice Receptionist SaaS platform.</p>
 
-                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 1: In-Memory Trie Architecture & Zero Latency</h4>
-                <p>Combining high-performance memory matching with Porter Garfield's webhook pipelines and Orla Garfield's speech recognition tuning, our system maintains sub-millisecond response times. Meanwhile, Martine Bear ensures everyone is well-fed with secure data practices.</p>
+                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 1: Vapi Voice Pipeline & Intent Detection</h4>
+                <p>By connecting low-latency Vapi voice engines with Porter Garfield's webhook dispatches and Orla Garfield's sub-20ms speech recognition tuning, our AI Receptionist handles thousands of calls per second while Martine Bear maintains full system stability.</p>
 
                 <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 2: Community Support & Garfield Lounge Integration</h4>
-                <p>Joe Garfield and Sadie Wolf spearhead our Garfield Lounge Discord support servers, ensuring every enterprise customer gets immediate assistance with their SDK integrations.</p>
+                <p>Joe Garfield and Sadie Wolf spearhead our Garfield Lounge Discord support servers, ensuring every enterprise tenant gets immediate help configuring their custom system prompts.</p>
 
-                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Conclusion: Scaling with Child Safety Values</h4>
-                <p>True enterprise success comes from combining robust safety compliance with family-friendly reliability—just like Garfield and Daniel Panda intended. Unlock your full license on Gumroad today!</p>
+                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Conclusion: Automated Customer Support Excellence</h4>
+                <p>Combining wit, warm customer support, and instant table booking capabilities—just as Garfield and Daniel Panda envisioned. Unlock your full license on Gumroad today!</p>
             `;
 
             return {
                 id: index + 1,
                 title: title,
-                category: (index % 2 === 0) ? "Child Safety" : "SaaS Operations",
+                category: (index % 2 === 0) ? "AI Voice Telephony" : "SaaS Operations",
                 date: "Oct 25, 2026",
                 body: fullText
             };
@@ -1214,7 +1218,7 @@ ${memeBanner}
                             </div>
                             <h4 class="font-bangers text-xl text-garfield-black mt-2 leading-tight">${item.title}</h4>
                             <p class="text-xs font-bold text-slate-700 mt-2 line-clamp-3 leading-relaxed">
-                                Complete 1,000-word child safety & moderation deep-dive featuring Daniel Panda, Eric, Martine, Joe, Sadie, and Porter.
+                                Complete 1,000-word AI voice receptionist deep-dive featuring Daniel Panda, Eric, Martine, Joe, Sadie, and Porter.
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-xs font-bold">
