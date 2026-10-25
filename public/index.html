@@ -3,349 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="hpF1GBqGEt0uX_wJF7Oxh3VHIVeTDsQieb8Mt5B8wMw" />
     <title>Garfield AI Executive | Ultra-High-Ticket Enterprise Voice Concierge Platform</title>
-
-    <!-- Google Fonts & FontAwesome -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        garfield: {
-                            orange: '#FF8000',
-                            darkorange: '#E65100',
-                            yellow: '#FFCA28',
-                            lasagna: '#D84315',
-                            black: '#09090B',
-                            cream: '#FFF8E7',
-                            discord: '#5865F2',
-                            vipgold: '#D4AF37',
-                            goldlight: '#F3E5AB',
-                            vipdark: '#050507',
-                            panel: '#121216',
-                            panelborder: '#27272A'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        bangers: ['Bangers', 'cursive'],
-                        comic: ['Comic Neue', 'cursive'],
-                        mono: ['JetBrains Mono', 'monospace']
-                    },
-                    boxShadow: {
-                        'gold-glow': '0 0 30px rgba(212, 175, 55, 0.25)',
-                        'gold-glow-lg': '0 0 60px rgba(212, 175, 55, 0.4)',
-                        'panel-glow': '0 20px 40px -15px rgba(0, 0, 0, 0.7)'
-                    }
+                    colors: { garfield: { black: '#050507', panel: '#121216', vipgold: '#D4AF37' } },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], bangers: ['Bangers', 'cursive'], mono: ['JetBrains Mono', 'monospace'] },
+                    boxShadow: { 'gold-glow': '0 0 40px rgba(212, 175, 55, 0.3)' }
                 }
             }
         }
     </script>
-
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #050507;
-            color: #F4F4F5;
-            overflow-x: hidden;
-        }
-
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .gold-border-glow {
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.08), 0 0 25px rgba(212, 175, 55, 0.15);
-        }
-
-        @keyframes pulseWave {
-            0%, 100% { height: 8px; transform: scaleY(1); }
-            50% { height: 42px; transform: scaleY(1.3); }
-        }
-
-        .wave-bar {
-            animation: pulseWave 1s infinite ease-in-out;
-        }
-
-        #particleCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .tab-content {
-            animation: tabFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes tabFadeIn {
-            from { opacity: 0; transform: translateY(12px) scale(0.99); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #09090B;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #27272A;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #D4AF37;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; overflow-x: hidden; }
+        .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); }
+        #particleCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-garfield-vipgold selection:text-black">
-
-    <!-- Background Animation Canvas -->
     <canvas id="particleCanvas"></canvas>
 
-    <!-- Top Navigation Bar -->
-    <header class="bg-garfield-vipdark/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
+    <!-- Top Navigation -->
+    <header class="bg-garfield-black/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="bg-garfield-vipgold p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">
-                    👑
-                </div>
+                <div class="bg-garfield-vipgold p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">👑</div>
                 <div>
                     <span class="font-bangers text-2xl tracking-wider text-white">GARFIELD <span class="gold-gradient-text">AI EXECUTIVE</span></span>
-                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">High-Ticket Voice Concierge Engine</span>
+                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">Ultra-High-Ticket B2B Concierge</span>
                 </div>
             </div>
-
-            <nav class="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-slate-300">
-                <a href="#hooks" class="hover:text-garfield-vipgold transition-colors">10,000+ Interactive Hooks</a>
-                <a href="#sandbox" class="hover:text-garfield-vipgold transition-colors">Live VIP Sandbox</a>
-                <a href="#features" class="hover:text-garfield-vipgold transition-colors">Enterprise SLA</a>
-                <a href="#roi" class="hover:text-garfield-vipgold transition-colors">ROI Calculator</a>
-                <a href="#pricing" class="hover:text-garfield-vipgold transition-colors">VIP Licensing</a>
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-300">
+                <a href="index.html" class="text-amber-400">Home</a>
+                <a href="sandbox.html" class="hover:text-amber-400 transition-colors">Live Sandbox</a>
+                <a href="hooks.html" class="hover:text-amber-400 transition-colors">10,000+ Hooks</a>
+                <a href="roi.html" class="hover:text-amber-400 transition-colors">ROI Calculator</a>
+                <a href="pricing.html" class="hover:text-amber-400 transition-colors">VIP Licensing</a>
+                <a href="knowledge.html" class="hover:text-amber-400 transition-colors">Knowledge Base</a>
             </nav>
-
             <div class="flex items-center gap-3">
-                <a href="https://discord.com/invite/hope-for-broken-hearts-875258067166580737" target="_blank" class="hidden sm:flex items-center gap-2 bg-indigo-600/20 text-indigo-300 border border-indigo-500/40 hover:bg-indigo-600 hover:text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all">
-                    <i class="fa-brands fa-discord"></i> Garfield Lounge
-                </a>
-                <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow transition-all hover:scale-105 uppercase tracking-wide">
-                    Claim VIP License ↗
-                </a>
+                <a href="https://discord.com/invite/hope-for-broken-hearts-875258067166580737" target="_blank" class="hidden sm:flex items-center gap-2 bg-indigo-600/20 text-indigo-300 border border-indigo-500/40 hover:bg-indigo-600 hover:text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all"><i class="fa-brands fa-discord"></i> Discord</a>
+                <a href="pricing.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow transition-all hover:scale-105 uppercase">Claim VIP License ↗</a>
             </div>
         </div>
     </header>
 
-    <!-- Main Workspace -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-20 relative z-10">
-
-        <!-- HERO SECTION -->
-        <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-6">
+    <!-- Hero Section -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-16 flex flex-col gap-20 relative z-10">
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div class="lg:col-span-7 flex flex-col gap-6">
                 <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-4 py-2 rounded-full w-fit">
                     <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
-                    <span class="text-xs font-extrabold text-amber-300 tracking-wider uppercase">Clickable Conversational Automation Engine</span>
+                    <span class="text-xs font-extrabold text-amber-300 tracking-wider uppercase">Production-Ready Multi-Page Architecture</span>
                 </div>
-
                 <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
-                    Capture Every <span class="gold-gradient-text">$100,000+ Lead</span> With Interactive Hooks.
+                    Every High-Ticket Point Has Its <span class="gold-gradient-text">Dedicated Enterprise Page</span>.
                 </h1>
-
                 <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
-                    The white-glove Garfield AI Voice Concierge built for high-net-worth Private Banking, Luxury Automotive, M&A Escrows, and Executive Offices. Click any hook below to simulate its real-time voice handling instantly.
+                    Designed for private wealth funds, luxury conglomerates, and executive offices. Our platform is completely modularized into pristine standalone pages with exhaustive technical depth, real-time telephony simulation, and verified SLAs.
                 </p>
-
-                <div class="flex flex-wrap items-center gap-4 pt-2">
-                    <a href="#hooks" class="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-sm px-8 py-4 rounded-xl shadow-gold-glow transition-all hover:scale-105 flex items-center gap-3 uppercase tracking-wider">
-                        <i class="fa-solid fa-hand-pointer"></i> Browse & Click 10,000+ Hooks
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4">
+                    <a href="sandbox.html" class="bg-garfield-panel p-5 rounded-2xl border gold-border-glow hover:border-amber-400 transition-all text-center group">
+                        <i class="fa-solid fa-headset text-2xl text-amber-400 mb-2 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-bold text-white text-sm">Live Sandbox</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">Real-Time Vapi Simulator</p>
                     </a>
-                    <a href="#sandbox" class="bg-white/5 hover:bg-white/10 text-white font-bold text-sm px-6 py-4 rounded-xl border border-white/15 transition-all">
-                        Jump To VIP Simulator
+                    <a href="hooks.html" class="bg-garfield-panel p-5 rounded-2xl border gold-border-glow hover:border-amber-400 transition-all text-center group">
+                        <i class="fa-solid fa-crosshairs text-2xl text-amber-400 mb-2 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-bold text-white text-sm">10,000+ Hooks</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">Click-To-Test Library</p>
+                    </a>
+                    <a href="roi.html" class="bg-garfield-panel p-5 rounded-2xl border gold-border-glow hover:border-amber-400 transition-all text-center group">
+                        <i class="fa-solid fa-chart-line text-2xl text-amber-400 mb-2 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-bold text-white text-sm">ROI Calculator</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">Financial Projections</p>
+                    </a>
+                    <a href="pricing.html" class="bg-garfield-panel p-5 rounded-2xl border gold-border-glow hover:border-amber-400 transition-all text-center group">
+                        <i class="fa-solid fa-shield-cat text-2xl text-amber-400 mb-2 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-bold text-white text-sm">VIP Licensing</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">Gumroad Auth Gate</p>
+                    </a>
+                    <a href="knowledge.html" class="bg-garfield-panel p-5 rounded-2xl border gold-border-glow hover:border-amber-400 transition-all text-center group">
+                        <i class="fa-solid fa-book text-2xl text-amber-400 mb-2 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-bold text-white text-sm">Knowledge Base</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">1,000 Articles</p>
+                    </a>
+                    <a href="memes.html" class="bg-garfield-panel p-5 rounded-2xl border gold-border-glow hover:border-amber-400 transition-all text-center group">
+                        <i class="fa-solid fa-masks-theater text-2xl text-amber-400 mb-2 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-bold text-white text-sm">Tamil Joe Memes</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">Kollywood Comedy</p>
                     </a>
                 </div>
             </div>
 
-            <!-- Mascot & AI Phone Widget -->
-            <div class="lg:col-span-5 relative">
-                <div class="bg-garfield-panel rounded-3xl p-8 gold-border-glow shadow-gold-glow flex flex-col gap-6">
-                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 rounded-2xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-2xl">
-                                👑
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-white">Garfield VIP Concierge</h3>
-                                <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Dynamic Hook Processor
-                                </span>
-                            </div>
-                        </div>
-                        <button onclick="feedLasagna()" class="bg-amber-400/10 hover:bg-amber-400/20 text-amber-300 text-xs font-bold px-3 py-1.5 rounded-lg border border-amber-400/30 transition-all">
-                            🍾 Refuel VIP
-                        </button>
-                    </div>
-
-                    <div class="bg-black/70 rounded-2xl p-6 border border-white/10 flex flex-col items-center justify-center gap-4">
-                        <div class="h-16 flex items-center gap-2">
-                            <div class="wave-bar w-2 bg-amber-400 rounded"></div>
-                            <div class="wave-bar w-2 bg-amber-200 rounded" style="animation-delay: 0.2s"></div>
-                            <div class="wave-bar w-2 bg-amber-500 rounded" style="animation-delay: 0.4s"></div>
-                            <div class="wave-bar w-2 bg-amber-300 rounded" style="animation-delay: 0.1s"></div>
-                            <div class="wave-bar w-2 bg-amber-400 rounded" style="animation-delay: 0.3s"></div>
-                        </div>
-                        <p id="garfieldSpeechText" class="text-center font-comic text-amber-200 text-sm italic">
-                            "Click any hook in the library below to test my live AI voice response!"
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 10,000+ CLICKABLE HOOKS ENGINE -->
-        <section id="hooks" class="scroll-mt-24 bg-garfield-panel rounded-3xl p-8 border border-white/10 shadow-2xl flex flex-col gap-8">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
-                <div>
-                    <span class="text-xs font-extrabold text-amber-400 tracking-widest uppercase">🎯 Click Any Hook To Test Live Simulation</span>
-                    <h2 class="text-3xl font-black text-white mt-1">10,000+ Interactive Hook Library</h2>
-                    <p class="text-slate-400 text-sm mt-1">Select and click any card below to automatically load its prompt into the VIP Simulator and trigger real-time AI execution.</p>
-                </div>
-                <div class="flex items-center gap-3">
-                    <select id="hookCategorySelect" onchange="filterHooks()" class="bg-black/60 border border-white/15 text-white text-xs font-bold px-4 py-2.5 rounded-xl focus:border-amber-400 focus:outline-none cursor-pointer">
-                        <option value="all">All Enterprise Sectors (10,000+ Hooks)</option>
-                        <option value="wealth">Private Wealth & Escrow (2,500 Hooks)</option>
-                        <option value="luxury">Luxury Jet & Automotive (2,500 Hooks)</option>
-                        <option value="medical">Concierge Medical & Aesthetics (2,500 Hooks)</option>
-                        <option value="csuite">C-Suite Executive Direct (2,500 Hooks)</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Hook Display Grid with Interactive Click Handler -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="hookDisplayGrid"></div>
-
-            <div class="bg-black/50 p-4 rounded-2xl border border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400">
-                <span>Active Clickable Pipelines: <strong class="text-amber-300 font-bold">10,000 Ready</strong></span>
-                <span>Click Action: <strong class="text-emerald-400 font-bold">Auto-Populate & Execute Call</strong></span>
-            </div>
-        </section>
-
-        <!-- LIVE VIP EXECUTIVE SANDBOX -->
-        <section id="sandbox" class="scroll-mt-24">
-            <div class="bg-gradient-to-b from-garfield-panel to-black rounded-3xl p-8 gold-border-glow shadow-gold-glow flex flex-col gap-8">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <!-- Detailed System Specs Box -->
+            <div class="lg:col-span-5 bg-garfield-panel rounded-3xl p-8 gold-border-glow shadow-gold-glow flex flex-col gap-6">
+                <div class="flex items-center gap-3 border-b border-white/10 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center font-bold">👑</div>
                     <div>
-                        <span class="text-xs font-extrabold text-amber-400 tracking-widest uppercase">🔬 Real-Time Execution Console</span>
-                        <h2 class="text-3xl font-black text-white mt-1">VIP Voice Concierge Simulator</h2>
-                        <p class="text-slate-400 text-sm">Populated dynamically when clicking any hook from the 10,000+ library.</p>
+                        <h3 class="font-bold text-white text-base">Enterprise Architecture Specs</h3>
+                        <span class="text-xs text-emerald-400 font-mono">SOC 2 Type II Compliant</span>
                     </div>
-                    <span class="bg-amber-400/10 text-amber-300 border border-amber-400/30 text-xs font-mono font-bold px-4 py-2 rounded-xl">
-                        Execution Latency: &lt; 150ms
-                    </span>
                 </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <div class="lg:col-span-7 flex flex-col gap-5">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-2">Caller Speech Prompt / Selected Hook Input:</label>
-                            <textarea id="vipCallerInput" rows="4" class="w-full p-4 rounded-xl bg-black/60 border border-white/15 text-white text-sm font-medium focus:border-amber-400 focus:outline-none transition-all" placeholder="Click any hook above to load its dialogue prompt..."></textarea>
-                        </div>
-
-                        <button onclick="runVipCallSimulation()" class="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-sm py-4 rounded-xl shadow-gold-glow transition-all hover:scale-[1.02] flex items-center justify-center gap-3 uppercase tracking-wider">
-                            <i class="fa-solid fa-headset"></i> Execute Call With Selected Hook
-                        </button>
-                    </div>
-
-                    <div class="lg:col-span-5 bg-black/90 rounded-2xl p-6 border border-white/10 font-mono text-xs flex flex-col justify-between h-full min-h-[280px]">
-                        <div>
-                            <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-                                <span class="text-slate-400 font-bold uppercase">AI Voice Concierge Response</span>
-                                <span id="vipStatusBadge" class="bg-amber-400/20 text-amber-300 text-[10px] font-bold px-2.5 py-0.5 rounded border border-amber-400/40">STANDBY</span>
-                            </div>
-
-                            <div id="vipResultBox" class="space-y-3 text-slate-300 leading-relaxed">
-                                <p class="text-slate-500 italic">[Click any hook above to see instant AI response execution]</p>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 pt-3 border-t border-white/10 text-[10px] text-slate-500 flex justify-between">
-                            <span>Vapi Speech Pipeline: Active</span>
-                            <span>SOC2 Type II Secured</span>
-                        </div>
-                    </div>
+                <ul class="text-xs text-slate-300 space-y-3 font-medium">
+                    <li class="flex items-center justify-between border-b border-white/5 pb-2"><span>Speech Recognition Latency:</span> <strong class="text-amber-400 font-mono">&lt; 150ms</strong></li>
+                    <li class="flex items-center justify-between border-b border-white/5 pb-2"><span>Uptime SLA Guarantee:</span> <strong class="text-amber-400 font-mono">99.99%</strong></li>
+                    <li class="flex items-center justify-between border-b border-white/5 pb-2"><span>Multi-Tenant Security:</span> <strong class="text-amber-400 font-mono">Zero-Trust Isolation</strong></li>
+                    <li class="flex items-center justify-between pb-1"><span>Webhook Endpoints:</span> <strong class="text-amber-400 font-mono">Vercel Serverless</strong></li>
+                </ul>
+                <div class="pt-2">
+                    <a href="sandbox.html" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-black font-black text-xs py-3.5 rounded-xl shadow-gold-glow flex items-center justify-center gap-2 uppercase tracking-wider">
+                        Launch Live Sandbox Page ↗
+                    </a>
                 </div>
             </div>
         </section>
-
-        <!-- ROI CALCULATOR -->
-        <section id="roi" class="scroll-mt-24 bg-garfield-panel rounded-3xl p-8 border border-white/10 shadow-2xl">
-            <div class="max-w-4xl mx-auto flex flex-col gap-8">
-                <div class="text-center space-y-2">
-                    <span class="text-xs font-extrabold text-amber-400 tracking-widest uppercase">Quantifiable Impact</span>
-                    <h2 class="text-3xl font-black text-white">Enterprise ROI Calculator</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="space-y-6">
-                        <div>
-                            <div class="flex justify-between text-sm font-bold text-slate-300 mb-2">
-                                <span>Monthly Inbound Executive Calls:</span>
-                                <span id="callVolumeVal" class="text-amber-400 font-mono">1,500</span>
-                            </div>
-                            <input type="range" id="callVolume" min="500" max="10000" step="500" value="1500" oninput="calculateROI()" class="w-full accent-amber-400 bg-black/50 h-2 rounded-lg">
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between text-sm font-bold text-slate-300 mb-2">
-                                <span>Average Deal Value ($):</span>
-                                <span id="dealVal" class="text-amber-400 font-mono">$25,000</span>
-                            </div>
-                            <input type="range" id="dealValue" min="5000" max="250000" step="5000" value="25000" oninput="calculateROI()" class="w-full accent-amber-400 bg-black/50 h-2 rounded-lg">
-                        </div>
-                    </div>
-
-                    <div class="bg-black/70 p-6 rounded-2xl border gold-border-glow text-center space-y-4">
-                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Projected Annual Savings & Revenue</span>
-                        <div id="annualROI" class="text-4xl font-black gold-gradient-text">$294,000 / year</div>
-                        <p class="text-xs text-slate-400">Calculated from 85% receptionist cost reduction + 12% after-hours lead recovery.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECURITY GATE CARD -->
-        <section id="pricing" class="scroll-mt-24 bg-garfield-panel p-8 rounded-3xl border border-white/10 shadow-comic flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-5">
-                <div class="w-14 h-14 rounded-2xl bg-amber-400/20 border border-amber-400/40 text-amber-300 flex items-center justify-center text-3xl font-bold">
-                    🔐
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-white">Enterprise VIP Security Access Gate</h3>
-                    <p class="text-xs text-slate-400 mt-1">
-                        Enter your Gumroad VIP License Key or Demo Keys (<code class="text-amber-300 font-mono">garfield</code> / <code class="text-amber-300 font-mono">lasagna</code>) to unlock workspace tools.
-                    </p>
-                </div>
-            </div>
-
-            <div class="w-full md:w-auto flex items-center gap-3">
-                <input type="password" id="securityPassInput" placeholder="Enter License Key..." class="w-full md:w-64 px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white font-mono text-xs focus:border-amber-400 focus:outline-none">
-                <button onclick="validateSecurityKey()" id="unlockBtn" class="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 text-black font-extrabold text-xs px-6 py-3 rounded-xl shadow-gold-glow transition-all whitespace-nowrap uppercase tracking-wider">
-                    Unlock VIP Gate
-                </button>
-            </div>
-        </section>
-
     </main>
 
     <!-- Footer -->
@@ -355,193 +132,34 @@
                 <span class="font-bangers text-xl text-amber-400">GARFIELD AI EXECUTIVE SaaS</span>
                 <p class="text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</p>
             </div>
-
             <div class="flex items-center gap-6 text-xs text-slate-400 font-semibold">
-                <a href="https://discord.com/invite/hope-for-broken-hearts-875258067166580737" target="_blank" class="hover:text-amber-400 transition-colors">Garfield Lounge Discord</a>
-                <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="hover:text-amber-400 transition-colors">Gumroad Store</a>
+                <a href="sandbox.html" class="hover:text-amber-400">Sandbox</a>
+                <a href="hooks.html" class="hover:text-amber-400">Hooks</a>
+                <a href="roi.html" class="hover:text-amber-400">ROI</a>
+                <a href="pricing.html" class="hover:text-amber-400">Pricing</a>
             </div>
         </div>
     </footer>
 
-    <!-- Interactive Script & Hook Execution Engine -->
     <script>
-        // Master Database of 10,000+ Industry Conversation Hooks
-        const hookCategories = {
-            wealth: [
-                { hook: "Direct Escrow Routing (> $500K)", pattern: "Detects escrow transfer -> Direct bridge to Managing Director line", prompt: "Hello, this is Director Marcus. I need immediate priority routing for our multi-million dollar corporate escrow transfer.", response: "Director Marcus, initializing zero-latency secure handoff to your private wealth manager right now.", category: "Private Wealth" },
-                { hook: "Portfolio Security Verification", pattern: "Multi-factor voice biometric verification for portfolio balance inquiries", prompt: "Good afternoon, requesting a confidential portfolio valuation and liquidity status update.", response: "Voice biometric verified. Accessing private portfolio ledger now.", category: "Private Wealth" },
-                { hook: "After-Hours Liquidity Event Intake", pattern: "Captures asset acquisition terms for morning briefing", prompt: "We are closing a $12M equity deal tonight and need immediate legal escrow confirmation.", response: "Recorded. Your dedicated deal counsel has been notified via priority SMS.", category: "Private Wealth" }
-            ],
-            luxury: [
-                { hook: "Gulfstream Charter Priority Dispatch", pattern: "Matches tail number request -> Instant Flight Coordinator Dispatch", prompt: "I require a private Gulfstream G700 charter from Taipei to Tainan with custom lasagna catering.", response: "Private flight charter confirmed with gourmet catering. Flight coordinator notified.", category: "Luxury Travel" },
-                { hook: "Superyacht Berth Harbour Dispatch", pattern: "Correlates arrival timestamp with harbour master API", prompt: "Our 60-meter yacht is docking in 30 minutes; prepare private ground transport.", response: "Berth allocated and chauffeured limousine confirmed at dockside.", category: "Luxury Travel" },
-                { hook: "Hypercar White-Glove Transport", pattern: "Automates VIP logistics for high-value vehicle deliveries", prompt: "Enquiring about enclosed transport for our newly acquired Bugatti.", response: "Logistics team dispatched with climate-controlled enclosed carrier.", category: "Luxury Automotive" }
-            ],
-            medical: [
-                { hook: "Emergency Surgical Suite Reservation", pattern: "Direct patch to chief medical officer on call", prompt: "Urgent surgical suite reservation requested for VIP client.", response: "Patching directly to Chief Medical Officer on call now.", category: "Concierge Medical" },
-                { hook: "Executive Health Assessment Intake", pattern: "HIPAA-compliant confidential medical screening", prompt: "Scheduling full executive health diagnostic suite for next Monday.", response: "Confidential appointment booked with executive medical director.", category: "Concierge Medical" }
-            ],
-            csuite: [
-                { hook: "Series C M&A Board Bridge", pattern: "Bypasses IVR -> Direct bridge to Managing Partner", prompt: "Urgent: Connect me directly to the managing director regarding our Series C board acquisition.", response: "Connecting you directly to Managing Director's private line.", category: "C-Suite Direct" },
-                { hook: "Crisis PR Escalation Dispatch", pattern: "Pings corporate communications team on Twilio/Slack", prompt: "Initiating emergency executive PR response protocol.", response: "PR Director and Crisis Team alerted immediately.", category: "C-Suite Direct" }
-            ]
-        };
-
-        let currentHooks = [];
-
-        function renderHooks(category = 'all') {
-            const grid = document.getElementById('hookDisplayGrid');
-            if (!grid) return;
-
-            currentHooks = [];
-            if (category === 'all') {
-                Object.values(hookCategories).forEach(arr => currentHooks.push(...arr));
-            } else if (hookCategories[category]) {
-                currentHooks = hookCategories[category];
-            }
-
-            let html = "";
-            currentHooks.forEach((h, idx) => {
-                html += `
-                    <div onclick="executeHook(${idx})" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover:border-amber-400 hover:scale-[1.02] transition-all cursor-pointer group flex flex-col justify-between gap-3 shadow-lg">
-                        <div>
-                            <div class="flex items-center justify-between text-[10px] font-mono">
-                                <span class="bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded border border-amber-400/30 font-bold">HOOK #${idx + 1}</span>
-                                <span class="text-slate-400 group-hover:text-amber-300 transition-colors">${h.category}</span>
-                            </div>
-                            <h4 class="font-bold text-white text-sm mt-2 group-hover:text-amber-300 transition-colors">${h.hook}</h4>
-                            <p class="text-xs font-mono text-slate-400 mt-1 leading-relaxed">${h.pattern}</p>
-                        </div>
-                        <div class="text-[10px] text-amber-400 font-mono flex items-center justify-between pt-2 border-t border-white/10">
-                            <span><i class="fa-solid fa-hand-pointer"></i> Click To Test</span>
-                            <span class="text-emerald-400"><i class="fa-solid fa-bolt"></i> &lt; 150ms</span>
-                        </div>
-                    </div>
-                `;
-            });
-
-            grid.innerHTML = html;
-        }
-
-        function executeHook(index) {
-            const item = currentHooks[index];
-            if (!item) return;
-
-            const input = document.getElementById('vipCallerInput');
-            const resultBox = document.getElementById('vipResultBox');
-            const badge = document.getElementById('vipStatusBadge');
-
-            if (input) input.value = item.prompt;
-
-            if (badge) {
-                badge.className = "bg-amber-400/20 text-amber-300 text-[10px] font-bold px-2.5 py-0.5 rounded border border-amber-400/40";
-                badge.innerText = `HOOK #${index + 1} EXECUTED`;
-            }
-
-            if (resultBox) {
-                resultBox.innerHTML = `
-                    <p class="text-amber-300 font-bold">💎 Garfield VIP Agent: "${item.response}"</p>
-                    <p class="text-slate-400 mt-1">Matched Hook Pattern: <span class="text-amber-300 font-bold">${item.hook}</span></p>
-                    <p class="text-slate-400">Category: <span class="text-emerald-400">${item.category}</span></p>
-                    <p class="text-slate-500 text-[10px] mt-2 font-mono bg-black/60 p-2 rounded border border-white/10">Payload: { hookId: ${index + 1}, status: "SUCCESS", latency: "112ms" }</p>
-                `;
-            }
-
-            // Scroll down to sandbox console for immediate view
-            const sandbox = document.getElementById('sandbox');
-            if (sandbox) sandbox.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function filterHooks() {
-            const sel = document.getElementById('hookCategorySelect').value;
-            renderHooks(sel);
-        }
-
-        function runVipCallSimulation() {
-            const promptText = document.getElementById('vipCallerInput').value;
-            const badge = document.getElementById('vipStatusBadge');
-            const resultBox = document.getElementById('vipResultBox');
-
-            if (badge) {
-                badge.className = "bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2.5 py-0.5 rounded border border-emerald-500/40";
-                badge.innerText = "CUSTOM PROMPT PROCESSED";
-            }
-
-            if (resultBox) {
-                resultBox.innerHTML = `
-                    <p class="text-emerald-400 font-bold">💎 Garfield VIP Agent: "Processing request: '${promptText.substring(0, 50)}...'"</p>
-                    <p class="text-slate-400 mt-1">Action: <span class="text-emerald-300 font-bold">Dispatched to Vapi Speech Engine</span></p>
-                `;
-            }
-        }
-
-        function calculateROI() {
-            const volume = parseInt(document.getElementById('callVolume').value);
-            const dealVal = parseInt(document.getElementById('dealValue').value);
-
-            document.getElementById('callVolumeVal').innerText = volume.toLocaleString();
-            document.getElementById('dealVal').innerText = `$${dealVal.toLocaleString()}`;
-
-            const laborSavings = volume * 10; 
-            const convertedDeals = Math.floor((volume * 0.04) * dealVal * 0.08); 
-            const annualTotal = (laborSavings + convertedDeals) * 12;
-
-            document.getElementById('annualROI').innerText = `$${annualTotal.toLocaleString()} / year`;
-        }
-
-        // Background Particle Engine
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
-
         const particles = [];
-        for (let i = 0; i < 180; i++) {
-            particles.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.4,
-                vy: (Math.random() - 0.5) * 0.4,
-                size: Math.random() * 2 + 1,
-                color: '#D4AF37'
-            });
-        }
-
-        function animateParticles() {
+        for (let i = 0; i < 150; i++) particles.push({ x: Math.random() * width, y: Math.random() * height, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, size: Math.random() * 2 + 1, color: '#D4AF37' });
+        function animate() {
             ctx.clearRect(0, 0, width, height);
             particles.forEach(p => {
-                p.x += p.vx;
-                p.y += p.vy;
-                if (p.x < 0) p.x = width;
-                if (p.x > width) p.x = 0;
-                if (p.y < 0) p.y = height;
-                if (p.y > height) p.y = 0;
-
-                ctx.fillStyle = p.color;
-                ctx.globalAlpha = 0.18;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0) p.x = width; if (p.x > width) p.x = 0;
+                if (p.y < 0) p.y = height; if (p.y > height) p.y = 0;
+                ctx.fillStyle = p.color; ctx.globalAlpha = 0.15;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
             });
-            requestAnimationFrame(animateParticles);
+            requestAnimationFrame(animate);
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            renderHooks();
-            animateParticles();
-            calculateROI();
-        });
-
-        function validateSecurityKey() {
-            const key = document.getElementById('securityPassInput').value.trim();
-            if (key === 'garfield' || key === 'lasagna' || key.length >= 8) {
-                alert("Security Access Unlocked!");
-            } else {
-                alert("Invalid Key. Use demo keys 'garfield' or 'lasagna'.");
-            }
-        }
-
-        function feedLasagna() { alert("Refueled VIP Concierge!"); }
+        animate();
     </script>
 </body>
 </html>
