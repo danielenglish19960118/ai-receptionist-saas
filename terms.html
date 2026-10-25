@@ -3,35 +3,265 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms of Service - AI Receptionist SaaS</title>
+  <title>Privacy Policy | Garfield AI Executive SaaS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 2rem; background-color: #f9f9f9; }
-    .container { background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-    h1 { color: #5865F2; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; }
-    h2 { color: #2c2f33; margin-top: 1.5rem; }
-    p, li { color: #4f545c; }
-    .footer { margin-top: 2rem; text-align: center; font-size: 0.85rem; color: #747f8d; }
+    :root {
+      --bg-color: #050507;
+      --card-bg: #121216;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #F4F4F5;
+      --text-secondary: #A1A1AA;
+      --accent-gold: #D4AF37;
+      --accent-gold-glow: rgba(212, 175, 55, 0.15);
+      --accent-emerald: #10B981;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      color: var(--text-primary);
+      background-color: var(--bg-color);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 1.5rem;
+    }
+
+    .container {
+      max-width: 880px;
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 3.5rem;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-gold);
+      background: var(--accent-gold-glow);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+      margin-bottom: 0.75rem;
+    }
+
+    .last-updated {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .intro-text {
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1.1rem;
+      background: var(--accent-gold);
+      border-radius: 2px;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      padding-left: 0.5rem;
+    }
+
+    li {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 0.85rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--accent-gold);
+      font-size: 0.75rem;
+      top: 0.1rem;
+    }
+
+    li strong {
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .highlight-box p {
+      color: var(--accent-emerald);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    .contact-card strong {
+      color: var(--accent-gold);
+    }
+
+    .footer {
+      margin-top: 3.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .footer a {
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 2rem 1.5rem; border-radius: 20px; }
+      h1 { font-size: 2rem; }
+      .footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Terms of Service</h1>
-    <p>Last updated: October 23, 2026</p>
-    
-    <h2>1. Acceptance of Terms</h2>
-    <p>Welcome to AI Receptionist SaaS (the "Service"). By adding our bot to your Discord server or using our Service, you agree to be bound by these Terms of Service.</p>
-    
-    <h2>2. Use of Service & Restrictions</h2>
-    <p>The Service provides AI-powered reception and automated reply support. Users must not use the Service to violate Discord's Community Guidelines, engage in illegal activities, fraud, or distribute malicious content.</p>
-    
-    <h2>3. Modifications & Termination</h2>
-    <p>We reserve the right to modify, suspend, or terminate the Service or these terms at any time without prior individual notice.</p>
-    
-    <h2>4. Disclaimer</h2>
-    <p>The Service is provided on an "as is" and "as available" basis without warranties of any kind, whether express or implied, regarding the accuracy of AI-generated content.</p>
-    
+    <div class="header-badge">Enterprise Compliance Standard</div>
+    <h1>Privacy Policy</h1>
+    <div class="last-updated">Last Updated: October 26, 2026 &bull; Effective Date: Immediate</div>
+
+    <p class="intro-text">At <strong>Garfield AI Executive Inc.</strong> ("Company", "we", "us", or "our"), safeguarding corporate privacy and security is foundational to our enterprise voice telephony and autonomous SaaS suite. This Privacy Policy discloses our data governance practices for our web platform, Vapi WebRTC telephony edge, and Discord integrations.</p>
+
+    <h2>1. Information We Collect</h2>
+    <p>We strictly adhere to a data minimization protocol, collecting only necessary telemetry and operational inputs required for service fulfillment:</p>
+    <ul>
+      <li><strong>Platform & Account Identifiers:</strong> Discord User IDs, Guild (Server) IDs, Channel IDs, Full Name, and Corporate Business Email addresses.</li>
+      <li><strong>Voice & Telephony Streams:</strong> Temporary WebRTC speech-to-speech audio tokens processed via sub-150ms Vapi Edge nodes. Audio inputs are strictly processed under Zero-Data-Retention (ZDR) agreements unless explicit cloud logging is requested by enterprise clients.</li>
+      <li><strong>Support & Interactivity Logs:</strong> Text commands, P1-P3 customer support ticket descriptions, and parameters submitted to our autonomous B2B lead generation bot.</li>
+      <li><strong>Licensing & Billing Tokens:</strong> Encrypted Gumroad license verification tokens. Payment card handling is offloaded entirely to Stripe and Gumroad; raw financial credentials never touch our servers.</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p>🛡️ Zero Data Sale Commitment: We never sell, rent, monetize, or trade your personal, corporate, or voice interaction data to any third party under any circumstances.</p>
+    </div>
+
+    <h2>2. Enterprise Purpose & Data Processing</h2>
+    <p>Your data is processed exclusively to deliver high-performance executive automation, including:</p>
+    <ul>
+      <li>Processing sub-150ms real-time voice concierge calls and WebRTC speech synthesis.</li>
+      <li>Validating enterprise VIP licensing and gating access to our 100 standalone child modules.</li>
+      <li>Dispatching high-priority P1-P3 support tickets and routing instant Webhook alerts to Discord engineering queues.</li>
+      <li>Running autonomous target prospecting, lead scoring, and ROI financial calculations.</li>
+      <li>Maintaining SOC 2 Type II compliance standards and platform perimeter security.</li>
+    </ul>
+
+    <h2>3. Infrastructure & Service Processors</h2>
+    <p>We share necessary transactional tokens with compliant cloud infrastructure providers bound by non-disclosure agreements:</p>
+    <ul>
+      <li><strong>Vercel Cloud:</strong> Global serverless hosting, edge routing, and deployment static infrastructure.</li>
+      <li><strong>Vapi AI Telephony:</strong> Ultra-low latency voice edge pipeline and WebRTC connection handler.</li>
+      <li><strong>Gumroad & Stripe:</strong> License key validation, billing verification, and tier management.</li>
+      <li><strong>Discord Operations:</strong> Real-time event notifications and server webhook integration.</li>
+    </ul>
+
+    <h2>4. Security Standards & Encryption</h2>
+    <p>We enforce bank-grade security protocols across all systems, including <strong>AES-256 encryption at rest</strong>, <strong>TLS 1.3 in transit</strong>, isolated multi-tenant RBAC permissions, and continuous perimeter auditing to protect against unauthorized access, loss, or alteration.</p>
+
+    <h2>5. User Control, Removal & GDPR/CCPA Rights</h2>
+    <p>Regardless of jurisdiction, all users retain absolute governance over their stored records:</p>
+    <ul>
+      <li><strong>Bot Disconnection:</strong> Removing our bot from your Discord Guild immediately terminates all active message data transmission.</li>
+      <li><strong>Data Deletion Requests:</strong> You possess the absolute right to request complete deletion of your support ticket history, user ID logs, and licensing tokens.</li>
+    </ul>
+
+    <h2>6. Contact & Data Protection Desk</h2>
+    <p>For compliance inquiries, formal GDPR/CCPA data erasure requests, or SOC 2 audit reports, contact our compliance desk:</p>
+    <div class="contact-card">
+      <strong>Data Protection Officer:</strong> Garfield Enterprise Inc.<br>
+      <strong>Compliance Email:</strong> privacy@garfield-ai-executive.com<br>
+      <strong>Legal Desk:</strong> Tainan City & Global Operations
+    </div>
+
     <div class="footer">
-      &copy; 2026 AI Receptionist SaaS. All rights reserved.
+      <span>&copy; 2026 Garfield AI Executive Inc. All rights reserved.</span>
+      <a href="/">Return to Dashboard ↗</a>
     </div>
   </div>
 </body>
