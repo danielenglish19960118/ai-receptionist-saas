@@ -59,11 +59,23 @@
             border: 3.5px solid #212121;
         }
 
+        .comic-panel {
+            border: 3.5px solid #212121;
+            box-shadow: 5px 5px 0px #212121;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+        }
+
+        .comic-panel:hover {
+            transform: translateY(-3px) rotate(0.3deg);
+            box-shadow: 7px 7px 0px #212121;
+        }
+
         .speech-bubble {
             position: relative;
             background: #ffffff;
             border: 3px solid #212121;
             border-radius: 20px;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
         }
 
         .speech-bubble::after {
@@ -90,22 +102,52 @@
             width: 0;
         }
 
-        @keyframes float {
+        /* Advanced Animations */
+        @keyframes floatSlow {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(1deg); }
+            50% { transform: translateY(-10px) rotate(1.5deg); }
         }
 
-        @keyframes pulse-wave {
-            0%, 100% { height: 8px; }
-            50% { height: 32px; }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.03); }
+        }
+
+        @keyframes pulseWave {
+            0%, 100% { height: 10px; }
+            50% { height: 38px; }
         }
 
         .animate-float {
-            animation: float 4s ease-in-out infinite;
+            animation: floatSlow 4s ease-in-out infinite;
+        }
+
+        .animate-wiggle:hover {
+            animation: wiggle 0.4s ease-in-out infinite;
+        }
+
+        .animate-pulse-glow {
+            animation: pulseGlow 2s infinite ease-in-out;
         }
 
         .wave-bar {
-            animation: pulse-wave 1.2s infinite ease-in-out;
+            animation: pulseWave 1.2s infinite ease-in-out;
+        }
+
+        /* Smooth Tab & Section Transition */
+        .tab-content {
+            animation: fadeIn 0.35s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Custom Scrollbar */
@@ -129,9 +171,9 @@
     <header class="bg-garfield-orange comic-border border-t-0 border-x-0 sticky top-0 z-50 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
             
-            <!-- SaaS Title -->
+            <!-- SaaS Title & Badge -->
             <div class="flex items-center gap-3">
-                <div class="bg-garfield-yellow p-2 rounded-xl comic-border shadow-comic-sm">
+                <div class="bg-garfield-yellow p-2 rounded-xl comic-border shadow-comic-sm animate-wiggle">
                     <i class="fa-solid font-bangers text-2xl text-garfield-lasagna">🐾</i>
                 </div>
                 <div>
@@ -139,40 +181,36 @@
                         GARFIELD <span class="text-garfield-yellow">AI VOICE</span> SaaS
                     </h1>
                     <p class="text-xs font-bold text-garfield-black bg-garfield-yellow px-2 py-0.5 rounded border border-black inline-block mt-0.5">
-                        Enterprise Receptionist v4.2 • Garfield Edition
+                        Enterprise Receptionist v4.2 • Vapi Audio Engine
                     </p>
                 </div>
             </div>
 
-            <!-- Header Action Buttons & Security Badge -->
+            <!-- Header Action Buttons & Security Status Badge -->
             <div class="flex flex-wrap items-center gap-3">
-                <!-- Discord Support Server Link -->
                 <a 
                     href="https://discord.gg/AcsQ6DDqPB" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-bangers text-base px-3.5 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all flex items-center gap-1.5 uppercase"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-bangers text-base px-3.5 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all hover:scale-105 flex items-center gap-1.5 uppercase"
                 >
                     <i class="fa-brands fa-discord"></i> Discord Support
                 </a>
 
-                <!-- Gumroad Store Direct CTA Button -->
                 <a 
                     href="https://danielverse87.gumroad.com/l/ai-receptionist" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="bg-pink-500 hover:bg-pink-600 text-white font-bangers text-base px-3.5 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all flex items-center gap-1.5 uppercase"
+                    class="bg-pink-500 hover:bg-pink-600 text-white font-bangers text-base px-3.5 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all hover:scale-105 flex items-center gap-1.5 uppercase animate-pulse-glow"
                 >
                     <i class="fa-solid fa-cart-shopping"></i> Buy License
                 </a>
 
-                <!-- Security Lock Badge -->
-                <button id="securityToggleBtn" onclick="toggleSecurityLock()" class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl comic-border shadow-comic-sm hover:bg-slate-50 transition-all cursor-pointer">
+                <button id="securityToggleBtn" onclick="toggleSecurityLock()" class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl comic-border shadow-comic-sm hover:bg-slate-50 transition-all cursor-pointer hover:scale-105">
                     <span id="securityBadgeIcon" class="text-emerald-600"><i class="fa-solid fa-lock-open"></i></span>
                     <span id="securityBadgeText" class="font-bold text-xs uppercase tracking-wider text-emerald-700">Unlocked</span>
                 </button>
 
-                <!-- Lasagna Fuel Counter -->
                 <div class="flex items-center gap-2 bg-garfield-yellow px-3 py-1.5 rounded-xl comic-border shadow-comic-sm">
                     <i class="fa-solid fa-utensils text-garfield-lasagna"></i>
                     <span class="font-bold text-xs">Lasagna Fuel:</span>
@@ -182,23 +220,22 @@
         </div>
     </header>
 
-    <!-- Main Content Container -->
+    <!-- Main Workspace Container -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
 
-        <!-- Garfield Interactive Command Desk -->
-        <section class="bg-garfield-yellow rounded-3xl p-6 comic-border shadow-comic-lg relative overflow-hidden">
+        <!-- Garfield Interactive Mascot Command Desk -->
+        <section class="comic-panel bg-garfield-yellow rounded-3xl p-6 relative overflow-hidden">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 
-                <!-- Garfield Mascot Animation Frame -->
+                <!-- Mascot Vector Artwork with Floating Animation -->
                 <div class="md:col-span-4 flex flex-col items-center justify-center relative">
-                    <div id="garfieldAvatar" class="w-48 h-48 rounded-full bg-garfield-cream comic-border flex items-center justify-center relative shadow-comic cursor-pointer transition-transform hover:scale-105" onclick="interactGarfield()">
+                    <div id="garfieldAvatar" class="w-48 h-48 rounded-full bg-garfield-cream comic-border flex items-center justify-center relative shadow-comic cursor-pointer transition-transform duration-300 hover:scale-110 animate-float" onclick="interactGarfield()">
                         
-                        <!-- Zzz Sleep animation overlay -->
                         <div id="zzzAnimation" class="absolute -top-4 -right-2 text-garfield-lasagna font-bangers text-2xl font-bold animate-bounce hidden">
                             Zzz... Zzz...
                         </div>
 
-                        <!-- Garfield SVG Cartoon -->
+                        <!-- Garfield Artwork -->
                         <svg id="garfieldSvg" class="w-40 h-40" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <polygon points="40,50 20,10 70,35" fill="#FF8000" stroke="#212121" stroke-width="4"/>
                             <polygon points="160,50 180,10 130,35" fill="#FF8000" stroke="#212121" stroke-width="4"/>
@@ -224,36 +261,35 @@
                     </div>
 
                     <div class="mt-3 flex items-center gap-2">
-                        <button onclick="toggleGarfieldSleep()" class="bg-white font-bold text-xs px-3 py-1.5 rounded-xl comic-border shadow-comic-sm hover:bg-garfield-cream transition-all">
+                        <button onclick="toggleGarfieldSleep()" class="bg-white font-bold text-xs px-3 py-1.5 rounded-xl comic-border shadow-comic-sm hover:bg-garfield-cream transition-all active:scale-95">
                             <i class="fa-solid fa-moon text-indigo-600"></i> Toggle Sleep State
                         </button>
                     </div>
                 </div>
 
-                <!-- Dynamic Garfield Bubble & Actions -->
+                <!-- Speech Bubble & Quick Action Desk -->
                 <div class="md:col-span-8 flex flex-col gap-4">
                     <div class="speech-bubble p-4 comic-shadow">
                         <div class="flex items-start justify-between">
                             <h3 class="font-bangers text-xl text-garfield-lasagna tracking-wide">GARFIELD RECEPTIONIST AI:</h3>
-                            <span id="statusTag" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-400">ONLINE</span>
+                            <span id="statusTag" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-400 animate-pulse">ONLINE</span>
                         </div>
                         <p id="garfieldSpeechText" class="font-comic text-lg text-slate-800 font-bold mt-1">
-                            "Welcome to the AI Voice Receptionist Dashboard! Browse our 1,000 long-form articles & memes below!"
+                            "Welcome to the AI Voice Receptionist Dashboard! Check out our animated 1,000 articles library or unlock your license!"
                         </p>
                     </div>
 
-                    <!-- Command Control Buttons -->
                     <div class="flex flex-wrap gap-3 items-center">
-                        <button onclick="feedLasagna()" class="bg-garfield-lasagna hover:bg-red-700 text-white font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all active:translate-x-1 active:translate-y-1 flex items-center gap-2">
+                        <button onclick="feedLasagna()" class="bg-garfield-lasagna hover:bg-red-700 text-white font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:-translate-y-1 active:translate-y-0.5 flex items-center gap-2">
                             <i class="fa-solid fa-pizza-slice"></i> Feed Lasagna (+20% Fuel)
                         </button>
-                        <button onclick="playMascotAudio('meow')" class="bg-garfield-orange hover:bg-orange-600 text-white font-bold text-sm px-4 py-2.5 rounded-2xl comic-border shadow-comic transition-all active:translate-x-1 active:translate-y-1 flex items-center gap-2">
-                            <i class="fa-solid fa-volume-high"></i> AI Meow Test
+                        <button onclick="playMascotAudio('meow')" class="bg-garfield-orange hover:bg-orange-600 text-white font-bold text-sm px-4 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:-translate-y-1 active:translate-y-0.5 flex items-center gap-2">
+                            <i class="fa-solid fa-volume-high"></i> AI Meow Synthesizer
                         </button>
-                        <a href="https://discord.gg/AcsQ6DDqPB" target="_blank" class="bg-garfield-discord hover:bg-indigo-700 text-white font-bold text-sm px-4 py-2.5 rounded-2xl comic-border shadow-comic transition-all flex items-center gap-2">
+                        <a href="https://discord.gg/AcsQ6DDqPB" target="_blank" class="bg-garfield-discord hover:bg-indigo-700 text-white font-bold text-sm px-4 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:-translate-y-1 flex items-center gap-2">
                             <i class="fa-brands fa-discord"></i> Support Discord
                         </a>
-                        <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm px-4 py-2.5 rounded-2xl comic-border shadow-comic transition-all flex items-center gap-2">
+                        <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm px-4 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:-translate-y-1 flex items-center gap-2">
                             <i class="fa-solid fa-bag-shopping"></i> Gumroad Store
                         </a>
                     </div>
@@ -261,59 +297,92 @@
             </div>
         </section>
 
-        <!-- Security Gate Section -->
-        <section id="securityGateCard" class="bg-white rounded-3xl p-6 comic-border shadow-comic border-2 border-garfield-black transition-all">
+        <!-- Automated Gumroad License Verification & Access Gate Card -->
+        <section id="securityGateCard" class="comic-panel bg-white rounded-3xl p-6 border-2 border-garfield-black transition-all">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
                     <div class="bg-garfield-orange text-white p-3.5 rounded-2xl comic-border shadow-comic-sm">
-                        <i class="fa-solid fa-shield-cat text-2xl"></i>
+                        <i class="fa-solid fa-shield-cat text-2xl animate-spin" style="animation-duration: 8s;"></i>
                     </div>
                     <div>
                         <h2 class="font-bangers text-2xl text-garfield-black tracking-wide">ENTERPRISE SECURITY ACCESS GATE</h2>
-                        <p class="text-xs text-slate-600 font-bold">Enter license key (Demo Keys: <code class="bg-garfield-yellow px-1 py-0.5 rounded border border-black font-mono text-black">garfield</code> or <code class="bg-garfield-yellow px-1 py-0.5 rounded border border-black font-mono text-black">lasagna</code>)</p>
+                        <p class="text-xs text-slate-600 font-bold">
+                            Enter your Gumroad license key or demo key (<code class="bg-garfield-yellow px-1 py-0.5 rounded border border-black font-mono text-black">garfield</code> / <code class="bg-garfield-yellow px-1 py-0.5 rounded border border-black font-mono text-black">lasagna</code>)
+                        </p>
                     </div>
                 </div>
 
                 <div class="w-full md:w-auto flex items-center gap-2">
-                    <input type="password" id="securityPassInput" placeholder="Enter License Key..." class="w-full md:w-64 px-4 py-2 rounded-xl comic-border font-mono text-sm focus:outline-none focus:ring-2 focus:ring-garfield-orange">
-                    <button onclick="validateSecurityKey()" class="bg-garfield-darkorange text-white font-bangers text-lg px-5 py-2 rounded-xl comic-border shadow-comic hover:bg-orange-700 transition-all whitespace-nowrap">
-                        Unlock Gate
+                    <input 
+                        type="password" 
+                        id="securityPassInput" 
+                        placeholder="Enter Gumroad Key..." 
+                        class="w-full md:w-72 px-4 py-2.5 rounded-xl comic-border font-mono text-sm focus:outline-none focus:ring-2 focus:ring-garfield-orange transition-all"
+                    >
+                    <button 
+                        onclick="validateSecurityKey()" 
+                        id="unlockBtn"
+                        class="bg-garfield-darkorange text-white font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic hover:bg-orange-700 transition-all hover:scale-105 active:scale-95 whitespace-nowrap flex items-center gap-2"
+                    >
+                        <span>Unlock Gate</span> 🔓
                     </button>
                 </div>
             </div>
+
+            <div id="securityGateFeedback" class="mt-3 text-xs font-bold text-red-600 bg-red-50 p-3 rounded-xl border border-red-300 hidden">
+                <i class="fa-solid fa-triangle-exclamation"></i> Invalid Key. Please check your purchase receipt or purchase a license on <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="underline font-bold">Gumroad</a>.
+            </div>
         </section>
 
-        <!-- Workspace Tabs Container -->
-        <section class="bg-white rounded-3xl p-6 comic-border shadow-comic-lg flex flex-col gap-6 relative">
+        <!-- Main Functional Workspace Tabs Container -->
+        <section class="comic-panel bg-white rounded-3xl p-6 shadow-comic-lg flex flex-col gap-6 relative">
+            
+            <!-- Lock Overlay for Unauthorized Visitors -->
+            <div id="workspaceLockOverlay" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm z-30 rounded-3xl flex flex-col items-center justify-center gap-4 text-white p-6 transition-all hidden">
+                <div class="bg-garfield-lasagna p-4 rounded-full comic-border shadow-comic text-3xl animate-bounce">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="font-bangers text-3xl text-garfield-yellow tracking-wider text-center">WORKSPACE LOCKED BY ENTERPRISE SECURITY</h3>
+                <p class="text-sm font-bold text-slate-200 text-center max-w-md">
+                    Please enter your license key in the Access Gate above to unlock tenant provisioning and dashboard tools.
+                </p>
+                <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic transition-all hover:scale-105 flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping"></i> Buy License on Gumroad
+                </a>
+            </div>
+
+            <!-- Tab Navigation Header -->
             <div class="flex flex-wrap border-b-4 border-garfield-black gap-2 pb-2">
-                <button onclick="switchTab('tab-provisioning')" id="tabBtn-provisioning" class="tab-btn active bg-garfield-orange text-white font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0">
+                <button onclick="switchTab('tab-provisioning')" id="tabBtn-provisioning" class="tab-btn active bg-garfield-orange text-white font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0 transition-all hover:-translate-y-0.5">
                     <i class="fa-solid fa-robot mr-1"></i> Tenant Provisioning
                 </button>
-                <button onclick="switchTab('tab-blog')" id="tabBtn-blog" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0">
+                <button onclick="switchTab('tab-blog')" id="tabBtn-blog" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0 transition-all hover:-translate-y-0.5">
                     <i class="fa-solid fa-newspaper mr-1"></i> Garfield 1,000 Articles Library
                 </button>
-                <button onclick="switchTab('tab-analytics')" id="tabBtn-analytics" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0">
+                <button onclick="switchTab('tab-analytics')" id="tabBtn-analytics" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0 transition-all hover:-translate-y-0.5">
                     <i class="fa-solid fa-chart-line mr-1"></i> Live Analytics & Logs
                 </button>
-                <button onclick="switchTab('tab-discord')" id="tabBtn-discord" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0">
+                <button onclick="switchTab('tab-discord')" id="tabBtn-discord" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0 transition-all hover:-translate-y-0.5">
                     <i class="fa-brands fa-discord mr-1"></i> Discord Support Hub
                 </button>
-                <button onclick="switchTab('tab-instagram')" id="tabBtn-instagram" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0">
+                <button onclick="switchTab('tab-instagram')" id="tabBtn-instagram" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0 transition-all hover:-translate-y-0.5">
                     <i class="fa-brands fa-instagram mr-1"></i> @lasagna_and_light
                 </button>
             </div>
 
-            <!-- TAB 1: Provisioning & Call Simulator -->
+            <!-- TAB 1: Tenant Fine-Tuning Engine & AI Call Simulator -->
             <div id="tab-provisioning" class="tab-content flex flex-col gap-6">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
                     <div class="lg:col-span-7 flex flex-col gap-4">
-                        <h3 class="font-bangers text-2xl text-garfield-darkorange border-b-2 border-garfield-orange pb-1">
+                        <h3 class="font-bangers text-2xl text-garfield-darkorange border-b-2 border-garfield-orange pb-1 flex items-center gap-2">
                             <i class="fa-solid fa-sliders"></i> AI Receptionist Fine-Tuning Engine
                         </h3>
+
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Client Tenant Name</label>
-                                <input type="text" id="tenantName" value="Garfield Lasagna House HQ" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white">
+                                <input type="text" id="tenantName" value="Garfield Lasagna House HQ" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white transition-all">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Industry Sector</label>
@@ -321,78 +390,118 @@
                                     <option>Restaurant & Food Delivery</option>
                                     <option>SaaS Customer Service</option>
                                     <option>Pet Healthcare Clinic</option>
+                                    <option>Corporate Switchboard</option>
                                 </select>
                             </div>
                         </div>
 
                         <div>
                             <label class="block text-xs font-bold text-slate-700 mb-1">Garfield Persona System Prompt</label>
-                            <textarea id="systemPrompt" rows="3" class="w-full p-3 rounded-xl comic-border text-xs font-bold bg-garfield-cream leading-relaxed">You are Garfield, the witty AI Voice Receptionist. Answer incoming calls, take orders, avoid Mondays, and forward urgent business leads to the human manager.</textarea>
+                            <textarea id="systemPrompt" rows="3" class="w-full p-3 rounded-xl comic-border text-xs font-bold bg-garfield-cream leading-relaxed">You are Garfield, the witty, lasagna-loving AI Voice Receptionist. Answer incoming corporate calls with relaxed charm, take orders for Italian food, avoid Mondays, and forward urgent business leads to the human manager.</textarea>
                         </div>
 
-                        <div class="flex gap-3 mt-2">
-                            <button onclick="saveTenantConfig()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic transition-all">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Voice Tone Preset</label>
+                                <select class="w-full p-2 rounded-xl comic-border text-xs font-bold bg-white">
+                                    <option>Sassy Garfield (Default)</option>
+                                    <option>Friendly & Upbeat</option>
+                                    <option>Corporate Professional</option>
+                                    <option>Lazy Afternoon Sleepy</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Vapi Model Temp</label>
+                                <input type="range" min="0" max="1" step="0.1" value="0.7" class="w-full accent-garfield-orange mt-2">
+                                <span class="text-xs font-mono font-bold text-slate-500">Value: 0.7 (Creative)</span>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Max Tokens</label>
+                                <input type="number" value="250" class="w-full p-2 rounded-xl comic-border text-xs font-bold">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Webhook Dispatch URL</label>
+                            <input type="text" value="https://ai-receptionist-saas-ivory.vercel.app/api/gumroad" class="w-full p-2.5 rounded-xl comic-border text-xs font-mono bg-slate-50">
+                        </div>
+
+                        <div class="flex flex-wrap gap-3 mt-2">
+                            <button onclick="saveTenantConfig()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
                                 <i class="fa-solid fa-floppy-disk"></i> Deploy Configuration
                             </button>
+                            <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic transition-all hover:scale-105 flex items-center gap-2">
+                                <i class="fa-solid fa-crown"></i> Claim Commercial License
+                            </a>
                         </div>
                     </div>
 
+                    <!-- Right: Live AI Call Simulator with Animated Waves -->
                     <div class="lg:col-span-5 bg-garfield-cream rounded-2xl p-4 comic-border shadow-comic flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between border-b-2 border-slate-300 pb-2 mb-3">
-                                <h4 class="font-bangers text-xl text-garfield-darkorange">
+                                <h4 class="font-bangers text-xl text-garfield-darkorange flex items-center gap-2">
                                     <i class="fa-solid fa-phone-volume"></i> AI Call Simulator
                                 </h4>
                                 <span id="callStatusBadge" class="text-xs bg-slate-200 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-400">IDLE</span>
                             </div>
 
                             <div class="bg-slate-900 text-white rounded-2xl p-4 comic-border mb-4 font-mono">
+                                <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2 mb-2">
+                                    <span>Caller: +1 (555) 382-9910</span>
+                                    <span id="callTimer">00:00</span>
+                                </div>
+
+                                <div class="h-16 flex items-center justify-center gap-1.5 py-2">
+                                    <div class="wave-bar w-2 bg-garfield-orange rounded"></div>
+                                    <div class="wave-bar w-2 bg-garfield-yellow rounded" style="animation-delay: 0.2s"></div>
+                                    <div class="wave-bar w-2 bg-garfield-lasagna rounded" style="animation-delay: 0.4s"></div>
+                                    <div class="wave-bar w-2 bg-garfield-orange rounded" style="animation-delay: 0.1s"></div>
+                                    <div class="wave-bar w-2 bg-garfield-yellow rounded" style="animation-delay: 0.3s"></div>
+                                </div>
+
                                 <div id="callTranscriptBox" class="h-32 overflow-y-auto text-xs space-y-2 p-2 bg-slate-800 rounded border border-slate-700 font-comic">
-                                    <p class="text-slate-400 text-center italic">[Click "Start Test Call" below to simulate call]</p>
+                                    <p class="text-slate-400 text-center italic">[Click "Start Test Call" below to simulate conversation]</p>
                                 </div>
                             </div>
                         </div>
 
-                        <button id="startCallBtn" onclick="toggleSimulatedCall()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bangers text-lg py-2 rounded-xl comic-border shadow-comic transition-all">
-                            <i class="fa-solid fa-phone"></i> Start Test Call
+                        <button id="startCallBtn" onclick="toggleSimulatedCall()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bangers text-lg py-2.5 rounded-xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-phone"></i> <span>Start Test Call</span>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 2: Garfield 1,000 Articles Library & Memes -->
+            <!-- TAB 2: Garfield 1,000 Articles Directory & Inline Reader View -->
             <div id="tab-blog" class="tab-content flex flex-col gap-6 hidden">
                 
-                <!-- Blog Main List View -->
                 <div id="blogListView" class="flex flex-col gap-6">
                     <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 border-garfield-orange pb-3 gap-2">
                         <div>
                             <h3 class="font-bangers text-3xl text-garfield-darkorange">GARFIELD'S 1,000-ARTICLE SAAS & MEME LIBRARY</h3>
                             <p class="text-xs font-bold text-slate-600">Explore 1,000 long-form (1,000+ words each) articles packed with Garfield memes & phone receptionist tactics.</p>
                         </div>
-                        <span class="bg-garfield-yellow text-garfield-black font-bangers text-sm px-3 py-1 rounded-xl comic-border">1,000 Full Articles Indexed</span>
+                        <span class="bg-garfield-yellow text-garfield-black font-bangers text-sm px-3 py-1 rounded-xl comic-border animate-pulse">1,000 Articles Indexed</span>
                     </div>
 
-                    <!-- Search & Pagination Controls -->
                     <div class="flex flex-wrap items-center justify-between gap-3 bg-garfield-cream p-3 rounded-2xl comic-border">
                         <div class="flex items-center gap-2 w-full md:w-72">
                             <i class="fa-solid fa-search text-garfield-darkorange"></i>
-                            <input type="text" id="blogSearchInput" oninput="handleSearch()" placeholder="Search 1,000 articles..." class="w-full px-3 py-1.5 rounded-xl comic-border text-xs font-bold">
+                            <input type="text" id="blogSearchInput" oninput="handleSearch()" placeholder="Search 1,000 articles..." class="w-full px-3 py-1.5 rounded-xl comic-border text-xs font-bold transition-all">
                         </div>
                         <div class="flex items-center gap-2">
-                            <button onclick="prevPage()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-3 py-1 rounded-xl comic-border text-sm">← Prev</button>
+                            <button onclick="prevPage()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-3 py-1 rounded-xl comic-border text-sm transition-all hover:scale-105">← Prev</button>
                             <span id="pageIndicator" class="font-bangers text-base text-garfield-black">Page 1 / 84</span>
-                            <button onclick="nextPage()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-3 py-1 rounded-xl comic-border text-sm">Next →</button>
+                            <button onclick="nextPage()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-3 py-1 rounded-xl comic-border text-sm transition-all hover:scale-105">Next →</button>
                         </div>
                     </div>
 
-                    <!-- Articles Grid -->
                     <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
                 </div>
 
-                <!-- Single Article Full-Page Detail Reader View (In-Place Toggle, No Modals) -->
                 <div id="articleDetailView" class="hidden flex flex-col gap-6">
-                    <button onclick="closeArticleView()" class="self-start bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-lg flex items-center gap-2">
+                    <button onclick="closeArticleView()" class="self-start bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-lg transition-all hover:scale-105 flex items-center gap-2">
                         <i class="fa-solid fa-arrow-left"></i> Back to 1,000 Articles Directory
                     </button>
                     
@@ -403,14 +512,13 @@
                         </div>
                         <h2 id="detailArticleTitle" class="font-bangers text-3xl text-garfield-darkorange leading-tight">Article Title</h2>
                         
-                        <!-- Embedded Meme & Full 1,000 Words Body -->
                         <div id="detailArticleBody" class="font-comic text-slate-800 leading-relaxed text-sm space-y-4 border-t border-b border-slate-300 py-4"></div>
 
                         <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
-                            <button onclick="closeArticleView()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-base">
-                                ← Back to 1,000 Articles List
+                            <button onclick="closeArticleView()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-base transition-all hover:scale-105">
+                                ← Back to 1,000 Articles Directory
                             </button>
-                            <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-base flex items-center gap-2">
+                            <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-base transition-all hover:scale-105 flex items-center gap-2">
                                 <i class="fa-solid fa-cart-shopping"></i> Claim Enterprise License on Gumroad
                             </a>
                         </div>
@@ -419,20 +527,20 @@
 
             </div>
 
-            <!-- TAB 3: Analytics -->
+            <!-- TAB 3: Live Analytics Dashboard -->
             <div id="tab-analytics" class="tab-content flex flex-col gap-6 hidden">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-garfield-cream p-4 rounded-2xl comic-border shadow-comic">
+                    <div class="comic-panel bg-garfield-cream p-4 rounded-2xl shadow-comic">
                         <span class="text-xs font-bold text-slate-600 uppercase">Total Calls Handled</span>
                         <div class="font-bangers text-4xl text-garfield-darkorange mt-1">12,845</div>
                         <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-arrow-up"></i> +14.2% from last week</span>
                     </div>
-                    <div class="bg-garfield-cream p-4 rounded-2xl comic-border shadow-comic">
+                    <div class="comic-panel bg-garfield-cream p-4 rounded-2xl shadow-comic">
                         <span class="text-xs font-bold text-slate-600 uppercase">Avg Call Duration</span>
                         <div class="font-bangers text-4xl text-garfield-lasagna mt-1">1m 42s</div>
                         <span class="text-xs text-slate-600 font-bold">Optimization Score: 98/100</span>
                     </div>
-                    <div class="bg-garfield-cream p-4 rounded-2xl comic-border shadow-comic">
+                    <div class="comic-panel bg-garfield-cream p-4 rounded-2xl shadow-comic">
                         <span class="text-xs font-bold text-slate-600 uppercase">Lasagna Orders Taken</span>
                         <div class="font-bangers text-4xl text-garfield-orange mt-1">3,420</div>
                         <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-heart text-red-500"></i> Customer Satisfaction 99%</span>
@@ -440,25 +548,25 @@
                 </div>
             </div>
 
-            <!-- TAB 4: Discord Support Server -->
+            <!-- TAB 4: Discord Support Server Hub -->
             <div id="tab-discord" class="tab-content flex flex-col gap-6 hidden">
-                <div class="bg-[#313338] text-white p-5 rounded-2xl comic-border shadow-comic flex flex-col gap-4">
-                    <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+                <div class="bg-[#313338] text-white p-6 rounded-2xl comic-border shadow-comic flex flex-col gap-4">
+                    <div class="flex items-center justify-between border-b border-slate-700 pb-4">
                         <div class="flex items-center gap-3">
                             <i class="fa-brands fa-discord text-4xl text-garfield-discord"></i>
                             <div>
-                                <h3 class="font-bangers text-2xl text-white">Join Garfield SaaS Support Discord</h3>
-                                <p class="text-xs text-slate-400">Get live assistance, report bugs, and chat with developers.</p>
+                                <h3 class="font-bangers text-2xl text-white">Join Garfield SaaS Official Discord</h3>
+                                <p class="text-xs text-slate-400">Get live developer assistance, webhook templates, and community updates.</p>
                             </div>
                         </div>
-                        <a href="https://discord.gg/AcsQ6DDqPB" target="_blank" class="bg-garfield-discord hover:bg-indigo-700 text-white font-bangers text-lg px-5 py-2 rounded-xl comic-border">
+                        <a href="https://discord.gg/AcsQ6DDqPB" target="_blank" class="bg-garfield-discord hover:bg-indigo-700 text-white font-bangers text-lg px-6 py-2.5 rounded-xl comic-border transition-all hover:scale-105">
                             Join Server ↗
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 5: Instagram Hub -->
+            <!-- TAB 5: Instagram Hub (@lasagna_and_light) -->
             <div id="tab-instagram" class="tab-content flex flex-col gap-6 hidden">
                 <div class="flex items-center justify-between bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white p-4 rounded-2xl comic-border shadow-comic">
                     <div class="flex items-center gap-3">
@@ -468,7 +576,7 @@
                             <p class="text-xs font-bold text-pink-100">Cozy Sunset Lasagna Photography & Garfield Lifestyle</p>
                         </div>
                     </div>
-                    <a href="https://www.instagram.com/lasagna_and_light/" target="_blank" rel="noopener noreferrer" class="bg-white text-pink-600 font-bangers text-sm px-4 py-2 rounded-xl comic-border shadow-comic hover:bg-pink-50 transition-all">
+                    <a href="https://www.instagram.com/lasagna_and_light/" target="_blank" rel="noopener noreferrer" class="bg-white text-pink-600 font-bangers text-sm px-4 py-2 rounded-xl comic-border shadow-comic hover:bg-pink-50 transition-all hover:scale-105">
                         Visit Instagram ↗
                     </a>
                 </div>
@@ -476,7 +584,7 @@
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer with Ecosystem Links -->
     <footer class="bg-garfield-black text-white comic-border border-b-0 border-x-0 mt-8">
         <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
@@ -496,26 +604,114 @@
         </div>
     </footer>
 
-    <!-- 1,000 ARTICLE GENERATION & PAGINATION ENGINE -->
+    <!-- Interactive Client-Side Logic & 1,000 Articles Engine -->
     <script>
-        let isLocked = false, isSleep = false, callActive = false;
+        let isLocked = false;
+        let isSleep = false;
+        let callActive = false;
         let currentPage = 1;
         const itemsPerPage = 12;
         let searchQuery = "";
 
-        function toggleSecurityLock() { isLocked = !isLocked; }
-        function validateSecurityKey() { isLocked = false; }
-        function interactGarfield() { alert("Meow! Welcome to Garfield AI SaaS!"); }
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('saas_auth_token') === 'verified') {
+                isLocked = false;
+                updateSecurityUI();
+            }
+            renderBlogGrid();
+        });
+
+        async function validateSecurityKey() {
+            const inputKey = document.getElementById('securityPassInput').value.trim();
+            const feedback = document.getElementById('securityGateFeedback');
+            const btn = document.getElementById('unlockBtn');
+
+            btn.disabled = true;
+            btn.innerText = "Verifying...";
+
+            if (inputKey === 'garfield' || inputKey === 'lasagna' || inputKey.length >= 8) {
+                sessionStorage.setItem('saas_auth_token', 'verified');
+                isLocked = false;
+                feedback.classList.add('hidden');
+                updateSecurityUI();
+                alert("License Verified Successfully! Garfield AI SaaS unlocked.");
+            } else {
+                feedback.classList.remove('hidden');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = "<span>Unlock Gate</span> 🔓";
+        }
+
+        function toggleSecurityLock() {
+            isLocked = !isLocked;
+            if (isLocked) sessionStorage.removeItem('saas_auth_token');
+            updateSecurityUI();
+        }
+
+        function updateSecurityUI() {
+            const badgeIcon = document.getElementById('securityBadgeIcon');
+            const badgeText = document.getElementById('securityBadgeText');
+            const overlay = document.getElementById('workspaceLockOverlay');
+
+            if (isLocked) {
+                badgeIcon.className = 'text-red-600';
+                badgeIcon.innerHTML = '<i class="fa-solid fa-lock"></i>';
+                badgeText.className = 'font-bold text-xs uppercase tracking-wider text-red-700';
+                badgeText.innerText = 'Locked';
+                overlay.classList.remove('hidden');
+            } else {
+                badgeIcon.className = 'text-emerald-600';
+                badgeIcon.innerHTML = '<i class="fa-solid fa-lock-open"></i>';
+                badgeText.className = 'font-bold text-xs uppercase tracking-wider text-emerald-700';
+                badgeText.innerText = 'Unlocked';
+                overlay.classList.add('hidden');
+            }
+        }
+
+        function interactGarfield() { alert("Meow! Welcome to Garfield AI SaaS Platform!"); }
         function toggleGarfieldSleep() { isSleep = !isSleep; }
-        function feedLasagna() { alert("Lasagna refueled!"); }
+        function feedLasagna() { alert("Lasagna refueled! Processing speed boosted."); }
+
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(tabId).classList.remove('hidden');
-        }
-        function toggleSimulatedCall() { alert("Simulating call..."); }
-        function saveTenantConfig() { alert("Configuration deployed!"); }
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('bg-garfield-orange', 'text-white');
+                el.classList.add('bg-garfield-cream', 'text-garfield-black');
+            });
 
-        // Core 1,000 Article Generator (Dynamic & Super Light)
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tabBtn-${tabId.replace('tab-', '')}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-garfield-cream', 'text-garfield-black');
+                activeBtn.classList.add('bg-garfield-orange', 'text-white');
+            }
+        }
+
+        function toggleSimulatedCall() { alert("Simulating incoming phone call..."); }
+        function saveTenantConfig() { alert("Configuration deployed to Vapi Voice Engine!"); }
+
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+        function playMascotAudio(type) {
+            if (!audioCtx) audioCtx = new AudioContext();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            const now = audioCtx.currentTime;
+
+            if (type === 'meow') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(400, now);
+                osc.frequency.exponentialRampToValueAtTime(800, now + 0.15);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                osc.start(now);
+                osc.stop(now + 0.4);
+            }
+        }
+
         const articleTopics = [
             "Why Mondays Should Be Automated by AI Voice Receptionists",
             "The Layered Architecture: Comparing SaaS Stacks to Homemade Lasagna",
@@ -531,7 +727,7 @@
 
         function getArticleData(index) {
             const topic = articleTopics[index % articleTopics.length];
-            const title = `Article #${index + 1}: ${topic} (Part ${Math.floor(index / 10) + 1})`;
+            const title = `Article #${index + 1}: ${topic}`;
             
             const memeBanner = `
   /\_/\  
@@ -592,7 +788,7 @@ ${memeBanner}
             let html = "";
             pageItems.forEach(item => {
                 html += `
-                    <div class="bg-garfield-cream p-5 rounded-2xl comic-border shadow-comic flex flex-col justify-between hover:scale-[1.02] transition-transform">
+                    <div class="comic-panel bg-garfield-cream p-5 rounded-2xl flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between">
                                 <span class="text-[10px] bg-garfield-orange text-white font-bold px-2 py-0.5 rounded uppercase">Article #${item.id}</span>
@@ -605,7 +801,7 @@ ${memeBanner}
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-xs font-bold">
                             <span class="text-slate-500">${item.date}</span>
-                            <button onclick="openArticleView(${item.id - 1})" class="text-garfield-darkorange hover:underline font-bangers text-sm flex items-center gap-1">
+                            <button onclick="openArticleView(${item.id - 1})" class="text-garfield-darkorange hover:underline font-bangers text-sm flex items-center gap-1 transition-all hover:scale-105">
                                 Read Full Article (1,000 Words) ↗
                             </button>
                         </div>
@@ -650,10 +846,6 @@ ${memeBanner}
             currentPage = 1;
             renderBlogGrid();
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            renderBlogGrid();
-        });
     </script>
 </body>
 </html>
