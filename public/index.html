@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="hpF1GBqGEt0uX_wJF7Oxh3VHIVeTDsQieb8Mt5B8wMw" />
-    <title>Garfield AI Voice Receptionist SaaS Platform</title>
+    <title>Garfield AI VIP Executive Voice Receptionist SaaS</title>
 
     <!-- Google Fonts & Tailwind CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +26,9 @@
                             cheese: '#FFE082',
                             black: '#212121',
                             cream: '#FFF8E7',
-                            discord: '#5865F2'
+                            discord: '#5865F2',
+                            vipgold: '#D4AF37',
+                            viplight: '#FDFBF7'
                         }
                     },
                     fontFamily: {
@@ -115,8 +117,8 @@
         }
 
         @keyframes dynamicGlow {
-            0%, 100% { filter: drop-shadow(0 0 2px rgba(255,128,0,0.6)); }
-            50% { filter: drop-shadow(0 0 12px rgba(255,202,40,0.9)); }
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(212,175,55,0.8)); }
+            50% { filter: drop-shadow(0 0 14px rgba(255,202,40,0.9)); }
         }
 
         @keyframes pulseWave {
@@ -178,20 +180,20 @@
     <!-- Interactive 1,000 Particle Animation Canvas -->
     <canvas id="particleCanvas"></canvas>
 
-    <!-- Top Navigation Bar -->
-    <header class="bg-garfield-orange comic-border border-t-0 border-x-0 sticky top-0 z-50 shadow-md">
+    <!-- Top Navigation Bar (VIP Executive Style) -->
+    <header class="bg-garfield-black comic-border border-t-0 border-x-0 sticky top-0 z-50 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
             
             <div class="flex items-center gap-3">
-                <div class="bg-garfield-yellow p-2 rounded-xl comic-border shadow-comic-sm animate-dynamic-wiggle">
-                    <i class="fa-solid font-bangers text-2xl text-garfield-lasagna">📞</i>
+                <div class="bg-garfield-vipgold p-2 rounded-xl comic-border shadow-comic-sm animate-dynamic-wiggle">
+                    <i class="fa-solid font-bangers text-2xl text-black">💎</i>
                 </div>
                 <div>
                     <h1 class="font-bangers text-3xl tracking-wider text-white drop-shadow-[0_2px_0_#212121] leading-none animate-dynamic-glow">
-                        GARFIELD <span class="text-garfield-yellow">AI VOICE RECEPTIONIST</span> SaaS
+                        GARFIELD <span class="text-garfield-vipgold">VIP EXECUTIVE</span> VOICE SaaS
                     </h1>
-                    <p class="text-xs font-bold text-garfield-black bg-garfield-yellow px-2 py-0.5 rounded border border-black inline-block mt-0.5">
-                        Interactive AI Call Simulator Engine • Vapi Powered
+                    <p class="text-xs font-bold text-black bg-garfield-vipgold px-2 py-0.5 rounded border border-black inline-block mt-0.5">
+                        High-Ticket White-Glove Concierge Edition • Vapi Powered
                     </p>
                 </div>
             </div>
@@ -210,21 +212,15 @@
                     href="https://danielverse87.gumroad.com/l/ai-receptionist" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="bg-pink-500 hover:bg-pink-600 text-white font-bangers text-base px-3.5 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all hover:scale-110 flex items-center gap-1.5 uppercase"
+                    class="bg-garfield-vipgold hover:bg-yellow-600 text-black font-bangers text-base px-3.5 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all hover:scale-110 flex items-center gap-1.5 uppercase font-bold"
                 >
-                    <i class="fa-solid fa-cart-shopping"></i> Buy License
+                    <i class="fa-solid fa-crown"></i> Get VIP License
                 </a>
 
                 <button id="securityToggleBtn" onclick="toggleSecurityLock()" class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl comic-border shadow-comic-sm hover:bg-slate-50 transition-all cursor-pointer hover:scale-105">
                     <span id="securityBadgeIcon" class="text-emerald-600"><i class="fa-solid fa-lock-open"></i></span>
-                    <span id="securityBadgeText" class="font-bold text-xs uppercase tracking-wider text-emerald-700">Unlocked</span>
+                    <span id="securityBadgeText" class="font-bold text-xs uppercase tracking-wider text-emerald-700">VIP Unlocked</span>
                 </button>
-
-                <div class="flex items-center gap-2 bg-garfield-yellow px-3 py-1.5 rounded-xl comic-border shadow-comic-sm">
-                    <i class="fa-solid fa-utensils text-garfield-lasagna"></i>
-                    <span class="font-bold text-xs">Lasagna Fuel:</span>
-                    <span id="lasagnaFuelCount" class="font-bangers text-lg text-garfield-lasagna">100%</span>
-                </div>
             </div>
         </div>
     </header>
@@ -232,8 +228,8 @@
     <!-- Main Workspace Container -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-6 relative z-10">
 
-        <!-- Garfield Interactive Mascot Command Desk -->
-        <section class="comic-panel bg-garfield-yellow rounded-3xl p-6 relative overflow-hidden">
+        <!-- Garfield VIP Mascot Command Desk -->
+        <section class="comic-panel bg-gradient-to-r from-amber-200 via-garfield-yellow to-amber-200 rounded-3xl p-6 relative overflow-hidden shadow-comic-lg">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 
                 <div class="md:col-span-4 flex flex-col items-center justify-center relative">
@@ -262,7 +258,7 @@
                                 <path d="M 55 90 Q 75 110 95 90" stroke="#212121" stroke-width="5" fill="none" stroke-linecap="round"/>
                                 <path d="M 105 90 Q 125 110 145 90" stroke="#212121" stroke-width="5" fill="none" stroke-linecap="round"/>
                             </g>
-                            <ellipse cx="100" cy="115" rx="14" ry="10" fill="#D84315" stroke="#212121" stroke-width="3"/>
+                            <ellipse cx="100" cy="115" rx="14" ry="10" fill="#D4AF37" stroke="#212121" stroke-width="3"/>
                             <path d="M 100 125 L 100 135 M 100 135 Q 80 150 60 135 M 100 135 Q 120 150 140 135" stroke="#212121" stroke-width="4" fill="none" stroke-linecap="round"/>
                             <path d="M 40 125 L 15 120 M 38 135 L 12 138 M 160 125 L 185 120 M 162 135 L 188 138" stroke="#212121" stroke-width="3" stroke-linecap="round"/>
                         </svg>
@@ -278,17 +274,17 @@
                 <div class="md:col-span-8 flex flex-col gap-4">
                     <div class="speech-bubble p-4 comic-shadow">
                         <div class="flex items-start justify-between">
-                            <h3 class="font-bangers text-xl text-garfield-lasagna tracking-wide">GARFIELD AI VOICE RECEPTIONIST:</h3>
-                            <span id="statusTag" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-400 animate-pulse">SWITCHBOARD READY</span>
+                            <h3 class="font-bangers text-xl text-garfield-darkorange tracking-wide">GARFIELD VIP EXECUTIVE CONCIERGE:</h3>
+                            <span id="statusTag" class="text-xs bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded border border-amber-500 animate-pulse">VIP READY 24/7</span>
                         </div>
                         <p id="garfieldSpeechText" class="font-comic text-lg text-slate-800 font-bold mt-1">
-                            "Hello! I am your Garfield AI Voice Receptionist. Try simulating an incoming call in the trial sandbox below!"
+                            "Welcome! Test our high-ticket executive voice concierge simulator for enterprise VIP clients below."
                         </p>
                     </div>
 
                     <div class="flex flex-wrap gap-3 items-center">
-                        <button onclick="feedLasagna()" class="bg-garfield-lasagna hover:bg-red-700 text-white font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:-translate-y-1 active:translate-y-0.5 flex items-center gap-2">
-                            <i class="fa-solid fa-pizza-slice"></i> Feed Lasagna (+20% Fuel)
+                        <button onclick="feedLasagna()" class="bg-garfield-vipgold hover:bg-yellow-600 text-black font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:-translate-y-1 active:translate-y-0.5 flex items-center gap-2 font-bold">
+                            <i class="fa-solid fa-champagne-glasses"></i> Executive Treatment (+VIP)
                         </button>
                         <a href="https://discord.com/invite/hope-for-broken-hearts-875258067166580737" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:-translate-y-1 flex items-center gap-2">
                             <i class="fa-brands fa-discord"></i> Garfield Lounge ↗
@@ -301,76 +297,76 @@
             </div>
         </section>
 
-        <!-- LIVE AI VOICE RECEPTIONIST TRIAL SANDBOX (AI 接線員線上對話試用區) -->
-        <section class="comic-panel bg-gradient-to-r from-amber-50 via-garfield-cream to-orange-50 rounded-3xl p-6 border-2 border-garfield-black relative overflow-hidden shadow-comic-lg">
+        <!-- HIGH-TICKET VIP EXECUTIVE CALL SANDBOX (高單價客戶專屬試用區) -->
+        <section class="comic-panel bg-gradient-to-r from-yellow-50 via-garfield-cream to-amber-50 rounded-3xl p-6 border-2 border-garfield-black relative overflow-hidden shadow-comic-lg">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-4">
                 <div class="flex items-center gap-4">
-                    <div class="bg-garfield-orange text-white p-4 rounded-2xl comic-border shadow-comic-sm animate-bounce">
-                        <i class="fa-solid fa-headset text-3xl"></i>
+                    <div class="bg-garfield-vipgold text-black p-4 rounded-2xl comic-border shadow-comic-sm animate-bounce font-bold">
+                        <i class="fa-solid fa-gem text-3xl"></i>
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs bg-garfield-darkorange text-white font-bold px-2 py-0.5 rounded uppercase font-bangers tracking-wider">📞 Live Interactive Sandbox</span>
-                            <span class="text-xs font-bold text-slate-700">Garfield Voice Agent v2.5</span>
+                            <span class="text-xs bg-garfield-vipgold text-black font-bold px-2 py-0.5 rounded uppercase font-bangers tracking-wider">💎 High-Ticket Executive Sandbox</span>
+                            <span class="text-xs font-bold text-slate-700">VIP White-Glove Mode v2.5</span>
                         </div>
-                        <h2 class="font-bangers text-3xl text-garfield-darkorange tracking-wide mt-1">AI VOICE RECEPTIONIST SIMULATOR (線上電話試用區)</h2>
-                        <p class="text-xs font-bold text-slate-700">Simulate caller speech input and watch Garfield AI answer, detect intents, and process calls instantly!</p>
+                        <h2 class="font-bangers text-3xl text-amber-900 tracking-wide mt-1">HIGH-TICKET VIP EXECUTIVE CONCIERGE SIMULATOR</h2>
+                        <p class="text-xs font-bold text-slate-700">Test high-value client phone prompts (Private Banking, Black Card, Executive Travel, Luxury Assets) instantly.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Call Trial Grid -->
+            <!-- VIP Trial Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                 
-                <!-- Left: Caller Speech Input & Scenario Presets -->
+                <!-- Left: VIP Caller Input & Scenarios -->
                 <div class="lg:col-span-7 flex flex-col gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Simulate Caller Speech / What the Customer Says:</label>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Simulate High-Ticket VIP Client Speech / Request:</label>
                         <textarea 
-                            id="aiCallCallerInput" 
+                            id="vipCallerInput" 
                             rows="4" 
-                            placeholder="Type what a customer would say when calling your business..." 
-                            class="w-full p-3 rounded-xl comic-border text-sm font-bold bg-white focus:ring-2 focus:ring-garfield-orange transition-all"
-                        >Hi! I'd like to reserve a table for 4 people at 7 PM tonight, and order two large Italian lasagnas.</textarea>
+                            placeholder="Type what a high-net-worth or corporate VIP client would say..." 
+                            class="w-full p-3 rounded-xl comic-border text-sm font-bold bg-white focus:ring-2 focus:ring-garfield-vipgold transition-all"
+                        >Hello, this is Director Marcus. I need immediate priority routing for our multi-million dollar corporate escrow transfer and a private jet charter to Tainan.</textarea>
                     </div>
 
-                    <!-- Quick Caller Presets -->
+                    <!-- Quick VIP Scenarios -->
                     <div>
-                        <span class="block text-xs font-bold text-slate-600 mb-2">⚡ Quick Call Scenarios (常見電話情境測試):</span>
+                        <span class="block text-xs font-bold text-slate-600 mb-2">⚡ High-Ticket VIP Scenarios (高端客戶專屬情境):</span>
                         <div class="flex flex-wrap gap-2">
-                            <button onclick="setAiCallScenario('order')" class="bg-white hover:bg-orange-50 text-garfield-darkorange text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
-                                🍕 Order Lasagna & Reservation
+                            <button onclick="setVipScenario('manda')" class="bg-white hover:bg-yellow-50 text-amber-900 text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
+                                🏛️ Private Banking & Corporate Escrow
                             </button>
-                            <button onclick="setAiCallScenario('hours')" class="bg-white hover:bg-amber-50 text-amber-900 text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
-                                🕒 Ask Business Hours & Location
+                            <button onclick="setVipScenario('jet')" class="bg-white hover:bg-orange-50 text-garfield-darkorange text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
+                                ✈️ Luxury Concierge & Private Jet
                             </button>
-                            <button onclick="setAiCallScenario('spam')" class="bg-white hover:bg-red-50 text-red-800 text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
-                                🚫 Telemarketing / Spam Call
+                            <button onclick="setVipScenario('board')" class="bg-white hover:bg-emerald-50 text-emerald-900 text-xs font-bold px-3 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all">
+                                👔 Executive Board Direct Routing
                             </button>
                         </div>
                     </div>
 
-                    <button onclick="runAiCallSimulation()" class="bg-garfield-darkorange hover:bg-orange-700 text-white font-bangers text-xl py-3 rounded-xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-phone-flip"></i> Simulate AI Phone Answer (測試 AI 接聽對話)
+                    <button onclick="runVipCallSimulation()" class="bg-garfield-vipgold hover:bg-yellow-600 text-black font-bangers text-xl py-3 rounded-xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 font-bold">
+                        <i class="fa-solid fa-phone-volume"></i> Simulate VIP White-Glove Routing (測試高單價客戶專屬接聽)
                     </button>
                 </div>
 
-                <!-- Right: AI Voice Receptionist Response Box -->
+                <!-- Right: VIP Concierge Response Report Box -->
                 <div class="lg:col-span-5 bg-slate-900 text-white p-5 rounded-2xl comic-border shadow-inner font-mono flex flex-col justify-between h-full min-h-[240px]">
                     <div>
                         <div class="flex items-center justify-between border-b border-slate-700 pb-2 mb-3">
-                            <span class="text-xs font-bold text-slate-400 uppercase">AI Receptionist Live Transcript</span>
-                            <span id="aiCallStatusBadge" class="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-0.5 rounded border border-emerald-500">LINE READY</span>
+                            <span class="text-xs font-bold text-slate-400 uppercase">VIP Executive Dispatch Report</span>
+                            <span id="vipStatusBadge" class="text-xs bg-garfield-vipgold/20 text-garfield-vipgold font-bold px-2.5 py-0.5 rounded border border-garfield-vipgold">VIP READY</span>
                         </div>
 
-                        <div id="aiCallTranscriptResult" class="text-xs space-y-2 text-slate-300">
-                            <p class="italic text-slate-500">[Click "Simulate AI Phone Answer" to see Garfield AI's live response]</p>
+                        <div id="vipResultBox" class="text-xs space-y-2 text-slate-300">
+                            <p class="italic text-slate-500">[Click "Simulate VIP White-Glove Routing" to evaluate high-ticket client request]</p>
                         </div>
                     </div>
 
                     <div class="mt-4 pt-3 border-t border-slate-800 text-[10px] text-slate-500 flex justify-between">
-                        <span>Vapi Engine Latency: ~180ms</span>
-                        <span>Multi-Tenant Webhook Enabled</span>
+                        <span>Zero Wait-Time Routing</span>
+                        <span>Encrypted Enterprise Security</span>
                     </div>
                 </div>
 
@@ -504,13 +500,13 @@
         <section id="securityGateCard" class="comic-panel bg-white rounded-3xl p-6 border-2 border-garfield-black transition-all">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
-                    <div class="bg-garfield-orange text-white p-3.5 rounded-2xl comic-border shadow-comic-sm">
-                        <i class="fa-solid fa-shield-cat text-2xl animate-spin" style="animation-duration: 6s;"></i>
+                    <div class="bg-garfield-vipgold text-black p-3.5 rounded-2xl comic-border shadow-comic-sm font-bold">
+                        <i class="fa-solid fa-crown text-2xl animate-spin" style="animation-duration: 6s;"></i>
                     </div>
                     <div>
-                        <h2 class="font-bangers text-2xl text-garfield-black tracking-wide">ENTERPRISE SECURITY ACCESS GATE</h2>
+                        <h2 class="font-bangers text-2xl text-garfield-black tracking-wide">ENTERPRISE VIP SECURITY ACCESS GATE</h2>
                         <p class="text-xs text-slate-600 font-bold">
-                            Enter your Gumroad license key or demo key (<code class="bg-garfield-yellow px-1 py-0.5 rounded border border-black font-mono text-black">garfield</code> / <code class="bg-garfield-yellow px-1 py-0.5 rounded border border-black font-mono text-black">lasagna</code>)
+                            Enter your Gumroad VIP license key or demo key (<code class="bg-garfield-yellow px-1 py-0.5 rounded border border-black font-mono text-black">garfield</code> / <code class="bg-garfield-yellow px-1 py-0.5 rounded border border-black font-mono text-black">lasagna</code>)
                         </p>
                     </div>
                 </div>
@@ -519,15 +515,15 @@
                     <input 
                         type="password" 
                         id="securityPassInput" 
-                        placeholder="Enter Gumroad Key..." 
-                        class="w-full md:w-72 px-4 py-2.5 rounded-xl comic-border font-mono text-sm focus:outline-none focus:ring-2 focus:ring-garfield-orange transition-all"
+                        placeholder="Enter VIP Gumroad Key..." 
+                        class="w-full md:w-72 px-4 py-2.5 rounded-xl comic-border font-mono text-sm focus:outline-none focus:ring-2 focus:ring-garfield-vipgold transition-all"
                     >
                     <button 
                         onclick="validateSecurityKey()" 
                         id="unlockBtn"
-                        class="bg-garfield-darkorange text-white font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic hover:bg-orange-700 transition-all hover:scale-105 active:scale-95 whitespace-nowrap flex items-center gap-2"
+                        class="bg-garfield-vipgold text-black font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic hover:bg-yellow-600 transition-all hover:scale-105 active:scale-95 whitespace-nowrap flex items-center gap-2 font-bold"
                     >
-                        <span>Unlock Gate</span> 🔓
+                        <span>Unlock VIP Gate</span> 🔓
                     </button>
                 </div>
             </div>
@@ -541,28 +537,28 @@
         <section class="comic-panel bg-white rounded-3xl p-6 shadow-comic-lg flex flex-col gap-6 relative">
             
             <div id="workspaceLockOverlay" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm z-30 rounded-3xl flex flex-col items-center justify-center gap-4 text-white p-6 transition-all hidden">
-                <div class="bg-garfield-lasagna p-4 rounded-full comic-border shadow-comic text-3xl animate-bounce">
+                <div class="bg-garfield-vipgold p-4 rounded-full comic-border shadow-comic text-3xl animate-bounce text-black font-bold">
                     <i class="fa-solid fa-lock"></i>
                 </div>
-                <h3 class="font-bangers text-3xl text-garfield-yellow tracking-wider text-center">WORKSPACE LOCKED BY ENTERPRISE SECURITY</h3>
+                <h3 class="font-bangers text-3xl text-garfield-vipgold tracking-wider text-center">VIP EXECUTIVE WORKSPACE LOCKED</h3>
                 <p class="text-sm font-bold text-slate-200 text-center max-w-md">
-                    Please enter your license key in the Access Gate above to unlock tenant provisioning and dashboard tools.
+                    Please enter your VIP license key in the Access Gate above to unlock executive tenant provisioning and high-ticket routing tools.
                 </p>
-                <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic transition-all hover:scale-105 flex items-center gap-2">
-                    <i class="fa-solid fa-cart-shopping"></i> Buy License on Gumroad
+                <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-garfield-vipgold hover:bg-yellow-600 text-black font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic transition-all hover:scale-105 flex items-center gap-2 font-bold">
+                    <i class="fa-solid fa-crown"></i> Claim VIP License on Gumroad
                 </a>
             </div>
 
             <!-- Tab Navigation Header -->
             <div class="flex flex-wrap border-b-4 border-garfield-black gap-2 pb-2">
-                <button onclick="switchTab('tab-provisioning')" id="tabBtn-provisioning" class="tab-btn active bg-garfield-orange text-white font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0 transition-all hover:-translate-y-0.5">
-                    <i class="fa-solid fa-robot mr-1"></i> Tenant Provisioning
+                <button onclick="switchTab('tab-provisioning')" id="tabBtn-provisioning" class="tab-btn active bg-garfield-vipgold text-black font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0 transition-all hover:-translate-y-0.5 font-bold">
+                    <i class="fa-solid fa-crown mr-1"></i> VIP Tenant Provisioning
                 </button>
                 <button onclick="switchTab('tab-blog')" id="tabBtn-blog" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0 transition-all hover:-translate-y-0.5">
                     <i class="fa-solid fa-newspaper mr-1"></i> Garfield 1,000 Articles Library
                 </button>
                 <button onclick="switchTab('tab-analytics')" id="tabBtn-analytics" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0 transition-all hover:-translate-y-0.5">
-                    <i class="fa-solid fa-chart-line mr-1"></i> Live Analytics & Logs
+                    <i class="fa-solid fa-chart-line mr-1"></i> VIP Analytics & SLA
                 </button>
                 <button onclick="switchTab('tab-discord')" id="tabBtn-discord" class="tab-btn bg-garfield-cream text-garfield-black hover:bg-garfield-yellow font-bangers text-lg px-5 py-2.5 rounded-t-2xl comic-border shadow-comic border-b-0 transition-all hover:-translate-y-0.5">
                     <i class="fa-brands fa-discord mr-1"></i> Garfield Lounge
@@ -572,68 +568,67 @@
                 </button>
             </div>
 
-            <!-- TAB 1: Tenant Fine-Tuning Engine & AI Call Simulator -->
+            <!-- TAB 1: VIP Tenant Fine-Tuning Engine & AI Call Simulator -->
             <div id="tab-provisioning" class="tab-content flex flex-col gap-6">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     
                     <div class="lg:col-span-7 flex flex-col gap-4">
-                        <h3 class="font-bangers text-2xl text-garfield-darkorange border-b-2 border-garfield-orange pb-1 flex items-center gap-2">
-                            <i class="fa-solid fa-sliders"></i> AI Receptionist Fine-Tuning Engine
+                        <h3 class="font-bangers text-2xl text-amber-900 border-b-2 border-garfield-vipgold pb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders"></i> VIP Executive Concierge Fine-Tuning Engine
                         </h3>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Client Tenant Name</label>
-                                <input type="text" id="tenantName" value="Lasagna Palace Restaurant" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white transition-all">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">VIP Enterprise Tenant Name</label>
+                                <input type="text" id="tenantName" value="Global Private Banking & Wealth HQ" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white transition-all">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Industry Sector</label>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">High-Ticket Industry Sector</label>
                                 <select id="industrySector" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream">
-                                    <option>Restaurant & Dining</option>
-                                    <option>SaaS Customer Service</option>
-                                    <option>Pet Healthcare Clinic</option>
-                                    <option>Corporate Switchboard</option>
+                                    <option>Private Banking & Wealth Management</option>
+                                    <option>Luxury Automotive & Yacht Charter</option>
+                                    <option>Elite Medical & Concierge Health</option>
+                                    <option>C-Suite Corporate Switchboard</option>
                                 </select>
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Garfield Persona System Prompt</label>
-                            <textarea id="systemPrompt" rows="3" class="w-full p-3 rounded-xl comic-border text-xs font-bold bg-garfield-cream leading-relaxed">You are Garfield AI Voice Receptionist. Answer incoming restaurant calls with warm witty charm, record table reservations, process lasagna orders, decline Mondays politely, and route urgent business leads.</textarea>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Garfield VIP Executive System Prompt</label>
+                            <textarea id="systemPrompt" rows="3" class="w-full p-3 rounded-xl comic-border text-xs font-bold bg-garfield-cream leading-relaxed">You are Garfield VIP Executive Concierge for high-net-worth clients. Answer calls with absolute white-glove professionalism, zero-latency routing, immediate human executive handoff for deals over $100K, and subtle wit regarding Mondays.</textarea>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Voice Tone Preset</label>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Concierge Tone Preset</label>
                                 <select class="w-full p-2 rounded-xl comic-border text-xs font-bold bg-white">
-                                    <option>Sassy Garfield (Default)</option>
-                                    <option>Friendly & Upbeat</option>
-                                    <option>Corporate Professional</option>
-                                    <option>Lazy Afternoon Sleepy</option>
+                                    <option>Ultra-Polite White-Glove (Default)</option>
+                                    <option>Discreet & Professional</option>
+                                    <option>Warm & Sophisticated</option>
+                                    <option>Executive Direct Routing</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Vapi Model Temp</label>
-                                <input type="range" min="0" max="1" step="0.1" value="0.7" class="w-full accent-garfield-orange mt-2">
-                                <span class="text-xs font-mono font-bold text-slate-500">Value: 0.7 (Creative)</span>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Vapi Latency Target</label>
+                                <input type="text" value="&lt; 150ms (Ultra-Fast)" class="w-full p-2 rounded-xl comic-border text-xs font-bold bg-slate-50" readonly>
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Max Tokens</label>
-                                <input type="number" value="250" class="w-full p-2 rounded-xl comic-border text-xs font-bold">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Priority SLA</label>
+                                <input type="text" value="99.99% Uptime" class="w-full p-2 rounded-xl comic-border text-xs font-bold bg-slate-50" readonly>
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Webhook Dispatch URL</label>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">VIP Webhook Dispatch URL</label>
                             <input type="text" value="https://ai-receptionist-saas-ivory.vercel.app/api/gumroad" class="w-full p-2.5 rounded-xl comic-border text-xs font-mono bg-slate-50">
                         </div>
 
                         <div class="flex flex-wrap gap-3 mt-2">
-                            <button onclick="saveTenantConfig()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
-                                <i class="fa-solid fa-floppy-disk"></i> Deploy Configuration
+                            <button onclick="saveTenantConfig()" class="bg-garfield-vipgold hover:bg-yellow-600 text-black font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center gap-2 font-bold">
+                                <i class="fa-solid fa-floppy-disk"></i> Deploy VIP Configuration
                             </button>
                             <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white font-bangers text-lg px-6 py-2.5 rounded-xl comic-border shadow-comic transition-all hover:scale-105 flex items-center gap-2">
-                                <i class="fa-solid fa-crown"></i> Claim Commercial License
+                                <i class="fa-solid fa-crown"></i> Claim VIP Commercial License
                             </a>
                         </div>
                     </div>
@@ -642,34 +637,34 @@
                     <div class="lg:col-span-5 bg-garfield-cream rounded-2xl p-4 comic-border shadow-comic flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between border-b-2 border-slate-300 pb-2 mb-3">
-                                <h4 class="font-bangers text-xl text-garfield-darkorange flex items-center gap-2">
-                                    <i class="fa-solid fa-phone-volume"></i> AI Call Simulator
+                                <h4 class="font-bangers text-xl text-amber-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-phone-volume"></i> VIP Call Simulator
                                 </h4>
-                                <span id="callStatusBadge" class="text-xs bg-slate-200 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-400">IDLE</span>
+                                <span id="callStatusBadge" class="text-xs bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded border border-amber-400">VIP STANDBY</span>
                             </div>
 
                             <div class="bg-slate-900 text-white rounded-2xl p-4 comic-border mb-4 font-mono">
                                 <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2 mb-2">
-                                    <span>Caller: +1 (555) 382-9910</span>
+                                    <span>VIP Caller: +1 (800) 555-GOLD</span>
                                     <span id="callTimer">00:00</span>
                                 </div>
 
                                 <div class="h-16 flex items-center justify-center gap-1.5 py-2">
-                                    <div class="wave-bar w-2 bg-garfield-orange rounded"></div>
+                                    <div class="wave-bar w-2 bg-garfield-vipgold rounded"></div>
                                     <div class="wave-bar w-2 bg-garfield-yellow rounded" style="animation-delay: 0.2s"></div>
-                                    <div class="wave-bar w-2 bg-garfield-lasagna rounded" style="animation-delay: 0.4s"></div>
-                                    <div class="wave-bar w-2 bg-garfield-orange rounded" style="animation-delay: 0.1s"></div>
+                                    <div class="wave-bar w-2 bg-garfield-orange rounded" style="animation-delay: 0.4s"></div>
+                                    <div class="wave-bar w-2 bg-garfield-vipgold rounded" style="animation-delay: 0.1s"></div>
                                     <div class="wave-bar w-2 bg-garfield-yellow rounded" style="animation-delay: 0.3s"></div>
                                 </div>
 
                                 <div id="callTranscriptBox" class="h-32 overflow-y-auto text-xs space-y-2 p-2 bg-slate-800 rounded border border-slate-700 font-comic">
-                                    <p class="text-slate-400 text-center italic">[Click "Start Test Call" below to simulate conversation]</p>
+                                    <p class="text-slate-400 text-center italic">[Click "Start VIP Test Call" below to simulate high-ticket conversation]</p>
                                 </div>
                             </div>
                         </div>
 
-                        <button id="startCallBtn" onclick="toggleSimulatedCall()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bangers text-lg py-2.5 rounded-xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-phone"></i> <span>Start Test Call</span>
+                        <button id="startCallBtn" onclick="toggleSimulatedCall()" class="w-full bg-garfield-vipgold hover:bg-yellow-600 text-black font-bangers text-lg py-2.5 rounded-xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 font-bold">
+                            <i class="fa-solid fa-phone"></i> <span>Start VIP Test Call</span>
                         </button>
                     </div>
                 </div>
@@ -679,23 +674,23 @@
             <div id="tab-blog" class="tab-content flex flex-col gap-6 hidden">
                 
                 <div id="blogListView" class="flex flex-col gap-6">
-                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 border-garfield-orange pb-3 gap-2">
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 border-garfield-vipgold pb-3 gap-2">
                         <div>
-                            <h3 class="font-bangers text-3xl text-garfield-darkorange">GARFIELD & FAMILY 1,000-ARTICLE LIBRARY</h3>
-                            <p class="text-xs font-bold text-slate-600">Explore 1,000 long-form articles featuring AI voice receptionists, Eric, Martine, and Joe Garfield!</p>
+                            <h3 class="font-bangers text-3xl text-amber-900">GARFIELD & FAMILY 1,000-ARTICLE LIBRARY</h3>
+                            <p class="text-xs font-bold text-slate-600">Explore 1,000 long-form articles featuring VIP white-glove AI concierges, Eric, Martine, and Joe Garfield!</p>
                         </div>
-                        <span class="bg-garfield-yellow text-garfield-black font-bangers text-sm px-3 py-1 rounded-xl comic-border animate-pulse">1,000 Articles Indexed</span>
+                        <span class="bg-garfield-vipgold text-black font-bangers text-sm px-3 py-1 rounded-xl comic-border animate-pulse font-bold">1,000 Articles Indexed</span>
                     </div>
 
                     <div class="flex flex-wrap items-center justify-between gap-3 bg-garfield-cream p-3 rounded-2xl comic-border">
                         <div class="flex items-center gap-2 w-full md:w-72">
-                            <i class="fa-solid fa-search text-garfield-darkorange"></i>
+                            <i class="fa-solid fa-search text-amber-900"></i>
                             <input type="text" id="blogSearchInput" oninput="handleSearch()" placeholder="Search family articles..." class="w-full px-3 py-1.5 rounded-xl comic-border text-xs font-bold transition-all">
                         </div>
                         <div class="flex items-center gap-2">
-                            <button onclick="prevPage()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-3 py-1 rounded-xl comic-border text-sm transition-all hover:scale-105">← Prev</button>
+                            <button onclick="prevPage()" class="bg-garfield-vipgold text-black font-bangers px-3 py-1 rounded-xl comic-border text-sm transition-all hover:scale-105 font-bold">← Prev</button>
                             <span id="pageIndicator" class="font-bangers text-base text-garfield-black">Page 1 / 84</span>
-                            <button onclick="nextPage()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-3 py-1 rounded-xl comic-border text-sm transition-all hover:scale-105">Next →</button>
+                            <button onclick="nextPage()" class="bg-garfield-vipgold text-black font-bangers px-3 py-1 rounded-xl comic-border text-sm transition-all hover:scale-105 font-bold">Next →</button>
                         </div>
                     </div>
 
@@ -703,25 +698,25 @@
                 </div>
 
                 <div id="articleDetailView" class="hidden flex flex-col gap-6">
-                    <button onclick="closeArticleView()" class="self-start bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-lg transition-all hover:scale-105 flex items-center gap-2">
+                    <button onclick="closeArticleView()" class="self-start bg-garfield-vipgold text-black font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-lg transition-all hover:scale-105 flex items-center gap-2 font-bold">
                         <i class="fa-solid fa-arrow-left"></i> Back to Family Directory
                     </button>
                     
                     <div class="bg-garfield-cream p-6 rounded-3xl comic-border shadow-comic space-y-4">
                         <div class="flex items-center justify-between border-b-2 border-black pb-3">
-                            <span id="detailArticleCategory" class="text-xs font-bold bg-garfield-orange text-white px-3 py-1 rounded-full uppercase">FAMILY ARCHIVE</span>
+                            <span id="detailArticleCategory" class="text-xs font-bold bg-garfield-vipgold text-black px-3 py-1 rounded-full uppercase font-bold">VIP ARCHIVE</span>
                             <span id="detailArticleDate" class="text-xs font-bold text-slate-500">Oct 25, 2026</span>
                         </div>
-                        <h2 id="detailArticleTitle" class="font-bangers text-3xl text-garfield-darkorange leading-tight">Article Title</h2>
+                        <h2 id="detailArticleTitle" class="font-bangers text-3xl text-amber-900 leading-tight">Article Title</h2>
                         
                         <div id="detailArticleBody" class="font-comic text-slate-800 leading-relaxed text-sm space-y-4 border-t border-b border-slate-300 py-4"></div>
 
                         <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
-                            <button onclick="closeArticleView()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-base transition-all hover:scale-105">
+                            <button onclick="closeArticleView()" class="bg-garfield-vipgold text-black font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-base transition-all hover:scale-105 font-bold">
                                 ← Back to Family Directory
                             </button>
                             <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white font-bangers px-5 py-2.5 rounded-xl comic-border shadow-comic text-base transition-all hover:scale-105 flex items-center gap-2">
-                                <i class="fa-solid fa-cart-shopping"></i> Claim Enterprise License on Gumroad
+                                <i class="fa-solid fa-cart-shopping"></i> Claim VIP Enterprise License on Gumroad
                             </a>
                         </div>
                     </div>
@@ -729,23 +724,23 @@
 
             </div>
 
-            <!-- TAB 3: Live Analytics Dashboard -->
+            <!-- TAB 3: VIP Analytics Dashboard & SLA -->
             <div id="tab-analytics" class="tab-content flex flex-col gap-6 hidden">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="comic-panel bg-garfield-cream p-4 rounded-2xl shadow-comic">
-                        <span class="text-xs font-bold text-slate-600 uppercase">Total Answered Calls</span>
-                        <div class="font-bangers text-4xl text-garfield-darkorange mt-1">84,920</div>
-                        <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-arrow-up"></i> +19.2% this week</span>
+                        <span class="text-xs font-bold text-slate-600 uppercase">VIP Calls Routed (&gt; $100K)</span>
+                        <div class="font-bangers text-4xl text-amber-900 mt-1">12,480</div>
+                        <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-arrow-up"></i> +34.1% this month</span>
                     </div>
                     <div class="comic-panel bg-garfield-cream p-4 rounded-2xl shadow-comic">
-                        <span class="text-xs font-bold text-slate-600 uppercase">Average Latency</span>
-                        <div class="font-bangers text-4xl text-garfield-lasagna mt-1">182 ms</div>
-                        <span class="text-xs text-slate-600 font-bold">Vapi Speech Engine</span>
+                        <span class="text-xs font-bold text-slate-600 uppercase">Executive Handoff Latency</span>
+                        <div class="font-bangers text-4xl text-garfield-vipgold mt-1">115 ms</div>
+                        <span class="text-xs text-slate-600 font-bold">Zero-Ring Direct Routing</span>
                     </div>
                     <div class="comic-panel bg-garfield-cream p-4 rounded-2xl shadow-comic">
-                        <span class="text-xs font-bold text-slate-600 uppercase">Reservations Processed</span>
-                        <div class="font-bangers text-4xl text-garfield-orange mt-1">6,410</div>
-                        <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-check text-emerald-600"></i> Automated Booking</span>
+                        <span class="text-xs font-bold text-slate-600 uppercase">VIP Client Satisfaction SLA</span>
+                        <div class="font-bangers text-4xl text-emerald-700 mt-1">99.98%</div>
+                        <span class="text-xs text-emerald-600 font-bold"><i class="fa-solid fa-shield text-emerald-600"></i> White-Glove Verified</span>
                     </div>
                 </div>
             </div>
@@ -790,7 +785,7 @@
     <footer class="bg-garfield-black text-white comic-border border-b-0 border-x-0 mt-8 relative z-10">
         <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
-                <span class="font-bangers text-2xl text-garfield-yellow tracking-wider">GARFIELD AI VOICE RECEPTIONIST SaaS</span>
+                <span class="font-bangers text-2xl text-garfield-vipgold tracking-wider">GARFIELD VIP EXECUTIVE VOICE SaaS</span>
                 <p class="text-xs text-slate-400">© 2026 Garfield Enterprise Inc. All rights reserved.</p>
             </div>
 
@@ -806,50 +801,50 @@
         </div>
     </footer>
 
-    <!-- Interactive Script & Trial Sandbox Logic -->
+    <!-- Interactive Script & High-Ticket VIP Sandbox Logic -->
     <script>
-        // AI Voice Receptionist Trial Logic
-        function setAiCallScenario(type) {
-            const input = document.getElementById('aiCallCallerInput');
+        // High-Ticket VIP Concierge Trial Logic
+        function setVipScenario(type) {
+            const input = document.getElementById('vipCallerInput');
             if (!input) return;
-            if (type === 'order') {
-                input.value = "Hi! I'd like to reserve a table for 4 people at 7 PM tonight, and order two large Italian lasagnas.";
-            } else if (type === 'hours') {
-                input.value = "Hello! What time do you open on weekends and where is your restaurant located?";
-            } else if (type === 'spam') {
-                input.value = "We are calling regarding your extended warranty on your commercial delivery truck...";
+            if (type === 'manda') {
+                input.value = "Hello, this is Director Marcus. I need immediate priority routing for our multi-million dollar corporate escrow transfer.";
+            } else if (type === 'jet') {
+                input.value = "Good afternoon, I require a private Gulfstream G700 charter from Taipei to Tainan with a custom gourmet lasagna catering.";
+            } else if (type === 'board') {
+                input.value = "Urgent: Connect me directly to the managing director regarding our Series C executive board acquisition.";
             }
         }
 
-        function runAiCallSimulation() {
-            const callerText = document.getElementById('aiCallCallerInput').value.toLowerCase();
-            const badge = document.getElementById('aiCallStatusBadge');
-            const resultBox = document.getElementById('aiCallTranscriptResult');
+        function runVipCallSimulation() {
+            const callerText = document.getElementById('vipCallerInput').value.toLowerCase();
+            const badge = document.getElementById('vipStatusBadge');
+            const resultBox = document.getElementById('vipResultBox');
 
-            if (callerText.includes("order") || callerText.includes("reserve") || callerText.includes("table") || callerText.includes("lasagna")) {
-                badge.className = "text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-0.5 rounded border border-emerald-500";
-                badge.innerText = "CALL PROCESSED (BOOKING)";
+            if (callerText.includes("escrow") || callerText.includes("transfer") || callerText.includes("million") || callerText.includes("acquisition") || callerText.includes("series")) {
+                badge.className = "text-xs bg-amber-500/20 text-amber-400 font-bold px-2.5 py-0.5 rounded border border-amber-500";
+                badge.innerText = "VIP ROUTED (EXECUTIVE)";
                 resultBox.innerHTML = `
-                    <p class="text-emerald-400 font-bold">🎙️ Garfield AI: "Good choice! I've booked your table and notified our kitchen for 2 large lasagnas."</p>
-                    <p class="text-slate-300 mt-1">Detected Intent: <span class="text-garfield-yellow font-bold">RESERVATION_AND_ORDER</span> (Confidence: 99.4%)</p>
-                    <p class="text-slate-300">Action Taken: <span class="text-emerald-400">Webhook Dispatched to Restaurant CRM</span></p>
-                    <p class="text-slate-400 mt-2 font-mono text-[11px] bg-slate-800 p-2 rounded border border-slate-700">Response payload: { status: "SUCCESS", category: "RESERVATION", notification: "SENT" }</p>
+                    <p class="text-amber-400 font-bold">💎 Garfield VIP Concierge: "Director Marcus, initializing zero-latency secure handoff to your private wealth advisor right now."</p>
+                    <p class="text-slate-300 mt-1">Detected Intent: <span class="text-garfield-vipgold font-bold">HIGH_TICKET_ESCROW_EXECUTIVE</span> (Confidence: 99.9%)</p>
+                    <p class="text-slate-300">Action Taken: <span class="text-emerald-400">Direct Bridge to Senior Managing Director</span></p>
+                    <p class="text-slate-400 mt-2 font-mono text-[11px] bg-slate-800 p-2 rounded border border-slate-700">Response payload: { tier: "VIP_BLACK_CARD", priority: "INSTANT", routing: "SECURE_BRIDGE" }</p>
                 `;
-            } else if (callerText.includes("hours") || callerText.includes("open") || callerText.includes("location") || callerText.includes("where")) {
-                badge.className = "text-xs bg-blue-500/20 text-blue-400 font-bold px-2.5 py-0.5 rounded border border-blue-500";
-                badge.innerText = "CALL ANSWERED (INFO)";
+            } else if (callerText.includes("jet") || callerText.includes("charter") || callerText.includes("private") || callerText.includes("gourmet")) {
+                badge.className = "text-xs bg-garfield-vipgold/20 text-garfield-vipgold font-bold px-2.5 py-0.5 rounded border border-garfield-vipgold";
+                badge.innerText = "CONCIERGE DISPATCHED";
                 resultBox.innerHTML = `
-                    <p class="text-blue-400 font-bold">🎙️ Garfield AI: "We are open daily from 11 AM to 10 PM. Located right in the heart of East District, Tainan City!"</p>
-                    <p class="text-slate-300 mt-1">Detected Intent: <span class="text-blue-300 font-bold">BUSINESS_HOURS_LOCATION</span> (Confidence: 98.1%)</p>
-                    <p class="text-slate-300">Action Taken: <span class="text-slate-200">Provided Standard Operating Details</span></p>
+                    <p class="text-garfield-vipgold font-bold">💎 Garfield VIP Concierge: "Private flight charter confirmed with gourmet lasagna catering. Your flight plan is being dispatched."</p>
+                    <p class="text-slate-300 mt-1">Detected Intent: <span class="text-yellow-300 font-bold">LUXURY_CONCIERGE_TRAVEL</span> (Confidence: 99.5%)</p>
+                    <p class="text-slate-300">Action Taken: <span class="text-slate-200">Flight Coordinator & Catering Notified</span></p>
                 `;
             } else {
-                badge.className = "text-xs bg-amber-500/20 text-amber-400 font-bold px-2.5 py-0.5 rounded border border-amber-500";
-                badge.innerText = "CALL FILTERED (SPAM/GENERAL)";
+                badge.className = "text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-0.5 rounded border border-emerald-500";
+                badge.innerText = "VIP PRIORITY ANSWERED";
                 resultBox.innerHTML = `
-                    <p class="text-amber-400 font-bold">🎙️ Garfield AI: "I'm sorry, I cannot take telemarketing offers right now. Garfield is taking a nap. Goodbye!"</p>
-                    <p class="text-slate-300 mt-1">Detected Intent: <span class="text-red-400 font-bold">SPAM_FILTERED</span></p>
-                    <p class="text-slate-300">Action Taken: <span class="text-amber-400">Politely Disconnected Call</span></p>
+                    <p class="text-emerald-400 font-bold">💎 Garfield VIP Concierge: "Welcome, valued client. How may I assist your executive office today?"</p>
+                    <p class="text-slate-300 mt-1">Detected Intent: <span class="text-emerald-300 font-bold">VIP_GENERAL_INQUIRY</span> (Confidence: 98.9%)</p>
+                    <p class="text-slate-300">Action Taken: <span class="text-emerald-400">White-Glove Response Delivered</span></p>
                 `;
             }
         }
@@ -1000,7 +995,7 @@
         });
 
         const particles = [];
-        const symbols = ['🐾', '🍕', '🐼', '⚡', '💻', '✨'];
+        const symbols = ['💎', '👑', '🐾', '🍕', '🐼', '⚡'];
         for (let i = 0; i < 1000; i++) {
             particles.push({
                 x: Math.random() * width,
@@ -1009,7 +1004,7 @@
                 vy: (Math.random() - 0.5) * 0.8,
                 size: Math.random() * 3 + 1,
                 symbol: i % 15 === 0 ? symbols[Math.floor(Math.random() * symbols.length)] : null,
-                color: i % 2 === 0 ? '#FF8000' : '#10B981',
+                color: i % 2 === 0 ? '#D4AF37' : '#FF8000',
                 alpha: Math.random() * 0.5 + 0.1
             });
         }
@@ -1066,20 +1061,20 @@
             const btn = document.getElementById('unlockBtn');
 
             btn.disabled = true;
-            btn.innerText = "Verifying...";
+            btn.innerText = "Verifying VIP...";
 
             if (inputKey === 'garfield' || inputKey === 'lasagna' || inputKey.length >= 8) {
                 sessionStorage.setItem('saas_auth_token', 'verified');
                 isLocked = false;
                 feedback.classList.add('hidden');
                 updateSecurityUI();
-                alert("License Verified Successfully! Garfield AI Voice Receptionist SaaS unlocked.");
+                alert("VIP License Verified Successfully! Garfield Executive SaaS unlocked.");
             } else {
                 feedback.classList.remove('hidden');
             }
 
             btn.disabled = false;
-            btn.innerHTML = "<span>Unlock Gate</span> 🔓";
+            btn.innerHTML = "<span>Unlock VIP Gate</span> 🔓";
         }
 
         function toggleSecurityLock() {
@@ -1097,25 +1092,25 @@
                 badgeIcon.className = 'text-red-600';
                 badgeIcon.innerHTML = '<i class="fa-solid fa-lock"></i>';
                 badgeText.className = 'font-bold text-xs uppercase tracking-wider text-red-700';
-                badgeText.innerText = 'Locked';
+                badgeText.innerText = 'VIP Locked';
                 overlay.classList.remove('hidden');
             } else {
                 badgeIcon.className = 'text-emerald-600';
                 badgeIcon.innerHTML = '<i class="fa-solid fa-lock-open"></i>';
                 badgeText.className = 'font-bold text-xs uppercase tracking-wider text-emerald-700';
-                badgeText.innerText = 'Unlocked';
+                badgeText.innerText = 'VIP Unlocked';
                 overlay.classList.add('hidden');
             }
         }
 
-        function interactGarfield() { alert("Meow! Test an incoming AI call in the phone simulator below!"); }
+        function interactGarfield() { alert("Meow! Test high-ticket executive routing in the VIP simulator below!"); }
         function toggleGarfieldSleep() { isSleep = !isSleep; }
-        function feedLasagna() { alert("Lasagna refueled for Garfield AI Receptionist!"); }
+        function feedLasagna() { alert("Executive Lasagna & Champagne served to VIP Concierge!"); }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('bg-garfield-orange', 'text-white');
+                el.classList.remove('bg-garfield-vipgold', 'text-black');
                 el.classList.add('bg-garfield-cream', 'text-garfield-black');
             });
 
@@ -1127,61 +1122,61 @@
             const activeBtn = document.getElementById(`tabBtn-${tabId.replace('tab-', '')}`);
             if (activeBtn) {
                 activeBtn.classList.remove('bg-garfield-cream', 'text-garfield-black');
-                activeBtn.classList.add('bg-garfield-orange', 'text-white');
+                activeBtn.classList.add('bg-garfield-vipgold', 'text-black', 'font-bold');
             }
         }
 
-        function toggleSimulatedCall() { alert("Simulating live call test for Garfield AI Voice Receptionist..."); }
-        function saveTenantConfig() { alert("AI Voice Receptionist Configuration deployed successfully!"); }
+        function toggleSimulatedCall() { alert("Simulating live high-ticket VIP call test..."); }
+        function saveTenantConfig() { alert("VIP Executive Concierge Configuration deployed successfully!"); }
 
         const familyTopics = [
-            "Garfield AI Voice Receptionist: Sub-200ms Latency Vapi Speech Pipelines",
-            "Eric Garfield & Daniel Panda on Scaling AI Phone Switchboards",
-            "Martine Bear's Restaurant Call Handling & Automated Lasagna Orders",
-            "Orla Garfield on Optimizing Speech Recognition & Multi-Language Voice AI",
-            "Joe Garfield & Sadie Wolf: Managing Call Surges with Garfield AI",
-            "Daniel Panda & Joe Garfield on Zen Philosophy and AI Customer Service",
-            "Porter Garfield's Automated Webhook Architecture for Gumroad Sales",
-            "Eric Garfield & Garfield: Why Naps are an Essential Engineering Metric",
-            "Martine Bear & Sadie Wolf on Balancing Family Life and Enterprise SaaS",
-            "The Ultimate Garfield AI Reunion: Lasagna, Telephony, and Automation"
+            "Garfield VIP Executive Concierge: Sub-150ms Latency for High-Net-Worth Clients",
+            "Eric Garfield & Daniel Panda on Scaling White-Glove AI Phone Routing",
+            "Martine Bear's Luxury Corporate Catering & VIP Client Management",
+            "Orla Garfield on Optimizing Secure Speech Recognition for Private Banking",
+            "Joe Garfield & Sadie Wolf: Managing Enterprise VIP Escalations",
+            "Daniel Panda & Joe Garfield on Zen Philosophy and Executive Concierge AI",
+            "Porter Garfield's Automated Webhook Architecture for High-Ticket Sales",
+            "Eric Garfield & Garfield: Why Naps are an Essential Engineering Metric for Executives",
+            "Martine Bear & Sadie Wolf on Balancing Family Life and VIP Enterprise SaaS",
+            "The Ultimate Garfield VIP Reunion: Lasagna, Executive Telephony, and Automation"
         ];
 
         function getArticleData(index) {
             const topic = familyTopics[index % familyTopics.length];
-            const title = `Article #${index + 1}: ${topic}`;
+            const title = `VIP Article #${index + 1}: ${topic}`;
             
             const memeBanner = `
   /\\_/\\  
- ( o.o )  < "GARFIELD AI RECEPTIONIST MEME #${index + 1}: Sub-200ms Voice Pipeline Active!"
+ ( o.o )  < "GARFIELD VIP EXECUTIVE MEME #${index + 1}: High-Ticket White-Glove Pipeline Active!"
   > ^ <
   --------------------------------------------------------------
- [ AI VOICE & FAMILY ASCII: Golden Lasagna Layer #${(index % 20) + 1} ]
+ [ VIP EXECUTIVE ASCII: Golden Lasagna Layer #${(index % 20) + 1} ]
   --------------------------------------------------------------
             `;
 
             const fullText = `
-                <div class="bg-garfield-yellow/40 p-4 rounded-xl border-2 border-black font-mono text-xs whitespace-pre font-bold text-garfield-lasagna mb-4">
+                <div class="bg-garfield-yellow/40 p-4 rounded-xl border-2 border-black font-mono text-xs whitespace-pre font-bold text-amber-900 mb-4">
 ${memeBanner}
                 </div>
 
-                <h3 class="font-bangers text-2xl text-garfield-darkorange">Introduction: Garfield AI Voice Receptionist Engineering</h3>
-                <p>Welcome to family article #${index + 1}. In this 1,000-word piece, we explore how Joe Garfield, Daniel Panda, Eric Garfield, Martine Bear, Orla Garfield, Sadie Wolf, and Porter Garfield collaborate to power our AI Voice Receptionist SaaS platform.</p>
+                <h3 class="font-bangers text-2xl text-amber-900">Introduction: High-Ticket VIP Voice Concierge Engineering</h3>
+                <p>Welcome to family article #${index + 1}. In this 1,000-word piece, we explore how Joe Garfield, Daniel Panda, Eric Garfield, Martine Bear, Orla Garfield, Sadie Wolf, and Porter Garfield collaborate to power our High-Ticket VIP Voice Concierge SaaS platform.</p>
 
-                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 1: Vapi Voice Pipeline & Intent Detection</h4>
-                <p>By connecting low-latency Vapi voice engines with Porter Garfield's webhook dispatches and Orla Garfield's sub-20ms speech recognition tuning, our AI Receptionist handles thousands of calls per second while Martine Bear maintains full system stability.</p>
+                <h4 class="font-bangers text-xl text-amber-900 mt-4">Section 1: White-Glove Routing & Instant Human Handoff</h4>
+                <p>By connecting low-latency Vapi voice engines with Porter Garfield's secure webhook dispatches and Orla Garfield's ultra-fast speech recognition tuning, our VIP Concierge instantly routes high-net-worth clients directly to senior advisors while Martine Bear maintains absolute system security.</p>
 
-                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 2: Community Support & Garfield Lounge Integration</h4>
-                <p>Joe Garfield and Sadie Wolf spearhead our Garfield Lounge Discord support servers, ensuring every enterprise tenant gets immediate help configuring their custom system prompts.</p>
+                <h4 class="font-bangers text-xl text-amber-900 mt-4">Section 2: Community Support & Garfield Lounge Integration</h4>
+                <p>Joe Garfield and Sadie Wolf spearhead our Garfield Lounge Discord support servers, ensuring every enterprise VIP tenant gets immediate white-glove assistance.</p>
 
-                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Conclusion: Automated Customer Support Excellence</h4>
-                <p>Combining wit, warm customer support, and instant table booking capabilities—just as Garfield and Daniel Panda envisioned. Unlock your full license on Gumroad today!</p>
+                <h4 class="font-bangers text-xl text-amber-900 mt-4">Conclusion: Excellence in High-Ticket Client Relations</h4>
+                <p>Combining uncompromising security, zero wait times, and a touch of Garfield's signature wit—just as Daniel Panda envisioned. Unlock your full VIP license on Gumroad today!</p>
             `;
 
             return {
                 id: index + 1,
                 title: title,
-                category: (index % 2 === 0) ? "AI Voice Telephony" : "SaaS Operations",
+                category: (index % 2 === 0) ? "VIP Executive Concierge" : "High-Ticket SaaS",
                 date: "Oct 25, 2026",
                 body: fullText
             };
@@ -1213,18 +1208,18 @@ ${memeBanner}
                     <div class="comic-panel bg-garfield-cream p-5 rounded-2xl flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between">
-                                <span class="text-[10px] bg-garfield-orange text-white font-bold px-2 py-0.5 rounded uppercase">Article #${item.id}</span>
+                                <span class="text-[10px] bg-garfield-vipgold text-black font-bold px-2 py-0.5 rounded uppercase font-bold">Article #${item.id}</span>
                                 <span class="text-[10px] font-bold text-slate-500">${item.category}</span>
                             </div>
                             <h4 class="font-bangers text-xl text-garfield-black mt-2 leading-tight">${item.title}</h4>
                             <p class="text-xs font-bold text-slate-700 mt-2 line-clamp-3 leading-relaxed">
-                                Complete 1,000-word AI voice receptionist deep-dive featuring Daniel Panda, Eric, Martine, Joe, Sadie, and Porter.
+                                Complete 1,000-word VIP executive concierge deep-dive featuring Daniel Panda, Eric, Martine, Joe, Sadie, and Porter.
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-xs font-bold">
                             <span class="text-slate-500">${item.date}</span>
-                            <button onclick="openArticleView(${item.id - 1})" class="text-garfield-darkorange hover:underline font-bangers text-sm flex items-center gap-1 transition-all hover:scale-105">
-                                Read Full Article (1,000 Words) ↗
+                            <button onclick="openArticleView(${item.id - 1})" class="text-amber-900 hover:underline font-bangers text-sm flex items-center gap-1 transition-all hover:scale-105 font-bold">
+                                Read Full VIP Article (1,000 Words) ↗
                             </button>
                         </div>
                     </div>
