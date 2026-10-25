@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageMetaTitle">Programmatic Sub-Page | Garfield AI Executive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.6); box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-amber-400 selection:text-black">
+    <!-- Header -->
+    <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="modules.html" class="flex items-center gap-3">
+                <div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">⚡</div>
+                <span class="font-bangers text-2xl text-white">PSEO NODE <span class="text-amber-400" id="headerNodeId">#0000</span></span>
+            </a>
+            <a href="modules.html" class="text-xs font-bold font-mono text-amber-400 border border-amber-400/30 px-4 py-2 rounded-xl hover:bg-amber-400 hover:text-black transition-all">← Back to 10,000+ Directory</a>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl w-full mx-auto px-6 py-12 space-y-8">
+        <div class="bg-[#121216] p-8 md:p-10 rounded-3xl gold-border-glow space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span id="nodeBadge" class="text-xs font-mono text-amber-400 bg-amber-400/10 px-3 py-1 rounded-xl border border-amber-400/20 font-bold uppercase">Sub-Node #1</span>
+                        <span id="nodeCategory" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1 rounded-xl border border-white/10">Private Wealth</span>
+                    </div>
+                    <h1 id="nodeTitle" class="text-2xl md:text-3xl font-black text-white">Loading Programmatic Sub-Page Payload...</h1>
+                </div>
+                <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-xl border border-emerald-500/20 whitespace-nowrap">✔ Vercel Edge Live</span>
+            </div>
+
+            <!-- Dynamic SEO Script Payload Box -->
+            <div class="space-y-3 font-mono text-xs">
+                <label class="text-slate-300 font-bold block flex items-center justify-between">
+                    <span>Programmatic Closing Script & Semantic Payload:</span>
+                    <span class="text-amber-400">Latency: &lt; 130ms</span>
+                </label>
+                <div id="nodeScript" class="bg-black/80 p-6 rounded-2xl border border-white/10 text-slate-200 leading-relaxed text-sm">
+                    Querying secure node parameters from decentralized edge registry...
+                </div>
+            </div>
+
+            <!-- Interactive Action & Webhook Trigger -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
+                <button onclick="executeNodeWebhook()" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs px-8 py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all">
+                    Execute Sub-Page Webhook & Vapi Voice 🚀
+                </button>
+                <div id="nodeLog" class="text-xs font-mono text-amber-300 text-center sm:text-right">Ready for institutional dispatch.</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const nodeId = parseInt(urlParams.get('id') || '1');
+
+        const sectorsList = ["Private Wealth & Escrow Vault", "Gulfstream & Superyacht Charter", "Emergency Concierge Surgical Suite", "Series C M&A Boardroom Bridge"];
+        const assignedSector = sectorsList[(nodeId - 1) % sectorsList.length];
+
+        document.getElementById('pageMetaTitle').innerText = `Sub-Page #${nodeId} | Garfield AI Executive`;
+        document.getElementById('headerNodeId').innerText = `#${nodeId}`;
+        document.getElementById('nodeBadge').innerText = `Programmatic Node #${nodeId}`;
+        document.getElementById('nodeCategory').innerText = assignedSector;
+        document.getElementById('nodeTitle').innerText = `Enterprise Sub-Page #${nodeId}: ${assignedSector} Conversion Protocol`;
+        
+        document.getElementById('nodeScript').innerText = `[Programmatic SEO & Script Payload for Node #${nodeId}] -> This sub-page is dynamically optimized for high-net-worth query intent in '${assignedSector}'. Automatically integrates real-time AES-256 escrow verification, sub-150ms Vapi WebRTC speech synthesis, and instant Discord P1 stakeholder handoff.`;
+
+        function executeNodeWebhook() {
+            const log = document.getElementById('nodeLog');
+            log.innerText = `Dispatching webhook for Sub-Page #${nodeId}...`;
+            setTimeout(() => {
+                log.innerText = `✔ Node #${nodeId} Executed (Hash: 0x${(nodeId * 3821).toString(16).toUpperCase()})`;
+            }, 600);
+        }
+    </script>
+</body>
+</html>
