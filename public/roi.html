@@ -1,56 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise ROI Calculator | Garfield AI Executive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Cost of Delay Calculator | Garfield AI Executive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { garfield: { black: '#050507', panel: '#121216', vipgold: '#D4AF37', orange: '#FF8C00' } },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], bangers: ['Bangers', 'cursive'], mono: ['JetBrains Mono', 'monospace'] },
+                    boxShadow: { 'gold-glow': '0 0 70px rgba(212, 175, 55, 0.5)', 'orange-glow': '0 0 40px rgba(255, 140, 0, 0.45)' }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; overflow-x: hidden; }
         .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.6); box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
-    <header class="bg-garfield-black/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
+<body class="min-h-screen flex flex-col selection:bg-garfield-vipgold selection:text-black">
+    <!-- Top Urgency Bar -->
+    <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
+        <span>🚨 CRITICAL DEADLINE: 100% ESCROW REFUND GUARANTEE CLOSES IN <strong class="text-white bg-black px-2 py-0.5 rounded">03:42:18</strong></span>
+        <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline">Claim Your Guaranteed Slot Now ➔</a>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3"><div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">👑</div><span class="font-bangers text-2xl text-white">GARFIELD <span class="gold-gradient-text">ROI CALCULATOR</span></span></a>
-            <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-300">
-                <a href="index.html" class="hover:text-amber-400">Home</a>
-                <a href="sandbox.html" class="hover:text-amber-400">Live Sandbox</a>
-                <a href="hooks.html" class="hover:text-amber-400">10,000+ Hooks</a>
-                <a href="roi.html" class="text-amber-400">ROI</a>
-                <a href="pricing.html" class="hover:text-amber-400">Pricing</a>
-            </nav>
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-garfield-vipgold p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">👑</div>
+                <div>
+                    <span class="font-bangers text-2xl tracking-wider text-white">GARFIELD <span class="gold-gradient-text">200% CLOSER</span></span>
+                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">Absolute Revenue Conversion Engine</span>
+                </div>
+            </a>
+            <div class="flex items-center gap-3">
+                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400">Visitor</strong></span>
+                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure Deal ↗</a>
+            </div>
         </div>
     </header>
-    <main class="flex-grow max-w-5xl w-full mx-auto px-6 py-16 flex flex-col gap-10">
-        <div class="text-center max-w-2xl mx-auto"><span class="text-xs font-extrabold text-amber-400 uppercase tracking-widest">Quantifiable Value</span><h1 class="text-4xl font-black text-white mt-1">Enterprise ROI & Cost Savings Calculator</h1></div>
-        <div class="bg-[#121216] rounded-3xl p-10 gold-border-glow grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            <div class="space-y-6">
-                <div><div class="flex justify-between text-sm font-bold text-slate-300 mb-2"><span>Monthly Inbound Executive Calls:</span><span id="callVolumeVal" class="text-amber-400 font-mono">1,500</span></div><input type="range" id="callVolume" min="500" max="10000" step="500" value="1500" oninput="calculateROI()" class="w-full accent-amber-400 bg-black/50 h-2 rounded-lg"></div>
-                <div><div class="flex justify-between text-sm font-bold text-slate-300 mb-2"><span>Average Deal Value ($):</span><span id="dealVal" class="text-amber-400 font-mono">$25,000</span></div><input type="range" id="dealValue" min="5000" max="250000" step="5000" value="25000" oninput="calculateROI()" class="w-full accent-amber-400 bg-black/50 h-2 rounded-lg"></div>
-            </div>
-            <div class="bg-black/70 p-8 rounded-2xl border gold-border-glow text-center space-y-4">
-                <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Projected Annual Savings & Revenue</span>
-                <div id="annualROI" class="text-4xl font-black gold-gradient-text">$294,000 / year</div>
-                <p class="text-xs text-slate-400">Based on 85% receptionist cost reduction + 12% after-hours lead conversion.</p>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-10">
+        <!-- Navigation Toolbar -->
+        <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
+            <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🔥 Hot Buyer Finder</a>
+            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
+            <a href="roi.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">💸 Cost of Delay Calculator</a>
+            <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
+            <a href="team.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">01. Closing Team</a>
+            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
+            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
+            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
+            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 100 Closing Modules</a>
+        </div>
+
+        <!-- 💸 3. Cost of Delay Financial Analytics -->
+        <div class="space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-5 bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6">
+                    <h3 class="font-bold text-white text-base border-b border-white/10 pb-3">Cost of Delay & ROI Calculator</h3>
+                    <form onsubmit="calculateRoi(event)" class="space-y-4">
+                        <div>
+                            <label class="text-xs font-bold text-slate-300 block mb-1">Monthly Inbound & Outbound Pipeline Calls</label>
+                            <input type="number" id="monthlyCalls" required value="5000" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-300 block mb-1">Average Closed Contract Value ($ USD)</label>
+                            <input type="number" id="avgDealSize" required value="50000" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
+                        </div>
+                        <button type="submit" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all">Calculate Cost of Delay ➔</button>
+                    </form>
+                </div>
+                <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-5 font-mono text-xs" id="roiResultsBox">
+                    <div class="text-slate-400 uppercase border-b border-white/10 pb-2 flex justify-between"><span>Financial Impact Metrics</span><span class="text-emerald-400 font-bold">Instant Payback</span></div>
+                    <p class="text-slate-300">Run calculation to reveal your exact daily loss from delaying deployment.</p>
+                </div>
             </div>
         </div>
     </main>
-    <footer class="bg-black border-t border-white/10 mt-20 py-8 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
-    <script>
-        function calculateROI() {
-            const volume = parseInt(document.getElementById('callVolume').value);
-            const dealVal = parseInt(document.getElementById('dealValue').value);
-            document.getElementById('callVolumeVal').innerText = volume.toLocaleString();
-            document.getElementById('dealVal').innerText = `$${dealVal.toLocaleString()}`;
-            const annualTotal = ((volume * 10) + Math.floor((volume * 0.04) * dealVal * 0.08)) * 12;
-            document.getElementById('annualROI').innerText = `$${annualTotal.toLocaleString()} / year`;
-        }
-        calculateROI();
-    </script>
+
+    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+    <script src="app.js"></script>
 </body>
 </html>
