@@ -53,6 +53,7 @@
             background-image: radial-gradient(#FF8000 15%, transparent 16%), radial-gradient(#FFCA28 15%, transparent 16%);
             background-size: 60px 60px;
             background-position: 0 0, 30px 30px;
+            overflow-x: hidden;
         }
 
         .comic-border {
@@ -62,12 +63,12 @@
         .comic-panel {
             border: 3.5px solid #212121;
             box-shadow: 5px 5px 0px #212121;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
         }
 
         .comic-panel:hover {
-            transform: translateY(-3px) rotate(0.3deg);
-            box-shadow: 7px 7px 0px #212121;
+            transform: translateY(-4px) rotate(0.4deg) scale(1.01);
+            box-shadow: 8px 8px 0px #212121;
         }
 
         .speech-bubble {
@@ -75,7 +76,7 @@
             background: #ffffff;
             border: 3px solid #212121;
             border-radius: 20px;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
         }
 
         .speech-bubble::after {
@@ -102,55 +103,63 @@
             width: 0;
         }
 
-        /* Advanced Animations */
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(1.5deg); }
+        @keyframes dynamicFloat {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-12px) rotate(1.2deg) scale(1.02); }
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
         }
 
-        @keyframes wiggle {
+        @keyframes dynamicWiggle {
             0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
+            25% { transform: rotate(-3deg) scale(1.05); }
+            75% { transform: rotate(3deg) scale(1.05); }
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.03); }
+        @keyframes dynamicGlow {
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(255,128,0,0.6)); }
+            50% { filter: drop-shadow(0 0 12px rgba(255,202,40,0.9)); }
         }
 
         @keyframes pulseWave {
-            0%, 100% { height: 10px; }
-            50% { height: 38px; }
+            0%, 100% { height: 8px; transform: scaleY(1); }
+            50% { height: 40px; transform: scaleY(1.2); }
         }
 
-        .animate-float {
-            animation: floatSlow 4s ease-in-out infinite;
+        .animate-dynamic-float {
+            animation: dynamicFloat 3.5s ease-in-out infinite;
         }
 
-        .animate-wiggle:hover {
-            animation: wiggle 0.4s ease-in-out infinite;
+        .animate-dynamic-wiggle:hover {
+            animation: dynamicWiggle 0.35s ease-in-out infinite;
         }
 
-        .animate-pulse-glow {
-            animation: pulseGlow 2s infinite ease-in-out;
+        .animate-dynamic-glow {
+            animation: dynamicGlow 2.2s infinite ease-in-out;
         }
 
         .wave-bar {
-            animation: pulseWave 1.2s infinite ease-in-out;
+            animation: pulseWave 1s infinite ease-in-out;
         }
 
-        /* Smooth Tab & Section Transition */
         .tab-content {
-            animation: fadeIn 0.35s ease-out forwards;
+            animation: panelFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes panelFadeIn {
+            from { opacity: 0; transform: translateY(15px) scale(0.99); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Custom Scrollbar */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -165,34 +174,35 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col text-garfield-black">
+<body class="min-h-screen flex flex-col text-garfield-black relative">
+
+    <!-- Interactive 1,000 Particle Animation Canvas -->
+    <canvas id="particleCanvas"></canvas>
 
     <!-- Top Navigation Bar -->
     <header class="bg-garfield-orange comic-border border-t-0 border-x-0 sticky top-0 z-50 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
             
-            <!-- SaaS Title & Badge -->
             <div class="flex items-center gap-3">
-                <div class="bg-garfield-yellow p-2 rounded-xl comic-border shadow-comic-sm animate-wiggle">
+                <div class="bg-garfield-yellow p-2 rounded-xl comic-border shadow-comic-sm animate-dynamic-wiggle">
                     <i class="fa-solid font-bangers text-2xl text-garfield-lasagna">🐾</i>
                 </div>
                 <div>
-                    <h1 class="font-bangers text-3xl tracking-wider text-white drop-shadow-[0_2px_0_#212121] leading-none">
+                    <h1 class="font-bangers text-3xl tracking-wider text-white drop-shadow-[0_2px_0_#212121] leading-none animate-dynamic-glow">
                         GARFIELD <span class="text-garfield-yellow">AI VOICE</span> SaaS
                     </h1>
                     <p class="text-xs font-bold text-garfield-black bg-garfield-yellow px-2 py-0.5 rounded border border-black inline-block mt-0.5">
-                        Enterprise Receptionist v4.2 • Vapi Audio Engine
+                        Enterprise Receptionist v4.2 • Meme of the Day Edition
                     </p>
                 </div>
             </div>
 
-            <!-- Header Action Buttons & Security Status Badge -->
             <div class="flex flex-wrap items-center gap-3">
                 <a 
                     href="https://discord.gg/AcsQ6DDqPB" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-bangers text-base px-3.5 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all hover:scale-105 flex items-center gap-1.5 uppercase"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-bangers text-base px-3.5 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all hover:scale-110 flex items-center gap-1.5 uppercase"
                 >
                     <i class="fa-brands fa-discord"></i> Discord Support
                 </a>
@@ -201,7 +211,7 @@
                     href="https://danielverse87.gumroad.com/l/ai-receptionist" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="bg-pink-500 hover:bg-pink-600 text-white font-bangers text-base px-3.5 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all hover:scale-105 flex items-center gap-1.5 uppercase animate-pulse-glow"
+                    class="bg-pink-500 hover:bg-pink-600 text-white font-bangers text-base px-3.5 py-1.5 rounded-xl comic-border shadow-comic-sm transition-all hover:scale-110 flex items-center gap-1.5 uppercase animate-pulse"
                 >
                     <i class="fa-solid fa-cart-shopping"></i> Buy License
                 </a>
@@ -221,21 +231,20 @@
     </header>
 
     <!-- Main Workspace Container -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-6 relative z-10">
 
         <!-- Garfield Interactive Mascot Command Desk -->
         <section class="comic-panel bg-garfield-yellow rounded-3xl p-6 relative overflow-hidden">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 
-                <!-- Mascot Vector Artwork with Floating Animation -->
                 <div class="md:col-span-4 flex flex-col items-center justify-center relative">
-                    <div id="garfieldAvatar" class="w-48 h-48 rounded-full bg-garfield-cream comic-border flex items-center justify-center relative shadow-comic cursor-pointer transition-transform duration-300 hover:scale-110 animate-float" onclick="interactGarfield()">
+                    <div id="garfieldAvatar" class="w-48 h-48 rounded-full bg-garfield-cream comic-border flex items-center justify-center relative shadow-comic cursor-pointer transition-transform duration-300 hover:scale-110 animate-dynamic-float" onclick="interactGarfield()">
                         
                         <div id="zzzAnimation" class="absolute -top-4 -right-2 text-garfield-lasagna font-bangers text-2xl font-bold animate-bounce hidden">
                             Zzz... Zzz...
                         </div>
 
-                        <!-- Garfield Artwork -->
+                        <!-- Garfield Vector Artwork -->
                         <svg id="garfieldSvg" class="w-40 h-40" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <polygon points="40,50 20,10 70,35" fill="#FF8000" stroke="#212121" stroke-width="4"/>
                             <polygon points="160,50 180,10 130,35" fill="#FF8000" stroke="#212121" stroke-width="4"/>
@@ -267,7 +276,6 @@
                     </div>
                 </div>
 
-                <!-- Speech Bubble & Quick Action Desk -->
                 <div class="md:col-span-8 flex flex-col gap-4">
                     <div class="speech-bubble p-4 comic-shadow">
                         <div class="flex items-start justify-between">
@@ -275,7 +283,7 @@
                             <span id="statusTag" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-400 animate-pulse">ONLINE</span>
                         </div>
                         <p id="garfieldSpeechText" class="font-comic text-lg text-slate-800 font-bold mt-1">
-                            "Welcome to the AI Voice Receptionist Dashboard! Check out our animated 1,000 articles library or unlock your license!"
+                            "Check out our Garfield Meme of the Day below, or browse 1,000 deep-dive AI articles!"
                         </p>
                     </div>
 
@@ -297,12 +305,40 @@
             </div>
         </section>
 
+        <!-- GARFIELD MEME OF THE DAY FEATURE -->
+        <section class="comic-panel bg-gradient-to-r from-garfield-yellow via-garfield-cream to-garfield-yellow rounded-3xl p-6 border-2 border-garfield-black relative overflow-hidden">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="bg-garfield-lasagna text-white p-4 rounded-2xl comic-border shadow-comic-sm animate-bounce">
+                        <i class="fa-solid fa-face-laugh-squint text-3xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-garfield-darkorange text-white font-bold px-2 py-0.5 rounded uppercase font-bangers tracking-wider">🔥 Daily Highlight</span>
+                            <span id="memeDate" class="text-xs font-bold text-slate-700">October 25, 2026</span>
+                        </div>
+                        <h2 class="font-bangers text-3xl text-garfield-darkorange tracking-wide mt-1">GARFIELD MEME OF THE DAY</h2>
+                        <p id="memeSubtitle" class="text-xs font-bold text-slate-700">Fresh daily humor guaranteed to make Mondays bearable.</p>
+                    </div>
+                </div>
+
+                <button onclick="loadRandomMeme()" class="bg-garfield-orange hover:bg-orange-600 text-white font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-dice"></i> Generate Random Meme 🎲
+                </button>
+            </div>
+
+            <!-- Meme ASCII / Graphic Display Card -->
+            <div class="mt-4 bg-slate-900 text-garfield-yellow p-4 rounded-2xl comic-border font-mono text-xs md:text-sm whitespace-pre font-bold shadow-inner overflow-x-auto" id="memeDisplayBox">
+                Loading today's masterpiece...
+            </div>
+        </section>
+
         <!-- Automated Gumroad License Verification & Access Gate Card -->
         <section id="securityGateCard" class="comic-panel bg-white rounded-3xl p-6 border-2 border-garfield-black transition-all">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
                     <div class="bg-garfield-orange text-white p-3.5 rounded-2xl comic-border shadow-comic-sm">
-                        <i class="fa-solid fa-shield-cat text-2xl animate-spin" style="animation-duration: 8s;"></i>
+                        <i class="fa-solid fa-shield-cat text-2xl animate-spin" style="animation-duration: 6s;"></i>
                     </div>
                     <div>
                         <h2 class="font-bangers text-2xl text-garfield-black tracking-wide">ENTERPRISE SECURITY ACCESS GATE</h2>
@@ -337,7 +373,6 @@
         <!-- Main Functional Workspace Tabs Container -->
         <section class="comic-panel bg-white rounded-3xl p-6 shadow-comic-lg flex flex-col gap-6 relative">
             
-            <!-- Lock Overlay for Unauthorized Visitors -->
             <div id="workspaceLockOverlay" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm z-30 rounded-3xl flex flex-col items-center justify-center gap-4 text-white p-6 transition-all hidden">
                 <div class="bg-garfield-lasagna p-4 rounded-full comic-border shadow-comic text-3xl animate-bounce">
                     <i class="fa-solid fa-lock"></i>
@@ -436,7 +471,7 @@
                         </div>
                     </div>
 
-                    <!-- Right: Live AI Call Simulator with Animated Waves -->
+                    <!-- Right: Live AI Call Simulator -->
                     <div class="lg:col-span-5 bg-garfield-cream rounded-2xl p-4 comic-border shadow-comic flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between border-b-2 border-slate-300 pb-2 mb-3">
@@ -585,7 +620,7 @@
     </main>
 
     <!-- Footer with Ecosystem Links -->
-    <footer class="bg-garfield-black text-white comic-border border-b-0 border-x-0 mt-8">
+    <footer class="bg-garfield-black text-white comic-border border-b-0 border-x-0 mt-8 relative z-10">
         <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
                 <span class="font-bangers text-2xl text-garfield-yellow tracking-wider">GARFIELD AI SAAS</span>
@@ -604,8 +639,99 @@
         </div>
     </footer>
 
-    <!-- Interactive Client-Side Logic & 1,000 Articles Engine -->
+    <!-- Interactive 1,000 Animation Engine & Meme of the Day Logic -->
     <script>
+        // Meme of the Day Database
+        const memeCollection = [
+            `
+  /\\_/\\  
+ ( o.o )  < "I hate Mondays. And I also hate when users try to push code without unit tests."
+  > ^ <
+            `,
+            `
+  /\\_/\\  
+ ( -.- )  < "My body is 90% lasagna, 5% sleep, and 5% waiting for the weekend."
+  > ^ <
+            `,
+            `
+  /\\_/\\  
+ ( ^_^ )  < "Why talk to humans when you can deploy an AI Voice Receptionist to do it while you nap?"
+  > ^ <
+            `,
+            `
+  /\\_/\\  
+ ( ಠ_ಠ )  < "You want me to work on Monday? Talk to the paw."
+  > ^ <
+            `,
+            `
+  /\\_/\\  
+ ( ˘ ³˘)  < "Lasagna is the only framework that never breaks in production."
+  > ^ <
+            `
+        ];
+
+        function loadRandomMeme() {
+            const randomIndex = Math.floor(Math.random() * memeCollection.length);
+            const box = document.getElementById('memeDisplayBox');
+            if(box) {
+                box.innerText = memeCollection[randomIndex];
+            }
+        }
+
+        // 1,000 Particle Animation Engine
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const symbols = ['🐾', '🍕', '🐱', '⚡', '💻', '✨'];
+        for (let i = 0; i < 1000; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.8,
+                vy: (Math.random() - 0.5) * 0.8,
+                size: Math.random() * 3 + 1,
+                symbol: i % 15 === 0 ? symbols[Math.floor(Math.random() * symbols.length)] : null,
+                color: i % 2 === 0 ? '#FF8000' : '#FFCA28',
+                alpha: Math.random() * 0.5 + 0.1
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0) p.x = width;
+                if (p.x > width) p.x = 0;
+                if (p.y < 0) p.y = height;
+                if (p.y > height) p.y = 0;
+
+                ctx.save();
+                ctx.globalAlpha = p.alpha;
+                if (p.symbol) {
+                    ctx.font = '12px Fredoka';
+                    ctx.fillText(p.symbol, p.x, p.y);
+                } else {
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
         let isLocked = false;
         let isSleep = false;
         let callActive = false;
@@ -619,6 +745,7 @@
                 updateSecurityUI();
             }
             renderBlogGrid();
+            loadRandomMeme();
         });
 
         async function validateSecurityKey() {
@@ -730,7 +857,7 @@
             const title = `Article #${index + 1}: ${topic}`;
             
             const memeBanner = `
-  /\_/\  
+  /\\_/\\  
  ( o.o )  < "GARFIELD MEME #${index + 1}: Never deploy code on Mondays!"
   > ^ <
   --------------------------------------------------------------
