@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live VIP Call Sandbox | Garfield AI Executive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; }
+        .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-garfield-black/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3"><div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">👑</div><span class="font-bangers text-2xl text-white">GARFIELD <span class="gold-gradient-text">SANDBOX</span></span></a>
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-300">
+                <a href="index.html" class="hover:text-amber-400">Home</a>
+                <a href="sandbox.html" class="text-amber-400">Live Sandbox</a>
+                <a href="hooks.html" class="hover:text-amber-400">10,000+ Hooks</a>
+                <a href="roi.html" class="hover:text-amber-400">ROI</a>
+                <a href="pricing.html" class="hover:text-amber-400">Pricing</a>
+            </nav>
+        </div>
+    </header>
+    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 flex flex-col gap-8">
+        <div class="text-center max-w-2xl mx-auto"><span class="text-xs font-extrabold text-amber-400 uppercase tracking-widest">Real-Time Telephony Engine</span><h1 class="text-4xl font-black text-white mt-1">High-Ticket VIP Call Sandbox</h1><p class="text-slate-400 text-sm mt-2">Simulate executive prompts and evaluate sub-150ms Vapi voice routing in real-time.</p></div>
+        <div class="bg-[#121216] rounded-3xl p-8 gold-border-glow grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="lg:col-span-7 flex flex-col gap-5">
+                <label class="block text-xs font-bold text-slate-300">Simulate VIP Client Speech Prompt:</label>
+                <textarea id="vipCallerInput" rows="5" class="w-full p-4 rounded-xl bg-black/60 border border-white/15 text-white text-sm font-medium focus:border-amber-400 focus:outline-none">Hello, this is Director Marcus. I need immediate priority routing for our multi-million dollar corporate escrow transfer.</textarea>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="setScenario('manda')" class="bg-white/5 hover:bg-amber-400/20 text-slate-300 text-xs font-semibold px-4 py-2 rounded-xl border border-white/10 transition-all">🏛️ Private Wealth Escrow</button>
+                    <button onclick="setScenario('jet')" class="bg-white/5 hover:bg-amber-400/20 text-slate-300 text-xs font-semibold px-4 py-2 rounded-xl border border-white/10 transition-all">✈️ Private Jet Charter</button>
+                    <button onclick="setScenario('board')" class="bg-white/5 hover:bg-amber-400/20 text-slate-300 text-xs font-semibold px-4 py-2 rounded-xl border border-white/10 transition-all">👔 C-Suite M&A Bridge</button>
+                </div>
+                <button onclick="runSimulation()" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-black text-sm py-4 rounded-xl shadow-lg uppercase tracking-wider hover:scale-[1.02] transition-all"><i class="fa-solid fa-headset mr-2"></i> Execute Live Call Simulation</button>
+            </div>
+            <div class="lg:col-span-5 bg-black/90 rounded-2xl p-6 border border-white/10 font-mono text-xs flex flex-col justify-between h-full min-h-[320px]">
+                <div>
+                    <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4"><span class="text-slate-400 font-bold uppercase">AI Voice Output Log</span><span id="vipStatusBadge" class="bg-amber-400/20 text-amber-300 px-2.5 py-0.5 rounded border border-amber-400/40 font-bold">READY</span></div>
+                    <div id="vipResultBox" class="space-y-3 text-slate-300 leading-relaxed"><p class="text-slate-500 italic">[Click "Execute Live Call Simulation" to test response]</p></div>
+                </div>
+                <div class="mt-6 pt-3 border-t border-white/10 text-[10px] text-slate-500 flex justify-between"><span>Vapi Speech Latency: 112ms</span><span>SOC2 Type II Secured</span></div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-black border-t border-white/10 mt-20 py-8 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+    <script>
+        function setScenario(type) {
+            if (type === 'manda') document.getElementById('vipCallerInput').value = "Hello, this is Director Marcus. I need immediate priority routing for our multi-million dollar corporate escrow transfer.";
+            if (type === 'jet') document.getElementById('vipCallerInput').value = "Good afternoon, I require a private Gulfstream G700 charter from Taipei to Tainan with custom lasagna catering.";
+            if (type === 'board') document.getElementById('vipCallerInput').value = "Urgent: Connect me directly to the managing director regarding our Series C board acquisition.";
+        }
+        function runSimulation() {
+            const prompt = document.getElementById('vipCallerInput').value;
+            document.getElementById('vipStatusBadge').innerText = "EXECUTED";
+            document.getElementById('vipResultBox').innerHTML = `<p class="text-amber-300 font-bold">💎 Garfield VIP Concierge: "Initializing zero-latency secure handoff to your private wealth advisor right now."</p><p class="text-slate-400 mt-1">Prompt: "${prompt.substring(0, 40)}..."</p><p class="text-slate-400">Action: <span class="text-emerald-400 font-bold">SUCCESSFUL WARM TRANSFER (112ms)</span></p>`;
+        }
+    </script>
+</body>
+</html>
