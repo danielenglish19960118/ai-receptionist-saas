@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Base | Garfield AI Executive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; }
+        .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-garfield-black/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3"><div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">👑</div><span class="font-bangers text-2xl text-white">GARFIELD <span class="gold-gradient-text">KNOWLEDGE BASE</span></span></a>
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-300">
+                <a href="index.html" class="hover:text-amber-400">Home</a>
+                <a href="sandbox.html" class="hover:text-amber-400">Live Sandbox</a>
+                <a href="hooks.html" class="hover:text-amber-400">10,000+ Hooks</a>
+                <a href="knowledge.html" class="text-amber-400">Knowledge Base</a>
+            </nav>
+        </div>
+    </header>
+    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 flex flex-col gap-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <div><span class="text-xs font-extrabold text-amber-400 uppercase tracking-widest">Enterprise Library</span><h1 class="text-3xl font-black text-white mt-1">1,000-Article Knowledge Archive</h1></div>
+            <input type="text" placeholder="Search articles..." class="px-4 py-2.5 rounded-xl bg-black/60 border border-white/15 text-xs text-white">
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-[#121216] p-6 rounded-2xl border border-white/10 space-y-3"><span class="text-[10px] bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded font-bold">Article #1</span><h3 class="font-bold text-white text-base">Sub-150ms Latency Vapi Speech Pipelines</h3><p class="text-xs text-slate-400">Explore how edge voice processing eliminates latency for high-net-worth clients.</p></div>
+            <div class="bg-[#121216] p-6 rounded-2xl border border-white/10 space-y-3"><span class="text-[10px] bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded font-bold">Article #2</span><h3 class="font-bold text-white text-base">White-Glove Routing & Instant Human Handoff</h3><p class="text-xs text-slate-400">Architecting zero-trust secure warm transfers for multi-million dollar deals.</p></div>
+            <div class="bg-[#121216] p-6 rounded-2xl border border-white/10 space-y-3"><span class="text-[10px] bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded font-bold">Article #3</span><h3 class="font-bold text-white text-base">Scaling Multi-Tenant Enterprise Telephony</h3><p class="text-xs text-slate-400">Best practices for deploying isolated serverless webhooks on Vercel.</p></div>
+        </div>
+    </main>
+    <footer class="bg-black border-t border-white/10 mt-20 py-8 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+</body>
+</html>
