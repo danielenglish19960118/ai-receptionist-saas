@@ -1,16 +1,6 @@
 {
+  "version": 2,
   "rewrites": [
-    {
-      "source": "/terms",
-      "destination": "/api/terms"
-    },
-    {
-      "source": "/privacy",
-      "destination": "/api/privacy"
-    },
-    {
-      "source": "/linked-role",
-      "destination": "/api/linked-role"
-    }
+    { "source": "/api/(.*)", "destination": "/api/$1" }
   ]
 }
