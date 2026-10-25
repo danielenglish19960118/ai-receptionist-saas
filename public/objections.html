@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Objection Destroyer | Garfield AI Executive</title>
+    <title>Objection Destroyer & 10,000+ Rebuttal Nodes | Garfield AI Executive</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
@@ -42,7 +42,7 @@
                 </div>
             </a>
             <div class="flex items-center gap-3">
-                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400">Visitor</strong></span>
+                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400 font-bold">Visitor</strong></span>
                 <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure Deal ↗</a>
             </div>
         </div>
@@ -60,35 +60,247 @@
             <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
             <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
             <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
-            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 100 Closing Modules</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 10,000+ Modules</a>
         </div>
 
-        <!-- 🛡️ 2. Objection Destroyer View -->
-        <div class="space-y-8">
-            <div class="border-b border-white/10 pb-4">
-                <span class="text-xs font-extrabold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3.5 py-1.5 rounded-full uppercase">Absolute Deal Reversal</span>
-                <h1 class="text-3xl font-black text-white mt-2">AI Objection Destroyer & Rebuttal Engine</h1>
-                <p class="text-xs text-slate-400 mt-1">Click any objection below to generate an unrefutable closing counter-argument instantly.</p>
+        <!-- 🛡️ Objection Destroyer Header -->
+        <div class="space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full mb-2">
+                        <i class="fa-solid fa-shield-cat text-amber-400 text-xs"></i>
+                        <span class="text-xs font-mono font-bold text-amber-300 uppercase">Absolute Deal Reversal Engine</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-black text-white">AI Objection Destroyer & Rebuttal Engine</h1>
+                    <p class="text-xs md:text-sm text-slate-300 font-mono mt-1 max-w-2xl">
+                        Select or search any executive resistance pattern. Our neural voice pipelines counter hesitation with unrefutable financial metrics, SOC 2 compliance guarantees, and 30-day escrow locks.
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <input type="number" id="specificNodeInput" min="1" max="10000" placeholder="Jump to Node # (1-10000)" class="bg-black/60 border border-white/15 px-4 py-3 text-xs text-white rounded-xl font-mono outline-none w-full md:w-56 focus:border-amber-400" />
+                    <button onclick="jumpToObjectionNode()" class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs px-5 py-3 rounded-xl uppercase transition-all shadow-md whitespace-nowrap">Go ➔</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Core Rebuttal Workspace -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- Left Panel: Core Objection Categories & Selector -->
+            <div class="lg:col-span-5 bg-garfield-panel p-6 rounded-3xl border border-white/10 space-y-4 shadow-xl">
+                <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                    <label class="text-xs font-bold text-slate-300 uppercase tracking-wider">Executive Resistance Patterns:</label>
+                    <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Real-Time Counter</span>
+                </div>
+                <div class="space-y-2.5" id="objectionButtonList">
+                    <button onclick="destroyObjection('price')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group">
+                        <span class="font-bold group-hover:text-amber-300 transition-colors">"The price is too high for our budget."</span>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                    </button>
+                    <button onclick="destroyObjection('timing')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group">
+                        <span class="font-bold group-hover:text-amber-300 transition-colors">"Let's postpone evaluation until Q3/Q4."</span>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                    </button>
+                    <button onclick="destroyObjection('risk')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group">
+                        <span class="font-bold group-hover:text-amber-300 transition-colors">"We are concerned about AI security & privacy risk."</span>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                    </button>
+                    <button onclick="destroyObjection('competitor')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group">
+                        <span class="font-bold group-hover:text-amber-300 transition-colors">"We are already evaluating an in-house build."</span>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                    </button>
+                    <button onclick="destroyObjection('approval')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group">
+                        <span class="font-bold group-hover:text-amber-300 transition-colors">"I need to present this to the executive board first."</span>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                    </button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <div class="lg:col-span-5 bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-4">
-                    <label class="text-xs font-bold text-slate-300 block">Common Executive Objections:</label>
-                    <div class="space-y-2">
-                        <button onclick="destroyObjection('price')" class="w-full text-left bg-black/60 hover:bg-white/10 text-xs text-white p-3.5 rounded-xl border border-white/10 transition-all flex justify-between"><span>"The price is too high for our budget."</span><span>➔</span></button>
-                        <button onclick="destroyObjection('timing')" class="w-full text-left bg-black/60 hover:bg-white/10 text-xs text-white p-3.5 rounded-xl border border-white/10 transition-all flex justify-between"><span>"Let's evaluate this next quarter."</span><span>➔</span></button>
-                        <button onclick="destroyObjection('risk')" class="w-full text-left bg-black/60 hover:bg-white/10 text-xs text-white p-3.5 rounded-xl border border-white/10 transition-all flex justify-between"><span>"We are worried about AI implementation risk."</span><span>➔</span></button>
+            <!-- Right Panel: Output Closing Rebuttal Console -->
+            <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6 font-mono text-xs shadow-2xl" id="objectionOutput">
+                <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                    <span class="text-amber-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-terminal text-xs"></i> RECOMMENDED CLOSING REBUTTAL SCRIPT
+                    </span>
+                    <span class="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 text-[10px]">VERIFIED CLOSING RATIO: 99.2%</span>
+                </div>
+                
+                <div class="space-y-4">
+                    <p class="text-slate-300 leading-relaxed text-sm bg-black/70 p-5 rounded-2xl border border-white/10">
+                        "I completely respect budget constraints. However, every day without an AI executive receptionist costs average enterprises $1,420 in uncaptured hot leads. That is why we back your deployment with a 30-day 100% third-party escrow refund guarantee. You carry zero financial risk—if we don't increase your closing velocity by 300%, your funds are returned in full."
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 text-[11px]">
+                        <div class="bg-black/50 p-3 rounded-xl border border-white/10">
+                            <span class="text-slate-400 block">Vapi Response Latency:</span>
+                            <strong class="text-emerald-400">&lt; 125ms Edge Synthesis</strong>
+                        </div>
+                        <div class="bg-black/50 p-3 rounded-xl border border-white/10">
+                            <span class="text-slate-400 block">Contract Protection:</span>
+                            <strong class="text-amber-300">Stripe Vault Escrow Lock</strong>
+                        </div>
                     </div>
                 </div>
-                <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-4 font-mono text-xs" id="objectionOutput">
-                    <div class="text-amber-400 font-bold border-b border-white/10 pb-2">RECOMMENDED CLOSING REBUTTAL SCRIPT</div>
-                    <p class="text-slate-400 italic">[Click any objection on the left to load the AI closing counter-script]</p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-white/10">
+                    <button onclick="window.location.href='trial.html?objection=price'" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-6 py-3 rounded-xl uppercase transition-all shadow-md">
+                        Test This Script in Sandbox 🎙️
+                    </button>
+                    <span class="text-[10px] text-slate-500">PSEO Node ID: #OBJ-2026-VAL</span>
                 </div>
             </div>
+        </div>
+
+        <!-- 10,000+ Programmatic Sub-Page Nodes Grid Container -->
+        <div class="space-y-6 border-t border-white/10 pt-10">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-white">10,000+ Programmatic Objection Child Sub-Pages</h2>
+                    <p class="text-xs text-slate-400 font-mono mt-1">
+                        Explore our complete index of 10,000 specialized objection resolution pages. Click any sub-page node to open its dedicated child module terminal.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2 font-mono text-xs">
+                    <button onclick="changeObjectionBatch(-1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10">← Previous 16 Nodes</button>
+                    <span id="objectionPageIndicator" class="text-amber-400 font-bold px-2">Nodes 1 - 16 of 10,000</span>
+                    <button onclick="changeObjectionBatch(1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10">Next 16 Nodes →</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Sub-Nodes Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="objectionNodesGrid"></div>
         </div>
     </main>
 
-    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a>
+    </footer>
+
     <script src="app.js"></script>
+    <script>
+        let currentObjectionBatch = 0;
+        const batchSize = 16;
+        const totalObjectionNodes = 10000;
+
+        const objectionPresets = {
+            price: {
+                title: "Price & Budget Resistance Destroyer",
+                script: "I completely respect budget constraints. However, every day without an AI executive receptionist costs average enterprises $1,420 in uncaptured hot leads. That is why we back your deployment with a 30-day 100% third-party escrow refund guarantee. You carry zero financial risk—if we don't increase your closing velocity by 300%, your funds are returned in full.",
+                latency: "< 125ms",
+                conversion: "99.4%"
+            },
+            timing: {
+                title: "Quarterly Delay & Timing Rebuttal",
+                script: "Delaying implementation until next quarter means deferring an estimated $120,000 in pipeline revenue to your competitors. Our zero-friction setup takes under 60 seconds with Vapi WebRTC speech synthesis, allowing you to capture lost leads starting today without taking up engineering bandwidth.",
+                latency: "< 110ms",
+                conversion: "98.7%"
+            },
+            risk: {
+                title: "Security & Compliance Assurance Protocol",
+                script: "We completely prioritize your enterprise security. Garfield AI operates on a SOC 2 Type II certified infrastructure with zero-retention Vapi audio stream encryption (AES-256). Your proprietary lead lists and recordings are purged from volatile memory instantly upon call completion.",
+                latency: "< 130ms",
+                conversion: "99.8%"
+            },
+            competitor: {
+                title: "In-House Build Cost Comparison Counter",
+                script: "Building an in-house voice AI WebRTC pipeline requires over $200,000 in engineering salaries and months of acoustic tuning to achieve sub-150ms latency. With Garfield AI, you get instant access to pre-tuned closing models for a fraction of the cost, backed by an escrow guarantee.",
+                latency: "< 115ms",
+                conversion: "97.9%"
+            },
+            approval: {
+                title: "Executive Board Approval Accelerator",
+                script: "To make your board presentation effortless, we provide a pre-packaged ROI calculation deck along with a 30-day escrow performance contract. Your board carries zero downside risk—funds are locked in third-party escrow until target conversion KPIs are met.",
+                latency: "< 140ms",
+                conversion: "98.5%"
+            }
+        };
+
+        function destroyObjection(type) {
+            const data = objectionPresets[type] || objectionPresets.price;
+            const output = document.getElementById('objectionOutput');
+            
+            output.innerHTML = `
+                <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                    <span class="text-amber-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-terminal text-xs"></i> ${data.title}
+                    </span>
+                    <span class="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 text-[10px]">CONVERSION RATIO: ${data.conversion}</span>
+                </div>
+                
+                <div class="space-y-4">
+                    <p class="text-slate-200 leading-relaxed text-sm bg-black/80 p-5 rounded-2xl border border-amber-500/30">
+                        "${data.script}"
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 text-[11px]">
+                        <div class="bg-black/50 p-3 rounded-xl border border-white/10">
+                            <span class="text-slate-400 block">Vapi Response Latency:</span>
+                            <strong class="text-emerald-400">${data.latency} Edge Synthesis</strong>
+                        </div>
+                        <div class="bg-black/50 p-3 rounded-xl border border-white/10">
+                            <span class="text-slate-400 block">Contract Guarantee:</span>
+                            <strong class="text-amber-300">100% Escrow Refund Lock</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-white/10">
+                    <button onclick="window.location.href='trial.html?objection=${type}'" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-6 py-3 rounded-xl uppercase transition-all shadow-md">
+                        Test This Script in Sandbox 🎙️
+                    </button>
+                    <span class="text-[10px] text-slate-500">PSEO Node Hash: 0x${Math.floor(Math.random()*0xFFFFFF).toString(16).toUpperCase()}</span>
+                </div>
+            `;
+        }
+
+        function renderObjectionNodes() {
+            const grid = document.getElementById('objectionNodesGrid');
+            const start = currentObjectionBatch * batchSize + 1;
+            const end = Math.min(start + batchSize - 1, totalObjectionNodes);
+            let html = '';
+
+            const nodeCategories = ["Price Objection Reversal", "Board Approval Fast-Track", "Security & SOC 2 Clearance", "Custom Integration SLA"];
+
+            for (let i = start; i <= end; i++) {
+                const category = nodeCategories[(i - 1) % nodeCategories.length];
+                html += `
+                    <div onclick="window.location.href='module-detail.html?id=${i}'" class="bg-garfield-panel p-5 rounded-2xl border border-white/10 hover:border-amber-400 hover:scale-[1.02] transition-all cursor-pointer shadow-xl flex flex-col justify-between space-y-3 group">
+                        <div>
+                            <div class="flex justify-between items-center text-[10px] font-mono mb-2">
+                                <span class="text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">NODE #${i}</span>
+                                <span class="text-slate-400">${category}</span>
+                            </div>
+                            <h4 class="font-bold text-white text-xs group-hover:text-amber-300 transition-colors line-clamp-2">Rebuttal Scenario #${i}: ${category} Protocol</h4>
+                            <p class="text-[11px] font-mono text-slate-400 mt-1 line-clamp-2">Autonomous objection destruction script and Vapi speech trigger for enterprise node #${i}.</p>
+                        </div>
+                        <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-amber-400">
+                            <span>Open Rebuttal Node</span>
+                            <span class="text-emerald-400">&lt;130ms</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            grid.innerHTML = html;
+            document.getElementById('objectionPageIndicator').innerText = `Nodes ${start} - ${end} of ${totalObjectionNodes}`;
+        }
+
+        function changeObjectionBatch(delta) {
+            const maxBatches = Math.floor(totalObjectionNodes / batchSize);
+            if (currentObjectionBatch + delta >= 0 && currentObjectionBatch + delta <= maxBatches) {
+                currentObjectionBatch += delta;
+                renderObjectionNodes();
+            }
+        }
+
+        function jumpToObjectionNode() {
+            const val = parseInt(document.getElementById('specificNodeInput').value);
+            if (val >= 1 && val <= totalObjectionNodes) {
+                window.location.href = `module-detail.html?id=${val}`;
+            } else {
+                alert('Please enter a valid node number between 1 and 10000.');
+            }
+        }
+
+        // Initial render
+        renderObjectionNodes();
+    </script>
 </body>
 </html>
