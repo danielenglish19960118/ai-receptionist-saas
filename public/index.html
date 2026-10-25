@@ -192,7 +192,7 @@
                         GARFIELD <span class="text-garfield-yellow">AI VOICE</span> SaaS
                     </h1>
                     <p class="text-xs font-bold text-garfield-black bg-garfield-yellow px-2 py-0.5 rounded border border-black inline-block mt-0.5">
-                        Garfield Lounge & Family Edition • 1,000 Animations
+                        Tamil Joe Garfield Memes Edition • 1,000 Animations
                     </p>
                 </div>
             </div>
@@ -283,7 +283,7 @@
                             <span id="statusTag" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-400 animate-pulse">ONLINE</span>
                         </div>
                         <p id="garfieldSpeechText" class="font-comic text-lg text-slate-800 font-bold mt-1">
-                            "Welcome to the Garfield Lounge! Join our Discord community or explore our Family Pages and Comics below!"
+                            "Check out Tamil Joe Garfield Memes below! Romba jolly-ah iruku!"
                         </p>
                     </div>
 
@@ -292,13 +292,41 @@
                             <i class="fa-solid fa-pizza-slice"></i> Feed Lasagna (+20% Fuel)
                         </button>
                         <a href="https://discord.com/invite/hope-for-broken-hearts-875258067166580737" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:-translate-y-1 flex items-center gap-2">
-                            <i class="fa-brands fa-discord"></i> Join Garfield Lounge ↗
+                            <i class="fa-brands fa-discord"></i> Garfield Lounge ↗
                         </a>
                         <a href="https://danielverse87.gumroad.com/l/ai-receptionist" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm px-4 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:-translate-y-1 flex items-center gap-2">
                             <i class="fa-solid fa-bag-shopping"></i> Gumroad Store
                         </a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- TAMIL JOE GARFIELD MEMES FEATURE -->
+        <section class="comic-panel bg-gradient-to-r from-red-100 via-garfield-cream to-amber-100 rounded-3xl p-6 border-2 border-garfield-black relative overflow-hidden shadow-comic-lg">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="bg-garfield-lasagna text-white p-4 rounded-2xl comic-border shadow-comic-sm animate-bounce">
+                        <i class="fa-solid fa-masks-theater text-3xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-red-700 text-white font-bold px-2 py-0.5 rounded uppercase font-bangers tracking-wider">🎭 Tamil Meme Vadivelu Style</span>
+                            <span id="tamilMemeDate" class="text-xs font-bold text-slate-700">October 25, 2026</span>
+                        </div>
+                        <h2 class="font-bangers text-3xl text-garfield-darkorange tracking-wide mt-1">TAMIL JOE GARFIELD MEMES</h2>
+                        <p class="text-xs font-bold text-slate-700">Joe Garfield & friends dropping ultimate Kollywood & Tamil comedy vibes!</p>
+                    </div>
+                </div>
+
+                <button onclick="loadRandomTamilMeme()" class="bg-garfield-darkorange hover:bg-orange-700 text-white font-bangers text-lg px-5 py-2.5 rounded-2xl comic-border shadow-comic transition-all hover:scale-105 active:scale-95 flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-dice"></i> Switch Tamil Meme 🎲
+                </button>
+            </div>
+
+            <!-- Tamil Meme Display Box -->
+            <div class="mt-4 bg-slate-900 text-garfield-yellow p-5 rounded-2xl comic-border font-comic text-base md:text-lg font-bold shadow-inner" id="tamilMemeDisplayBox">
+                Loading Tamil Joe Garfield Meme...
             </div>
         </section>
 
@@ -482,7 +510,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Client Tenant Name</label>
-                                <input type="text" id="tenantName" value="Garfield Lounge HQ" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white transition-all">
+                                <input type="text" id="tenantName" value="Tamil Joe Garfield HQ" class="w-full p-2.5 rounded-xl comic-border text-sm font-bold bg-garfield-cream focus:bg-white transition-all">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Industry Sector</label>
@@ -497,7 +525,7 @@
 
                         <div>
                             <label class="block text-xs font-bold text-slate-700 mb-1">Garfield Persona System Prompt</label>
-                            <textarea id="systemPrompt" rows="3" class="w-full p-3 rounded-xl comic-border text-xs font-bold bg-garfield-cream leading-relaxed">You are Garfield, supported by Eric, Martine Bear, Orla, Joe, Sadie Wolf, Porter Garfield, and Daniel Panda. Answer incoming calls with witty charm, take Italian lasagna orders, avoid Mondays, and forward urgent business leads.</textarea>
+                            <textarea id="systemPrompt" rows="3" class="w-full p-3 rounded-xl comic-border text-xs font-bold bg-garfield-cream leading-relaxed">You are Garfield, supported by Joe Garfield, Daniel Panda, and family. Answer incoming calls with Tamil movie comedy vibes, take Italian lasagna orders, avoid Mondays, and forward urgent business leads.</textarea>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -580,7 +608,7 @@
                     <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 border-garfield-orange pb-3 gap-2">
                         <div>
                             <h3 class="font-bangers text-3xl text-garfield-darkorange">GARFIELD & FAMILY 1,000-ARTICLE LIBRARY</h3>
-                            <p class="text-xs font-bold text-slate-600">Explore 1,000 long-form articles featuring Daniel Panda, Eric, Martine Bear, Orla, Joe, Sadie, Porter, and Garfield!</p>
+                            <p class="text-xs font-bold text-slate-600">Explore 1,000 long-form articles featuring Joe Garfield, Tamil memes, Eric, Martine, and Daniel Panda!</p>
                         </div>
                         <span class="bg-garfield-yellow text-garfield-black font-bangers text-sm px-3 py-1 rounded-xl comic-border animate-pulse">1,000 Articles Indexed</span>
                     </div>
@@ -704,16 +732,34 @@
         </div>
     </footer>
 
-    <!-- Interactive Script & Family Directory Renderer -->
+    <!-- Interactive Script & Tamil Joe Garfield Memes Logic -->
     <script>
+        // Tamil Joe Garfield Memes Database
+        const tamilMemes = [
+            `🇮🇳 Joe Garfield: "Monday-na ennaannu kekuriye... Monday-la oru naan oru 'vadai' sappidalaam-nu ninaicha, work vandhu nimmadhiya kedukuthe!" 😹`,
+            `🇮🇳 Joe Garfield (Vadivelu style): "Enna koduma sir ithu? Lasagna-voda pan-niya eduthutu poitu, 'Bug fixed' nu solli romba comedy panraangale!" 🍕`,
+            `🇮🇳 Joe Garfield: "Server down aana odane Daniel Panda vanthu solluvaan: 'Amaidhi padai... bamboo tea kudi, ellaam seri aagum!'" 🐼`,
+            `🇮🇳 Joe Garfield: "Vapi voice AI call-la pesurathum, naan nalla thoongurathum orae nerathula nadakkuthu paaru—thaakkuthu periya comedy!" 🎙️`,
+            `🇮🇳 Joe Garfield: "Monday morning traffic-la Sadie Wolf matikittapo, Joe Garfield solli kuthitha wisdom: 'Chill bro, lasagna is waiting at home!'" 🐺`
+        ];
+
+        let currentTamilMemeIndex = 0;
+        function loadRandomTamilMeme() {
+            currentTamilMemeIndex = (currentTamilMemeIndex + 1) % tamilMemes.length;
+            const box = document.getElementById('tamilMemeDisplayBox');
+            if (box) {
+                box.innerText = tamilMemes[currentTamilMemeIndex];
+            }
+        }
+
         // Family Introduction Directory Data
         const familyMembers = [
             { name: "Garfield", role: "Chief Nap & Lasagna Officer", desc: "Expert in afternoon naps, lasagna connoisseur, and professional Monday hater.", icon: "🐱", color: "bg-amber-500" },
+            { name: "Joe Garfield", role: "Tamil Meme Guildmaster", desc: "Master of Kollywood humor, Vadivelu style dialogues, and epic server comedy.", icon: "🎭", color: "bg-red-600" },
             { name: "Daniel Panda", role: "Zen Architect & Panda Master", desc: "Eats code, shoots bugs, and ensures bamboo tea is always brewed for backend uptime.", icon: "🐼", color: "bg-emerald-600" },
             { name: "Eric Garfield", role: "Lead Systems Architect", desc: "Deploys multi-tenant Vapi pipelines and manages core enterprise infrastructure.", icon: "💻", color: "bg-garfield-orange" },
             { name: "Martine Bear", role: "Chief Culinary Officer", desc: "Bakes legendary triple-cheese lasagna and fresh bamboo shoots for the clan.", icon: "🐻", color: "bg-orange-700" },
             { name: "Orla Garfield", role: "Voice Latency Specialist", desc: "Tunes sub-20ms speech recognition models and optimizes audio streams.", icon: "🎙️", color: "bg-indigo-600" },
-            { name: "Joe Garfield", role: "Community Guildmaster", desc: "Welcomes new members to Discord and keeps developer morale remarkably high.", icon: "🎧", color: "bg-purple-600" },
             { name: "Sadie Wolf", role: "Call Surge Guardian", desc: "Survives Monday morning traffic spikes and routes urgent leads instantly.", icon: "🐺", color: "bg-slate-700" },
             { name: "Porter Garfield", role: "Webhook Pipeline Engineer", desc: "Automates Gumroad licensing webhooks and Vercel serverless deployments.", icon: "⚡", color: "bg-pink-600" }
         ];
@@ -892,6 +938,7 @@
             animateParticles();
             renderComicStrip();
             loadRandomPandaQuote();
+            loadRandomTamilMeme();
         });
 
         async function validateSecurityKey() {
@@ -907,7 +954,7 @@
                 isLocked = false;
                 feedback.classList.add('hidden');
                 updateSecurityUI();
-                alert("License Verified Successfully! Garfield Lounge AI SaaS unlocked.");
+                alert("License Verified Successfully! Tamil Joe Garfield Memes SaaS unlocked.");
             } else {
                 feedback.classList.remove('hidden');
             }
@@ -942,9 +989,9 @@
             }
         }
 
-        function interactGarfield() { alert("Meow! Welcome to the Garfield Lounge! Daniel Panda, Eric, Martine, Orla, Joe, Sadie, and Porter say hello!"); }
+        function interactGarfield() { alert("Vanakkam! Joe Garfield, Daniel Panda, and the family welcome you to Tamil Joe Garfield Memes!"); }
         function toggleGarfieldSleep() { isSleep = !isSleep; }
-        function feedLasagna() { alert("Lasagna and bamboo refueled for the lounge!"); }
+        function feedLasagna() { alert("Lasagna and Tamil filter coffee refueled for the lounge!"); }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -953,6 +1000,7 @@
                 el.classList.add('bg-garfield-cream', 'text-garfield-black');
             });
 
+            document.getElementById(tabId).classList.add('hidden'); // safe reset
             document.getElementById(tabId).classList.remove('hidden');
             const activeBtn = document.getElementById(`tabBtn-${tabId.replace('tab-', '')}`);
             if (activeBtn) {
@@ -961,41 +1009,20 @@
             }
         }
 
-        function toggleSimulatedCall() { alert("Simulating incoming call for Garfield Lounge HQ..."); }
-        function saveTenantConfig() { alert("Configuration deployed with Garfield Lounge routing!"); }
-
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        let audioCtx = null;
-        function playMascotAudio(type) {
-            if (!audioCtx) audioCtx = new AudioContext();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            const now = audioCtx.currentTime;
-
-            if (type === 'meow') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(400, now);
-                osc.frequency.exponentialRampToValueAtTime(800, now + 0.15);
-                gain.gain.setValueAtTime(0.3, now);
-                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
-                osc.start(now);
-                osc.stop(now + 0.4);
-            }
-        }
+        function toggleSimulatedCall() { alert("Simulating incoming call for Tamil Joe Garfield HQ..."); }
+        function saveTenantConfig() { alert("Configuration deployed with Tamil meme routing!"); }
 
         const familyTopics = [
-            "Daniel Panda's Guide to Zen Architecture and Garfield Lounge",
-            "Eric Garfield & Daniel Panda on Scaling AI Receptionist Workloads",
-            "Martine Bear's Bamboo & Triple-Cheese Lasagna Fusion Recipe",
-            "Orla Garfield on Optimizing Vapi Voice Latency Under Pressure",
-            "Joe Garfield & Porter Garfield: Building Scalable Discord Communities",
-            "Sadie Wolf & Daniel Panda on Surviving Monday Call Surges",
+            "Joe Garfield's Guide to Tamil Kollywood Comedy & SaaS Architecture",
+            "Eric Garfield & Joe Garfield on Scaling Tamil Meme Webhooks",
+            "Martine Bear's Spicy Chettinad Lasagna Fusion Recipe",
+            "Orla Garfield on Optimizing Tamil Speech Recognition Latency",
+            "Joe Garfield & Sadie Wolf: Building High-Energy Discord Communities",
+            "Daniel Panda & Joe Garfield on Zen Philosophy and Monday Surges",
             "Porter Garfield's Automated Webhook Architecture for Gumroad Sales",
             "Eric Garfield & Garfield: Why Naps are an Essential Engineering Metric",
             "Martine Bear & Sadie Wolf on Balancing Family Life and Enterprise SaaS",
-            "The Ultimate Garfield Lounge Reunion: Lasagna, Bamboo, and Automation"
+            "The Ultimate Tamil Joe Garfield Reunion: Lasagna, Memes, and Automation"
         ];
 
         function getArticleData(index) {
@@ -1004,10 +1031,10 @@
             
             const memeBanner = `
   /\\_/\\  
- ( o.o )  < "GARFIELD LOUNGE MEME #${index + 1}: Daniel Panda, Eric, Martine, Orla, Joe, Sadie, & Porter approved!"
+ ( o.o )  < "TAMIL JOE GARFIELD MEME #${index + 1}: Vadivelu & family approved!"
   > ^ <
   --------------------------------------------------------------
- [ LOUNGE & FAMILY ASCII: Golden Lasagna Layer #${(index % 20) + 1} ]
+ [ TAMIL MEME & FAMILY ASCII: Golden Lasagna Layer #${(index % 20) + 1} ]
   --------------------------------------------------------------
             `;
 
@@ -1016,23 +1043,23 @@
 ${memeBanner}
                 </div>
 
-                <h3 class="font-bangers text-2xl text-garfield-darkorange">Introduction: The Garfield Lounge & Family Philosophy</h3>
-                <p>Welcome to family article #${index + 1}. In this 1,000-word piece, we explore how Daniel Panda, Eric Garfield, Martine Bear, Orla Garfield, Joe Garfield, Sadie Wolf, and Porter Garfield collaborate to run our world-class AI Voice Receptionist SaaS platform in the Garfield Lounge.</p>
+                <h3 class="font-bangers text-2xl text-garfield-darkorange">Introduction: The Tamil Joe Garfield & Family Philosophy</h3>
+                <p>Welcome to family article #${index + 1}. In this 1,000-word piece, we explore how Joe Garfield, Daniel Panda, Eric Garfield, Martine Bear, Orla Garfield, Sadie Wolf, and Porter Garfield collaborate to run our world-class AI Voice Receptionist SaaS platform with ultimate Tamil comedy flair.</p>
 
-                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 1: Daniel Panda's Zen Architecture & Vapi Integration</h4>
-                <p>Combining Daniel Panda's zen approach to backend stability with Porter Garfield's webhook pipelines and Orla Garfield's speech recognition tuning, our system maintains lightning-fast response times. Meanwhile, Martine Bear ensures everyone is well-fed with fresh lasagna and bamboo shoots.</p>
+                <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 1: Joe Garfield's Tamil Meme Architecture & Vapi Integration</h4>
+                <p>Combining Joe Garfield's legendary Tamil comedy timing with Porter Garfield's webhook pipelines and Orla Garfield's speech recognition tuning, our system maintains lightning-fast response times. Meanwhile, Martine Bear ensures everyone is well-fed with fresh Chettinad lasagna.</p>
 
                 <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Section 2: Community Support & Garfield Lounge Integration</h4>
                 <p>Joe Garfield and Sadie Wolf spearhead our Garfield Lounge Discord support servers, ensuring every user gets immediate assistance with their tenant configurations and Gumroad licensing inquiries.</p>
 
                 <h4 class="font-bangers text-xl text-garfield-lasagna mt-4">Conclusion: Scaling with Family Values</h4>
-                <p>True enterprise success comes from combining robust automation with a relaxed, family-friendly mindset—just like Garfield and Daniel Panda intended. Unlock your full license on Gumroad today!</p>
+                <p>True enterprise success comes from combining robust automation with a relaxed, family-friendly mindset—just like Joe Garfield and Daniel Panda intended. Unlock your full license on Gumroad today!</p>
             `;
 
             return {
                 id: index + 1,
                 title: title,
-                category: (index % 2 === 0) ? "Garfield Lounge" : "SaaS Operations",
+                category: (index % 2 === 0) ? "Tamil Memes" : "SaaS Operations",
                 date: "Oct 25, 2026",
                 body: fullText
             };
@@ -1069,7 +1096,7 @@ ${memeBanner}
                             </div>
                             <h4 class="font-bangers text-xl text-garfield-black mt-2 leading-tight">${item.title}</h4>
                             <p class="text-xs font-bold text-slate-700 mt-2 line-clamp-3 leading-relaxed">
-                                Complete 1,000-word lounge & family deep-dive featuring Daniel Panda, Eric, Martine, Orla, Joe, Sadie, and Porter.
+                                Complete 1,000-word Tamil meme & family deep-dive featuring Joe Garfield, Daniel Panda, Eric, Martine, and Porter.
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-xs font-bold">
