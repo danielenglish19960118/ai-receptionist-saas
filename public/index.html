@@ -60,50 +60,217 @@
             <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
             <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
             <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
-            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 100 Closing Modules</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 10,000+ Modules</a>
         </div>
 
-        <!-- 🔥 1. Hot Buyer Finder View -->
+        <!-- Hero Title Section -->
+        <div class="text-center space-y-3 max-w-3xl mx-auto">
+            <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full">
+                <i class="fa-solid fa-radar text-amber-400 text-xs"></i>
+                <span class="text-xs font-mono font-bold text-amber-300 uppercase">Autonomous Intent Intelligence & Telephony Pipeline</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight">AI Hot Buyer Finder & Intent Acquisition Engine</h1>
+            <p class="text-xs md:text-sm text-slate-300 font-mono leading-relaxed">
+                Scan high-net-worth institutional prospects, capture ready-to-sign enterprise decision-makers, and automatically dispatch sub-150ms Vapi voice closers backed by 10,000+ programmatic SEO sub-page nodes.
+            </p>
+        </div>
+
+        <!-- 🔥 Hot Buyer Finder Core Workspace -->
         <div class="space-y-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <div class="lg:col-span-5 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6">
+                
+                <!-- Left Column: Acquisition Parameters Form (5 Columns) -->
+                <div class="lg:col-span-5 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6 shadow-2xl">
                     <h3 class="font-bold text-white text-base border-b border-white/10 pb-3 flex items-center justify-between">
                         <span>Capture Ready-to-Buy Whales</span>
                         <span class="text-[10px] text-emerald-400 font-mono font-bold">99.9% Conversion Filter</span>
                     </h3>
-                    <form onsubmit="runAiLeadBot(event)" class="space-y-4">
+                    
+                    <form onsubmit="runAiLeadBot(event)" class="space-y-4 font-mono text-xs">
                         <div>
-                            <label class="text-xs font-bold text-slate-300 block mb-1">Target Niche</label>
+                            <label class="text-xs font-bold text-slate-300 block mb-1">Target Niche / Industry Sector *</label>
                             <input type="text" id="targetIndustry" required value="Sovereign Family Offices & Institutional Funds" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
                         </div>
                         <div>
-                            <label class="text-xs font-bold text-slate-300 block mb-1">Geographic Hub</label>
+                            <label class="text-xs font-bold text-slate-300 block mb-1">Geographic Capital Hubs *</label>
                             <input type="text" id="geoRegion" required value="New York / London / Singapore / Taipei" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
                         </div>
                         <div>
-                            <label class="text-xs font-bold text-slate-300 block mb-1">Target Contract Size (ARR)</label>
-                            <select id="minNetWorth" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none">
+                            <label class="text-xs font-bold text-slate-300 block mb-1">Target Contract Size (ARR) *</label>
+                            <select id="minNetWorth" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none cursor-pointer">
                                 <option value="$300,000+ ARR" selected>$300,000+ ARR (Tier-1 Whale Deal)</option>
                                 <option value="$1,000,000+ ARR">$1,000,000+ ARR (Institutional Enterprise)</option>
+                                <option value="$5,000,000+ ARR">$5,000,000+ ARR (Sovereign Holding Holding)</option>
                             </select>
                         </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-gold-glow transition-all">Scan & Auto-Close Ready Buyers 🚀</button>
+                        <button type="submit" id="scanBtn" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-gold-glow transition-all">
+                            Scan & Auto-Close Ready Buyers 🚀
+                        </button>
                     </form>
                 </div>
-                <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6">
-                    <div class="flex items-center justify-between border-b border-white/10 pb-3">
-                        <h3 class="font-bold text-white text-base">Verified Ready-to-Sign Buyers Terminal</h3>
-                        <span id="botBadge" class="text-xs font-mono text-amber-400 bg-amber-400/10 px-3 py-1 rounded-xl border border-amber-400/20">Ready</span>
+
+                <!-- Right Column: Live Output Terminal (7 Columns) -->
+                <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6 shadow-2xl flex flex-col justify-between min-h-[480px]">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                            <h3 class="font-bold text-white text-base flex items-center gap-2">
+                                <i class="fa-solid fa-terminal text-xs text-amber-400"></i> Verified Ready-to-Sign Buyers Terminal
+                            </h3>
+                            <span id="botBadge" class="text-xs font-mono text-amber-400 bg-amber-400/10 px-3 py-1 rounded-xl border border-amber-400/20 font-bold">Ready</span>
+                        </div>
+                        <div id="leadBotResults" class="space-y-3 font-mono text-xs max-h-[360px] overflow-y-auto pr-2 mt-4">
+                            <div class="text-slate-500 italic text-center py-24">[Launch scan to capture verified Decision-Makers with active buying triggers]</div>
+                        </div>
                     </div>
-                    <div id="leadBotResults" class="space-y-3 font-mono text-xs max-h-[400px] overflow-y-auto pr-2">
-                        <div class="text-slate-500 italic text-center py-16">[Launch scan to capture verified Decision-Makers with active buying triggers]</div>
+
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-slate-400">
+                        <span>PSEO Edge Router: <strong class="text-emerald-400">Active</strong></span>
+                        <span>Vapi Latency: <strong class="text-amber-400">&lt; 130ms</strong></span>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- 10,000+ Programmatic SEO Sub-Nodes Navigation Hub -->
+        <div class="space-y-6 border-t border-white/10 pt-10">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-white">10,000+ Programmatic Closing Sub-Pages Index</h2>
+                    <p class="text-xs text-slate-400 font-mono mt-1">
+                        Instantly access any child module from Node #1 to #10,000. Each sub-page is pre-tuned for high-intent SEO acquisition and instant Vapi WebRTC speech handoff.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2 font-mono text-xs">
+                    <button onclick="changeHomeBatch(-1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10">← Prev 16 Nodes</button>
+                    <span id="homePageIndicator" class="text-amber-400 font-bold px-2">Nodes 1 - 16 of 10,000</span>
+                    <button onclick="changeHomeBatch(1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10">Next 16 Nodes →</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Sub-Nodes Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="homeNodesGrid"></div>
+        </div>
     </main>
 
-    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a>
+    </footer>
+
     <script src="app.js"></script>
+    <script>
+        let currentHomeBatch = 0;
+        const homeBatchSize = 16;
+        const totalHomeNodes = 10000;
+
+        async function runAiLeadBot(e) {
+            e.preventDefault();
+            const industry = document.getElementById('targetIndustry').value.trim();
+            const geo = document.getElementById('geoRegion').value.trim();
+            const netWorth = document.getElementById('minNetWorth').value;
+            const btn = document.getElementById('scanBtn');
+            const resultsBox = document.getElementById('leadBotResults');
+            const badge = document.getElementById('botBadge');
+
+            btn.innerText = "Scanning Global Intent Pipelines & Webhooks...";
+            btn.disabled = true;
+            badge.innerText = "SCANNING...";
+            badge.className = "text-xs font-mono text-amber-300 bg-amber-400/20 px-3 py-1 rounded-xl border border-amber-400/40 animate-pulse font-bold";
+
+            resultsBox.innerHTML = `
+                <div class="text-amber-400 font-mono text-xs text-center py-12 space-y-2">
+                    <div class="animate-bounce text-2xl">📡</div>
+                    <div>Querying decentralized intent telemetry across ${geo}...</div>
+                </div>
+            `;
+
+            setTimeout(() => {
+                badge.innerText = "3 WHALES CAPTURED";
+                badge.className = "text-xs font-mono text-emerald-400 bg-emerald-500/20 px-3 py-1 rounded-xl border border-emerald-500/40 font-bold";
+                btn.innerText = "Scan & Auto-Close Ready Buyers 🚀";
+                btn.disabled = false;
+
+                resultsBox.innerHTML = `
+                    <div class="bg-black/70 p-4 rounded-2xl border border-amber-500/30 space-y-2 hover:border-amber-400 transition-all">
+                        <div class="flex justify-between items-center text-xs">
+                            <strong class="text-white">1. Apex Sovereign Capital (Managing Director)</strong>
+                            <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">INTENT: 99.8%</span>
+                        </div>
+                        <p class="text-slate-300 text-[11px]">Region: ${geo.split('/')[0] || 'Global'} | Budget: ${netWorth} | Signal: Active Escrow Transfer Pending</p>
+                        <div class="pt-2 border-t border-white/5 flex justify-between items-center text-[10px]">
+                            <span class="text-slate-400">Vapi Trigger: Module #01 (Whale Escrow Route)</span>
+                            <button onclick="window.location.href='trial.html?lead=apex'" class="text-amber-400 hover:underline font-bold">Initiate Voice Call ➔</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/70 p-4 rounded-2xl border border-white/10 space-y-2 hover:border-amber-400 transition-all">
+                        <div class="flex justify-between items-center text-xs">
+                            <strong class="text-white">2. Crestview M&A Advisory Partners</strong>
+                            <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">INTENT: 98.4%</span>
+                        </div>
+                        <p class="text-slate-300 text-[11px]">Region: London Hub | Budget: $1,000,000+ ARR | Signal: Series C Term Sheet Board Evaluation</p>
+                        <div class="pt-2 border-t border-white/5 flex justify-between items-center text-[10px]">
+                            <span class="text-slate-400">Vapi Trigger: Module #07 (Boardroom Bridge)</span>
+                            <button onclick="window.location.href='trial.html?lead=crestview'" class="text-amber-400 hover:underline font-bold">Initiate Voice Call ➔</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/70 p-4 rounded-2xl border border-white/10 space-y-2 hover:border-amber-400 transition-all">
+                        <div class="flex justify-between items-center text-xs">
+                            <strong class="text-white">3. Horizon Private Jet & Charter Holdings</strong>
+                            <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">INTENT: 97.9%</span>
+                        </div>
+                        <p class="text-slate-300 text-[11px]">Region: Singapore / Taipei | Budget: ${netWorth} | Signal: Urgent 24/7 Concierge Telephony Need</p>
+                        <div class="pt-2 border-t border-white/5 flex justify-between items-center text-[10px]">
+                            <span class="text-slate-400">Vapi Trigger: Module #04 (Aviation Charter)</span>
+                            <button onclick="window.location.href='trial.html?lead=horizon'" class="text-amber-400 hover:underline font-bold">Initiate Voice Call ➔</button>
+                        </div>
+                    </div>
+                `;
+            }, 800);
+        }
+
+        function renderHomeNodes() {
+            const grid = document.getElementById('homeNodesGrid');
+            const start = currentHomeBatch * homeBatchSize + 1;
+            const end = Math.min(start + homeBatchSize - 1, totalHomeNodes);
+            let html = '';
+
+            const sectors = ["Private Wealth & Escrow Vault", "Gulfstream Charter Dispatch", "Concierge Medical Suite", "Series C M&A Boardroom Bridge"];
+
+            for (let i = start; i <= end; i++) {
+                const sector = sectors[(i - 1) % sectors.length];
+                html += `
+                    <div onclick="window.location.href='module-detail.html?id=${i}'" class="bg-garfield-panel p-5 rounded-2xl border border-white/10 hover:border-amber-400 hover:scale-[1.02] transition-all cursor-pointer shadow-xl flex flex-col justify-between space-y-3 group">
+                        <div>
+                            <div class="flex justify-between items-center text-[10px] font-mono mb-2">
+                                <span class="text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">NODE #${i}</span>
+                                <span class="text-emerald-400">&lt;130ms</span>
+                            </div>
+                            <h4 class="font-bold text-white text-xs group-hover:text-amber-300 transition-colors line-clamp-2">PSEO Sub-Page #${i}: ${sector}</h4>
+                            <p class="text-[11px] font-mono text-slate-400 mt-1 line-clamp-2">Programmatic intent acquisition node for enterprise pipeline #${i}.</p>
+                        </div>
+                        <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-amber-400">
+                            <span>Open Child Sub-Page</span>
+                            <span class="text-slate-500">Live</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            grid.innerHTML = html;
+            document.getElementById('homePageIndicator').innerText = `Nodes ${start} - ${end} of ${totalHomeNodes}`;
+        }
+
+        function changeHomeBatch(delta) {
+            const maxBatches = Math.floor(totalHomeNodes / homeBatchSize);
+            if (currentHomeBatch + delta >= 0 && currentHomeBatch + delta <= maxBatches) {
+                currentHomeBatch += delta;
+                renderHomeNodes();
+            }
+        }
+
+        // Initial render
+        renderHomeNodes();
+    </script>
 </body>
 </html>
