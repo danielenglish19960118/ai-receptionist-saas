@@ -1,6 +1,10 @@
 {
-  "dependencies": {
-    "discord-interactions": "^4.4.0",
-    "node-fetch": "^3.3.2"
+  "name": "garfield-ai-executive-200pct",
+  "version": "9.0.0",
+  "description": "Garfield AI Executive 200% Conversion & Absolute Closing Engine",
+  "private": true,
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.x"
   }
 }
