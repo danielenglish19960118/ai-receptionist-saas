@@ -25,7 +25,8 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-garfield-vipgold selection:text-black">
-    <!-- Top Urgency Bar -->
+
+    <!-- Top Urgency Banner -->
     <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
         <span>🚨 CRITICAL DEADLINE: 10,000+ PROGRAMMATIC SUB-PAGES ENGINE ACTIVE</span>
         <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline">Claim Enterprise License ➔</a>
@@ -42,13 +43,14 @@
                 </div>
             </a>
             <div class="flex items-center gap-3">
-                <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20">Status: <strong class="text-white">10,000 Nodes Live</strong></span>
-                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure Deal ↗</a>
+                <span id="authBadge" class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20">Status: <strong class="text-white">10,000 Nodes Live</strong></span>
+                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all">Secure Deal ↗</a>
             </div>
         </div>
     </header>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-8">
+        
         <!-- Navigation Toolbar -->
         <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
             <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🔥 Hot Buyer Finder</a>
@@ -60,11 +62,11 @@
             <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
             <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
             <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
-            <a href="modules.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">06. 10,000+ Modules</a>
+            <a href="modules.html" class="bg-amber-400 text-black font-extrabold text-xs px-4 py-2 rounded-xl transition-all shadow-md">06. 10,000+ Modules</a>
         </div>
 
         <!-- Master Control & Search for 10,000+ Pages -->
-        <div class="bg-garfield-panel p-6 md:p-8 rounded-3xl gold-border-glow space-y-6">
+        <div class="bg-garfield-panel p-6 md:p-8 rounded-3xl gold-border-glow space-y-6 shadow-2xl">
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 border-b border-white/10 pb-6">
                 <div class="space-y-2">
                     <span class="text-xs font-mono font-bold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20 uppercase">Massive Scale Architecture</span>
@@ -81,29 +83,33 @@
 
             <!-- Quick Filter Categories -->
             <div class="flex flex-wrap gap-2 text-xs font-mono">
-                <button onclick="filterBySector('all')" class="bg-amber-400 text-black font-bold px-4 py-2 rounded-xl transition-all">All Sectors (10,000)</button>
-                <button onclick="filterBySector('wealth')" class="bg-white/5 text-slate-300 hover:text-white px-4 py-2 rounded-xl border border-white/10 transition-all">Private Wealth (2,500)</button>
-                <button onclick="filterBySector('luxury')" class="bg-white/5 text-slate-300 hover:text-white px-4 py-2 rounded-xl border border-white/10 transition-all">Luxury & Jets (2,500)</button>
-                <button onclick="filterBySector('medical')" class="bg-white/5 text-slate-300 hover:text-white px-4 py-2 rounded-xl border border-white/10 transition-all">Concierge Medical (2,500)</button>
-                <button onclick="filterBySector('csuite')" class="bg-white/5 text-slate-300 hover:text-white px-4 py-2 rounded-xl border border-white/10 transition-all">C-Suite M&A (2,500)</button>
+                <button onclick="filterBySector('all')" id="secBtn-all" class="bg-amber-400 text-black font-bold px-4 py-2 rounded-xl transition-all shadow-md">All Sectors (10,000)</button>
+                <button onclick="filterBySector('wealth')" id="secBtn-wealth" class="bg-white/5 text-slate-300 hover:text-white px-4 py-2 rounded-xl border border-white/10 transition-all">Private Wealth (2,500)</button>
+                <button onclick="filterBySector('luxury')" id="secBtn-luxury" class="bg-white/5 text-slate-300 hover:text-white px-4 py-2 rounded-xl border border-white/10 transition-all">Luxury & Jets (2,500)</button>
+                <button onclick="filterBySector('medical')" id="secBtn-medical" class="bg-white/5 text-slate-300 hover:text-white px-4 py-2 rounded-xl border border-white/10 transition-all">Concierge Medical (2,500)</button>
+                <button onclick="filterBySector('csuite')" id="secBtn-csuite" class="bg-white/5 text-slate-300 hover:text-white px-4 py-2 rounded-xl border border-white/10 transition-all">C-Suite M&A (2,500)</button>
             </div>
         </div>
 
         <!-- Dynamic Sub-Pages Grid -->
         <div class="space-y-4">
             <div class="flex justify-between items-center text-xs font-mono text-slate-400">
-                <span id="showingIndicator">Showing Sub-Pages 1 - 24 of 10,000</span>
+                <span id="showingIndicator" class="text-amber-400 font-bold">Showing Sub-Pages 1 - 24 of 10,000</span>
                 <div class="flex gap-2">
-                    <button onclick="changeBatch(-1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-1.5 rounded-lg border border-white/10">← Prev Batch</button>
-                    <button onclick="changeBatch(1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-1.5 rounded-lg border border-white/10">Next Batch →</button>
+                    <button onclick="changeBatch(-1)" class="bg-white/5 hover:bg-white/10 text-white font-bold px-4 py-2 rounded-xl border border-white/10 transition-all">← Prev Batch</button>
+                    <button onclick="changeBatch(1)" class="bg-white/5 hover:bg-white/10 text-white font-bold px-4 py-2 rounded-xl border border-white/10 transition-all">Next Batch →</button>
                 </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="subPagesGrid"></div>
         </div>
     </main>
 
-    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a></footer>
+    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a>
+    </footer>
 
+    <!-- Core Script Assets -->
+    <script src="script.js"></script>
     <script>
         let currentBatch = 0;
         const pageSize = 24;
@@ -154,7 +160,12 @@
                 `;
             }
 
-            grid.innerHTML = html;
+            if (html === '') {
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-slate-500 font-mono text-xs">No matching sub-pages found in this sector batch.</div>`;
+            } else {
+                grid.innerHTML = html;
+            }
+
             const indicator = document.getElementById('showingIndicator');
             if (indicator) indicator.innerText = `Showing Nodes ${start} - ${end} of ${totalNodes} (Sector: ${activeSector.toUpperCase()})`;
         }
@@ -164,7 +175,7 @@
             if (currentBatch + direction >= 0 && currentBatch + direction <= maxBatches) {
                 currentBatch += direction;
                 renderSubPages();
-                window.scrollTo({ top: 400, behavior: 'smooth' });
+                window.scrollTo({ top: 300, behavior: 'smooth' });
             }
         }
 
@@ -182,6 +193,19 @@
         function filterBySector(sector) {
             activeSector = sector;
             currentBatch = 0;
+            
+            const sectors = ['all', 'wealth', 'luxury', 'medical', 'csuite'];
+            sectors.forEach(s => {
+                const btn = document.getElementById(`secBtn-${s}`);
+                if (btn) {
+                    if (s === sector) {
+                        btn.className = "bg-amber-400 text-black font-bold px-4 py-2 rounded-xl transition-all shadow-md";
+                    } else {
+                        btn.className = "bg-white/5 text-slate-300 hover:text-white px-4 py-2 rounded-xl border border-white/10 transition-all";
+                    }
+                }
+            });
+
             renderSubPages();
         }
 
