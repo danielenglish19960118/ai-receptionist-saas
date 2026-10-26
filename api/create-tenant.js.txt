@@ -86,6 +86,63 @@ Your goal is to assist callers with inquiries, collect their contact details (na
         // Generate standard embed code for clients to paste into their websites
         const embedCode = `<script src="https://ai-receptionist-saas-ivory.vercel.app/widget.js" data-client-id="${clientId}" data-assistant-id="${assistantId}" data-public-key="${publicKey}" defer></script>`;
 
+        // -----------------------------------------------------------------
+        // 🚀 升級版：發送高單價 VIP 租戶詳細區塊通知到 Slack 頻道
+        // -----------------------------------------------------------------
+        const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
+        if (slackWebhookUrl) {
+            // 使用非同步背景發送，避免 Slack API 延遲拖慢主回應速度
+            fetch(slackWebhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    blocks: [
+                        {
+                            type: "header",
+                            text: {
+                                type: "plain_text",
+                                text: "💎 New High-Ticket Tenant Deployed!",
+                                emoji: true
+                            }
+                        },
+                        {
+                            type: "section",
+                            fields: [
+                                {
+                                    type: "mrkdwn",
+                                    text: `*Business Name:*\n${storeName}`
+                                },
+                                {
+                                    type: "mrkdwn",
+                                    text: `*Contact Email:*\n${contactEmail}`
+                                },
+                                {
+                                    type: "mrkdwn",
+                                    text: `*Language / Locale:*\n${language.toUpperCase()}`
+                                },
+                                {
+                                    type: "mrkdwn",
+                                    text: `*Vapi Assistant ID:*\n\`${assistantId}\``
+                                }
+                            ]
+                        },
+                        {
+                            type: "section",
+                            text: {
+                                type: "mrkdwn",
+                                text: `*Business Description / FAQ Highlights:*\n> ${businessDescription.substring(0, 200)}...`
+                            }
+                        },
+                        {
+                            type: "divider"
+                        }
+                    ]
+                })
+            }).catch(slackErr => {
+                console.error('Background Slack notification failed:', slackErr);
+            });
+        }
+
         return res.status(200).json({
             success: true,
             message: 'Successfully generated tenant AI assistant and web widget!',
@@ -102,5 +159,3 @@ Your goal is to assist callers with inquiries, collect their contact details (na
         return res.status(500).json({ error: error.message || 'Internal server error during assistant provisioning.' });
     }
 }
-
-// Trigger redeploy timestamp: 2026-10-26
