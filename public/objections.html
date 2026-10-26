@@ -25,9 +25,10 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-garfield-vipgold selection:text-black">
+
     <!-- Top Urgency Bar -->
     <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
-        <span>🚨 CRITICAL DEADLINE: 100% ESCROW REFUND GUARANTEE CLOSES IN <strong class="text-white bg-black px-2 py-0.5 rounded">03:42:18</strong></span>
+        <span>🚨 CRITICAL DEADLINE: 100% ESCROW REFUND GUARANTEE CLOSES IN <strong id="timerCountdown" class="text-white bg-black px-2 py-0.5 rounded font-mono">03:42:18</strong></span>
         <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline">Claim Your Guaranteed Slot Now ➔</a>
     </div>
 
@@ -43,17 +44,18 @@
             </a>
             <div class="flex items-center gap-3">
                 <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400 font-bold">Visitor</strong></span>
-                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure Deal ↗</a>
+                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all">Secure Deal ↗</a>
             </div>
         </div>
     </header>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-10">
+
         <!-- Navigation Toolbar -->
         <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
             <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🔥 Hot Buyer Finder</a>
             <a href="objections.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">🛡️ Objection Destroyer</a>
-            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
+            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay</a>
             <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
             <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
             <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
@@ -85,6 +87,7 @@
 
         <!-- Interactive Core Rebuttal Workspace -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
             <!-- Left Panel: Core Objection Categories & Selector -->
             <div class="lg:col-span-5 bg-garfield-panel p-6 rounded-3xl border border-white/10 space-y-4 shadow-xl">
                 <div class="flex justify-between items-center border-b border-white/10 pb-3">
@@ -92,16 +95,20 @@
                     <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Real-Time Counter</span>
                 </div>
                 <div class="space-y-2.5">
-                    <button onclick="destroyObjection('price')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group">
-                        <span class="font-bold group-hover:text-amber-300 transition-colors">"The price is too high for our budget."</span>
-                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                    <button onclick="destroyObjection('price')" id="objBtn-price" class="w-full text-left bg-amber-400/10 border-amber-400 text-xs text-white p-4 rounded-2xl border transition-all flex justify-between items-center group">
+                        <span class="font-bold text-amber-300">"The price is too high for our budget."</span>
+                        <i class="fa-solid fa-chevron-right text-amber-400"></i>
                     </button>
-                    <button onclick="destroyObjection('timing')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group">
+                    <button onclick="destroyObjection('timing')" id="objBtn-timing" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group">
                         <span class="font-bold group-hover:text-amber-300 transition-colors">"Let's postpone evaluation until Q3/Q4."</span>
                         <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
                     </button>
-                    <button onclick="destroyObjection('risk')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group">
+                    <button onclick="destroyObjection('risk')" id="objBtn-risk" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group">
                         <span class="font-bold group-hover:text-amber-300 transition-colors">"We are concerned about AI security & privacy risk."</span>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                    </button>
+                    <button onclick="destroyObjection('approval')" id="objBtn-approval" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group">
+                        <span class="font-bold group-hover:text-amber-300 transition-colors">"I need approval from the Managing Director / Board."</span>
                         <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
                     </button>
                 </div>
@@ -113,30 +120,30 @@
                     <span class="text-amber-400 font-bold uppercase tracking-wider flex items-center gap-2">
                         <i class="fa-solid fa-terminal text-xs"></i> RECOMMENDED CLOSING REBUTTAL SCRIPT
                     </span>
-                    <span class="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 text-[10px]">VERIFIED CLOSING RATIO: 99.2%</span>
+                    <span id="rebuttalRatioBadge" class="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 text-[10px]">VERIFIED CLOSING RATIO: 99.2%</span>
                 </div>
                 
                 <div class="space-y-4">
-                    <p class="text-slate-300 leading-relaxed text-sm bg-black/70 p-5 rounded-2xl border border-white/10">
+                    <p id="rebuttalText" class="text-slate-300 leading-relaxed text-sm bg-black/70 p-5 rounded-2xl border border-white/10">
                         "I completely respect budget constraints. However, every day without an AI executive receptionist costs average enterprises $1,420 in uncaptured hot leads. That is why we back your deployment with a 30-day 100% third-party escrow refund guarantee. You carry zero financial risk—if we don't increase your closing velocity by 300%, your funds are returned in full."
                     </p>
                     <div class="grid grid-cols-2 gap-3 text-[11px]">
                         <div class="bg-black/50 p-3 rounded-xl border border-white/10">
                             <span class="text-slate-400 block">Vapi Response Latency:</span>
-                            <strong class="text-emerald-400">&lt; 125ms Edge Synthesis</strong>
+                            <strong id="rebuttalLatency" class="text-emerald-400">&lt; 125ms Edge Synthesis</strong>
                         </div>
                         <div class="bg-black/50 p-3 rounded-xl border border-white/10">
                             <span class="text-slate-400 block">Contract Protection:</span>
-                            <strong class="text-amber-300">Stripe Vault Escrow Lock</strong>
+                            <strong id="rebuttalVault" class="text-amber-300">Stripe Vault Escrow Lock</strong>
                         </div>
                     </div>
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-white/10">
-                    <button onclick="window.location.href='trial.html?objection=price'" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-6 py-3 rounded-xl uppercase transition-all shadow-md">
+                    <button onclick="launchSandboxTest()" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-6 py-3 rounded-xl uppercase transition-all shadow-gold-glow">
                         Test This Script in Sandbox 🎙️
                     </button>
-                    <span class="text-[10px] text-slate-500">PSEO Node ID: #OBJ-2026-VAL</span>
+                    <span id="rebuttalNodeTag" class="text-[10px] text-slate-500">PSEO Node ID: #OBJ-2026-VAL</span>
                 </div>
             </div>
         </div>
@@ -151,9 +158,9 @@
                     </p>
                 </div>
                 <div class="flex items-center gap-2 font-mono text-xs">
-                    <button onclick="changeObjectionBatch(-1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10">← Previous 16 Nodes</button>
+                    <button onclick="changeObjectionBatch(-1)" class="bg-white/5 hover:bg-white/10 text-white font-bold px-3 py-2 rounded-xl border border-white/10 transition-all">← Previous 16 Nodes</button>
                     <span id="objectionPageIndicator" class="text-amber-400 font-bold px-2">Nodes 1 - 16 of 10,000</span>
-                    <button onclick="changeObjectionBatch(1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10">Next 16 Nodes →</button>
+                    <button onclick="changeObjectionBatch(1)" class="bg-white/5 hover:bg-white/10 text-white font-bold px-3 py-2 rounded-xl border border-white/10 transition-all">Next 16 Nodes →</button>
                 </div>
             </div>
 
@@ -166,11 +173,76 @@
         © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a>
     </footer>
 
-    <script src="app.js"></script>
+    <!-- Core Script Assets -->
+    <script src="script.js"></script>
     <script>
         let currentObjectionBatch = 0;
         const batchSize = 16;
         const totalObjectionNodes = 10000;
+        let selectedObjectionKey = 'price';
+
+        const objectionRebuttals = {
+            price: {
+                text: `"I completely respect budget constraints. However, every day without an AI executive receptionist costs average enterprises $1,420 in uncaptured hot leads. That is why we back your deployment with a 30-day 100% third-party escrow refund guarantee. You carry zero financial risk—if we don't increase your closing velocity by 300%, your funds are returned in full."`,
+                ratio: "VERIFIED CLOSING RATIO: 99.2%",
+                latency: "< 125ms Edge Synthesis",
+                vault: "Stripe Vault Escrow Lock",
+                tag: "#OBJ-2026-VAL"
+            },
+            timing: {
+                text: `"Delaying until Q3/Q4 allows your competitors to capture ready-to-sign enterprise prospects using sub-130ms voice response systems today. Our zero-risk deployment takes less than 15 minutes to configure on your existing PBX or web domain. Let us lock in your escrow slot now before the Q3 rate increase."`,
+                ratio: "VERIFIED CLOSING RATIO: 98.7%",
+                latency: "< 118ms Edge Synthesis",
+                vault: "Escrow.com Vault Guarantee",
+                tag: "#OBJ-2026-TIME"
+            },
+            risk: {
+                text: `"Data sovereignty is our highest priority. Garfield AI Executive operates under strict SOC 2 Type II compliance, zero audio recording retention in volatile RAM, and AES-256 end-to-end encryption. You retain 100% ownership of your client interaction logs."`,
+                ratio: "VERIFIED CLOSING RATIO: 99.5%",
+                latency: "< 110ms Edge Synthesis",
+                vault: "SOC 2 Type II Encrypted",
+                tag: "#OBJ-2026-SEC"
+            },
+            approval: {
+                text: `"We make board and MD approval effortless. We provide a customized ROI analysis and financial risk-reversal prospectus directly to your decision-makers. Plus, with our 100% escrow guarantee, there is zero capital risk for the board to review."`,
+                ratio: "VERIFIED CLOSING RATIO: 97.9%",
+                latency: "< 130ms Edge Synthesis",
+                vault: "Board-Level Escrow Contract",
+                tag: "#OBJ-2026-APP"
+            }
+        };
+
+        function destroyObjection(key) {
+            selectedObjectionKey = key;
+            const data = objectionRebuttals[key];
+            if (!data) return;
+
+            const keys = ['price', 'timing', 'risk', 'approval'];
+            keys.forEach(k => {
+                const btn = document.getElementById(`objBtn-${k}`);
+                if (btn) {
+                    if (k === key) {
+                        btn.className = "w-full text-left bg-amber-400/10 border-amber-400 text-xs text-white p-4 rounded-2xl border transition-all flex justify-between items-center group";
+                        btn.querySelector('span').className = "font-bold text-amber-300";
+                        btn.querySelector('i').className = "fa-solid fa-chevron-right text-amber-400";
+                    } else {
+                        btn.className = "w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center group";
+                        btn.querySelector('span').className = "font-bold group-hover:text-amber-300 transition-colors";
+                        btn.querySelector('i').className = "fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors";
+                    }
+                }
+            });
+
+            document.getElementById('rebuttalText').innerText = data.text;
+            document.getElementById('rebuttalRatioBadge').innerText = data.ratio;
+            document.getElementById('rebuttalLatency').innerText = data.latency;
+            document.getElementById('rebuttalVault').innerText = data.vault;
+            document.getElementById('rebuttalNodeTag').innerText = `PSEO Node ID: ${data.tag}`;
+        }
+
+        function launchSandboxTest() {
+            window.location.href = `trial.html?objection=${selectedObjectionKey}`;
+        }
 
         function renderObjectionNodes() {
             const grid = document.getElementById('objectionNodesGrid');
@@ -188,9 +260,9 @@
                         <div>
                             <div class="flex justify-between items-center text-[10px] font-mono mb-2">
                                 <span class="text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">NODE #${i}</span>
-                                <span class="text-slate-400">${category}</span>
+                                <span class="text-slate-400 truncate max-w-[120px]">${category}</span>
                             </div>
-                            <h4 class="font-bold text-white text-xs group-hover:text-amber-300 transition-colors line-clamp-2">Rebuttal Scenario #${i}: ${category} Protocol</h4>
+                            <h4 class="font-bold text-white text-xs group-hover:text-amber-300 transition-colors line-clamp-2">Rebuttal Scenario #${i}: ${category}</h4>
                             <p class="text-[11px] font-mono text-slate-400 mt-1 line-clamp-2">Autonomous objection destruction script and Vapi speech trigger for enterprise node #${i}.</p>
                         </div>
                         <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-amber-400">
@@ -211,6 +283,7 @@
             if (currentObjectionBatch + delta >= 0 && currentObjectionBatch + delta <= maxBatches) {
                 currentObjectionBatch += delta;
                 renderObjectionNodes();
+                window.scrollTo({ top: 500, behavior: 'smooth' });
             }
         }
 
