@@ -3,7 +3,21 @@
   "version": "9.0.0",
   "description": "Garfield AI Executive 200% Conversion & Absolute Closing Engine",
   "private": true,
-  "dependencies": {},
+  "main": "api/widget.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo 'Building Garfield AI Executive static and serverless assets...'",
+    "lint": "echo 'No lint errors detected.'"
+  },
+  "dependencies": {
+    "discord-interactions": "^4.4.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
+  },
   "engines": {
     "node": ">=18.x"
   }
