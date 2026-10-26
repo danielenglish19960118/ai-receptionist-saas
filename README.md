@@ -1,81 +1,74 @@
-# AI Receptionist SaaS 🤖
+# 👑 Garfield AI Executive SaaS
 
-An enterprise-ready, AI-powered automated receptionist platform designed to handle multi-channel customer inquiries, automate ticket resolution, and facilitate seamless bot interactions across Discord, web widgets, and internal communication workflows.
-
----
-
-## 🌟 Key Features
-
-- **Automated Conversational AI**: Powered by modern Large Language Models (LLMs) to deliver contextual and accurate responses in real time.
-- **Discord Bot Integration**: Full integration with the Discord API to serve as an intelligent server receptionist and user support assistant.
-- **Custom Knowledge Base**: Ingest custom business FAQs, operational rules, and guidelines for customized support outputs.
-- **Multi-Tenant Dashboard**: Modern web console for managing bot instances, configuring system prompts, and reviewing analytical metrics.
-- **Serverless Architecture**: Designed for quick deployment and high scalability with zero-downtime hosting.
+> **The Enterprise-Grade, Omnichannel AI Concierge & High-Ticket Lead Closing Engine**
 
 ---
 
-## 🛠️ Tech Stack
+## 🏛️ Executive Overview
 
-- **Frontend & Dashboard**: Next.js (React), Tailwind CSS
-- **Backend / Bot Framework**: Node.js, discord.js
-- **AI Integrations**: OpenAI API / Custom LLM Gateways
-- **Deployment & Hosting**: Vercel, GitHub Actions, GitHub Pages
+**Garfield AI Executive** is a high-performance, multi-tenant B2B SaaS architecture engineered specifically for high-net-worth lead generation, 24/7 AI VIP executive receptionist services, and automated digital product monetization.
+
+Powered by **Gemini 1.5 Flash**, **Supabase**, and a robust network of **Vercel Serverless Endpoints**, the system bridges front-end conversational artificial intelligence with enterprise back-office notifications, multi-platform app directories, and sovereign sales channels.
 
 ---
 
-## 📂 Project Structure
+## 🌐 Omnichannel Distribution & Ecosystem Architecture
 
-```text
-ai-receptionist-saas/
-├── .github/              # GitHub Actions & workflow configurations
-├── public/               # Static assets & web resources
-├── src/                  # Application source code
-│   ├── components/       # Reusable UI components
-│   ├── pages/            # Next.js routing and API endpoints
-│   ├── bot/              # Discord bot client & event handlers
-│   └── lib/              # Utility functions & API clients
-├── privacy.html          # Public Privacy Policy document
-├── terms.html            # Public Terms of Service document
-├── README.md             # Project documentation
-└── package.json          # Node.js dependencies and scripts
-🚀 Quick Start
-Prerequisites
-Make sure you have Node.js (v18.0.0 or higher), npm, and Git installed.
+To maximize global exposure and capture high-ticket traffic, Garfield AI Executive operates across a comprehensive **8-Channel Distribution Matrix**:
 
-1. Clone the Repository
-Bash
-git clone [https://github.com/danielenglish19960118/ai-receptionist-saas.git](https://github.com/danielenglish19960118/ai-receptionist-saas.git)
-cd ai-receptionist-saas
-2. Install Dependencies
-Bash
-npm install
-3. Configure Environment Variables
-Create a .env.local file in the root directory:
+| Ecosystem / Channel | Target Audience | Primary Function & Integration |
+| --- | --- | --- |
+| **1. Google Chrome Extension** | Global Web Visitors | Side panel persistent AI executive assistant and instant web-page lead capture. |
+| **2. Slack App Directory** | Business Executives & Founders | Instant Block Kit VIP lead alerts, revenue notifications, and team escalations. |
+| **3. Discord App Directory** | Community Managers & Operators | Slash commands (`/leads`, `/status`) and secure Linked Role identity verification. |
+| **4. Raycast / Alfred Launcher** | Power Users & Operators | Lightning-fast keyboard shortcut triggers (`Opt + Space`) for backend pipeline lookups. |
+| **5. Telegram / WhatsApp Gateway** | Global High-Net-Worth Clients | Direct, high-security executive messaging and sovereign AI voice/text concierges. |
+| **6. Desktop Tray App** | OS Power Users (macOS/Windows) | Native status bar / menu bar live revenue and VIP appointment monitoring. |
+| **7. Mobile App Companion** | Traveling Founders & Sales Teams | Real-time push notifications and mobile lead management. |
+| **8. Notion Workspace Widget** | Knowledge-Driven Consultancies | Embedded CRM boards and live pipeline synchronization directly inside Notion. |
 
-Code snippet
+---
+
+## ⚙️ Core Backend Architecture (Vercel Serverless Endpoints)
+
+The system runs on a secure, low-latency Serverless infrastructure deployed on Vercel, backed by PostgreSQL via Supabase:
+
+* **`api/chat.js`** — Enterprise chat handler powered by Gemini 1.5 Flash, featuring automated **Function Calling** (`save_lead_and_appointment`) and second-turn roundtrip natural language confirmation.
+* **`api/create-assistant.js`** — Dynamic multi-tenant provisioning endpoint that sets up client-specific system prompts and Vapi voice configurations.
+* **`api/gumroad.js`** — Personal Gumroad webhook processor that validates your secure seller token, verifies completed payments (`isPaid`), and triggers instant Slack VIP revenue alerts.
+* **`api/discord-bot.js`** — Ed25519 cryptographically verified webhook handler for Discord interactions, supporting Slash commands and database-driven data retrieval.
+* **`api/hot-buyer-finder.js`** — Autonomous prospecting engine that queries real Supabase pipelines, calculates closing intent scores, and pushes high-ticket whale targets to management channels.
+* **`api/linked-role.js`** — Production-ready Discord OAuth2 identity verification pipeline that exchanges auth codes, checks user VIP tier status in Supabase, and updates Discord role metadata.
+
+---
+
+## 🚀 Quick Deployment & Environment Variables
+
+Configure the following environment variables in your Vercel project settings to spin up the entire ecosystem:
+
+```env
+# AI & Database Core
+GEMINI_API_KEY=your_gemini_api_key
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# Communication & Notifications
+SLACK_WEBHOOK_URL=your_slack_incoming_webhook_url
+
+# Discord Integration
 DISCORD_CLIENT_ID=your_discord_client_id
-DISCORD_BOT_TOKEN=your_discord_bot_token
-OPENAI_API_KEY=your_openai_api_key
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-4. Run Development Server
-Bash
-npm run dev
-⚖️ Compliance & Legal Documents
-For platform verification (e.g., Discord Developer Portal verification, OAuth2 compliance) and user transparency:
+DISCORD_CLIENT_SECRET=your_discord_client_secret
+DISCORD_PUBLIC_KEY=your_discord_public_key
+DISCORD_REDIRECT_URI=https://your-domain.vercel.app/api/linked-role
 
-📜 Terms of Service: https://danielenglish19960118.github.io/ai-receptionist-saas/terms.html
+```
 
-🔒 Privacy Policy: https://danielenglish19960118.github.io/ai-receptionist-saas/privacy.html
+---
 
-🚢 Deployment
-Deploying Legal Pages via GitHub Pages
-Navigate to repository settings on GitHub: https://github.com/danielenglish19960118/ai-receptionist-saas/settings
+## 🛡️ Security & Compliance
 
-Select Pages from the left navigation menu.
+* **Cryptographic Verification**: Strict Ed25519 signature checks for Discord interactions.
+* **Secure Merchant Tokens**: Hardened seller ID validation for Gumroad digital asset provisioning.
+* **CORS & Rate Limiting**: Production-grade header policies across all serverless endpoints to prevent unauthorized access.
 
-Under Build and deployment > Source, choose Deploy from a branch.
-
-Set the branch to main / / (root) and click Save.
-
-📄 License
-This project is licensed under the MIT License.
+---
