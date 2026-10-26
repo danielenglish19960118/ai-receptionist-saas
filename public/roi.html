@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -56,7 +55,7 @@
             <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
             <a href="roi.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">💸 Cost of Delay Calculator</a>
             <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
-            <a href="team.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">01. Closing Team</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
             <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
             <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
             <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
@@ -214,12 +213,17 @@
         }
 
         function triggerInstantCalc() {
-            const calls = parseFloat(document.getElementById('monthlyCalls').value) || 0;
-            const dealSize = parseFloat(document.getElementById('avgDealSize').value) || 0;
-            const latencyFactor = parseFloat(document.getElementById('currentLatency').value) || 2.5;
+            const callsInput = document.getElementById('monthlyCalls');
+            const dealSizeInput = document.getElementById('avgDealSize');
+            const latencyInput = document.getElementById('currentLatency');
+
+            if (!callsInput || !dealSizeInput || !latencyInput) return;
+
+            const calls = parseFloat(callsInput.value) || 0;
+            const dealSize = parseFloat(dealSizeInput.value) || 0;
+            const latencyFactor = parseFloat(latencyInput.value) || 2.5;
 
             // Mathematical calculation of daily loss and monthly boost
-            // Assumes 8% of calls are high-intent hot leads, and latency decay loses 65% of them.
             const monthlyLostDeals = (calls * 0.08) * (latencyFactor / 24);
             const monthlyLossUSD = monthlyLostDeals * dealSize;
             const dailyLossUSD = monthlyLossUSD / 30;
@@ -231,12 +235,19 @@
             // Master suite annual cost is $4,997
             const roiMultiplier = Math.round((annualBoostUSD / 4997));
 
-            document.getElementById('dailyLossVal').innerText = `$${Math.round(dailyLossUSD).toLocaleString()} / day`;
-            document.getElementById('monthlyBoostVal').innerText = `$${Math.round(monthlyBoostUSD).toLocaleString()} / mo`;
-            document.getElementById('roiMultiplierVal').innerText = `${roiMultiplier > 0 ? roiMultiplier : 150}x Return`;
-            document.getElementById('insightText').innerHTML = `
-                Based on your volume of <strong>${calls.toLocaleString()}</strong> monthly calls and average contract value of <strong>$${dealSize.toLocaleString()}</strong>, delaying AI voice automation is costing your firm approximately <strong>$${Math.round(dailyLossUSD).toLocaleString()} every single day</strong> in decayed leads.
-            `;
+            const dailyLossVal = document.getElementById('dailyLossVal');
+            const monthlyBoostVal = document.getElementById('monthlyBoostVal');
+            const roiMultiplierVal = document.getElementById('roiMultiplierVal');
+            const insightText = document.getElementById('insightText');
+
+            if (dailyLossVal) dailyLossVal.innerText = `$${Math.round(dailyLossUSD).toLocaleString()} / day`;
+            if (monthlyBoostVal) monthlyBoostVal.innerText = `$${Math.round(monthlyBoostUSD).toLocaleString()} / mo`;
+            if (roiMultiplierVal) roiMultiplierVal.innerText = `${roiMultiplier > 0 ? roiMultiplier : 150}x Return`;
+            if (insightText) {
+                insightText.innerHTML = `
+                    Based on your volume of <strong>${calls.toLocaleString()}</strong> monthly calls and average contract value of <strong>$${dealSize.toLocaleString()}</strong>, delaying AI voice automation is costing your firm approximately <strong>$${Math.round(dailyLossUSD).toLocaleString()} every single day</strong> in decayed leads.
+                `;
+            }
         }
 
         // Run calculation on initial page load
@@ -244,5 +255,4 @@
     </script>
 </body>
 </html>
-
 
