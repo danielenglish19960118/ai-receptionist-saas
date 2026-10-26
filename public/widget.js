@@ -91,11 +91,10 @@
         display: none;
         flex-direction: column;
         overflow: hidden;
-        animation: fadeInWidget 0.3s ease-out forwards;
     `;
 
     chatWindow.innerHTML = `
-        <div style="background: #121216; padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: between;">
+        <div style="background: #121216; padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 10px;">
                 <div style="background: #D4AF37; color: #050507; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">👑</div>
                 <div>
@@ -130,15 +129,18 @@
     triggerBtn.onclick = () => {
         isOpen = !isOpen;
         chatWindow.style.display = isOpen ? 'flex' : 'none';
-        if (isOpen) inputField.focus();
+        if (isOpen && inputField) inputField.focus();
     };
 
-    closeBtn.onclick = () => {
-        isOpen = false;
-        chatWindow.style.display = 'none';
-    };
+    if (closeBtn) {
+        closeBtn.onclick = () => {
+            isOpen = false;
+            chatWindow.style.display = 'none';
+        };
+    }
 
     function handleSendMessage() {
+        if (!inputField || !messagesArea) return;
         const text = inputField.value.trim();
         if (!text) return;
 
@@ -160,10 +162,12 @@
         }, 800);
     }
 
-    sendBtn.onclick = handleSendMessage;
-    inputField.onkeypress = (e) => {
-        if (e.key === 'Enter') handleSendMessage();
-    };
+    if (sendBtn) sendBtn.onclick = handleSendMessage;
+    if (inputField) {
+        inputField.onkeypress = (e) => {
+            if (e.key === 'Enter') handleSendMessage();
+        };
+    }
 
     console.log("[Garfield AI Executive] Interactive Widget loaded successfully.");
 })();
