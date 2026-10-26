@@ -7,12 +7,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { garfield: { black: '#050507', panel: '#121216', vipgold: '#D4AF37', orange: '#FF8C00' } },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], bangers: ['Bangers', 'cursive'], mono: ['JetBrains Mono', 'monospace'] },
+                    boxShadow: { 'gold-glow': '0 0 70px rgba(212, 175, 55, 0.5)', 'orange-glow': '0 0 40px rgba(255, 140, 0, 0.45)' }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; overflow-x: hidden; }
+        .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.6); box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-amber-400 selection:text-black">
+
     <!-- Top Urgency Bar -->
     <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
         <span>🚨 CRITICAL DEADLINE: 10,000+ PSEO NODE PIPELINE ACTIVE</span>
@@ -23,8 +36,11 @@
     <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="modules.html" class="flex items-center gap-3">
-                <div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">⚡</div>
-                <span class="font-bangers text-2xl text-white">PSEO NODE <span class="text-amber-400" id="headerNodeId">#0000</span></span>
+                <div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">⚡</div>
+                <div>
+                    <span class="font-bangers text-2xl text-white">PSEO NODE <span class="gold-gradient-text" id="headerNodeId">#0000</span></span>
+                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">Dynamic Edge Node Payload</span>
+                </div>
             </a>
             <div class="flex items-center gap-4">
                 <a href="knowledge.html" class="hidden sm:inline text-xs font-bold font-mono text-slate-300 hover:text-amber-400">Knowledge Base</a>
@@ -33,17 +49,48 @@
         </div>
     </header>
 
-    <main class="flex-grow max-w-4xl w-full mx-auto px-6 py-12 space-y-8">
-        <div class="bg-[#121216] p-8 md:p-10 rounded-3xl gold-border-glow space-y-6">
+    <main class="flex-grow max-w-5xl w-full mx-auto px-6 py-12 space-y-8">
+        
+        <!-- Navigation Toolbar -->
+        <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
+            <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🔥 Hot Buyer Finder</a>
+            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
+            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay</a>
+            <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Voice AI</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
+            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
+            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
+            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
+            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
+            <a href="modules.html" class="bg-amber-400 text-black font-extrabold text-xs px-4 py-2 rounded-xl transition-all shadow-md">06. 10,000+ Modules</a>
+        </div>
+
+        <!-- Dynamic Node Payload Card -->
+        <div class="bg-garfield-panel p-8 md:p-10 rounded-3xl gold-border-glow space-y-6 shadow-2xl">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-6">
                 <div>
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
                         <span id="nodeBadge" class="text-xs font-mono text-amber-400 bg-amber-400/10 px-3 py-1 rounded-xl border border-amber-400/20 font-bold uppercase">Sub-Node #1</span>
                         <span id="nodeCategory" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1 rounded-xl border border-white/10">Private Wealth</span>
+                        <span id="nodeCode" class="text-xs font-mono text-amber-300 bg-black/60 px-3 py-1 rounded-xl border border-amber-400/30">CODE: HOOK-0001</span>
                     </div>
                     <h1 id="nodeTitle" class="text-2xl md:text-3xl font-black text-white">Loading Programmatic Sub-Page Payload...</h1>
                 </div>
-                <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-xl border border-emerald-500/20 whitespace-nowrap">✔ Vercel Edge Live</span>
+                <div class="flex flex-col items-end gap-1">
+                    <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-xl border border-emerald-500/20 whitespace-nowrap">✔ Vercel Edge Live</span>
+                    <span id="estimatedValueTag" class="text-[11px] font-mono text-amber-400 font-bold">Est. Value: $500,000+</span>
+                </div>
+            </div>
+
+            <!-- 🌐 Omnichannel Selector for Node -->
+            <div class="bg-black/60 p-4 rounded-2xl border border-white/10 space-y-3 font-mono text-xs">
+                <span class="text-slate-400 font-bold block">Target Ecosystem Binding:</span>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+                    <button onclick="setNodeChannel('chrome', 1)" id="nChan-1" class="bg-amber-400 text-black font-bold p-2 rounded-xl border border-amber-400 text-center truncate">1. Chrome</button>
+                    <button onclick="setNodeChannel('slack', 2)" id="nChan-2" class="bg-white/5 text-slate-300 hover:text-white p-2 rounded-xl border border-white/10 text-center truncate">2. Slack</button>
+                    <button onclick="setNodeChannel('discord', 3)" id="nChan-3" class="bg-white/5 text-slate-300 hover:text-white p-2 rounded-xl border border-white/10 text-center truncate">3. Discord</button>
+                    <button onclick="setNodeChannel('raycast', 4)" id="nChan-4" class="bg-white/5 text-slate-300 hover:text-white p-2 rounded-xl border border-white/10 text-center truncate">4. Raycast</button>
+                </div>
             </div>
 
             <!-- Dynamic SEO Script Payload Box -->
@@ -52,32 +99,51 @@
                     <span>Programmatic Closing Script & Semantic Payload:</span>
                     <span class="text-amber-400">Latency: &lt; 130ms</span>
                 </label>
-                <div id="nodeScript" class="bg-black/80 p-6 rounded-2xl border border-white/10 text-slate-200 leading-relaxed text-sm">
+                <div id="nodeScript" class="bg-black/80 p-6 rounded-2xl border border-white/10 text-slate-200 leading-relaxed text-sm min-h-[120px]">
                     Querying secure node parameters from decentralized edge registry...
                 </div>
             </div>
 
             <!-- Interactive Action & Webhook Trigger -->
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
-                <button onclick="executeNodeWebhook()" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs px-8 py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all">
+                <button onclick="executeNodeWebhook()" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs px-8 py-4 rounded-xl uppercase tracking-wider shadow-gold-glow transition-all">
                     Execute Sub-Page Webhook & Vapi Voice 🚀
                 </button>
                 <div id="nodeLog" class="text-xs font-mono text-amber-300 text-center sm:text-right">Ready for institutional dispatch.</div>
             </div>
         </div>
+
+        <!-- Pagination / Node Navigation Footer -->
+        <div class="flex items-center justify-between font-mono text-xs border-t border-white/10 pt-6">
+            <button onclick="navigateNode(-1)" id="prevNodeBtn" class="bg-white/5 hover:bg-white/10 text-white font-bold px-5 py-3 rounded-xl border border-white/10 transition-all">← Previous Node</button>
+            <a href="modules.html" class="text-amber-400 underline font-bold">Return to Directory Index</a>
+            <button onclick="navigateNode(1)" id="nextNodeBtn" class="bg-white/5 hover:bg-white/10 text-white font-bold px-5 py-3 rounded-xl border border-white/10 transition-all">Next Node →</button>
+        </div>
     </main>
 
-    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a></footer>
+    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a>
+    </footer>
 
+    <!-- Core Script Assets -->
+    <script src="script.js"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         let nodeId = parseInt(urlParams.get('id') || '1', 10);
+        let selectedNodeChannel = 'chrome';
 
         // 嚴格邊界檢查：確保 node id 在 1 到 10000 之間
         if (isNaN(nodeId) || nodeId < 1) nodeId = 1;
         if (nodeId > 10000) nodeId = 10000;
 
-        const sectorsList = ["Private Wealth & Escrow Vault", "Gulfstream & Superyacht Charter", "Emergency Concierge Surgical Suite", "Series C M&A Boardroom Bridge"];
+        const sectorsList = [
+            "Private Wealth & Escrow Vault", 
+            "Gulfstream & Superyacht Charter", 
+            "Emergency Concierge Surgical Suite", 
+            "Series C M&A Boardroom Bridge",
+            "Enterprise Cloud AI & Sovereign Infrastructure",
+            "Global Ultra-Luxury Real Estate"
+        ];
         const assignedSector = sectorsList[(nodeId - 1) % sectorsList.length];
 
         document.getElementById('pageMetaTitle').innerText = `Sub-Page #${nodeId} | Garfield AI Executive`;
@@ -85,8 +151,46 @@
         document.getElementById('nodeBadge').innerText = `Programmatic Node #${nodeId}`;
         document.getElementById('nodeCategory').innerText = assignedSector;
         document.getElementById('nodeTitle').innerText = `Enterprise Sub-Page #${nodeId}: ${assignedSector} Conversion Protocol`;
-        
-        document.getElementById('nodeScript').innerText = `[Programmatic SEO & Script Payload for Node #${nodeId}] -> This sub-page is dynamically optimized for high-net-worth query intent in '${assignedSector}'. Automatically integrates real-time AES-256 escrow verification, sub-150ms Vapi WebRTC speech synthesis, and instant Discord P1 stakeholder handoff.`;
+        document.getElementById('nodeCode').innerText = `CODE: HOOK-${String(nodeId).padStart(4, '0')}`;
+
+        async function fetchNodePayload() {
+            const scriptBox = document.getElementById('nodeScript');
+            const estVal = document.getElementById('estimatedValueTag');
+            
+            try {
+                const res = await fetch(`/api/voice-hook?id=${nodeId}&channel=${selectedNodeChannel}`);
+                const data = await res.json();
+                
+                if (data.success) {
+                    scriptBox.innerHTML = `
+                        <p class="mb-2"><strong>[Dynamic Script Payload]:</strong> ${data.systemScript}</p>
+                        <p class="text-xs text-slate-400">Automated WebRTC bridge active on channel: <span class="text-emerald-400 font-bold">${data.activeDistributionChannel}</span>. Pre-configured with zero-trust escrow escalation hooks.</p>
+                    `;
+                    if (data.targetMetrics && data.targetMetrics.estimatedValue) {
+                        estVal.innerText = `Est. Value: ${data.targetMetrics.estimatedValue}`;
+                    }
+                } else {
+                    throw new Error("Fallback required");
+                }
+            } catch (e) {
+                scriptBox.innerText = `[Programmatic SEO & Script Payload for Node #${nodeId}] -> Dynamically optimized for high-net-worth query intent in '${assignedSector}'. Automatically integrates real-time AES-256 escrow verification, sub-150ms Vapi WebRTC speech synthesis, and instant Discord P1 stakeholder handoff.`;
+            }
+        }
+
+        function setNodeChannel(chanKey, idNum) {
+            selectedNodeChannel = chanKey;
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`nChan-${i}`);
+                if (btn) {
+                    if (i === idNum) {
+                        btn.className = "bg-amber-400 text-black font-bold p-2 rounded-xl border border-amber-400 text-center truncate shadow-md";
+                    } else {
+                        btn.className = "bg-white/5 text-slate-300 hover:text-white p-2 rounded-xl border border-white/10 text-center truncate";
+                    }
+                }
+            }
+            fetchNodePayload();
+        }
 
         function executeNodeWebhook() {
             const log = document.getElementById('nodeLog');
@@ -96,6 +200,15 @@
                 log.innerText = `✔ Node #${nodeId} Executed (Hash: 0x${(nodeId * 3821).toString(16).toUpperCase()})`;
             }, 600);
         }
+
+        function navigateNode(delta) {
+            const newId = nodeId + delta;
+            if (newId >= 1 && newId <= 10000) {
+                window.location.href = `module-detail.html?id=${newId}`;
+            }
+        }
+
+        fetchNodePayload();
     </script>
 </body>
 </html>
