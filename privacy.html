@@ -1,268 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy | Garfield AI Executive SaaS</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-color: #050507;
-      --card-bg: #121216;
-      --card-border: rgba(255, 255, 255, 0.08);
-      --text-primary: #F4F4F5;
-      --text-secondary: #A1A1AA;
-      --accent-gold: #D4AF37;
-      --accent-gold-glow: rgba(212, 175, 55, 0.15);
-      --accent-emerald: #10B981;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.7;
-      color: var(--text-primary);
-      background-color: var(--bg-color);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 4rem 1.5rem;
-    }
-
-    .container {
-      max-width: 880px;
-      width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 28px;
-      padding: 3.5rem;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
-    }
-
-    .header-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--accent-gold);
-      background: var(--accent-gold-glow);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      padding: 0.35rem 0.85rem;
-      border-radius: 100px;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    h1 {
-      font-size: 2.75rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: #FFFFFF;
-      margin-bottom: 0.75rem;
-    }
-
-    .last-updated {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 2.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    .intro-text {
-      font-size: 1.05rem;
-      color: var(--text-primary);
-      margin-bottom: 2rem;
-      font-weight: 400;
-    }
-
-    h2 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #FFFFFF;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    h2::before {
-      content: '';
-      display: inline-block;
-      width: 4px;
-      height: 1.1rem;
-      background: var(--accent-gold);
-      border-radius: 2px;
-    }
-
-    p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 1.25rem;
-    }
-
-    ul {
-      list-style: none;
-      margin-bottom: 1.5rem;
-      padding-left: 0.5rem;
-    }
-
-    li {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 0.85rem;
-      position: relative;
-      padding-left: 1.5rem;
-    }
-
-    li::before {
-      content: '✦';
-      position: absolute;
-      left: 0;
-      color: var(--accent-gold);
-      font-size: 0.75rem;
-      top: 0.1rem;
-    }
-
-    li strong {
-      color: #FFFFFF;
-      font-weight: 600;
-    }
-
-    .highlight-box {
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 16px;
-      padding: 1.25rem 1.5rem;
-      margin: 1.5rem 0;
-    }
-
-    .highlight-box p {
-      color: var(--accent-emerald);
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin: 0;
-    }
-
-    .contact-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-top: 1.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-    }
-
-    .contact-card strong {
-      color: var(--accent-gold);
-    }
-
-    .footer {
-      margin-top: 3.5rem;
-      padding-top: 1.75rem;
-      border-top: 1px solid var(--card-border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-
-    .footer a {
-      color: var(--accent-gold);
-      text-decoration: none;
-    }
-
-    @media (max-width: 640px) {
-      .container { padding: 2rem 1.5rem; border-radius: 20px; }
-      h1 { font-size: 2rem; }
-      .footer { flex-direction: column; gap: 0.75rem; text-align: center; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Garfield AI Executive SaaS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <!-- Gumroad 官方內嵌彈窗腳本 -->
+    <script src="https://gumroad.com/js/gumroad.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { garfield: { black: '#050507', panel: '#121216', vipgold: '#D4AF37', orange: '#FF8C00' } },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], bangers: ['Bangers', 'cursive'], mono: ['JetBrains Mono', 'monospace'] },
+                    boxShadow: { 'gold-glow': '0 0 70px rgba(212, 175, 55, 0.5)', 'orange-glow': '0 0 40px rgba(255, 140, 0, 0.45)' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; overflow-x: hidden; }
+        .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.6); box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <div class="header-badge">Enterprise Compliance Standard</div>
-    <h1>Privacy Policy</h1>
-    <div class="last-updated">Last Updated: October 26, 2026 &bull; Effective Date: Immediate</div>
-
-    <p class="intro-text">At <strong>Garfield AI Executive Inc.</strong> ("Company", "we", "us", or "our"), safeguarding corporate privacy and security is foundational to our enterprise voice telephony and autonomous SaaS suite. This Privacy Policy discloses our data governance practices for our web platform, Vapi WebRTC telephony edge, and Discord integrations.</p>
-
-    <h2>1. Information We Collect</h2>
-    <p>We strictly adhere to a data minimization protocol, collecting only necessary telemetry and operational inputs required for service fulfillment:</p>
-    <ul>
-      <li><strong>Platform & Account Identifiers:</strong> Discord User IDs, Guild (Server) IDs, Channel IDs, Full Name, and Corporate Business Email addresses.</li>
-      <li><strong>Voice & Telephony Streams:</strong> Temporary WebRTC speech-to-speech audio tokens processed via sub-150ms Vapi Edge nodes. Audio inputs are strictly processed under Zero-Data-Retention (ZDR) agreements unless explicit cloud logging is requested by enterprise clients.</li>
-      <li><strong>Support & Interactivity Logs:</strong> Text commands, P1-P3 customer support ticket descriptions, and parameters submitted to our autonomous B2B lead generation bot.</li>
-      <li><strong>Licensing & Billing Tokens:</strong> Encrypted Gumroad license verification tokens. Payment card handling is offloaded entirely to Stripe and Gumroad; raw financial credentials never touch our servers.</li>
-    </ul>
-
-    <div class="highlight-box">
-      <p>🛡️ Zero Data Sale Commitment: We never sell, rent, monetize, or trade your personal, corporate, or voice interaction data to any third party under any circumstances.</p>
+<body class="min-h-screen flex flex-col selection:bg-garfield-vipgold selection:text-black">
+    <!-- Top Urgency Bar -->
+    <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
+        <span>🚨 CRITICAL DEADLINE: 100% ESCROW REFUND GUARANTEE CLOSES IN <strong class="text-white bg-black px-2 py-0.5 rounded">03:42:18</strong></span>
+        <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline">Claim Your Guaranteed Slot Now ➔</a>
     </div>
 
-    <h2>2. Enterprise Purpose & Data Processing</h2>
-    <p>Your data is processed exclusively to deliver high-performance executive automation, including:</p>
-    <ul>
-      <li>Processing sub-150ms real-time voice concierge calls and WebRTC speech synthesis.</li>
-      <li>Validating enterprise VIP licensing and gating access to our 100 standalone child modules.</li>
-      <li>Dispatching high-priority P1-P3 support tickets and routing instant Webhook alerts to Discord engineering queues.</li>
-      <li>Running autonomous target prospecting, lead scoring, and ROI financial calculations.</li>
-      <li>Maintaining SOC 2 Type II compliance standards and platform perimeter security.</li>
-    </ul>
+    <!-- Header -->
+    <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-garfield-vipgold p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">👑</div>
+                <div>
+                    <span class="font-bangers text-2xl tracking-wider text-white">GARFIELD <span class="gold-gradient-text">PRIVACY DESK</span></span>
+                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">Enterprise Compliance & Governance</span>
+                </div>
+            </a>
+            
+            <!-- 右上角 Gumroad 結帳按鈕 (已帶入您的真實連結) -->
+            <div class="flex items-center gap-3 font-mono">
+                <span id="authBadge" class="hidden sm:inline-flex items-center gap-1.5 text-xs text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Status: <strong class="text-amber-400 font-bold">Standard</strong>
+                </span>
+                <a href="vip.html" class="hidden md:inline-block bg-white/5 hover:bg-white/10 text-slate-300 font-bold text-xs px-3.5 py-2 rounded-xl border border-white/10 transition-all">
+                    🔑 Activate Key
+                </a>
+                <a href="https://danielverse87.gumroad.com/l/ai-receptionist" class="gumroad-button bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-cart-shopping text-xs"></i>
+                    <span>Buy VIP License ↗</span>
+                </a>
+            </div>
+        </div>
+    </header>
 
-    <h2>3. Infrastructure & Service Processors</h2>
-    <p>We share necessary transactional tokens with compliant cloud infrastructure providers bound by non-disclosure agreements:</p>
-    <ul>
-      <li><strong>Vercel Cloud:</strong> Global serverless hosting, edge routing, and deployment static infrastructure.</li>
-      <li><strong>Vapi AI Telephony:</strong> Ultra-low latency voice edge pipeline and WebRTC connection handler.</li>
-      <li><strong>Gumroad & Stripe:</strong> License key validation, billing verification, and tier management.</li>
-      <li><strong>Discord Operations:</strong> Real-time event notifications and server webhook integration.</li>
-    </ul>
+    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-10">
+        <!-- Navigation Toolbar -->
+        <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
+            <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🔥 Hot Buyer Finder</a>
+            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
+            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
+            <a href="sandbox.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
+            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
+            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
+            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
+            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 10,000+ Modules</a>
+        </div>
 
-    <h2>4. Security Standards & Encryption</h2>
-    <p>We enforce bank-grade security protocols across all systems, including <strong>AES-256 encryption at rest</strong>, <strong>TLS 1.3 in transit</strong>, isolated multi-tenant RBAC permissions, and continuous perimeter auditing to protect against unauthorized access, loss, or alteration.</p>
+        <!-- Privacy Policy Card Container -->
+        <div class="bg-garfield-panel p-8 md:p-12 rounded-3xl gold-border-glow space-y-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
 
-    <h2>5. User Control, Removal & GDPR/CCPA Rights</h2>
-    <p>Regardless of jurisdiction, all users retain absolute governance over their stored records:</p>
-    <ul>
-      <li><strong>Bot Disconnection:</strong> Removing our bot from your Discord Guild immediately terminates all active message data transmission.</li>
-      <li><strong>Data Deletion Requests:</strong> You possess the absolute right to request complete deletion of your support ticket history, user ID logs, and licensing tokens.</li>
-    </ul>
+            <div class="space-y-4 border-b border-white/10 pb-6">
+                <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full font-mono text-xs font-bold text-amber-300 uppercase">
+                    Enterprise Compliance Standard
+                </div>
+                <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight">Privacy Policy</h1>
+                <div class="font-mono text-xs text-slate-400">
+                    Last Updated: October 26, 2026 &bull; Effective Date: Immediate
+                </div>
+            </div>
 
-    <h2>6. Contact & Data Protection Desk</h2>
-    <p>For compliance inquiries, formal GDPR/CCPA data erasure requests, or SOC 2 audit reports, contact our compliance desk:</p>
-    <div class="contact-card">
-      <strong>Data Protection Officer:</strong> Garfield Enterprise Inc.<br>
-      <strong>Compliance Email:</strong> privacy@garfield-ai-executive.com<br>
-      <strong>Legal Desk:</strong> Tainan City & Global Operations
-    </div>
+            <div class="space-y-6 font-mono text-xs md:text-sm text-slate-300 leading-relaxed">
+                <p>
+                    At <strong class="text-white">Garfield AI Executive Inc.</strong> ("Company", "we", "us", or "our"), safeguarding corporate privacy and security is foundational to our enterprise voice telephony and autonomous SaaS suite. This Privacy Policy discloses our data governance practices for our web platform, Vapi WebRTC telephony edge, and Discord integrations.
+                </p>
 
-    <div class="footer">
-      <span>&copy; 2026 Garfield AI Executive Inc. All rights reserved.</span>
-      <a href="/">Return to Dashboard ↗</a>
-    </div>
-  </div>
+                <h2 class="text-lg font-bold text-white pt-4 border-t border-white/10">1. Information We Collect</h2>
+                <p>We strictly adhere to a data minimization protocol, collecting only necessary telemetry and operational inputs required for service fulfillment:</p>
+                <ul class="space-y-3 pl-4">
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">
+                        <strong class="text-white">Platform & Account Identifiers:</strong> Discord User IDs, Guild (Server) IDs, Channel IDs, Full Name, and Corporate Business Email addresses.
+                    </li>
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">
+                        <strong class="text-white">Voice & Telephony Streams:</strong> Temporary WebRTC speech-to-speech audio tokens processed via sub-150ms Vapi Edge nodes. Audio inputs are strictly processed under Zero-Data-Retention (ZDR) agreements unless explicit cloud logging is requested by enterprise clients.
+                    </li>
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">
+                        <strong class="text-white">Support & Interactivity Logs:</strong> Text commands, P1-P3 customer support ticket descriptions, and parameters submitted to our autonomous B2B lead generation bot.
+                    </li>
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">
+                        <strong class="text-white">Licensing & Billing Tokens:</strong> Encrypted Gumroad license verification tokens. Payment card handling is offloaded entirely to Stripe and Gumroad; raw financial credentials never touch our servers.
+                    </li>
+                </ul>
+
+                <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-5 text-emerald-400 font-bold">
+                    🛡️ Zero Data Sale Commitment: We never sell, rent, monetize, or trade your personal, corporate, or voice interaction data to any third party under any circumstances.
+                </div>
+
+                <h2 class="text-lg font-bold text-white pt-4 border-t border-white/10">2. Enterprise Purpose & Data Processing</h2>
+                <p>Your data is processed exclusively to deliver high-performance executive automation, including:</p>
+                <ul class="space-y-3 pl-4">
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Processing sub-150ms real-time voice concierge calls and WebRTC speech synthesis.</li>
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Validating enterprise VIP licensing and gating access to our standalone child modules.</li>
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Dispatching high-priority P1-P3 support tickets and routing instant Webhook alerts to Discord engineering queues.</li>
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Running autonomous target prospecting, lead scoring, and ROI financial calculations.</li>
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Maintaining SOC 2 Type II compliance standards and platform perimeter security.</li>
+                </ul>
+
+                <h2 class="text-lg font-bold text-white pt-4 border-t border-white/10">3. Infrastructure & Service Processors</h2>
+                <p>We share necessary transactional tokens with compliant cloud infrastructure providers bound by non-disclosure agreements:</p>
+                <ul class="space-y-3 pl-4">
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400"><strong class="text-white">Vercel Cloud:</strong> Global serverless hosting, edge routing, and deployment static infrastructure.</li>
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400"><strong class="text-white">Vapi AI Telephony:</strong> Ultra-low latency voice edge pipeline and WebRTC connection handler.</li>
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400"><strong class="text-white">Gumroad & Stripe:</strong> License key validation, billing verification, and tier management.</li>
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400"><strong class="text-white">Discord Operations:</strong> Real-time event notifications and server webhook integration.</li>
+                </ul>
+
+                <h2 class="text-lg font-bold text-white pt-4 border-t border-white/10">4. Security Standards & Encryption</h2>
+                <p>We enforce bank-grade security protocols across all systems, including <strong class="text-white">AES-256 encryption at rest</strong>, <strong class="text-white">TLS 1.3 in transit</strong>, isolated multi-tenant RBAC permissions, and continuous perimeter auditing to protect against unauthorized access, loss, or alteration.</p>
+
+                <h2 class="text-lg font-bold text-white pt-4 border-t border-white/10">5. User Control, Removal & GDPR/CCPA Rights</h2>
+                <p>Regardless of jurisdiction, all users retain absolute governance over their stored records:</p>
+                <ul class="space-y-3 pl-4">
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400"><strong class="text-white">Bot Disconnection:</strong> Removing our bot from your Discord Guild immediately terminates all active message data transmission.</li>
+                    <li class="relative pl-4 before:content-['✦'] before:absolute before:left-0 before:text-amber-400"><strong class="text-white">Data Deletion Requests:</strong> You possess the absolute right to request complete deletion of your support ticket history, user ID logs, and licensing tokens.</li>
+                </ul>
+
+                <h2 class="text-lg font-bold text-white pt-4 border-t border-white/10">6. Contact & Data Protection Desk</h2>
+                <p>For compliance inquiries, formal GDPR/CCPA data erasure requests, or SOC 2 audit reports, contact our compliance desk:</p>
+                
+                <div class="bg-black/60 p-6 rounded-2xl border border-white/10 space-y-1 font-mono text-xs">
+                    <div>Data Protection Officer: <strong class="text-white">Garfield Enterprise Inc. (Director Yang Cheng-han)</strong></div>
+                    <div>Compliance Email: <strong class="text-amber-400">privacy@garfield-ai-executive.com</strong></div>
+                    <div>Legal Desk: <strong class="text-white">East District, Tainan City, Taiwan & Global Operations</strong></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-black border-t border-white/10 mt-20 py-8 text-center text-xs text-slate-500 font-mono">
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="index.html" class="underline ml-2 text-amber-400">Return to Dashboard ↗</a>
+    </footer>
 </body>
 </html>
