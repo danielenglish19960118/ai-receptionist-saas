@@ -54,8 +54,12 @@
             <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🔥 Hot Buyer Finder</a>
             <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
             <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
-            <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
+            <a href="sandbox.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Sandbox</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
+            <a href="team.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">01. Closing Team</a>
             <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
+            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
+            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
             <a href="vip.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">05. VIP Portal</a>
             <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 10,000+ Modules</a>
         </div>
@@ -214,20 +218,32 @@
     <script>
         function switchVipTab(tabName) {
             ['activation', 'pseo', 'escrow'].forEach(t => {
-                document.getElementById(`tabContent-${t}`).classList.add('hidden');
-                document.getElementById(`tabBtn-${t}`).className = "bg-white/5 text-slate-300 hover:text-white px-5 py-2.5 rounded-xl border border-white/10 transition-all font-mono text-xs";
+                const content = document.getElementById(`tabContent-${t}`);
+                const btn = document.getElementById(`tabBtn-${t}`);
+                if (content) content.classList.add('hidden');
+                if (btn) btn.className = "bg-white/5 text-slate-300 hover:text-white px-5 py-2.5 rounded-xl border border-white/10 transition-all font-mono text-xs";
             });
-            document.getElementById(`tabContent-${tabName}`).classList.remove('hidden');
-            document.getElementById(`tabBtn-${tabName}`).className = "bg-amber-400 text-black font-bold px-5 py-2.5 rounded-xl transition-all shadow-md font-mono text-xs";
+
+            const activeContent = document.getElementById(`tabContent-${tabName}`);
+            const activeBtn = document.getElementById(`tabBtn-${tabName}`);
+
+            if (activeContent) activeContent.classList.remove('hidden');
+            if (activeBtn) activeBtn.className = "bg-amber-400 text-black font-bold px-5 py-2.5 rounded-xl transition-all shadow-md font-mono text-xs";
         }
 
         function verifyCloudLicense(e) {
             e.preventDefault();
-            const name = document.getElementById('regName').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const key = document.getElementById('licenseKeyInput').value.trim();
+            const nameInput = document.getElementById('regName');
+            const emailInput = document.getElementById('regEmail');
+            const keyInput = document.getElementById('licenseKeyInput');
             const statusDiv = document.getElementById('regStatus');
             const authBadge = document.getElementById('authBadge');
+
+            if (!nameInput || !emailInput || !keyInput || !statusDiv || !authBadge) return;
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const key = keyInput.value.trim();
 
             statusDiv.classList.remove('hidden');
             statusDiv.className = "text-xs font-mono p-4 rounded-xl border bg-amber-500/10 border-amber-500/30 text-amber-300 animate-pulse";
