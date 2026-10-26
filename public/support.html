@@ -55,12 +55,12 @@
             <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
             <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
             <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
-            <a href="team.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">01. Closing Team</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
             <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
             <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
             <a href="support.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">04. Instant Handoff</a>
             <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
-            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 100 Closing Modules</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 10,000+ Modules</a>
         </div>
 
         <!-- Section Header -->
@@ -228,13 +228,21 @@
 
         async function submitCloudSupportTicket(e) {
             e.preventDefault();
-            const name = document.getElementById('supName').value.trim();
-            const email = document.getElementById('supEmail').value.trim();
-            const priority = document.getElementById('supPriority').value;
-            const phone = document.getElementById('supPhone').value.trim();
-            const desc = document.getElementById('supDesc').value.trim();
+            const nameInput = document.getElementById('supName');
+            const emailInput = document.getElementById('supEmail');
+            const priorityInput = document.getElementById('supPriority');
+            const phoneInput = document.getElementById('supPhone');
+            const descInput = document.getElementById('supDesc');
             const btn = document.getElementById('supSubmitBtn');
             const statusDiv = document.getElementById('supStatus');
+
+            if (!nameInput || !emailInput || !priorityInput || !descInput || !btn || !statusDiv) return;
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const priority = priorityInput.value;
+            const phone = phoneInput ? phoneInput.value.trim() : '';
+            const desc = descInput.value.trim();
 
             btn.innerText = "Encrypting Payload & Dispatching Discord Webhook...";
             btn.disabled = true;
@@ -266,13 +274,18 @@
         function renderSuccessStatus(ticketId) {
             const btn = document.getElementById('supSubmitBtn');
             const statusDiv = document.getElementById('supStatus');
+            const priorityInput = document.getElementById('supPriority');
+
+            if (!btn || !statusDiv) return;
+
+            const priority = priorityInput ? priorityInput.value : 'P2';
 
             statusDiv.className = "text-xs font-mono p-5 rounded-2xl border bg-emerald-500/10 border-emerald-500/30 text-emerald-400 space-y-2";
             statusDiv.innerHTML = `
                 <div class="flex items-center gap-2 font-bold text-sm text-emerald-300">
                     <i class="fa-solid fa-circle-check"></i> TICKET DISPATCHED SUCCESSFULLY!
                 </div>
-                <div>Ticket Hash: <strong class="text-white">${ticketId}</strong> | SLA Priority: <strong class="text-amber-300">${document.getElementById('supPriority').value}</strong></div>
+                <div>Ticket Hash: <strong class="text-white">${ticketId}</strong> | SLA Priority: <strong class="text-amber-300">${priority}</strong></div>
                 <div class="text-slate-300 text-[11px] leading-relaxed pt-1">
                     Director Yang Cheng-han has received your payload via automated Discord Webhook. A dedicated callback or email response will be initiated within 15 minutes.
                 </div>
@@ -283,6 +296,8 @@
 
         function renderSupportNodes() {
             const grid = document.getElementById('supportNodesGrid');
+            if (!grid) return;
+
             const start = currentSupportBatch * supportBatchSize + 1;
             const end = Math.min(start + supportBatchSize - 1, totalSupportNodes);
             let html = '';
@@ -310,7 +325,10 @@
             }
 
             grid.innerHTML = html;
-            document.getElementById('supportPageIndicator').innerText = `Nodes ${start} - ${end} of ${totalSupportNodes}`;
+            const indicator = document.getElementById('supportPageIndicator');
+            if (indicator) {
+                indicator.innerText = `Nodes ${start} - ${end} of ${totalSupportNodes}`;
+            }
         }
 
         function changeSupportBatch(delta) {
