@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Objection Destroyer, 8-Channel Omnichannel & 10,000+ Rebuttal Nodes | Garfield AI Executive</title>
+    <title>Objection Destroyer & Sub-Page Dispatch | Garfield AI Executive</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
@@ -65,7 +65,7 @@
             <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">06. 10,000+ Modules</a>
         </div>
 
-        <!-- 🌐 8-Channel Omnichannel Status Panel (All 8 Clickable) -->
+        <!-- 🌐 8-Channel Omnichannel Status Panel -->
         <div class="bg-garfield-panel p-6 md:p-8 rounded-3xl border border-amber-500/30 space-y-4 shadow-xl font-mono text-xs">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/10 pb-4 gap-2">
                 <span class="text-amber-400 font-bold flex items-center gap-2 text-sm">
@@ -123,7 +123,7 @@
                     </div>
                     <h1 class="text-3xl md:text-4xl font-black text-white">AI Objection Destroyer & Rebuttal Engine</h1>
                     <p class="text-xs md:text-sm text-slate-300 font-mono mt-1 max-w-2xl">
-                        Select or click any executive resistance pattern below. Our neural voice pipelines counter hesitation instantly.
+                        Click any executive resistance pattern below to open its dedicated child sub-page terminal instantly.
                     </p>
                 </div>
                 <div class="flex items-center gap-3 w-full md:w-auto">
@@ -136,62 +136,45 @@
         <!-- Interactive Core Rebuttal Workspace -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- Left Panel: 4 Clickable Executive Resistance Patterns -->
+            <!-- Left Panel: 4 Clickable Executive Resistance Patterns (Directly Opens Sub-Page) -->
             <div class="lg:col-span-5 bg-garfield-panel p-6 rounded-3xl border border-white/10 space-y-4 shadow-xl">
                 <div class="flex justify-between items-center border-b border-white/10 pb-3">
                     <label class="text-xs font-bold text-slate-300 uppercase tracking-wider">Executive Resistance Patterns:</label>
-                    <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Click to Select</span>
+                    <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/25">Click to Open Sub-Page</span>
                 </div>
                 <div class="space-y-2.5">
-                    <button onclick="destroyObjection('price')" id="objBtn-price" class="w-full text-left bg-amber-400/10 border-amber-400 text-xs text-white p-4 rounded-2xl border transition-all flex justify-between items-center cursor-pointer group shadow-md">
-                        <span class="font-bold text-amber-300">"The price is too high for our budget."</span>
-                        <i class="fa-solid fa-chevron-right text-amber-400"></i>
+                    <button onclick="openObjectionSubPage('price')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center cursor-pointer group shadow-md">
+                        <span class="font-bold group-hover:text-amber-300 transition-colors">"The price is too high for our budget."</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-amber-400"></i>
                     </button>
-                    <button onclick="destroyObjection('timing')" id="objBtn-timing" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center cursor-pointer group">
+                    <button onclick="openObjectionSubPage('timing')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center cursor-pointer group">
                         <span class="font-bold group-hover:text-amber-300 transition-colors">"Let's postpone evaluation until Q3/Q4."</span>
-                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-amber-400"></i>
                     </button>
-                    <button onclick="destroyObjection('risk')" id="objBtn-risk" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center cursor-pointer group">
+                    <button onclick="openObjectionSubPage('risk')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center cursor-pointer group">
                         <span class="font-bold group-hover:text-amber-300 transition-colors">"We are concerned about AI security & privacy risk."</span>
-                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-amber-400"></i>
                     </button>
-                    <button onclick="destroyObjection('approval')" id="objBtn-approval" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center cursor-pointer group">
+                    <button onclick="openObjectionSubPage('approval')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center cursor-pointer group">
                         <span class="font-bold group-hover:text-amber-300 transition-colors">"I need approval from the Managing Director / Board."</span>
-                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-amber-400"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Right Panel: Output Closing Rebuttal Console -->
-            <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6 font-mono text-xs shadow-2xl" id="objectionOutput">
+            <!-- Right Panel: Output Closing Rebuttal Preview Console -->
+            <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6 font-mono text-xs shadow-2xl">
                 <div class="flex justify-between items-center border-b border-white/10 pb-3">
                     <span class="text-amber-400 font-bold uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-terminal text-xs"></i> RECOMMENDED CLOSING REBUTTAL SCRIPT & 8-CHANNEL DISPATCH
+                        <i class="fa-solid fa-terminal text-xs"></i> SUB-PAGE ROUTING CONSOLE
                     </span>
-                    <span id="rebuttalRatioBadge" class="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 text-[10px]">VERIFIED CLOSING RATIO: 99.2%</span>
+                    <span class="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 text-[10px]">DYNAMIC ROUTING ACTIVE</span>
                 </div>
                 
-                <div class="space-y-4">
-                    <p id="rebuttalText" class="text-slate-300 leading-relaxed text-sm bg-black/70 p-5 rounded-2xl border border-white/10">
-                        "I completely respect budget constraints. However, every day without an AI executive receptionist costs average enterprises $1,420 in uncaptured hot leads. That is why we back your deployment with a 30-day 100% third-party escrow refund guarantee. You carry zero financial risk—if we don't increase your closing velocity by 300%, your funds are returned in full."
+                <div class="space-y-4 text-slate-300 leading-relaxed text-xs">
+                    <p class="bg-black/70 p-5 rounded-2xl border border-white/10">
+                        Select any of the 4 executive resistance patterns on the left to immediately navigate to its dedicated programmatic sub-page (`module-detail.html?objection=...`), featuring live Vapi voice prompts, escrow contracts, and 8-channel webhook triggers.
                     </p>
-                    <div class="grid grid-cols-2 gap-3 text-[11px]">
-                        <div class="bg-black/50 p-3 rounded-xl border border-white/10">
-                            <span class="text-slate-400 block">Vapi Response Latency:</span>
-                            <strong id="rebuttalLatency" class="text-emerald-400">&lt; 125ms Edge Synthesis</strong>
-                        </div>
-                        <div class="bg-black/50 p-3 rounded-xl border border-white/10">
-                            <span class="text-slate-400 block">Contract Protection:</span>
-                            <strong id="rebuttalVault" class="text-amber-300">Stripe Vault Escrow Lock</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-white/10">
-                    <button onclick="launchSandboxTest()" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-6 py-3 rounded-xl uppercase transition-all shadow-gold-glow cursor-pointer">
-                        Test This Script in Sandbox 🎙️
-                    </button>
-                    <span id="rebuttalNodeTag" class="text-[10px] text-slate-500">PSEO Node ID: #OBJ-2026-VAL</span>
                 </div>
             </div>
         </div>
@@ -212,7 +195,7 @@
                 </div>
             </div>
 
-            <!-- Dynamic Sub-Nodes Grid (All 10,000 Clickable) -->
+            <!-- Dynamic Sub-Nodes Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="objectionNodesGrid"></div>
         </div>
     </main>
@@ -227,69 +210,9 @@
         let currentObjectionBatch = 0;
         const batchSize = 16;
         const totalObjectionNodes = 10000;
-        let selectedObjectionKey = 'price';
 
-        const objectionRebuttals = {
-            price: {
-                text: `"I completely respect budget constraints. However, every day without an AI executive receptionist costs average enterprises $1,420 in uncaptured hot leads. That is why we back your deployment with a 30-day 100% third-party escrow refund guarantee. You carry zero financial risk—if we don't increase your closing velocity by 300%, your funds are returned in full."`,
-                ratio: "VERIFIED CLOSING RATIO: 99.2%",
-                latency: "< 125ms Edge Synthesis",
-                vault: "Stripe Vault Escrow Lock",
-                tag: "#OBJ-2026-VAL"
-            },
-            timing: {
-                text: `"Delaying until Q3/Q4 allows your competitors to capture ready-to-sign enterprise prospects using sub-130ms voice response systems today. Our zero-risk deployment takes less than 15 minutes to configure on your existing PBX or web domain. Let us lock in your escrow slot now before the Q3 rate increase."`,
-                ratio: "VERIFIED CLOSING RATIO: 98.7%",
-                latency: "< 118ms Edge Synthesis",
-                vault: "Escrow.com Vault Guarantee",
-                tag: "#OBJ-2026-TIME"
-            },
-            risk: {
-                text: `"Data sovereignty is our highest priority. Garfield AI Executive operates under strict SOC 2 Type II compliance, zero audio recording retention in volatile RAM, and AES-256 end-to-end encryption. You retain 100% ownership of your client interaction logs."`,
-                ratio: "VERIFIED CLOSING RATIO: 99.5%",
-                latency: "< 110ms Edge Synthesis",
-                vault: "SOC 2 Type II Encrypted",
-                tag: "#OBJ-2026-SEC"
-            },
-            approval: {
-                text: `"We make board and MD approval effortless. We provide a customized ROI analysis and financial risk-reversal prospectus directly to your decision-makers. Plus, with our 100% escrow guarantee, there is zero capital risk for the board to review."`,
-                ratio: "VERIFIED CLOSING RATIO: 97.9%",
-                latency: "< 130ms Edge Synthesis",
-                vault: "Board-Level Escrow Contract",
-                tag: "#OBJ-2026-APP"
-            }
-        };
-
-        function destroyObjection(key) {
-            selectedObjectionKey = key;
-            const data = objectionRebuttals[key];
-            if (!data) return;
-
-            const keys = ['price', 'timing', 'risk', 'approval'];
-            keys.forEach(k => {
-                const btn = document.getElementById(`objBtn-${k}`);
-                if (btn) {
-                    if (k === key) {
-                        btn.className = "w-full text-left bg-amber-400/10 border-amber-400 text-xs text-white p-4 rounded-2xl border transition-all flex justify-between items-center cursor-pointer group shadow-md";
-                        btn.querySelector('span').className = "font-bold text-amber-300";
-                        btn.querySelector('i').className = "fa-solid fa-chevron-right text-amber-400";
-                    } else {
-                        btn.className = "w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center cursor-pointer group";
-                        btn.querySelector('span').className = "font-bold group-hover:text-amber-300 transition-colors";
-                        btn.querySelector('i').className = "fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition-colors";
-                    }
-                }
-            });
-
-            document.getElementById('rebuttalText').innerText = data.text;
-            document.getElementById('rebuttalRatioBadge').innerText = data.ratio;
-            document.getElementById('rebuttalLatency').innerText = data.latency;
-            document.getElementById('rebuttalVault').innerText = data.vault;
-            document.getElementById('rebuttalNodeTag').innerText = `PSEO Node ID: ${data.tag}`;
-        }
-
-        function launchSandboxTest() {
-            window.location.href = `trial.html?objection=${selectedObjectionKey}`;
+        function openObjectionSubPage(key) {
+            window.location.href = `module-detail.html?objection=${key}`;
         }
 
         function renderObjectionNodes() {
