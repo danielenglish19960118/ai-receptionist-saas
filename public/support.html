@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <!-- Gumroad 官方內嵌彈窗腳本 -->
+    <script src="https://gumroad.com/js/gumroad.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -41,9 +43,20 @@
                     <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">P1 Emergency Handoff & Dispatch</span>
                 </div>
             </a>
-            <div class="flex items-center gap-3">
-                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400">Visitor</strong></span>
-                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure Deal ↗</a>
+            
+            <!-- 右上角 Gumroad 結帳按鈕 (已帶入您的真實連結) -->
+            <div class="flex items-center gap-3 font-mono">
+                <span id="authBadge" class="hidden sm:inline-flex items-center gap-1.5 text-xs text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Status: <strong class="text-amber-400 font-bold">Standard</strong>
+                </span>
+                <a href="vip.html" class="hidden md:inline-block bg-white/5 hover:bg-white/10 text-slate-300 font-bold text-xs px-3.5 py-2 rounded-xl border border-white/10 transition-all">
+                    🔑 Activate Key
+                </a>
+                <a href="https://danielverse87.gumroad.com/l/ai-receptionist" class="gumroad-button bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-cart-shopping text-xs"></i>
+                    <span>Buy VIP License ↗</span>
+                </a>
             </div>
         </div>
     </header>
@@ -54,7 +67,7 @@
             <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🔥 Hot Buyer Finder</a>
             <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
             <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
-            <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
+            <a href="sandbox.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
             <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
             <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
             <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
@@ -185,7 +198,7 @@
                 <div class="bg-garfield-panel p-6 rounded-3xl border border-white/10 space-y-3 font-mono text-xs">
                     <span class="text-slate-400 font-bold block text-[11px] uppercase">Self-Service Diagnostic Hubs:</span>
                     <div class="grid grid-cols-2 gap-2">
-                        <a href="trial.html" class="bg-white/5 hover:bg-white/10 text-white p-3 rounded-xl border border-white/10 text-center block">
+                        <a href="sandbox.html" class="bg-white/5 hover:bg-white/10 text-white p-3 rounded-xl border border-white/10 text-center block">
                             🎙️ Voice Sandbox
                         </a>
                         <a href="modules.html" class="bg-white/5 hover:bg-white/10 text-white p-3 rounded-xl border border-white/10 text-center block">
@@ -252,7 +265,6 @@
             statusDiv.innerText = "⏳ Routing P1 ticket via Vercel Serverless `/api/support-ticket`...";
 
             try {
-                // Call serverless API endpoint
                 const res = await fetch('/api/support-ticket', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -266,7 +278,6 @@
                     renderSuccessStatus(`TK-${Math.floor(Math.random()*90000+10000)}`);
                 }
             } catch (err) {
-                // Production fallback guarantee
                 renderSuccessStatus(`TK-${Math.floor(Math.random()*90000+10000)}`);
             }
         }
@@ -339,7 +350,6 @@
             }
         }
 
-        // Initial render
         renderSupportNodes();
     </script>
 </body>
