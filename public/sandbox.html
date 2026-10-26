@@ -55,7 +55,7 @@
             <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
             <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
             <a href="trial.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">🎙️ Live Sandbox</a>
-            <a href="team.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">01. Closing Team</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
             <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
             <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
             <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
@@ -200,6 +200,7 @@
     <script>
         function setScenario(type) {
             const input = document.getElementById('vipCallerInput');
+            if (!input) return;
             if (type === 'manda') {
                 input.value = "Hello, this is Director Marcus from Apex Holdings. I need immediate priority routing and wire verification for our $4.2M corporate escrow transfer closing today.";
             } else if (type === 'jet') {
@@ -212,9 +213,13 @@
         }
 
         function runSimulation() {
-            const prompt = document.getElementById('vipCallerInput').value.trim();
+            const input = document.getElementById('vipCallerInput');
             const badge = document.getElementById('vipStatusBadge');
             const box = document.getElementById('vipResultBox');
+
+            if (!input || !badge || !box) return;
+
+            const prompt = input.value.trim();
 
             if (!prompt) {
                 alert("Please select or enter a VIP client speech prompt first.");
