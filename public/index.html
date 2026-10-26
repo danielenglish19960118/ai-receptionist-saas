@@ -25,9 +25,10 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-garfield-vipgold selection:text-black">
-    <!-- Top Urgency Bar -->
+
+    <!-- Top Urgency Banner -->
     <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
-        <span>🚨 CRITICAL DEADLINE: 100% ESCROW REFUND GUARANTEE CLOSES IN <strong class="text-white bg-black px-2 py-0.5 rounded">03:42:18</strong></span>
+        <span>🚨 CRITICAL DEADLINE: 100% ESCROW REFUND GUARANTEE CLOSES IN <strong id="timerCountdown" class="text-white bg-black px-2 py-0.5 rounded font-mono">03:42:18</strong></span>
         <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline">Claim Your Guaranteed Slot Now ➔</a>
     </div>
 
@@ -43,17 +44,18 @@
             </a>
             <div class="flex items-center gap-3">
                 <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400">Visitor</strong></span>
-                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure Deal ↗</a>
+                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all">Secure Deal ↗</a>
             </div>
         </div>
     </header>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-10">
+
         <!-- Navigation Toolbar -->
         <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
             <a href="index.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">🔥 Hot Buyer Finder</a>
             <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
-            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
+            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay</a>
             <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
             <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
             <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
@@ -100,7 +102,7 @@
                             <select id="minNetWorth" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none cursor-pointer">
                                 <option value="$300,000+ ARR" selected>$300,000+ ARR (Tier-1 Whale Deal)</option>
                                 <option value="$1,000,000+ ARR">$1,000,000+ ARR (Institutional Enterprise)</option>
-                                <option value="$5,000,000+ ARR">$5,000,000+ ARR (Sovereign Holding Holding)</option>
+                                <option value="$5,000,000+ ARR">$5,000,000+ ARR (Sovereign Holding)</option>
                             </select>
                         </div>
                         <button type="submit" id="scanBtn" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-gold-glow transition-all">
@@ -131,6 +133,61 @@
             </div>
         </div>
 
+        <!-- 🌐 8-CHANNEL OMNICHANNEL DISTRIBUTION MATRIX WIDGET -->
+        <div class="bg-black/60 p-8 rounded-3xl border border-white/10 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+                <div>
+                    <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest block">Omnichannel Presence</span>
+                    <h3 class="text-xl font-bold text-white">8-Channel Distribution Matrix</h3>
+                </div>
+                <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20">All Gateways Active</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div onclick="launchOmnichannelModule(1)" class="bg-garfield-panel p-4 rounded-2xl border border-white/10 hover:border-amber-400 cursor-pointer transition-all space-y-2">
+                    <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-mono font-bold">CHANNEL #1</span><i class="fa-brands fa-chrome text-slate-400"></i></div>
+                    <strong class="text-white text-xs block">Chrome Extension</strong>
+                    <span class="text-[10px] text-slate-400 block font-mono">Side Panel Lead Capture</span>
+                </div>
+                <div onclick="launchOmnichannelModule(2)" class="bg-garfield-panel p-4 rounded-2xl border border-white/10 hover:border-amber-400 cursor-pointer transition-all space-y-2">
+                    <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-mono font-bold">CHANNEL #2</span><i class="fa-brands fa-slack text-slate-400"></i></div>
+                    <strong class="text-white text-xs block">Slack App Directory</strong>
+                    <span class="text-[10px] text-slate-400 block font-mono">Block Kit VIP Alerts</span>
+                </div>
+                <div onclick="launchOmnichannelModule(3)" class="bg-garfield-panel p-4 rounded-2xl border border-white/10 hover:border-amber-400 cursor-pointer transition-all space-y-2">
+                    <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-mono font-bold">CHANNEL #3</span><i class="fa-brands fa-discord text-slate-400"></i></div>
+                    <strong class="text-white text-xs block">Discord App Directory</strong>
+                    <span class="text-[10px] text-slate-400 block font-mono">Slash Commands & Linked Roles</span>
+                </div>
+                <div onclick="launchOmnichannelModule(4)" class="bg-garfield-panel p-4 rounded-2xl border border-white/10 hover:border-amber-400 cursor-pointer transition-all space-y-2">
+                    <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-mono font-bold">CHANNEL #4</span><i class="fa-solid fa-terminal text-slate-400"></i></div>
+                    <strong class="text-white text-xs block">Raycast / Alfred Launcher</strong>
+                    <span class="text-[10px] text-slate-400 block font-mono">Opt + Space Fast Pipeline</span>
+                </div>
+                <div onclick="launchOmnichannelModule(5)" class="bg-garfield-panel p-4 rounded-2xl border border-white/10 hover:border-amber-400 cursor-pointer transition-all space-y-2">
+                    <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-mono font-bold">CHANNEL #5</span><i class="fa-brands fa-telegram text-slate-400"></i></div>
+                    <strong class="text-white text-xs block">Telegram / WhatsApp</strong>
+                    <span class="text-[10px] text-slate-400 block font-mono">High-Net-Worth Messaging</span>
+                </div>
+                <div onclick="launchOmnichannelModule(6)" class="bg-garfield-panel p-4 rounded-2xl border border-white/10 hover:border-amber-400 cursor-pointer transition-all space-y-2">
+                    <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-mono font-bold">CHANNEL #6</span><i class="fa-solid fa-desktop text-slate-400"></i></div>
+                    <strong class="text-white text-xs block">Desktop Menu Bar Tray</strong>
+                    <span class="text-[10px] text-slate-400 block font-mono">Native Revenue Monitor</span>
+                </div>
+                <div onclick="launchOmnichannelModule(7)" class="bg-garfield-panel p-4 rounded-2xl border border-white/10 hover:border-amber-400 cursor-pointer transition-all space-y-2">
+                    <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-mono font-bold">CHANNEL #7</span><i class="fa-solid fa-mobile-screen text-slate-400"></i></div>
+                    <strong class="text-white text-xs block">Mobile App Companion</strong>
+                    <span class="text-[10px] text-slate-400 block font-mono">Push Deal Alerts</span>
+                </div>
+                <div onclick="launchOmnichannelModule(8)" class="bg-garfield-panel p-4 rounded-2xl border border-white/10 hover:border-amber-400 cursor-pointer transition-all space-y-2">
+                    <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-mono font-bold">CHANNEL #8</span><i class="fa-solid fa-book-open text-slate-400"></i></div>
+                    <strong class="text-white text-xs block">Notion Workspace Widget</strong>
+                    <span class="text-[10px] text-slate-400 block font-mono">Embedded CRM Sync</span>
+                </div>
+            </div>
+            <div id="omnichannelStatusBox"></div>
+        </div>
+
         <!-- 10,000+ Programmatic SEO Sub-Nodes Navigation Hub -->
         <div class="space-y-6 border-t border-white/10 pt-10">
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -141,9 +198,9 @@
                     </p>
                 </div>
                 <div class="flex items-center gap-2 font-mono text-xs">
-                    <button onclick="changeHomeBatch(-1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10">← Prev 16 Nodes</button>
+                    <button onclick="changeHomeBatch(-1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10 transition-all">← Prev 16 Nodes</button>
                     <span id="homePageIndicator" class="text-amber-400 font-bold px-2">Nodes 1 - 16 of 10,000</span>
-                    <button onclick="changeHomeBatch(1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10">Next 16 Nodes →</button>
+                    <button onclick="changeHomeBatch(1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10 transition-all">Next 16 Nodes →</button>
                 </div>
             </div>
 
@@ -156,7 +213,8 @@
         © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a>
     </footer>
 
-    <script src="app.js"></script>
+    <!-- Core Script Assets -->
+    <script src="script.js"></script>
     <script>
         let currentHomeBatch = 0;
         const homeBatchSize = 16;
@@ -174,7 +232,7 @@
             for (let i = start; i <= end; i++) {
                 const sector = sectors[(i - 1) % sectors.length];
                 html += `
-                    <div onclick="window.location.href='module-detail.html?id=${i}'" class="bg-garfield-panel p-5 rounded-2xl border border-white/10 hover:border-amber-400 hover:scale-[1.02] transition-all cursor-pointer shadow-xl flex flex-col justify-between space-y-3 group">
+                    <div onclick="window.location.href='modules.html?id=${i}'" class="bg-garfield-panel p-5 rounded-2xl border border-white/10 hover:border-amber-400 hover:scale-[1.02] transition-all cursor-pointer shadow-xl flex flex-col justify-between space-y-3 group">
                         <div>
                             <div class="flex justify-between items-center text-[10px] font-mono mb-2">
                                 <span class="text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">NODE #${i}</span>
