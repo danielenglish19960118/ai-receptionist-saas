@@ -57,6 +57,8 @@
             <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
             <a href="knowledge.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">📚 Knowledge Base</a>
             <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
+            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
+            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
             <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
             <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 10,000+ Modules</a>
         </div>
@@ -182,6 +184,7 @@
         © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a>
     </footer>
 
+    <script src="app.js"></script>
     <script>
         const articleDatabase = {
             1: {
@@ -244,8 +247,11 @@
         }
 
         function filterArticles() {
-            const query = document.getElementById('articleSearchInput').value.toLowerCase();
+            const searchInput = document.getElementById('articleSearchInput');
+            if (!searchInput) return;
+            const query = searchInput.value.toLowerCase();
             const grid = document.getElementById('articlesGrid');
+            if (!grid) return;
             const cards = grid.children;
 
             for (let card of cards) {
