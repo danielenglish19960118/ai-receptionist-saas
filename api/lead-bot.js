@@ -1,6 +1,6 @@
 /**
  * Garfield AI Executive - Autonomous Hot Buyer Prospecting & Closing Engine (api/hot-buyer-finder.js)
- * Scans high-net-worth pipelines, filters target industries, and calculates closing intent scores.
+ * Scans high-net-worth pipelines, filters target industries, calculates closing intent scores, and alerts Slack.
  */
 
 export default async function handler(req, res) {
@@ -57,6 +57,67 @@ export default async function handler(req, res) {
 
         console.log(`[Prospecting Executed] Industry: ${targetIndustry} | Region: ${geoRegion} | Min Net Worth: ${minNetWorth}`);
 
+        // -----------------------------------------------------------------
+        // 🚀 升級版：非同步發送高單價買家掃描結果到 Slack 頻道
+        // -----------------------------------------------------------------
+        const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
+        if (slackWebhookUrl) {
+            // 組裝高單價買家摘要清單給 Slack 預覽
+            const leadSummaryText = leads.map(l => 
+                `• *${l.company}* (${l.contact})\n  💰 \`${l.contractValue}\` | 🔥 Intent: ${l.intentScore}`
+            ).join('\n\n');
+
+            fetch(slackWebhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    blocks: [
+                        {
+                            type: "header",
+                            text: {
+                                type: "plain_text",
+                                text: "💎 Hot High-Net-Worth Buyers Detected!",
+                                emoji: true
+                            }
+                        },
+                        {
+                            type: "section",
+                            fields: [
+                                {
+                                    type: "mrkdwn",
+                                    text: `*Target Industry:*\n\`${targetIndustry}\``
+                                },
+                                {
+                                    type: "mrkdwn",
+                                    text: `*Geo Region:*\n\`${geoRegion}\``
+                                },
+                                {
+                                    type: "mrkdwn",
+                                    text: `*Min Net Worth:*\n\`${minNetWorth}\``
+                                },
+                                {
+                                    type: "mrkdwn",
+                                    text: `*Qualified Whales:*\n\`${leads.length} Targets\``
+                                }
+                            ]
+                        },
+                        {
+                            type: "section",
+                            text: {
+                                type: "mrkdwn",
+                                text: `*Top Prospect Pipeline Highlights:*\n${leadSummaryText}`
+                            }
+                        },
+                        {
+                            type: "divider"
+                        }
+                    ]
+                })
+            }).catch(slackErr => {
+                console.error('Background Slack Prospecting Notification Failed:', slackErr);
+            });
+        }
+
         return res.status(200).json({
             success: true,
             botSessionId: 'CLOSER-BOT-' + Math.floor(100000 + Math.random() * 900000),
@@ -72,5 +133,3 @@ export default async function handler(req, res) {
         return res.status(500).json({ success: false, message: 'Internal server error during buyer prospecting execution.' });
     }
 }
-
-// Trigger redeploy timestamp: 2026-10-26
