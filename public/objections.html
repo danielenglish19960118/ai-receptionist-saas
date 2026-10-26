@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Objection Destroyer & Sub-Page Dispatch | Garfield AI Executive</title>
+    <title>Objection Destroyer & 8-Channel Sub-Pages | Garfield AI Executive</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
@@ -65,52 +65,51 @@
             <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">06. 10,000+ Modules</a>
         </div>
 
-        <!-- 🌐 8-Channel Omnichannel Status Panel -->
+        <!-- 🌐 8-Channel Omnichannel Status Panel (Click any channel to open Sub-Page Modal) -->
         <div class="bg-garfield-panel p-6 md:p-8 rounded-3xl border border-amber-500/30 space-y-4 shadow-xl font-mono text-xs">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/10 pb-4 gap-2">
                 <span class="text-amber-400 font-bold flex items-center gap-2 text-sm">
-                    <i class="fa-solid fa-satellite-dish"></i> 8-CHANNEL OMNICHANNEL REBUTTAL DISPATCH MATRIX (Click to Inspect)
+                    <i class="fa-solid fa-satellite-dish"></i> 8-CHANNEL OMNICHANNEL SUB-PAGE DISPATCH MATRIX (Click any channel to open Sub-Page)
                 </span>
                 <span class="text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20 font-bold">8/8 Gateways Synced</span>
             </div>
             <p class="text-slate-300 text-[11px] leading-relaxed">
-                Click any of the 8 channels below to test real-time webhook handshakes and view technical connection specs.
+                Click any of the 8 channels below to instantly open its dedicated Sub-Page Inspector Terminal and test webhook handshakes.
             </p>
             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 pt-1 text-[11px]">
-                <button onclick="launchOmnichannelModule(1)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer">
-                    <span class="text-white font-bold block flex items-center gap-1"><i class="fa-brands fa-chrome text-amber-400"></i> Chrome</span>
-                    <span class="text-emerald-400 text-[10px]">Ready</span>
+                <button onclick="openChannelSubPage(1)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                    <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-brands fa-chrome text-amber-400"></i> Chrome</span>
+                    <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                 </button>
-                <button onclick="launchOmnichannelModule(2)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer">
-                    <span class="text-white font-bold block flex items-center gap-1"><i class="fa-brands fa-slack text-amber-400"></i> Slack</span>
-                    <span class="text-emerald-400 text-[10px]">Active</span>
+                <button onclick="openChannelSubPage(2)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                    <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-brands fa-slack text-amber-400"></i> Slack</span>
+                    <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                 </button>
-                <button onclick="launchOmnichannelModule(3)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer">
-                    <span class="text-white font-bold block flex items-center gap-1"><i class="fa-brands fa-discord text-amber-400"></i> Discord</span>
-                    <span class="text-emerald-400 text-[10px]">Live</span>
+                <button onclick="openChannelSubPage(3)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                    <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-brands fa-discord text-amber-400"></i> Discord</span>
+                    <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                 </button>
-                <button onclick="launchOmnichannelModule(4)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer">
-                    <span class="text-white font-bold block flex items-center gap-1"><i class="fa-solid fa-terminal text-amber-400"></i> Raycast</span>
-                    <span class="text-emerald-400 text-[10px]">Ready</span>
+                <button onclick="openChannelSubPage(4)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                    <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-solid fa-terminal text-amber-400"></i> Raycast</span>
+                    <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                 </button>
-                <button onclick="launchOmnichannelModule(5)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer">
-                    <span class="text-white font-bold block flex items-center gap-1"><i class="fa-brands fa-telegram text-amber-400"></i> Tele/WA</span>
-                    <span class="text-emerald-400 text-[10px]">Synced</span>
+                <button onclick="openChannelSubPage(5)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                    <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-brands fa-telegram text-amber-400"></i> Tele/WA</span>
+                    <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                 </button>
-                <button onclick="launchOmnichannelModule(6)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer">
-                    <span class="text-white font-bold block flex items-center gap-1"><i class="fa-solid fa-desktop text-amber-400"></i> Desktop</span>
-                    <span class="text-emerald-400 text-[10px]">Active</span>
+                <button onclick="openChannelSubPage(6)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                    <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-solid fa-desktop text-amber-400"></i> Desktop</span>
+                    <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                 </button>
-                <button onclick="launchOmnichannelModule(7)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer">
-                    <span class="text-white font-bold block flex items-center gap-1"><i class="fa-solid fa-mobile-screen text-amber-400"></i> Mobile</span>
-                    <span class="text-emerald-400 text-[10px]">Synced</span>
+                <button onclick="openChannelSubPage(7)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                    <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-solid fa-mobile-screen text-amber-400"></i> Mobile</span>
+                    <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                 </button>
-                <button onclick="launchOmnichannelModule(8)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer">
-                    <span class="text-white font-bold block flex items-center gap-1"><i class="fa-solid fa-book-open text-amber-400"></i> Notion</span>
-                    <span class="text-emerald-400 text-[10px]">Bound</span>
+                <button onclick="openChannelSubPage(8)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                    <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-solid fa-book-open text-amber-400"></i> Notion</span>
+                    <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                 </button>
             </div>
-            <div id="omnichannelStatusBox"></div>
         </div>
 
         <!-- 🛡️ Section Header -->
@@ -119,11 +118,11 @@
                 <div>
                     <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full mb-2">
                         <i class="fa-solid fa-shield-cat text-amber-400 text-xs"></i>
-                        <span class="text-xs font-mono font-bold text-amber-300 uppercase">Absolute Deal Reversal & Omnichannel Engine</span>
+                        <span class="text-xs font-mono font-bold text-amber-300 uppercase">Absolute Deal Reversal & Sub-Page Engine</span>
                     </div>
-                    <h1 class="text-3xl md:text-4xl font-black text-white">AI Objection Destroyer & Rebuttal Engine</h1>
+                    <h1 class="text-3xl md:text-4xl font-black text-white">AI Objection Destroyer & Sub-Page Generator</h1>
                     <p class="text-xs md:text-sm text-slate-300 font-mono mt-1 max-w-2xl">
-                        Click any executive resistance pattern below to open its dedicated child sub-page terminal instantly.
+                        Click any executive resistance pattern below to instantly open its dedicated interactive Sub-Page Terminal.
                     </p>
                 </div>
                 <div class="flex items-center gap-3 w-full md:w-auto">
@@ -136,11 +135,11 @@
         <!-- Interactive Core Rebuttal Workspace -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- Left Panel: 4 Clickable Executive Resistance Patterns (Directly Opens Sub-Page) -->
+            <!-- Left Panel: 4 Clickable Executive Resistance Patterns (Opens Sub-Page Modal) -->
             <div class="lg:col-span-5 bg-garfield-panel p-6 rounded-3xl border border-white/10 space-y-4 shadow-xl">
                 <div class="flex justify-between items-center border-b border-white/10 pb-3">
                     <label class="text-xs font-bold text-slate-300 uppercase tracking-wider">Executive Resistance Patterns:</label>
-                    <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/25">Click to Open Sub-Page</span>
+                    <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/25">Click to Launch Sub-Page</span>
                 </div>
                 <div class="space-y-2.5">
                     <button onclick="openObjectionSubPage('price')" class="w-full text-left bg-black/60 hover:bg-amber-400/10 hover:border-amber-400 text-xs text-white p-4 rounded-2xl border border-white/10 transition-all flex justify-between items-center cursor-pointer group shadow-md">
@@ -162,18 +161,17 @@
                 </div>
             </div>
 
-            <!-- Right Panel: Output Closing Rebuttal Preview Console -->
+            <!-- Right Panel: Output Closing Preview -->
             <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6 font-mono text-xs shadow-2xl">
                 <div class="flex justify-between items-center border-b border-white/10 pb-3">
                     <span class="text-amber-400 font-bold uppercase tracking-wider flex items-center gap-2">
                         <i class="fa-solid fa-terminal text-xs"></i> SUB-PAGE ROUTING CONSOLE
                     </span>
-                    <span class="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 text-[10px]">DYNAMIC ROUTING ACTIVE</span>
+                    <span class="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 text-[10px]">ALL SUB-PAGES READY</span>
                 </div>
-                
                 <div class="space-y-4 text-slate-300 leading-relaxed text-xs">
                     <p class="bg-black/70 p-5 rounded-2xl border border-white/10">
-                        Select any of the 4 executive resistance patterns on the left to immediately navigate to its dedicated programmatic sub-page (`module-detail.html?objection=...`), featuring live Vapi voice prompts, escrow contracts, and 8-channel webhook triggers.
+                        Click any of the 4 executive resistance patterns on the left or any of the 8 channels at the top to instantly trigger a dedicated **Sub-Page Modal Terminal** with live Vapi speech synthesis scripts and webhook telemetry.
                     </p>
                 </div>
             </div>
@@ -200,6 +198,42 @@
         </div>
     </main>
 
+    <!-- 🌐 Dynamic Sub-Page Modal Terminal -->
+    <div id="subPageModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-garfield-panel border border-amber-500/50 w-full max-w-2xl rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl font-mono text-xs relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeSubPageModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-lg font-bold cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="border-b border-white/10 pb-4 flex items-center gap-3">
+                <div class="bg-amber-400 text-black p-2.5 rounded-xl font-extrabold text-sm shadow-gold-glow">📄</div>
+                <div>
+                    <h3 id="modalSubPageTitle" class="text-lg font-black text-white">Sub-Page Terminal</h3>
+                    <span id="modalSubPageCategory" class="text-amber-400 text-[11px] font-bold">Omnichannel / Objection Sub-Page Node</span>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-black/60 p-4 rounded-2xl border border-white/10 space-y-2">
+                    <span class="text-slate-400 block font-bold">Verified Sub-Page Script & Webhook Payload:</span>
+                    <p id="modalSubPageScript" class="text-slate-200 text-sm leading-relaxed">Loading script...</p>
+                </div>
+                <div class="grid grid-cols-2 gap-3 text-[11px]">
+                    <div class="bg-black/40 p-3 rounded-xl border border-white/10">
+                        <span class="text-slate-400 block">Vapi Synthesis Latency:</span>
+                        <strong class="text-emerald-400">&lt; 125ms Edge Stream</strong>
+                    </div>
+                    <div class="bg-black/40 p-3 rounded-xl border border-white/10">
+                        <span class="text-slate-400 block">Escrow & SLA Protection:</span>
+                        <strong class="text-amber-300">30-Day 100% Refund Guarantee</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-4 border-t border-white/15 flex justify-end gap-3">
+                <button onclick="closeSubPageModal()" class="bg-white/10 hover:bg-white/20 text-white font-bold px-5 py-2.5 rounded-xl cursor-pointer">Close Sub-Page</button>
+                <a id="modalSandboxLink" href="trial.html" class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold px-6 py-2.5 rounded-xl uppercase transition-all shadow-md cursor-pointer">Test in Voice Sandbox 🎙️</a>
+            </div>
+        </div>
+    </div>
+
     <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
         © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a> | <a href="terms.html" class="underline ml-2 cursor-pointer">Terms of Service</a>
     </footer>
@@ -211,8 +245,65 @@
         const batchSize = 16;
         const totalObjectionNodes = 10000;
 
+        const objectionSubPages = {
+            price: {
+                title: "Sub-Page: Budget & Price Objection Reversal",
+                category: "Objection Node #OBJ-2026-PRICE",
+                script: `"I completely respect budget constraints. However, every day without an AI executive receptionist costs average enterprises $1,420 in uncaptured hot leads. That is why we back your deployment with a 30-day 100% third-party escrow refund guarantee. You carry zero financial risk—if we don't increase your closing velocity by 300%, your funds are returned in full."`
+            },
+            timing: {
+                title: "Sub-Page: Timing & Q3/Q4 Postponement Reversal",
+                category: "Objection Node #OBJ-2026-TIMING",
+                script: `"Delaying until Q3/Q4 allows your competitors to capture ready-to-sign enterprise prospects using sub-130ms voice response systems today. Our zero-risk deployment takes less than 15 minutes to configure on your existing PBX or web domain. Let us lock in your escrow slot now before the Q3 rate increase."`
+            },
+            risk: {
+                title: "Sub-Page: AI Security & Privacy Risk Reversal",
+                category: "Objection Node #OBJ-2026-SECURITY",
+                script: `"Data sovereignty is our highest priority. Garfield AI Executive operates under strict SOC 2 Type II compliance, zero audio recording retention in volatile RAM, and AES-256 end-to-end encryption. You retain 100% ownership of your client interaction logs."`
+            },
+            approval: {
+                title: "Sub-Page: Board & Managing Director Approval Fast-Track",
+                category: "Objection Node #OBJ-2026-BOARD",
+                script: `"We make board and MD approval effortless. We provide a customized ROI analysis and financial risk-reversal prospectus directly to your decision-makers. Plus, with our 100% escrow guarantee, there is zero capital risk for the board to review."`
+            }
+        };
+
+        const channelSubPages = {
+            1: { title: "Sub-Page: Google Chrome Extension Gateway", category: "Omnichannel Gateway #CHROME-EXT", script: "Real-time CRM injection and hot-lead detection active across active browser tabs." },
+            2: { title: "Sub-Page: Slack App Directory Integration", category: "Omnichannel Gateway #SLACK-BOT", script: "Automated webhook alert dispatching to #founder-escalation and #p1-deals upon call completion." },
+            3: { title: "Sub-Page: Discord App Directory Feed", category: "Omnichannel Gateway #DISCORD-BOT", script: "Streaming sub-125ms Vapi voice session telemetry directly into encrypted executive channels." },
+            4: { title: "Sub-Page: Raycast / Alfred Launcher Extension", category: "Omnichannel Gateway #RAYCAST", script: "Instant command-line query lookup for enterprise licensing, escrow status, and hot leads." },
+            5: { title: "Sub-Page: Telegram & WhatsApp Gateway", category: "Omnichannel Gateway #WHATSAPP-API", script: "Instant executive push notifications for high-priority inbound enterprise contracts." },
+            6: { title: "Sub-Page: Desktop Menu Bar Tray App", category: "Omnichannel Gateway #TRAY-APP", script: "Native macOS & Windows tray monitoring with live deal closing alerts." },
+            7: { title: "Sub-Page: Mobile App Companion", category: "Omnichannel Gateway #MOBILE-APP", script: "Push notification suite and remote Vapi speech pipeline monitoring for mobile executives." },
+            8: { title: "Sub-Page: Notion Workspace Widget", category: "Omnichannel Gateway #NOTION-WIDGET", script: "Automated pipeline logging and CRM synchronization directly into your corporate Notion database." }
+        };
+
         function openObjectionSubPage(key) {
-            window.location.href = `module-detail.html?objection=${key}`;
+            const data = objectionSubPages[key];
+            if (!data) return;
+            document.getElementById('modalSubPageTitle').innerText = data.title;
+            document.getElementById('modalSubPageCategory').innerText = data.category;
+            document.getElementById('modalSubPageScript').innerText = data.script;
+            document.getElementById('modalSandboxLink').href = `trial.html?objection=${key}`;
+            document.getElementById('subPageModal').classList.remove('hidden');
+            document.getElementById('subPageModal').classList.add('flex');
+        }
+
+        function openChannelSubPage(channelId) {
+            const data = channelSubPages[channelId];
+            if (!data) return;
+            document.getElementById('modalSubPageTitle').innerText = data.title;
+            document.getElementById('modalSubPageCategory').innerText = data.category;
+            document.getElementById('modalSubPageScript').innerText = data.script;
+            document.getElementById('modalSandboxLink').href = `vip.html?channel=${channelId}`;
+            document.getElementById('subPageModal').classList.remove('hidden');
+            document.getElementById('subPageModal').classList.add('flex');
+        }
+
+        function closeSubPageModal() {
+            document.getElementById('subPageModal').classList.add('hidden');
+            document.getElementById('subPageModal').classList.remove('flex');
         }
 
         function renderObjectionNodes() {
