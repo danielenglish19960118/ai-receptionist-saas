@@ -13,6 +13,12 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-amber-400 selection:text-black">
+    <!-- Top Urgency Bar -->
+    <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
+        <span>🚨 CRITICAL DEADLINE: 10,000+ PSEO NODE PIPELINE ACTIVE</span>
+        <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline">Claim Enterprise License ➔</a>
+    </div>
+
     <!-- Header -->
     <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -20,7 +26,10 @@
                 <div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">⚡</div>
                 <span class="font-bangers text-2xl text-white">PSEO NODE <span class="text-amber-400" id="headerNodeId">#0000</span></span>
             </a>
-            <a href="modules.html" class="text-xs font-bold font-mono text-amber-400 border border-amber-400/30 px-4 py-2 rounded-xl hover:bg-amber-400 hover:text-black transition-all">← Back to 10,000+ Directory</a>
+            <div class="flex items-center gap-4">
+                <a href="knowledge.html" class="hidden sm:inline text-xs font-bold font-mono text-slate-300 hover:text-amber-400">Knowledge Base</a>
+                <a href="modules.html" class="text-xs font-bold font-mono text-amber-400 border border-amber-400/30 px-4 py-2 rounded-xl hover:bg-amber-400 hover:text-black transition-all">← Back to Directory</a>
+            </div>
         </div>
     </header>
 
@@ -58,11 +67,15 @@
         </div>
     </main>
 
-    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a></footer>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const nodeId = parseInt(urlParams.get('id') || '1');
+        let nodeId = parseInt(urlParams.get('id') || '1', 10);
+
+        // 嚴格邊界檢查：確保 node id 在 1 到 10000 之間
+        if (isNaN(nodeId) || nodeId < 1) nodeId = 1;
+        if (nodeId > 10000) nodeId = 10000;
 
         const sectorsList = ["Private Wealth & Escrow Vault", "Gulfstream & Superyacht Charter", "Emergency Concierge Surgical Suite", "Series C M&A Boardroom Bridge"];
         const assignedSector = sectorsList[(nodeId - 1) % sectorsList.length];
@@ -77,6 +90,7 @@
 
         function executeNodeWebhook() {
             const log = document.getElementById('nodeLog');
+            if (!log) return;
             log.innerText = `Dispatching webhook for Sub-Page #${nodeId}...`;
             setTimeout(() => {
                 log.innerText = `✔ Node #${nodeId} Executed (Hash: 0x${(nodeId * 3821).toString(16).toUpperCase()})`;
