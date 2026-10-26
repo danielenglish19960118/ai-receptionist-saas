@@ -165,6 +165,66 @@ export default async function handler(req, res) {
                     }
                 }
 
+                // -----------------------------------------------------------------
+                // 🚀 NEW: 當高單價客戶留單/預約成功時，非同步發送高效 Slack Block Kit 通知
+                // -----------------------------------------------------------------
+                const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
+                if (slackWebhookUrl) {
+                    fetch(slackWebhookUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            blocks: [
+                                {
+                                    type: "header",
+                                    text: {
+                                        type: "plain_text",
+                                        text: "🎯 New High-Ticket Lead & Appointment!",
+                                        emoji: true
+                                    }
+                                },
+                                {
+                                    type: "section",
+                                    fields: [
+                                        {
+                                            type: "mrkdwn",
+                                            text: `*Tenant / Client:*\n\`${clientId}\``
+                                        },
+                                        {
+                                            type: "mrkdwn",
+                                            text: `*Visitor Name:*\n*${name}*`
+                                        },
+                                        {
+                                            type: "mrkdwn",
+                                            text: `*Phone:*\n${phone || 'Not provided'}`
+                                        },
+                                        {
+                                            type: "mrkdwn",
+                                            text: `*Email:*\n${email || 'Not provided'}`
+                                        },
+                                        {
+                                            type: "mrkdwn",
+                                            text: `*Appointment Time:*\n📅 *${appointment_date || 'No specific time'}*`
+                                        }
+                                    ]
+                                },
+                                {
+                                    type: "section",
+                                    text: {
+                                        type: "mrkdwn",
+                                        text: `*Consultation Notes:*\n> ${notes || 'No special requirements.'}`
+                                    }
+                                },
+                                {
+                                    type: "divider"
+                                }
+                            ]
+                        })
+                    }).catch(slackErr => {
+                        console.error('Background Slack Lead Notification Failed:', slackErr);
+                    });
+                }
+
                 // C. Second-turn roundtrip: Send function execution result back to Gemini to generate natural confirmation response
                 const functionResponsePayload = {
                     ...payload,
