@@ -55,7 +55,7 @@
             <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
             <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
             <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
-            <a href="team.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">01. Closing Team</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
             <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
             <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
             <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
@@ -162,75 +162,9 @@
         const homeBatchSize = 16;
         const totalHomeNodes = 10000;
 
-        async function runAiLeadBot(e) {
-            e.preventDefault();
-            const industry = document.getElementById('targetIndustry').value.trim();
-            const geo = document.getElementById('geoRegion').value.trim();
-            const netWorth = document.getElementById('minNetWorth').value;
-            const btn = document.getElementById('scanBtn');
-            const resultsBox = document.getElementById('leadBotResults');
-            const badge = document.getElementById('botBadge');
-
-            btn.innerText = "Scanning Global Intent Pipelines & Webhooks...";
-            btn.disabled = true;
-            badge.innerText = "SCANNING...";
-            badge.className = "text-xs font-mono text-amber-300 bg-amber-400/20 px-3 py-1 rounded-xl border border-amber-400/40 animate-pulse font-bold";
-
-            resultsBox.innerHTML = `
-                <div class="text-amber-400 font-mono text-xs text-center py-12 space-y-2">
-                    <div class="animate-bounce text-2xl">📡</div>
-                    <div>Querying decentralized intent telemetry across ${geo}...</div>
-                </div>
-            `;
-
-            setTimeout(() => {
-                badge.innerText = "3 WHALES CAPTURED";
-                badge.className = "text-xs font-mono text-emerald-400 bg-emerald-500/20 px-3 py-1 rounded-xl border border-emerald-500/40 font-bold";
-                btn.innerText = "Scan & Auto-Close Ready Buyers 🚀";
-                btn.disabled = false;
-
-                resultsBox.innerHTML = `
-                    <div class="bg-black/70 p-4 rounded-2xl border border-amber-500/30 space-y-2 hover:border-amber-400 transition-all">
-                        <div class="flex justify-between items-center text-xs">
-                            <strong class="text-white">1. Apex Sovereign Capital (Managing Director)</strong>
-                            <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">INTENT: 99.8%</span>
-                        </div>
-                        <p class="text-slate-300 text-[11px]">Region: ${geo.split('/')[0] || 'Global'} | Budget: ${netWorth} | Signal: Active Escrow Transfer Pending</p>
-                        <div class="pt-2 border-t border-white/5 flex justify-between items-center text-[10px]">
-                            <span class="text-slate-400">Vapi Trigger: Module #01 (Whale Escrow Route)</span>
-                            <button onclick="window.location.href='trial.html?lead=apex'" class="text-amber-400 hover:underline font-bold">Initiate Voice Call ➔</button>
-                        </div>
-                    </div>
-
-                    <div class="bg-black/70 p-4 rounded-2xl border border-white/10 space-y-2 hover:border-amber-400 transition-all">
-                        <div class="flex justify-between items-center text-xs">
-                            <strong class="text-white">2. Crestview M&A Advisory Partners</strong>
-                            <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">INTENT: 98.4%</span>
-                        </div>
-                        <p class="text-slate-300 text-[11px]">Region: London Hub | Budget: $1,000,000+ ARR | Signal: Series C Term Sheet Board Evaluation</p>
-                        <div class="pt-2 border-t border-white/5 flex justify-between items-center text-[10px]">
-                            <span class="text-slate-400">Vapi Trigger: Module #07 (Boardroom Bridge)</span>
-                            <button onclick="window.location.href='trial.html?lead=crestview'" class="text-amber-400 hover:underline font-bold">Initiate Voice Call ➔</button>
-                        </div>
-                    </div>
-
-                    <div class="bg-black/70 p-4 rounded-2xl border border-white/10 space-y-2 hover:border-amber-400 transition-all">
-                        <div class="flex justify-between items-center text-xs">
-                            <strong class="text-white">3. Horizon Private Jet & Charter Holdings</strong>
-                            <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">INTENT: 97.9%</span>
-                        </div>
-                        <p class="text-slate-300 text-[11px]">Region: Singapore / Taipei | Budget: ${netWorth} | Signal: Urgent 24/7 Concierge Telephony Need</p>
-                        <div class="pt-2 border-t border-white/5 flex justify-between items-center text-[10px]">
-                            <span class="text-slate-400">Vapi Trigger: Module #04 (Aviation Charter)</span>
-                            <button onclick="window.location.href='trial.html?lead=horizon'" class="text-amber-400 hover:underline font-bold">Initiate Voice Call ➔</button>
-                        </div>
-                    </div>
-                `;
-            }, 800);
-        }
-
         function renderHomeNodes() {
             const grid = document.getElementById('homeNodesGrid');
+            if (!grid) return;
             const start = currentHomeBatch * homeBatchSize + 1;
             const end = Math.min(start + homeBatchSize - 1, totalHomeNodes);
             let html = '';
@@ -258,7 +192,8 @@
             }
 
             grid.innerHTML = html;
-            document.getElementById('homePageIndicator').innerText = `Nodes ${start} - ${end} of ${totalHomeNodes}`;
+            const indicator = document.getElementById('homePageIndicator');
+            if (indicator) indicator.innerText = `Nodes ${start} - ${end} of ${totalHomeNodes}`;
         }
 
         function changeHomeBatch(delta) {
@@ -269,7 +204,6 @@
             }
         }
 
-        // Initial render
         renderHomeNodes();
     </script>
 </body>
