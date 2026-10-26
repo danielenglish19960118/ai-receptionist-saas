@@ -23,6 +23,12 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-amber-400 selection:text-black">
+    <!-- Top Urgency Bar -->
+    <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
+        <span>🚨 CRITICAL DEADLINE: 10,000+ INTERACTIVE HOOKS LIBRARY ACTIVE</span>
+        <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline">Claim Enterprise License ➔</a>
+    </div>
+
     <!-- Header -->
     <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -30,17 +36,28 @@
                 <div class="bg-amber-400 p-2.5 rounded-2xl text-black font-extrabold text-2xl">👑</div>
                 <span class="font-bangers text-2xl text-white">GARFIELD <span class="text-amber-400">10,000+ HOOKS</span></span>
             </a>
-            <nav class="hidden lg:flex items-center gap-5 text-xs font-bold uppercase tracking-wider text-slate-300">
-                <a href="index.html" class="hover:text-amber-400">Hot Finder</a>
-                <a href="objections.html" class="hover:text-amber-400">Objections</a>
-                <a href="roi.html" class="hover:text-amber-400">ROI Calculator</a>
-                <a href="hooks.html" class="text-amber-400">10,000+ Hooks</a>
-                <a href="modules.html" class="hover:text-amber-400">10,000 Modules</a>
-            </nav>
+            <div class="flex items-center gap-3">
+                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400">Visitor</strong></span>
+                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure Deal ↗</a>
+            </div>
         </div>
     </header>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 space-y-8">
+        <!-- Navigation Toolbar -->
+        <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
+            <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🔥 Hot Buyer Finder</a>
+            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
+            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
+            <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
+            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
+            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
+            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
+            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 10,000+ Modules</a>
+        </div>
+
         <!-- Control Bar -->
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
             <div>
@@ -66,8 +83,9 @@
         </div>
     </main>
 
-    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved.</footer>
+    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">© 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a></footer>
 
+    <script src="app.js"></script>
     <script>
         let currentPage = 1;
         const itemsPerPage = 20;
@@ -78,6 +96,7 @@
 
         function renderHooks(page, searchQuery = '') {
             const grid = document.getElementById('hooksGrid');
+            if (!grid) return;
             const startId = (page - 1) * itemsPerPage + 1;
             const endId = Math.min(page * itemsPerPage, totalItems);
             let html = '';
@@ -87,7 +106,6 @@
                 const hookName = `Enterprise Voice Hook Scenario #${i}`;
                 const pattern = `Pattern #${i}: Detects high-intent conversational triggers -> Direct secure bridge dispatch.`;
 
-                // If searching, simple client-side filter simulation for current page items
                 if (searchQuery && !hookName.toLowerCase().includes(searchQuery.toLowerCase()) && !String(i).includes(searchQuery)) {
                     continue;
                 }
@@ -116,28 +134,34 @@
                 grid.innerHTML = html;
             }
 
-            document.getElementById('pageIndicator').innerText = `Page ${page} of ${totalPages} (Hooks ${startId} - ${endId} of ${totalItems})`;
+            const indicator = document.getElementById('pageIndicator');
+            if (indicator) indicator.innerText = `Page ${page} of ${totalPages} (Hooks ${startId} - ${endId} of ${totalItems})`;
         }
 
         function changePage(delta) {
+            const searchInput = document.getElementById('hookSearchInput');
             if (currentPage + delta >= 1 && currentPage + delta <= totalPages) {
                 currentPage += delta;
-                renderHooks(currentPage, document.getElementById('hookSearchInput').value);
+                renderHooks(currentPage, searchInput ? searchInput.value : '');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
         function jumpToPage() {
-            const val = parseInt(document.getElementById('jumpPageInput').value);
+            const input = document.getElementById('jumpPageInput');
+            const searchInput = document.getElementById('hookSearchInput');
+            if (!input) return;
+            const val = parseInt(input.value);
             if (val >= 1 && val <= totalPages) {
                 currentPage = val;
-                renderHooks(currentPage, document.getElementById('hookSearchInput').value);
+                renderHooks(currentPage, searchInput ? searchInput.value : '');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
         function filterHooks() {
-            const query = document.getElementById('hookSearchInput').value;
+            const searchInput = document.getElementById('hookSearchInput');
+            const query = searchInput ? searchInput.value : '';
             renderHooks(currentPage, query);
         }
 
