@@ -1,43 +1,93 @@
+/**
+ * Garfield AI Executive - Terms of Service API Handler (api/terms.js)
+ * Serves the enterprise-grade Terms of Service compliance document.
+ */
+
 export default function handler(req, res) {
-  res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.status(200).send(`
+    // Set Security, CORS, and HTML Headers
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate');
+
+    return res.status(200).send(`
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms of Service - AI Receptionist SaaS</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 2rem; background-color: #f9f9f9; }
-    .container { background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-    h1 { color: #5865F2; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; }
-    h2 { color: #2c2f33; margin-top: 1.5rem; }
-    p, li { color: #4f545c; }
-    .footer { margin-top: 2rem; text-align: center; font-size: 0.85rem; color: #747f8d; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Garfield AI Executive SaaS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { garfield: { black: '#050507', panel: '#121216', vipgold: '#D4AF37', orange: '#FF8C00' } },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], bangers: ['Bangers', 'cursive'], mono: ['JetBrains Mono', 'monospace'] },
+                    boxShadow: { 'gold-glow': '0 0 70px rgba(212, 175, 55, 0.5)' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; overflow-x: hidden; }
+        .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.6); box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Terms of Service</h1>
-    <p>Last updated: October 23, 2026</p>
-    
-    <h2>1. Acceptance of Terms</h2>
-    <p>Welcome to AI Receptionist SaaS (the "Service"). By adding our bot to your Discord server or using our Service, you agree to be bound by these Terms of Service.</p>
-    
-    <h2>2. Use of Service & Restrictions</h2>
-    <p>The Service provides AI-powered reception and automated reply support. Users must not use the Service to violate Discord's Community Guidelines, engage in illegal activities, fraud, or distribute malicious content.</p>
-    
-    <h2>3. Modifications & Termination</h2>
-    <p>We reserve the right to modify, suspend, or terminate the Service or these terms at any time without prior individual notice.</p>
-    
-    <h2>4. Disclaimer</h2>
-    <p>The Service is provided on an "as is" and "as available" basis without warranties of any kind, whether express or implied, regarding the accuracy of AI-generated content.</p>
-    
-    <div class="footer">
-      &copy; 2026 AI Receptionist SaaS. All rights reserved.
+<body class="min-h-screen flex flex-col items-center justify-center p-6 selection:bg-garfield-vipgold selection:text-black">
+    <div class="max-w-3xl w-full bg-garfield-panel p-8 md:p-12 rounded-3xl gold-border-glow space-y-8 shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
+
+        <div class="space-y-4 border-b border-white/10 pb-6">
+            <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full font-mono text-xs font-bold text-amber-300 uppercase">
+                <i class="fa-solid fa-file-contract"></i> Enterprise Legal Agreement
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight">Terms of Service</h1>
+            <div class="font-mono text-xs text-slate-400">
+                Last Updated: October 26, 2026 &bull; Effective Date: Immediate
+            </div>
+        </div>
+
+        <div class="space-y-6 font-mono text-xs md:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-white font-sans">
+                Welcome to <strong class="text-amber-400">Garfield AI Executive Inc.</strong> (the "Service"). By adding our bot to your Discord server, connecting your telephony pipeline, or utilizing our SaaS suite, you agree to be bound by these Terms of Service.
+            </p>
+
+            <h2 class="text-base font-bold text-white pt-4 border-t border-white/10 flex items-center gap-2">
+                <span class="w-1 h-4 bg-amber-400 rounded"></span> 1. Acceptance of Terms
+            </h2>
+            <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users, corporate clients, and others who access or use the Service.</p>
+
+            <h2 class="text-base font-bold text-white pt-4 border-t border-white/10 flex items-center gap-2">
+                <span class="w-1 h-4 bg-amber-400 rounded"></span> 2. Use of Service & Restrictions
+            </h2>
+            <p>The Service provides AI-powered voice telephony, automated reply support, and executive closing automation. Users must not use the Service to:</p>
+            <ul class="space-y-3 pl-2">
+                <li class="relative pl-5 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Violate Discord's Community Guidelines or Terms of Service.</li>
+                <li class="relative pl-5 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Engage in fraudulent, deceptive, or illegal telecommunication activities.</li>
+                <li class="relative pl-5 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Distribute malware, spam, or malicious payloads through automated webhook systems.</li>
+            </ul>
+
+            <h2 class="text-base font-bold text-white pt-4 border-t border-white/10 flex items-center gap-2">
+                <span class="w-1 h-4 bg-amber-400 rounded"></span> 3. Modifications & Termination
+            </h2>
+            <p>We reserve the right, at our sole discretion, to modify, suspend, or terminate the Service or these Terms at any time without prior individual notice. Continued use of the platform following updates constitutes formal acceptance of the revised terms.</p>
+
+            <h2 class="text-base font-bold text-white pt-4 border-t border-white/10 flex items-center gap-2">
+                <span class="w-1 h-4 bg-amber-400 rounded"></span> 4. Disclaimer of Warranties
+            </h2>
+            <p>The Service is provided on an "as is" and "as available" basis without warranties of any kind, whether express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or accuracy of AI-generated executive voice models.</p>
+        </div>
+
+        <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
+            <span class="text-slate-500">&copy; 2026 Garfield Enterprise Inc. All rights reserved.</span>
+            <a href="index.html" class="text-amber-400 hover:text-amber-300 font-bold underline">Return to Dashboard ↗</a>
+        </div>
     </div>
-  </div>
 </body>
 </html>
-  `);
+    `);
 }
+
+// Trigger redeploy timestamp: 2026-10-26
