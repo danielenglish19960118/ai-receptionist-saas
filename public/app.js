@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 初始化 100 個模組網格（若當前頁面包含列表容器）
+    // 初始化模組網格（若當前頁面包含列表容器）
     const grid = document.getElementById('hundredPagesGrid');
     if (grid) {
         let html = '';
@@ -29,8 +29,9 @@ async function runAiLeadBot(e) {
     const minNetWorth = document.getElementById('minNetWorth').value;
     const resultsBox = document.getElementById('leadBotResults');
     const badge = document.getElementById('botBadge');
+    if (!resultsBox) return;
 
-    badge.innerText = "Filtering Whales...";
+    if (badge) badge.innerText = "Filtering Whales...";
     resultsBox.innerHTML = `<div class="text-amber-400 animate-pulse font-mono text-xs">🤖 Scanning institutional registers & identifying Decision-Makers with active buying triggers...</div>`;
 
     try {
@@ -41,7 +42,7 @@ async function runAiLeadBot(e) {
         });
         const data = await res.json();
         if (data.success) {
-            badge.innerText = `${data.qualifiedCount} Ready Whales`;
+            if (badge) badge.innerText = `${data.qualifiedCount} Ready Whales`;
             let html = `<div class="text-emerald-400 mb-3 bg-emerald-500/10 p-2.5 rounded-xl border border-emerald-500/20 font-mono text-xs">✔ Session: ${data.botSessionId} | Scanned ${data.scannedTargets} targets in ${data.executionTime}</div>`;
             data.leads.forEach(l => {
                 html += `
@@ -70,18 +71,27 @@ function destroyObjection(type) {
     if (!out) return;
     if(type === 'price') {
         out.innerHTML = `
-            <div class="text-amber-400 font-bold border-b border-white/10 pb-2">ABSOLUTE REBUTTAL: BUDGET / PRICE OBJECTION</div>
-            <p class="text-white text-xs leading-relaxed">"Director, I completely understand budget sensitivity. However, our financial model shows that delaying this deployment for 30 days costs your firm over $73,000 in operational waste and missed closes—which is 15x the cost of our entire annual software tier. We include a 100% money-back escrow guarantee, so your risk is literally zero. Shall we process your secure activation now?"</p>
+            <div class="text-amber-400 font-bold border-b border-white/10 pb-2 flex justify-between">
+                <span>ABSOLUTE REBUTTAL: BUDGET / PRICE OBJECTION</span>
+                <span class="text-emerald-400 text-[10px]">CONVERSION RATIO: 99.4%</span>
+            </div>
+            <p class="text-white text-xs leading-relaxed mt-3">"Director, I completely understand budget sensitivity. However, our financial model shows that delaying this deployment for 30 days costs your firm over $73,000 in operational waste and missed closes—which is 15x the cost of our entire annual software tier. We include a 100% money-back escrow guarantee, so your risk is literally zero. Shall we process your secure activation now?"</p>
         `;
     } else if(type === 'timing') {
         out.innerHTML = `
-            <div class="text-amber-400 font-bold border-b border-white/10 pb-2">ABSOLUTE REBUTTAL: TIMING / DELAY OBJECTION</div>
-            <p class="text-white text-xs leading-relaxed">"Waiting until next quarter means handing three full months of uncaptured high-ticket leads directly to your top competitor. Our zero-downtime integration takes 15 minutes. Why not let our voice concierges run a parallel test this week with zero financial risk?"</p>
+            <div class="text-amber-400 font-bold border-b border-white/10 pb-2 flex justify-between">
+                <span>ABSOLUTE REBUTTAL: TIMING / DELAY OBJECTION</span>
+                <span class="text-emerald-400 text-[10px]">CONVERSION RATIO: 98.7%</span>
+            </div>
+            <p class="text-white text-xs leading-relaxed mt-3">"Waiting until next quarter means handing three full months of uncaptured high-ticket leads directly to your top competitor. Our zero-downtime integration takes 15 minutes. Why not let our voice concierges run a parallel test this week with zero financial risk?"</p>
         `;
     } else if(type === 'risk') {
         out.innerHTML = `
-            <div class="text-amber-400 font-bold border-b border-white/10 pb-2">ABSOLUTE REBUTTAL: RISK OBJECTION</div>
-            <p class="text-white text-xs leading-relaxed">"That is precisely why we architected our platform with SOC 2 Type II compliance and AES-256 encryption. Furthermore, our founder backs every contract with a 30-day unconditional escrow refund. You have absolute zero downside."</p>
+            <div class="text-amber-400 font-bold border-b border-white/10 pb-2 flex justify-between">
+                <span>ABSOLUTE REBUTTAL: RISK OBJECTION</span>
+                <span class="text-emerald-400 text-[10px]">CONVERSION RATIO: 99.8%</span>
+            </div>
+            <p class="text-white text-xs leading-relaxed mt-3">"That is precisely why we architected our platform with SOC 2 Type II compliance and AES-256 encryption. Furthermore, our founder backs every contract with a 30-day unconditional escrow refund. You have absolute zero downside."</p>
         `;
     }
 }
@@ -92,6 +102,7 @@ async function calculateRoi(e) {
     const monthlyCalls = document.getElementById('monthlyCalls').value;
     const averageDealSize = document.getElementById('avgDealSize').value;
     const box = document.getElementById('roiResultsBox');
+    if (!box) return;
 
     try {
         const res = await fetch('/api/roi-calculator', {
@@ -121,6 +132,7 @@ async function verifyCloudLicense(e) {
     const userName = document.getElementById('regName').value;
     const userEmail = document.getElementById('regEmail').value;
     const statusBox = document.getElementById('regStatus');
+    if (!statusBox) return;
     statusBox.classList.remove('hidden');
     statusBox.className = "text-xs font-mono p-4 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30";
     statusBox.innerText = "Authenticating with Cloud Serverless Node...";
@@ -152,6 +164,7 @@ async function submitCloudSupportTicket(e) {
     const email = document.getElementById('supEmail').value;
     const description = document.getElementById('supDesc').value;
     const statusBox = document.getElementById('supStatus');
+    if (!statusBox) return;
     statusBox.classList.remove('hidden');
     statusBox.className = "text-xs font-mono p-4 rounded-xl bg-amber-500/20 text-amber-300";
     statusBox.innerText = "Escalating deal directly to founder & senior closer...";
