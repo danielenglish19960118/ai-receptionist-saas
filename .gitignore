@@ -1,4 +1,10 @@
+# 環境變數
 .env
 .env.*
+
+# Vercel 與 IDE
 .vercel/
+.vscode/
+
+# 依賴套件
 node_modules/
