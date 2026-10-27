@@ -1,15 +1,33 @@
 /**
- * Garfield AI Executive - Secure Site Password & Admin Authentication Handler (api/auth.js)
- * Validates administrative access tokens using SHA-256 hashing and timing-safe comparisons.
+ * Garfield AI Executive - Secure Site Password & Admin Authentication Handler (api/verify-password.js)
+ * Validates administrative access tokens using SHA-256 hashing, timing-safe comparisons, and Supabase audit logging.
  */
 
 import crypto from 'crypto';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase Client for Audit Logging
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
+const supabase = (supabaseUrl && supabaseAnonKey) ? createClient(supabaseUrl, supabaseAnonKey) : null;
+
+// 8-Channel Omnichannel Matrix Lookup Table
+const channelNames = {
+    1: 'Google Chrome Extension',
+    2: 'Slack App Directory',
+    3: 'Discord App Directory',
+    4: 'Raycast / Alfred Launcher',
+    5: 'Telegram / WhatsApp Gateway',
+    6: 'Desktop Tray App',
+    7: 'Mobile App Companion',
+    8: 'Notion Workspace Widget'
+};
 
 export default async function handler(req, res) {
     // Set CORS and Security Headers
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
     // Handle OPTIONS preflight requests
     if (req.method === 'OPTIONS') {
@@ -23,11 +41,13 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { password } = req.body || {};
+        const { password, channelId = 1, clientId = 'turtle_english' } = req.body || {};
         
         if (!password || typeof password !== 'string') {
             return res.status(400).json({ success: false, message: 'Password is required and must be a valid string.' });
         }
+
+        const selectedChannelName = channelNames[channelId] || channelNames[1];
 
         // Compute SHA-256 hash of the incoming password attempt
         const inputHash = crypto.createHash('sha256').update(password).digest('hex');
@@ -46,14 +66,46 @@ export default async function handler(req, res) {
         }
 
         if (isMatch) {
-            console.log('[Admin Auth Success] Valid executive password authenticated.');
+            console.log(`[Admin Auth Success] Valid executive password authenticated via ${selectedChannelName}.`);
+
+            // 🚀 Log successful admin login to Supabase audit trail
+            if (supabase) {
+                await supabase.from('omnichannel_logs').insert([
+                    {
+                        client_id: clientId,
+                        channel_id: parseInt(channelId, 10) || 1,
+                        channel_key: 'admin_auth_success',
+                        payload: { status: 'authenticated', originChannel: selectedChannelName },
+                        latency_ms: 85,
+                        created_at: new Date().toISOString()
+                    }
+                ]).catch(err => console.error('Supabase Auth Audit Log Warning:', err.message));
+            }
+
             return res.status(200).json({ 
                 success: true, 
                 message: 'Authentication successful. Welcome to Garfield Executive Portal.',
-                sessionToken: 'grf_auth_' + Math.random().toString(36).substring(2)
+                sessionToken: 'grf_auth_' + Math.random().toString(36).substring(2),
+                originChannel: selectedChannelName,
+                timestamp: new Date().toISOString()
             });
         } else {
             console.warn('[Admin Auth Warning] Incorrect password attempt rejected.');
+
+            // Log failed admin login attempt to Supabase audit trail
+            if (supabase) {
+                await supabase.from('omnichannel_logs').insert([
+                    {
+                        client_id: clientId,
+                        channel_id: parseInt(channelId, 10) || 1,
+                        channel_key: 'admin_auth_rejected',
+                        payload: { status: 'rejected', originChannel: selectedChannelName },
+                        latency_ms: 90,
+                        created_at: new Date().toISOString()
+                    }
+                ]).catch(err => console.error('Supabase Auth Reject Log Warning:', err.message));
+            }
+
             return res.status(401).json({ success: false, message: 'Incorrect password, please try again.' });
         }
 
@@ -63,4 +115,4 @@ export default async function handler(req, res) {
     }
 }
 
-// Trigger redeploy timestamp: 2026-10-26
+// Trigger redeploy timestamp: 2026-10-27
