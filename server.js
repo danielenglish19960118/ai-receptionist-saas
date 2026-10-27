@@ -26,25 +26,30 @@ app.use((req, res, next) => {
 });
 
 // ==========================================
-// WhatsApp Webhook (支援多種路徑防 404)
+// WhatsApp Webhook (安全驗證版)
 // ==========================================
-const whatsappHandler = (req, res) => {
+// 優先讀取環境變數的 Token，若無則預設為 'turtle_english_secure_token'
+const WHATSAPP_VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || 'turtle_english_secure_token';
+
+const whatsappHandlerGet = (req, res) => {
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
 
     console.log(`[WhatsApp Webhook GET] Mode: ${mode}, Token: ${token}, Challenge: ${challenge}`);
 
-    if (mode === 'subscribe' || challenge) {
+    // 嚴格安全檢查：必須符合 subscribe 且 Token 必須吻合
+    if (mode === 'subscribe' && token === WHATSAPP_VERIFY_TOKEN) {
         res.setHeader('Content-Type', 'text/plain');
         return res.status(200).send(String(challenge));
     }
     
-    return res.status(403).json({ error: 'Verification failed' });
+    console.warn(`[WhatsApp Security Warning] Token mismatch. Received: ${token}`);
+    return res.status(403).json({ error: 'Verification failed: Token mismatch' });
 };
 
-app.get('/whatsapp-webhook', whatsappHandler);
-app.get('/api/whatsapp-webhook', whatsappHandler);
+app.get('/whatsapp-webhook', whatsappHandlerGet);
+app.get('/api/whatsapp-webhook', whatsappHandlerGet);
 
 app.post(['/whatsapp-webhook', '/api/whatsapp-webhook'], async (req, res) => {
     try {
