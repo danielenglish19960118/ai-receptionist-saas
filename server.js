@@ -2,9 +2,13 @@ import { createClient } from '@supabase/supabase-js';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Initialize Supabase Client
 const supabaseUrl = process.env.SUPABASE_URL;
@@ -31,24 +35,18 @@ app.use((req, res, next) => {
 // ==========================================
 const WHATSAPP_VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || 'garfield-secure-token-2026';
 
-// GET: 處理 Meta Webhook 驗證握手
 const whatsappHandlerGet = (req, res) => {
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
 
-    console.log(`[WhatsApp Webhook GET] Mode: ${mode}, Token: ${token}, Challenge: ${challenge}`);
-
     if (mode === 'subscribe' && token === WHATSAPP_VERIFY_TOKEN) {
         res.setHeader('Content-Type', 'text/plain');
         return res.status(200).send(String(challenge));
     }
-    
-    console.warn(`[WhatsApp Security Warning] Token mismatch. Received: ${token}`);
     return res.status(403).json({ error: 'Verification failed: Token mismatch' });
 };
 
-// POST: 接收 WhatsApp 客戶訊息並同步至 Supabase 與 Slack
 const whatsappHandlerPost = async (req, res) => {
     try {
         const body = req.body;
@@ -62,9 +60,6 @@ const whatsappHandlerPost = async (req, res) => {
                 const senderPhone = messageData.from;
                 const messageText = messageData.text?.body || '[Non-text message]';
 
-                console.log(`[WhatsApp Incoming] From: ${senderPhone}, Message: ${messageText}`);
-
-                // 寫入 Supabase leads 資料表
                 if (supabase) {
                     await supabase.from('leads').insert([{
                         client_id: 'turtle_english',
@@ -74,7 +69,6 @@ const whatsappHandlerPost = async (req, res) => {
                     }]).catch(err => console.error('Supabase Error:', err.message));
                 }
 
-                // 發送 Slack 通知 (如果設定了 SLACK_WEBHOOK_URL)
                 const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
                 if (slackWebhookUrl) {
                     fetch(slackWebhookUrl, {
@@ -90,42 +84,53 @@ const whatsappHandlerPost = async (req, res) => {
         }
         return res.status(404).json({ error: 'Not a WhatsApp event' });
     } catch (error) {
-        console.error('WhatsApp POST Error:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 
-// 註冊 WhatsApp Webhook 路由
 app.get('/whatsapp-webhook', whatsappHandlerGet);
-app.get('/api/whatsapp-webhook', whatsappHandlerGet);
-
 app.post('/whatsapp-webhook', whatsappHandlerPost);
-app.post('/api/whatsapp-webhook', whatsappHandlerPost);
 
 // ==========================================
-// 靜態檔案託管與首頁強制對應
+// 🔍 診斷路由 (用來檢查 Vercel 雲端有沒有包進 public 檔案)
 // ==========================================
-try {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    
-    const publicPath = path.join(__dirname, 'public');
+app.get('/debug-files', (req, res) => {
+    try {
+        const publicPath1 = path.join(__dirname, 'public');
+        const publicPath2 = path.join(process.cwd(), 'public');
+        
+        res.json({
+            __dirname,
+            cwd: process.cwd(),
+            path1_exists: fs.existsSync(publicPath1),
+            path1_files: fs.existsSync(publicPath1) ? fs.readdirSync(publicPath1) : [],
+            path2_exists: fs.existsSync(publicPath2),
+            path2_files: fs.existsSync(publicPath2) ? fs.readdirSync(publicPath2) : [],
+            root_files: fs.readdirSync(process.cwd())
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message, stack: err.stack });
+    }
+});
 
-    // 託管 public 資料夾內的靜態資源（CSS, JS, 圖片等）
-    app.use(express.static(publicPath));
+// ==========================================
+// 靜態檔案託管
+// ==========================================
+const publicDir = fs.existsSync(path.join(__dirname, 'public')) 
+    ? path.join(__dirname, 'public') 
+    : path.join(process.cwd(), 'public');
 
-    // 明確設定：訪問根目錄 (/) 時，直接回傳 public/index.html
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(publicPath, 'index.html'));
-    });
-} catch (err) {
-    console.error('Error setting up static directory:', err);
-    app.get('/', (req, res) => {
-        res.status(500).send('Server Error loading static files');
-    });
-}
+app.use(express.static(publicDir));
 
-// 本地測試用啟動器
+app.get('/', (req, res) => {
+    const indexPath = path.join(publicDir, 'index.html');
+    if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+    } else {
+        res.status(404).send('index.html not found in public directory. Please check /debug-files');
+    }
+});
+
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
