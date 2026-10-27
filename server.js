@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { GoogleGenAI } from '@google/genai';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -14,6 +15,9 @@ const __dirname = path.dirname(__filename);
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 const supabase = (supabaseUrl && supabaseAnonKey) ? createClient(supabaseUrl, supabaseAnonKey) : null;
+
+// Initialize Google Gemini AI (自動讀取環境變數 GEMINI_API_KEY)
+const ai = new GoogleGenAI();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -40,12 +44,51 @@ const whatsappHandlerGet = (req, res) => {
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
 
+    console.log(`[WhatsApp Webhook GET] Mode: ${mode}, Token: ${token}`);
+
     if (mode === 'subscribe' && token === WHATSAPP_VERIFY_TOKEN) {
         res.setHeader('Content-Type', 'text/plain');
         return res.status(200).send(String(challenge));
     }
     return res.status(403).json({ error: 'Verification failed: Token mismatch' });
 };
+
+// 透過 Meta Cloud API 將訊息傳回給 WhatsApp 用戶
+async function sendWhatsAppMessage(recipientPhone, messageText) {
+    const accessToken = process.env.WHATSAPP_ACCESS_TOKEN;
+    const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
+
+    if (!accessToken || !phoneNumberId) {
+        console.warn('WhatsApp API credentials missing, skipping auto-reply dispatch.');
+        return;
+    }
+
+    try {
+        const url = `https://graph.facebook.com/v18.0/${phoneNumberId}/messages`;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                messaging_product: 'whatsapp',
+                to: recipientPhone,
+                type: 'text',
+                text: { body: messageText }
+            })
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            console.error('Failed to send WhatsApp message:', data);
+        } else {
+            console.log(`[WhatsApp Outbound] Sent to ${recipientPhone}`);
+        }
+    } catch (err) {
+        console.error('Error sending WhatsApp message:', err);
+    }
+}
 
 const whatsappHandlerPost = async (req, res) => {
     try {
@@ -58,24 +101,52 @@ const whatsappHandlerPost = async (req, res) => {
 
             if (messageData) {
                 const senderPhone = messageData.from;
-                const messageText = messageData.text?.body || '[Non-text message]';
+                const messageText = messageData.text?.body || '';
 
+                console.log(`[WhatsApp Incoming] From: ${senderPhone}, Message: ${messageText}`);
+
+                // 1. 使用 Gemini AI 生成智慧客服回覆
+                let aiReply = "感謝您的諮詢！我們是 Turtle English 英語教育中心與 Garfield AI 系統團隊，會盡快由專人為您服務。";
+                try {
+                    const response = await ai.models.generateContent({
+                        model: 'gemini-2.5-flash',
+                        contents: [
+                            {
+                                role: 'user',
+                                parts: [{ 
+                                    text: `你現在是 Turtle English 英語教育中心與 Garfield AI Executive 的專業 AI 櫃檯客服。請用親切、專業、簡潔的口吻回覆客戶的以下詢問。客戶訊息：${messageText}` 
+                                }]
+                            }
+                        ]
+                    });
+                    if (response.text) {
+                        aiReply = response.text;
+                    }
+                } catch (aiErr) {
+                    console.error('Gemini AI Generation Error:', aiErr);
+                }
+
+                // 2. 自動將對話與 AI 回覆傳回給 WhatsApp 用戶
+                await sendWhatsAppMessage(senderPhone, aiReply);
+
+                // 3. 寫入 Supabase leads 資料表
                 if (supabase) {
                     await supabase.from('leads').insert([{
                         client_id: 'turtle_english',
                         phone: senderPhone,
                         name: `WhatsApp Lead (${senderPhone})`,
-                        notes: `Inquiry: ${messageText}`
+                        notes: `Inquiry: ${messageText} | AI Reply: ${aiReply}`
                     }]).catch(err => console.error('Supabase Error:', err.message));
                 }
 
+                // 4. 發送 Slack VIP 通知
                 const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
                 if (slackWebhookUrl) {
                     fetch(slackWebhookUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            text: `💬 *WhatsApp Inquiry*\n*From:* \`${senderPhone}\`\n*Message:* ${messageText}`
+                            text: `💬 *WhatsApp AI Concierge Interaction*\n*From:* \`${senderPhone}\`\n*Inquiry:* ${messageText}\n*AI Reply:* ${aiReply}`
                         })
                     }).catch(err => console.error('Slack Notification Error:', err));
                 }
@@ -84,6 +155,7 @@ const whatsappHandlerPost = async (req, res) => {
         }
         return res.status(404).json({ error: 'Not a WhatsApp event' });
     } catch (error) {
+        console.error('WhatsApp POST Error:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 };
@@ -92,29 +164,7 @@ app.get('/whatsapp-webhook', whatsappHandlerGet);
 app.post('/whatsapp-webhook', whatsappHandlerPost);
 
 // ==========================================
-// 🔍 診斷路由 (用來檢查 Vercel 雲端有沒有包進 public 檔案)
-// ==========================================
-app.get('/debug-files', (req, res) => {
-    try {
-        const publicPath1 = path.join(__dirname, 'public');
-        const publicPath2 = path.join(process.cwd(), 'public');
-        
-        res.json({
-            __dirname,
-            cwd: process.cwd(),
-            path1_exists: fs.existsSync(publicPath1),
-            path1_files: fs.existsSync(publicPath1) ? fs.readdirSync(publicPath1) : [],
-            path2_exists: fs.existsSync(publicPath2),
-            path2_files: fs.existsSync(publicPath2) ? fs.readdirSync(publicPath2) : [],
-            root_files: fs.readdirSync(process.cwd())
-        });
-    } catch (err) {
-        res.status(500).json({ error: err.message, stack: err.stack });
-    }
-});
-
-// ==========================================
-// 靜態檔案託管
+// 靜態檔案託管與首頁路由
 // ==========================================
 const publicDir = fs.existsSync(path.join(__dirname, 'public')) 
     ? path.join(__dirname, 'public') 
@@ -127,7 +177,7 @@ app.get('/', (req, res) => {
     if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
     } else {
-        res.status(404).send('index.html not found in public directory. Please check /debug-files');
+        res.status(404).send('index.html not found');
     }
 });
 
