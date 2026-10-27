@@ -1,6 +1,6 @@
 /**
  * Garfield AI Executive - Terms of Service API Handler (api/terms.js)
- * Serves the enterprise-grade Terms of Service compliance document.
+ * Serves the enterprise-grade Terms of Service compliance document with 8-Channel Omnichannel integration.
  */
 
 export default function handler(req, res) {
@@ -41,30 +41,30 @@ export default function handler(req, res) {
 
         <div class="space-y-4 border-b border-white/10 pb-6">
             <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full font-mono text-xs font-bold text-amber-300 uppercase">
-                <i class="fa-solid fa-file-contract"></i> Enterprise Legal Agreement
+                <i class="fa-solid fa-file-contract"></i> Enterprise Legal Agreement (8-Channel Synced)
             </div>
             <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight">Terms of Service</h1>
             <div class="font-mono text-xs text-slate-400">
-                Last Updated: October 26, 2026 &bull; Effective Date: Immediate
+                Last Updated: October 27, 2026 &bull; Effective Date: Immediate
             </div>
         </div>
 
         <div class="space-y-6 font-mono text-xs md:text-sm text-slate-300 leading-relaxed">
             <p class="text-sm text-white font-sans">
-                Welcome to <strong class="text-amber-400">Garfield AI Executive Inc.</strong> (the "Service"). By adding our bot to your Discord server, connecting your telephony pipeline, or utilizing our SaaS suite, you agree to be bound by these Terms of Service.
+                Welcome to <strong class="text-amber-400">Garfield AI Executive Inc.</strong> (the "Service"). By integrating our 8-channel omnichannel suite (Chrome Extension, Slack App, Discord Bot, Raycast, Telegram/WhatsApp, Desktop Tray, Mobile Companion, Notion Widget), connecting your telephony pipelines, or utilizing our autonomous SaaS platform, you agree to be bound by these Terms of Service.
             </p>
 
             <h2 class="text-base font-bold text-white pt-4 border-t border-white/10 flex items-center gap-2">
                 <span class="w-1 h-4 bg-amber-400 rounded"></span> 1. Acceptance of Terms
             </h2>
-            <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users, corporate clients, and others who access or use the Service.</p>
+            <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users, corporate clients, and enterprise directors who access or deploy the Service.</p>
 
             <h2 class="text-base font-bold text-white pt-4 border-t border-white/10 flex items-center gap-2">
                 <span class="w-1 h-4 bg-amber-400 rounded"></span> 2. Use of Service & Restrictions
             </h2>
-            <p>The Service provides AI-powered voice telephony, automated reply support, and executive closing automation. Users must not use the Service to:</p>
+            <p>The Service provides AI-powered voice telephony, automated reply support, and executive closing automation across 8 sovereign gateways. Users must not use the Service to:</p>
             <ul class="space-y-3 pl-2">
-                <li class="relative pl-5 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Violate Discord's Community Guidelines or Terms of Service.</li>
+                <li class="relative pl-5 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Violate platform community guidelines or third-party API terms of service.</li>
                 <li class="relative pl-5 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Engage in fraudulent, deceptive, or illegal telecommunication activities.</li>
                 <li class="relative pl-5 before:content-['✦'] before:absolute before:left-0 before:text-amber-400">Distribute malware, spam, or malicious payloads through automated webhook systems.</li>
             </ul>
@@ -90,4 +90,4 @@ export default function handler(req, res) {
     `);
 }
 
-// Trigger redeploy timestamp: 2026-10-26
+// Trigger redeploy timestamp: 2026-10-27
