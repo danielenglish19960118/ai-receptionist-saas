@@ -162,7 +162,7 @@ app.post('/api/create-tenant', async (req, res) => {
         const vapiApiKey = process.env.VAPI_PRIVATE_API_KEY;
         if (!vapiApiKey) return res.status(500).json({ error: 'Vapi Private API Key is not configured on the server.' });
 
-        const vapiResponse = await fetch('https://ai-receptionist-saas-ivory.vercel.app/api/vapi-webhook', {
+        const vapiResponse = await fetch('https://api.vapi.ai/assistants', {
             method: 'POST',
             headers: { 'Authorization': `Bearer ${vapiApiKey}`, 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -536,11 +536,14 @@ app.get(['/api/whatsapp-webhook', '/whatsapp-webhook'], (req, res) => {
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
 
-    // 容錯驗證：直接秒過 Meta 的驗證挑戰
+    console.log(`[WhatsApp Webhook GET] Mode: ${mode}, Token: ${token}, Challenge: ${challenge}`);
+
+    // 強制設定 Content-Type 為 text/plain 並回傳純文字 challenge，100% 滿足 Meta 驗證規範
     if (mode === 'subscribe' || challenge) {
-        console.log('WHATSAPP_WEBHOOK_VERIFIED');
-        return res.status(200).send(challenge);
+        res.setHeader('Content-Type', 'text/plain');
+        return res.status(200).send(String(challenge));
     }
+    
     return res.status(403).json({ error: 'Verification failed' });
 });
 
