@@ -1,6 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 import express from 'express';
-import crypto from 'crypto';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,7 +12,7 @@ const supabase = (supabaseUrl && supabaseAnonKey) ? createClient(supabaseUrl, su
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Global CORS Headers
+// Global CORS & Security Headers
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -26,11 +25,11 @@ app.use((req, res, next) => {
 });
 
 // ==========================================
-// WhatsApp Webhook (安全驗證版)
+// WhatsApp Webhook Configuration
 // ==========================================
-// 優先讀取環境變數的 Token，若無則預設為 'turtle_english_secure_token'
-const WHATSAPP_VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || 'turtle_english_secure_token';
+const WHATSAPP_VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || 'garfield-secure-token-2026';
 
+// GET: 處理 Meta Webhook 驗證握手
 const whatsappHandlerGet = (req, res) => {
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
@@ -38,7 +37,6 @@ const whatsappHandlerGet = (req, res) => {
 
     console.log(`[WhatsApp Webhook GET] Mode: ${mode}, Token: ${token}, Challenge: ${challenge}`);
 
-    // 嚴格安全檢查：必須符合 subscribe 且 Token 必須吻合
     if (mode === 'subscribe' && token === WHATSAPP_VERIFY_TOKEN) {
         res.setHeader('Content-Type', 'text/plain');
         return res.status(200).send(String(challenge));
@@ -48,10 +46,8 @@ const whatsappHandlerGet = (req, res) => {
     return res.status(403).json({ error: 'Verification failed: Token mismatch' });
 };
 
-app.get('/whatsapp-webhook', whatsappHandlerGet);
-app.get('/api/whatsapp-webhook', whatsappHandlerGet);
-
-app.post(['/whatsapp-webhook', '/api/whatsapp-webhook'], async (req, res) => {
+// POST: 接收 WhatsApp 客戶訊息並同步至 Supabase 與 Slack
+const whatsappHandlerPost = async (req, res) => {
     try {
         const body = req.body;
         if (body?.object === 'whatsapp_business_account') {
@@ -64,6 +60,9 @@ app.post(['/whatsapp-webhook', '/api/whatsapp-webhook'], async (req, res) => {
                 const senderPhone = messageData.from;
                 const messageText = messageData.text?.body || '[Non-text message]';
 
+                console.log(`[WhatsApp Incoming] From: ${senderPhone}, Message: ${messageText}`);
+
+                // 寫入 Supabase leads 資料表
                 if (supabase) {
                     await supabase.from('leads').insert([{
                         client_id: 'turtle_english',
@@ -72,21 +71,43 @@ app.post(['/whatsapp-webhook', '/api/whatsapp-webhook'], async (req, res) => {
                         notes: `Inquiry: ${messageText}`
                     }]).catch(err => console.error('Supabase Error:', err.message));
                 }
+
+                // 發送 Slack 通知 (如果設定了 SLACK_WEBHOOK_URL)
+                const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
+                if (slackWebhookUrl) {
+                    fetch(slackWebhookUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            text: `💬 *WhatsApp Inquiry*\n*From:* \`${senderPhone}\`\n*Message:* ${messageText}`
+                        })
+                    }).catch(err => console.error('Slack Notification Error:', err));
+                }
             }
             return res.status(200).json({ status: 'EVENT_RECEIVED' });
         }
         return res.status(404).json({ error: 'Not a WhatsApp event' });
     } catch (error) {
+        console.error('WhatsApp POST Error:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
-});
+};
 
-// 根目錄與基本健康檢查
+// 註冊路由（同時支援根路徑與 /api/ 前綴，防止 404）
+app.get('/whatsapp-webhook', whatsappHandlerGet);
+app.get('/api/whatsapp-webhook', whatsappHandlerGet);
+
+app.post('/whatsapp-webhook', whatsappHandlerPost);
+app.post('/api/whatsapp-webhook', whatsappHandlerPost);
+
+// ==========================================
+// 根目錄健康檢查
+// ==========================================
 app.get('/', (req, res) => {
     res.status(200).send('Garfield AI Executive Engine Online');
 });
 
-// 啟動伺服器（本地測試用，Vercel 會自動匯出 app）
+// 本地測試用啟動器
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
