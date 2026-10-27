@@ -103,17 +103,26 @@ app.post('/whatsapp-webhook', whatsappHandlerPost);
 app.post('/api/whatsapp-webhook', whatsappHandlerPost);
 
 // ==========================================
-// 穩健的靜態檔案託管 (絕對不會引發 500 錯誤)
+// 靜態檔案託管與首頁強制對應
 // ==========================================
 try {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
     
-    // 直接將 public 資料夾對應為靜態網頁根目錄
-    // 這樣 index.html, team.html, pricing.html 等所有頁面都可以直接透過網址訪問
-    app.use(express.static(path.join(__dirname, 'public')));
+    const publicPath = path.join(__dirname, 'public');
+
+    // 託管 public 資料夾內的靜態資源（CSS, JS, 圖片等）
+    app.use(express.static(publicPath));
+
+    // 明確設定：訪問根目錄 (/) 時，直接回傳 public/index.html
+    app.get('/', (req, res) => {
+        res.sendFile(path.join(publicPath, 'index.html'));
+    });
 } catch (err) {
     console.error('Error setting up static directory:', err);
+    app.get('/', (req, res) => {
+        res.status(500).send('Server Error loading static files');
+    });
 }
 
 // 本地測試用啟動器
