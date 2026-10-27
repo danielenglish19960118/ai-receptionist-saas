@@ -252,6 +252,35 @@
     <!-- Core Script Assets -->
     <script src="script.js"></script>
     <script>
+        // 頂部緊急倒數計時器
+        function startTimer(duration, display) {
+            let timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                if (display) {
+                    display.textContent = hours + ":" + minutes + ":" + seconds;
+                }
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            const display = document.querySelector('#timerCountdown');
+            if (display) {
+                startTimer(13338, display); // 3小時 42分 18秒
+            }
+        };
+
         const teamChannelSubPages = {
             1: { title: "Sub-Page: Chrome Extension Executive Telemetry", nodeTag: "Omnichannel Gateway #CHROME-TEAM-01", payload: "Monitors active browser CRM windows in real-time under Director Yang's oversight. Instantly verifies executive telemetry and displays sub-150ms closing rebuttal popups." },
             2: { title: "Sub-Page: Slack App Directory Executive Webhook", nodeTag: "Omnichannel Gateway #SLACK-TEAM-02", payload: "Streams real-time leadership metrics and founder escalation notifications directly into executive Slack channels (#revenue-ops, #founder-escalation)." },
@@ -282,6 +311,10 @@
             if (modal) {
                 modal.style.display = 'none';
             }
+        }
+
+        function launchOmnichannelModule(channelId) {
+            openChannelSubPage(channelId);
         }
     </script>
 </body>
