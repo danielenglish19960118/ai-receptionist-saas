@@ -5,10 +5,5 @@
       "source": "/(.*)",
       "destination": "/server.js"
     }
-  ],
-  "functions": {
-    "server.js": {
-      "includeFiles": "public/**"
-    }
-  }
+  ]
 }
