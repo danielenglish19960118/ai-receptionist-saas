@@ -528,4 +528,87 @@ app.post('/api/verify-password', async (req, res) => {
     }
 });
 
+// ==========================================
+// 13. WhatsApp Cloud API Webhook Handler (/api/whatsapp-webhook)
+// ==========================================
+app.get('/api/whatsapp-webhook', (req, res) => {
+    const mode = req.query['hub.mode'];
+    const token = req.query['hub.verify_token'];
+    const challenge = req.query['hub.challenge'];
+
+    if (mode === 'subscribe' && token === process.env.WHATSAPP_VERIFY_TOKEN) {
+        console.log('WHATSAPP_WEBHOOK_VERIFIED');
+        return res.status(200).send(challenge);
+    }
+    return res.status(403).json({ error: 'Verification failed' });
+});
+
+app.post('/api/whatsapp-webhook', async (req, res) => {
+    try {
+        const body = req.body;
+        if (body.object === 'whatsapp_business_account') {
+            const entry = body.entry?.[0];
+            const change = entry?.changes?.[0];
+            const value = change?.value;
+            const messageData = value?.messages?.[0];
+
+            if (messageData) {
+                const senderPhone = messageData.from;
+                const messageText = messageData.text?.body || '[Non-text message]';
+
+                console.log(`Received WhatsApp message from ${senderPhone}: ${messageText}`);
+
+                // 同步記錄到 Supabase
+                if (supabase) {
+                    await supabase.from('leads').insert([{
+                        client_id: 'turtle_english',
+                        phone: senderPhone,
+                        name: `WhatsApp Lead (${senderPhone})`,
+                        notes: `Inquiry: ${messageText}`
+                    }]).catch(err => console.error('Supabase WhatsApp Lead Insert Warning:', err.message));
+                }
+
+                // 同步發送告警到 Slack
+                const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
+                if (slackWebhookUrl) {
+                    fetch(slackWebhookUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            text: `💬 *WhatsApp High-Net-Worth Inquiry*\n*From:* \`${senderPhone}\`\n*Message:* ${messageText}`
+                        })
+                    }).catch(err => console.error('Slack WhatsApp Notification Error:', err));
+                }
+
+                // 透過 WhatsApp 官方 API 自動回覆客戶
+                const token = process.env.WHATSAPP_TOKEN;
+                const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
+
+                if (token && phoneNumberId) {
+                    const replyText = `您好，我是 Garfield AI Executive 執行長管家。已收到您的諮詢：「${messageText}」。我們的專業團隊將立即為您處理。`;
+                    await fetch(`https://graph.facebook.com/v17.0/${phoneNumberId}/messages`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            messaging_product: 'whatsapp',
+                            to: senderPhone,
+                            type: 'text',
+                            text: { body: replyText }
+                        })
+                    }).catch(err => console.error('WhatsApp Reply API Error:', err));
+                }
+            }
+
+            return res.status(200).json({ status: 'EVENT_RECEIVED' });
+        }
+        return res.status(404).json({ error: 'Not a WhatsApp event' });
+    } catch (error) {
+        console.error('WhatsApp Webhook Internal Error:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 export default app;
