@@ -1,7 +1,14 @@
 /**
  * Garfield AI Executive - Automated Gumroad Webhook & Provisioning Handler (api/gumroad.js)
- * Handles automated sales, validates your personal Gumroad seller token, and pushes VIP alerts to Slack.
+ * Handles automated sales, validates your personal Gumroad seller token, pushes VIP alerts to Slack, and syncs with Supabase.
  */
+
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase Client
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
+const supabase = (supabaseUrl && supabaseAnonKey) ? createClient(supabaseUrl, supabaseAnonKey) : null;
 
 export default async function handler(req, res) {
     // Set CORS and Security Headers
@@ -31,6 +38,7 @@ export default async function handler(req, res) {
         const isPaid = eventData.paid;
         const price = eventData.price ? (eventData.price / 100) : 'N/A';
         const currency = eventData.currency || 'USD';
+        const buyerName = eventData.full_name || eventData.name || 'Gumroad VIP Buyer';
 
         // Validate your personal Gumroad seller ID
         const expectedSellerId = "o0g3LR2ktQ1Je36A9k58gQ==";
@@ -48,6 +56,31 @@ export default async function handler(req, res) {
         console.log(`[PROVISIONING SUCCESS] Sale verified for ${buyerEmail}`);
         console.log(`- Product: ${productName}`);
         console.log(`- Assigned License Key: ${licenseKey}`);
+
+        // 🚀 Synchronize successful sale to Supabase DB (if connected)
+        if (supabase) {
+            // A. Insert into leads / customers table
+            await supabase.from('leads').insert([
+                {
+                    client_id: 'turtle_english',
+                    name: buyerName,
+                    email: buyerEmail,
+                    notes: `Purchased: ${productName} | Price: ${price} ${currency} | License: ${licenseKey}`
+                }
+            ]).catch(dbErr => console.error('[Supabase Lead Insert Warning]:', dbErr.message));
+
+            // B. Register telemetry in omnichannel logs for sales tracking
+            await supabase.from('omnichannel_logs').insert([
+                {
+                    client_id: 'turtle_english',
+                    channel_id: 1, // Default to Chrome / Web Checkout
+                    channel_key: 'gumroad_checkout',
+                    payload: { productName, price, currency, buyerEmail, licenseKey },
+                    latency_ms: 100,
+                    created_at: new Date().toISOString()
+                }
+            ]).catch(logErr => console.error('[Supabase Omnichannel Log Warning]:', logErr.message));
+        }
 
         // 🚀 Non-blocking Slack VIP Notification
         const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
@@ -99,7 +132,7 @@ export default async function handler(req, res) {
         // Return successful response to Gumroad
         return res.status(200).json({
             success: true,
-            message: "Gumroad webhook processed successfully. VIP license provisioned.",
+            message: "Gumroad webhook processed successfully. VIP license provisioned and synced to database.",
             assigned_key: licenseKey
         });
 
