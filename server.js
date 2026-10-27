@@ -3,9 +3,6 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -106,9 +103,20 @@ app.post('/whatsapp-webhook', whatsappHandlerPost);
 app.post('/api/whatsapp-webhook', whatsappHandlerPost);
 
 // ==========================================
-// 託管 public 資料夾（找回你原本漂亮的前端主頁）
+// 託管靜態前端檔案（安全防崩潰版）
 // ==========================================
-app.use(express.static(path.join(__dirname, 'public')));
+try {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    app.use(express.static(path.join(__dirname, 'public')));
+} catch (e) {
+    console.warn('Static folder middleware skipped:', e.message);
+}
+
+// 預設根目錄保底回應
+app.get('/', (req, res) => {
+    res.status(200).send('Garfield AI Executive Engine Online');
+});
 
 // 本地測試用啟動器
 if (process.env.NODE_ENV !== 'production') {
