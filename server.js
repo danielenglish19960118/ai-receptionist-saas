@@ -3,9 +3,6 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -106,21 +103,17 @@ app.post('/whatsapp-webhook', whatsappHandlerPost);
 app.post('/api/whatsapp-webhook', whatsappHandlerPost);
 
 // ==========================================
-// 動態託管 public 資料夾內的所有 HTML 頁面與資源
+// 穩健的靜態檔案託管 (絕對不會引發 500 錯誤)
 // ==========================================
 try {
-    // 讓 Express 自動處理所有靜態檔案 (app.js, widget.js, css, 圖片等)
-    app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
-
-    // 根目錄明確對應到 index.html
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public', 'index.html'));
-    });
-} catch (e) {
-    console.warn('Static folder middleware skipped:', e.message);
-    app.get('/', (req, res) => {
-        res.status(200).send('Garfield AI Executive Engine Online');
-    });
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    
+    // 直接將 public 資料夾對應為靜態網頁根目錄
+    // 這樣 index.html, team.html, pricing.html 等所有頁面都可以直接透過網址訪問
+    app.use(express.static(path.join(__dirname, 'public')));
+} catch (err) {
+    console.error('Error setting up static directory:', err);
 }
 
 // 本地測試用啟動器
