@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Founder, 8-Channel Omnichannel & Executive Architect | Garfield AI Executive</title>
+    <title>01. Closing Team & Executive Architecture | Garfield AI Executive</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
@@ -25,49 +25,64 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-garfield-vipgold selection:text-black">
-    <!-- Top Urgency Bar -->
+
+    <!-- Top Urgency Banner -->
     <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
-        <span>🚨 8-CHANNEL OMNICHANNEL DISPATCH & 100% ESCROW REFUND GUARANTEE CLOSES IN <strong class="text-white bg-black px-2 py-0.5 rounded">03:42:18</strong></span>
-        <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline">Claim Your Guaranteed Slot Now ➔</a>
+        <span>🚨 OMNICHANNEL DISPATCH: 100% ESCROW REFUND GUARANTEE WINDOW CLOSES IN <strong id="timerCountdown" class="text-white bg-black px-2 py-0.5 rounded font-mono">03:42:18</strong></span>
+        <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline cursor-pointer">Claim Guaranteed Executive Slot ➔</a>
     </div>
 
     <!-- Header -->
     <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3">
+            <a href="index.html" class="flex items-center gap-3 cursor-pointer">
                 <div class="bg-garfield-vipgold p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">👑</div>
                 <div>
-                    <span class="font-bangers text-2xl tracking-wider text-white">GARFIELD <span class="gold-gradient-text">200% CLOSER</span></span>
-                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">8-Channel Omnichannel & Executive Engine</span>
+                    <span class="font-bangers text-2xl tracking-wider text-white">GARFIELD <span class="gold-gradient-text">CLOSING TEAM</span></span>
+                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">Omnichannel & Executive Revenue System</span>
                 </div>
             </a>
             <div class="flex items-center gap-3">
-                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400">Visitor</strong></span>
-                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure Deal ↗</a>
+                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400 font-bold">Visitor</strong></span>
+                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all cursor-pointer">Secure Deal ↗</a>
             </div>
         </div>
     </header>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-10">
+
         <!-- Navigation Toolbar -->
         <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
-            <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🔥 Hot Buyer Finder</a>
-            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
-            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
-            <a href="sandbox.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🎙️ Live Closing Voice</a>
-            <a href="team.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">01. Closing Team</a>
-            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
-            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
-            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
-            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
-            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 10,000+ Modules</a>
+            <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">🔥 Hot Buyer Finder</a>
+            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">🛡️ Objection Destroyer</a>
+            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">💸 Cost of Delay</a>
+            <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">🎙️ Live Voice AI</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">📚 Knowledge Base</a>
+            <a href="team.html" class="bg-amber-400 text-black font-extrabold text-xs px-4 py-2 rounded-xl transition-all shadow-md cursor-pointer">01. Closing Team</a>
+            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">02. Zero-Risk Escrow</a>
+            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">03. Founder's Pledge</a>
+            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">04. Instant Handoff</a>
+            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">05. VIP Portal</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">06. 10,000+ Modules</a>
+        </div>
+
+        <!-- 🎯 全站統一標準化的黃金標題與標籤 Header 區塊 -->
+        <div class="space-y-3 text-center max-w-3xl mx-auto pt-2">
+            <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full shadow-sm">
+                <i class="fa-solid fa-crown text-amber-400 text-xs"></i>
+                <span class="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider">GARFIELD EXECUTIVE AI • 300% CLOSING VELOCITY ENGINE</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">Absolute Revenue Conversion & Sub-130ms Voice Automation</h1>
+            <p class="text-xs md:text-sm text-slate-300 font-mono leading-relaxed">
+                Deploy autonomous AI executive receptionists across all 8 enterprise channels, neutralize high-stakes buyer resistance instantly, and lock in your growth with a 100% third-party escrow guarantee.
+            </p>
         </div>
 
         <!-- 01. Closing Team / Founder Spotlight -->
         <div class="space-y-8">
             <div class="border-b border-white/10 pb-4">
                 <span class="text-xs font-mono font-bold text-amber-400 bg-amber-400/10 px-3.5 py-1.5 rounded-full border border-amber-400/20 uppercase">Sole Architect & Executive Leadership</span>
-                <h1 class="text-3xl md:text-5xl font-black text-white mt-2">Director Yang Cheng-han (楊承翰)</h1>
+                <h2 class="text-3xl md:text-4xl font-black text-white mt-2">Director Yang Cheng-han (楊承翰)</h2>
                 <p class="text-xs md:text-sm text-slate-300 font-mono mt-1">
                     Founder, Lead Voice Infrastructure Architect, and Lexicographical Researcher based in Tainan, Taiwan.
                 </p>
@@ -85,40 +100,39 @@
                     Director Yang Cheng-han maintains direct oversight over all enterprise deployments, with live telemetry bridged across your entire communication stack. Click any channel below to view technical connection specs.
                 </p>
                 <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 pt-1 text-[11px]">
-                    <button onclick="launchOmnichannelModule(1)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all">
-                        <span class="text-white font-bold block flex items-center gap-1"><i class="fa-brands fa-chrome text-amber-400"></i> Chrome</span>
-                        <span class="text-emerald-400 text-[10px]">Ready</span>
+                    <button onclick="openChannelSubPage(1)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                        <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-brands fa-chrome text-amber-400"></i> Chrome</span>
+                        <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                     </button>
-                    <button onclick="launchOmnichannelModule(2)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all">
-                        <span class="text-white font-bold block flex items-center gap-1"><i class="fa-brands fa-slack text-amber-400"></i> Slack</span>
-                        <span class="text-emerald-400 text-[10px]">Active</span>
+                    <button onclick="openChannelSubPage(2)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                        <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-brands fa-slack text-amber-400"></i> Slack</span>
+                        <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                     </button>
-                    <button onclick="launchOmnichannelModule(3)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all">
-                        <span class="text-white font-bold block flex items-center gap-1"><i class="fa-brands fa-discord text-amber-400"></i> Discord</span>
-                        <span class="text-emerald-400 text-[10px]">Live</span>
+                    <button onclick="openChannelSubPage(3)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                        <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-brands fa-discord text-amber-400"></i> Discord</span>
+                        <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                     </button>
-                    <button onclick="launchOmnichannelModule(4)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all">
-                        <span class="text-white font-bold block flex items-center gap-1"><i class="fa-solid fa-terminal text-amber-400"></i> Raycast</span>
-                        <span class="text-emerald-400 text-[10px]">Ready</span>
+                    <button onclick="openChannelSubPage(4)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                        <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-solid fa-terminal text-amber-400"></i> Raycast</span>
+                        <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                     </button>
-                    <button onclick="launchOmnichannelModule(5)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all">
-                        <span class="text-white font-bold block flex items-center gap-1"><i class="fa-brands fa-telegram text-amber-400"></i> Tele/WA</span>
-                        <span class="text-emerald-400 text-[10px]">Synced</span>
+                    <button onclick="openChannelSubPage(5)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                        <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-brands fa-telegram text-amber-400"></i> Telegram</span>
+                        <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                     </button>
-                    <button onclick="launchOmnichannelModule(6)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all">
-                        <span class="text-white font-bold block flex items-center gap-1"><i class="fa-solid fa-desktop text-amber-400"></i> Desktop</span>
-                        <span class="text-emerald-400 text-[10px]">Active</span>
+                    <button onclick="openChannelSubPage(6)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                        <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-solid fa-desktop text-amber-400"></i> Desktop</span>
+                        <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                     </button>
-                    <button onclick="launchOmnichannelModule(7)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all">
-                        <span class="text-white font-bold block flex items-center gap-1"><i class="fa-solid fa-mobile-screen text-amber-400"></i> Mobile</span>
-                        <span class="text-emerald-400 text-[10px]">Synced</span>
+                    <button onclick="openChannelSubPage(7)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                        <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-solid fa-mobile-screen text-amber-400"></i> Mobile</span>
+                        <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                     </button>
-                    <button onclick="launchOmnichannelModule(8)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all">
-                        <span class="text-white font-bold block flex items-center gap-1"><i class="fa-solid fa-book-open text-amber-400"></i> Notion</span>
-                        <span class="text-emerald-400 text-[10px]">Bound</span>
+                    <button onclick="openChannelSubPage(8)" class="bg-black/60 hover:border-amber-400 p-3.5 rounded-xl border border-white/10 text-left transition-all cursor-pointer group">
+                        <span class="text-white font-bold block flex items-center gap-1 group-hover:text-amber-300"><i class="fa-solid fa-book-open text-amber-400"></i> Notion</span>
+                        <span class="text-emerald-400 text-[10px]">Open Sub-Page ↗</span>
                     </button>
                 </div>
-                <div id="omnichannelStatusBox"></div>
             </div>
 
             <!-- Founder Deep Dive Profile Card -->
@@ -187,18 +201,88 @@
                         Because Director Yang Cheng-han personally oversees architecture and onboarding, you can bypass standard support tiers entirely.
                     </p>
                 </div>
-                <a href="support.html" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs px-8 py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all whitespace-nowrap">
+                <a href="support.html" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs px-8 py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all whitespace-nowrap cursor-pointer">
                     Contact Founder Directly ➔
                 </a>
             </div>
         </div>
+
     </main>
 
+    <!-- 🌐 Dynamic 8-Channel Omnichannel Sub-Page Modal Terminal -->
+    <div id="channelSubPageModal" style="display: none;" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md items-center justify-center p-4">
+        <div class="bg-garfield-panel border border-amber-500/50 w-full max-w-2xl rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl font-mono text-xs relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeChannelSubPageModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-lg font-bold cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="border-b border-white/10 pb-4 flex items-center gap-3">
+                <div class="bg-garfield-vipgold text-black p-2.5 rounded-xl font-extrabold text-sm shadow-gold-glow">🛰️</div>
+                <div>
+                    <h3 id="modalChannelTitle" class="text-lg font-black text-white">Omnichannel Sub-Page Terminal</h3>
+                    <span id="modalChannelNodeTag" class="text-amber-400 text-[11px] font-bold">Gateway Sub-Page Node</span>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-black/60 p-4 rounded-2xl border border-white/10 space-y-2">
+                    <span class="text-slate-400 block font-bold">Sub-Page Executive Telemetry & Payload Data:</span>
+                    <p id="modalChannelPayload" class="text-slate-200 text-sm leading-relaxed">Loading payload data...</p>
+                </div>
+                <div class="grid grid-cols-2 gap-3 text-[11px]">
+                    <div class="bg-black/40 p-3 rounded-xl border border-white/10">
+                        <span class="text-slate-400 block">Dispatch Latency:</span>
+                        <strong class="text-emerald-400">&lt; 120ms Webhook Edge Stream</strong>
+                    </div>
+                    <div class="bg-black/40 p-3 rounded-xl border border-white/10">
+                        <span class="text-slate-400 block">Financial SLA Protection:</span>
+                        <strong class="text-amber-300">100% Escrow Guarantee Secured</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-4 border-t border-white/15 flex justify-end gap-3">
+                <button onclick="closeChannelSubPageModal()" class="bg-white/10 hover:bg-white/20 text-white font-bold px-5 py-2.5 rounded-xl cursor-pointer">Close Sub-Page</button>
+                <a id="modalChannelVipLink" href="onboarding.html" class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold px-6 py-2.5 rounded-xl uppercase transition-all shadow-md cursor-pointer">Provision in Onboarding Suite 🚀</a>
+            </div>
+        </div>
+    </div>
+
     <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
-        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a>
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a> | <a href="terms.html" class="underline ml-2 cursor-pointer">Terms of Service</a>
     </footer>
-    
+
     <!-- Core Script Assets -->
     <script src="script.js"></script>
+    <script>
+        const teamChannelSubPages = {
+            1: { title: "Sub-Page: Chrome Extension Executive Telemetry", nodeTag: "Omnichannel Gateway #CHROME-TEAM-01", payload: "Monitors active browser CRM windows in real-time under Director Yang's oversight. Instantly verifies executive telemetry and displays sub-150ms closing rebuttal popups." },
+            2: { title: "Sub-Page: Slack App Directory Executive Webhook", nodeTag: "Omnichannel Gateway #SLACK-TEAM-02", payload: "Streams real-time leadership metrics and founder escalation notifications directly into executive Slack channels (#revenue-ops, #founder-escalation)." },
+            3: { title: "Sub-Page: Discord App Directory Executive Stream", nodeTag: "Omnichannel Gateway #DISCORD-TEAM-03", payload: "Dispatches automated live voice session metrics and Director Yang's executive verification data to encrypted Discord management bots." },
+            4: { title: "Sub-Page: Raycast Launcher Instant Executive Engine", nodeTag: "Omnichannel Gateway #RAYCAST-TEAM-04", payload: "Enables sub-second keyboard query execution to retrieve founder's oversight metrics, contract serials, and hot lead recovery data." },
+            5: { title: "Sub-Page: Telegram & WhatsApp Executive Gateway", nodeTag: "Omnichannel Gateway #TELEGRAM-WA-TEAM-05", payload: "Delivers high-priority push notifications and automated executive summaries directly to mobile messaging apps under Director Yang's supervision." },
+            6: { title: "Sub-Page: Desktop Menu Bar Tray Executive Monitor", nodeTag: "Omnichannel Gateway #DESKTOP-TRAY-TEAM-06", payload: "Runs background desktop diagnostic monitoring for native macOS & Windows, verifying leadership tokens and warning of latency bottlenecks." },
+            7: { title: "Sub-Page: Mobile App Companion Executive Telemetry", nodeTag: "Omnichannel Gateway #MOBILE-TEAM-07", payload: "Full mobile companion interface for C-suite executives to review Director Yang's Vapi voice agent conversions and executive mandate status on the go." },
+            8: { title: "Sub-Page: Notion Workspace Executive Sync", nodeTag: "Omnichannel Gateway #NOTION-WIDGET-TEAM-08", payload: "Automatically syncs verified founder oversight records, call duration analytics, and deal recovery data directly into enterprise Notion databases." }
+        };
+
+        function openChannelSubPage(channelId) {
+            const data = teamChannelSubPages[channelId];
+            if (!data) return;
+            document.getElementById('modalChannelTitle').innerText = data.title;
+            document.getElementById('modalChannelNodeTag').innerText = data.nodeTag;
+            document.getElementById('modalChannelPayload').innerText = data.payload;
+            document.getElementById('modalChannelVipLink').href = `onboarding.html?channel=${channelId}`;
+            
+            const modal = document.getElementById('channelSubPageModal');
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeChannelSubPageModal() {
+            const modal = document.getElementById('channelSubPageModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
