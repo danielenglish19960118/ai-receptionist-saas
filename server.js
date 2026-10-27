@@ -1,5 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -93,7 +98,7 @@ const whatsappHandlerPost = async (req, res) => {
     }
 };
 
-// 註冊路由（同時支援根路徑與 /api/ 前綴，防止 404）
+// 註冊 WhatsApp Webhook 路由
 app.get('/whatsapp-webhook', whatsappHandlerGet);
 app.get('/api/whatsapp-webhook', whatsappHandlerGet);
 
@@ -101,11 +106,9 @@ app.post('/whatsapp-webhook', whatsappHandlerPost);
 app.post('/api/whatsapp-webhook', whatsappHandlerPost);
 
 // ==========================================
-// 根目錄健康檢查
+// 託管 public 資料夾（找回你原本漂亮的前端主頁）
 // ==========================================
-app.get('/', (req, res) => {
-    res.status(200).send('Garfield AI Executive Engine Online');
-});
+app.use(express.static(path.join(__dirname, 'public')));
 
 // 本地測試用啟動器
 if (process.env.NODE_ENV !== 'production') {
