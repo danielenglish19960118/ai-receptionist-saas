@@ -106,11 +106,13 @@ app.post('/whatsapp-webhook', whatsappHandlerPost);
 app.post('/api/whatsapp-webhook', whatsappHandlerPost);
 
 // ==========================================
-// 託管靜態前端主頁 (public/index.html)
+// 動態託管 public 資料夾內的所有 HTML 頁面與資源
 // ==========================================
 try {
-    app.use(express.static(path.join(__dirname, 'public')));
+    // 讓 Express 自動處理所有靜態檔案 (app.js, widget.js, css, 圖片等)
+    app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 
+    // 根目錄明確對應到 index.html
     app.get('/', (req, res) => {
         res.sendFile(path.join(__dirname, 'public', 'index.html'));
     });
