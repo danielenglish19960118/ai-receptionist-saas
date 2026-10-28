@@ -29,10 +29,18 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
                 })
             });
 
-            const result = await response.json();
+            // 先以文字讀取回應，避免直接 JSON.parse 失敗
+            const responseText = await response.text();
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                result = responseText; // 如果不是 JSON 格式，就當作純文字處理
+            }
+
             console.log("Lead synced successfully:", result);
             
-            // Optional: Notification or badge update
+            // 成功回饋
             chrome.action.setBadgeText({ text: "OK" });
             setTimeout(() => chrome.action.setBadgeText({ text: "" }), 2000);
 
