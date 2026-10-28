@@ -11,12 +11,12 @@ const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 初始化 Supabase
+// Initialize Supabase
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 const supabase = (supabaseUrl && supabaseAnonKey) ? createClient(supabaseUrl, supabaseAnonKey) : null;
 
-// 初始化 Google Gemini AI (@google/genai)
+// Initialize Google Gemini AI (@google/genai)
 const ai = new GoogleGenAI();
 
 app.use(express.json());
@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 });
 
 // ==========================================
-// 🧠 核心 AI 櫃檯大腦 (Gemini 2.5 Flash)
+// 🧠 Core AI Concierge Brain (Gemini 2.5 Flash)
 // ==========================================
 async function generateAiConciergeReply(userMessage, channelName) {
     try {
@@ -45,19 +45,19 @@ async function generateAiConciergeReply(userMessage, channelName) {
                 {
                     role: 'user',
                     parts: [{ 
-                        text: `你現在是 Turtle English 英語教育中心與 Garfield AI Executive 的專業 Sovereign AI Concierge。請用親切、專業、高效率的雙語口吻回覆來自 [${channelName}] 的高淨值客戶詢問。客戶訊息：${userMessage}` 
+                        text: `You are the professional Sovereign AI Concierge for Turtle English and Garfield AI Executive. Please reply to the high-net-worth inquiry from [${channelName}] in a polite, professional, and efficient bilingual tone. User inquiry: ${userMessage}` 
                     }]
                 }
             ]
         });
-        return response.text || "感謝您的諮詢！我們是 Turtle English 與 Garfield AI 團隊，會盡快由專人為您服務。";
+        return response.text || "Thank you for your inquiry! We are the Turtle English and Garfield AI team, and our specialist will connect with you shortly.";
     } catch (aiErr) {
         console.error('Gemini AI Error:', aiErr);
-        return "感謝您的諮詢！系統已收到您的訊息，我們將有專人盡快與您聯繫。";
+        return "Thank you for your inquiry! Your message has been received, and our team will get back to you shortly.";
     }
 }
 
-// 統一 Slack Block Kit 廣播工具
+// Unified Slack Block Kit Alert Tool
 async function sendSlackVipAlert(channelName, sender, text, aiReply) {
     const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
     if (!slackWebhookUrl) return;
@@ -78,7 +78,7 @@ async function sendSlackVipAlert(channelName, sender, text, aiReply) {
 // 🌐 8-CHANNEL DISTRIBUTION MATRIX FULL HANDLERS
 // ==========================================
 
-// Channel 1: Google Chrome Extension - 瀏覽器側邊欄/頁面即時抓取
+// Channel 1: Google Chrome Extension
 app.post('/api/extension/lead', async (req, res) => {
     const { url, selectedText, userEmail } = req.body;
     if (supabase) {
@@ -92,15 +92,15 @@ app.post('/api/extension/lead', async (req, res) => {
     return res.json({ status: 'SUCCESS', channel: 'Google Chrome Extension', synced: true });
 });
 
-// Channel 2: Slack App Directory - Block Kit VIP 互動事件
+// Channel 2: Slack App Directory
 app.post('/api/slack/interactive', async (req, res) => {
     return res.status(200).json({ response_type: 'in_channel', text: '✅ [Garfield Executive] Lead status updated by team action.' });
 });
 
-// Channel 3: Discord App Directory - Slash Commands (/leads, /status)
+// Channel 3: Discord App Directory
 app.post('/api/discord/interaction', async (req, res) => {
-    const { type, data } = req.body;
-    if (type === 1) return res.json({ type: 1 }); // Discord PING Verification
+    const { type } = req.body;
+    if (type === 1) return res.json({ type: 1 });
     
     return res.json({ 
         type: 4, 
@@ -108,7 +108,7 @@ app.post('/api/discord/interaction', async (req, res) => {
     });
 });
 
-// Channel 4: Raycast / Alfred Launcher - 快速鍵低延遲 API 查詢
+// Channel 4: Raycast / Alfred Launcher
 app.get('/api/launcher/leads', async (req, res) => {
     if (supabase) {
         const { data } = await supabase.from('leads').select('*').order('created_at', { ascending: false }).limit(10);
@@ -118,7 +118,7 @@ app.get('/api/launcher/leads', async (req, res) => {
 });
 
 // Channel 5: Telegram / WhatsApp Gateway
-// 5a. Telegram Webhook
+// 5a. Telegram Webhook (Supports multiple path variations to prevent 404)
 async function sendTelegramMessage(chatId, messageText) {
     const token = process.env.TELEGRAM_BOT_TOKEN;
     if (!token) return;
@@ -131,7 +131,7 @@ async function sendTelegramMessage(chatId, messageText) {
     } catch (err) { console.error('Telegram Send Error:', err); }
 }
 
-app.post('/telegram-webhook', async (req, res) => {
+const handleTelegramUpdate = async (req, res) => {
     try {
         const update = req.body;
         const message = update?.message;
@@ -156,14 +156,17 @@ app.post('/telegram-webhook', async (req, res) => {
         }
         return res.status(200).json({ status: 'OK' });
     } catch (error) {
-        return res.status(500).json({ error: error.message });
+        console.error('Telegram Webhook Error:', error);
+        return res.status(200).json({ ok: true });
     }
-});
+};
+
+app.post(['/telegram-webhook', '/api/telegram-webhook', '/'], handleTelegramUpdate);
 
 // 5b. WhatsApp Webhook
 const WHATSAPP_VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || 'garfield-secure-token-2026';
 
-app.get('/whatsapp-webhook', (req, res) => {
+app.get(['/whatsapp-webhook', '/api/whatsapp-webhook'], (req, res) => {
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
@@ -187,7 +190,7 @@ async function sendWhatsAppMessage(recipientPhone, messageText) {
     } catch (err) { console.error('WhatsApp Send Error:', err); }
 }
 
-app.post('/whatsapp-webhook', async (req, res) => {
+app.post(['/whatsapp-webhook', '/api/whatsapp-webhook'], async (req, res) => {
     try {
         const body = req.body;
         if (body?.object === 'whatsapp_business_account') {
@@ -218,7 +221,7 @@ app.post('/whatsapp-webhook', async (req, res) => {
     }
 });
 
-// Channel 6: Desktop Tray App - macOS/Windows 選單列狀態與營收監控
+// Channel 6: Desktop Tray App
 app.get('/api/tray/status', (req, res) => {
     res.json({ 
         channel: 'Desktop Tray App',
@@ -233,7 +236,7 @@ app.get('/api/tray/status', (req, res) => {
     });
 });
 
-// Channel 7: Mobile App Companion - 行動推播與 Leads 資料存取
+// Channel 7: Mobile App Companion
 app.get('/api/mobile/leads', async (req, res) => {
     if (supabase) {
         const { data } = await supabase.from('leads').select('*').order('created_at', { ascending: false }).limit(20);
@@ -242,7 +245,7 @@ app.get('/api/mobile/leads', async (req, res) => {
     return res.json({ channel: 'Mobile Companion App', leads: [] });
 });
 
-// Channel 8: Notion Workspace Widget - Notion 看板雙向同步
+// Channel 8: Notion Workspace Widget
 app.post('/api/notion/sync', async (req, res) => {
     if (supabase) {
         const { data } = await supabase.from('leads').select('*').order('created_at', { ascending: false }).limit(50);
@@ -258,7 +261,7 @@ app.post('/api/notion/sync', async (req, res) => {
 });
 
 // ==========================================
-// 📁 靜態檔案與多頁面託管
+// 📁 Static Files & Multi-page Hosting
 // ==========================================
 const publicDir = fs.existsSync(path.join(__dirname, 'public')) 
     ? path.join(__dirname, 'public') 
