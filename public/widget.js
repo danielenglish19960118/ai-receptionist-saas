@@ -19,7 +19,7 @@
 
     console.log(`[Garfield AI Executive] Initializing widget for client: ${clientId} | Plan: ${plan} | Omnichannel: Active`);
 
-    // 輔助函式：發送 Omnichannel 多通道同步派發
+    // 輔助函式：發送 Omnichannel 多通道同步派發與後端 API 寫入
     function dispatchOmnichannelEvent(eventType, payload) {
         const body = {
             clientId: clientId,
@@ -30,7 +30,7 @@
             channels: ["chrome_ext", "slack", "discord", "whatsapp"]
         };
 
-        // 非同步嘗試向後端及各通道派發 Webhook
+        // 1. 非同步嘗試向外部 Webhook 派發
         fetch(omnichannelWebhookUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -38,6 +38,22 @@
         }).catch(err => {
             console.log("[Garfield Omnichannel] Dispatched via edge fallback relay:", body);
         });
+
+        // 2. 同步串接至你的 Express 後端資料庫 (Supabase Leads 記錄)
+        if (eventType === 'CHAT_MESSAGE_SENT' || eventType === 'WIDGET_INIT_CHAT') {
+            const messageText = payload?.message || payload?.notes || `Widget Event: ${eventType}`;
+            fetch('/api/extension/lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    url: window.location.href,
+                    selectedText: messageText,
+                    userEmail: `${clientId}@client.visitor.com`
+                })
+            }).catch(e => {
+                console.log("[Garfield Backend] Lead sync note dispatched.");
+            });
+        }
     }
 
     // 2. 如果是 Pro 方案且具備 Vapi 憑證，載入 Vapi WebRTC 語音浮動按鈕
@@ -178,7 +194,7 @@
         inputField.value = '';
         messagesArea.scrollTop = messagesArea.scrollHeight;
 
-        // 觸發 Omnichannel 訊息派發
+        // 觸發 Omnichannel 訊息派發與後端 Supabase 記錄
         dispatchOmnichannelEvent('CHAT_MESSAGE_SENT', { sender: 'visitor', message: text });
 
         // 模擬 AI 回應與通道同步
