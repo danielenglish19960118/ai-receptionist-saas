@@ -1,6 +1,6 @@
 /**
  * Garfield AI Executive - Unified Enterprise Master Router (api/index.js)
- * Consolidates all enterprise endpoints (WhatsApp, Telegram, AI Chat, Omnichannel) into a single Serverless Function.
+ * Consolidates all enterprise endpoints (WhatsApp, Telegram, AI Chat, Chrome Extension, Omnichannel) into a single Serverless Function.
  */
 
 import { createClient } from '@supabase/supabase-js';
@@ -183,7 +183,35 @@ app.post(['/api/telegram-webhook', '/telegram-webhook', '/api/index', '/index', 
 });
 
 // ==========================================
-// 3. AI Chat & Function Calling Handler (/api/chat)
+// 3. Chrome Extension Lead Capture Handler (/api/extension/lead)
+// ==========================================
+app.post(['/api/extension/lead', '/extension/lead'], async (req, res) => {
+    try {
+        const { url, selectedText, userEmail } = req.body;
+        console.log(`[Chrome Extension Lead] URL: ${url}, Text: ${selectedText}, Email: ${userEmail}`);
+
+        if (supabase) {
+            await supabase.from('leads').insert([{
+                client_id: 'turtle_english',
+                name: `Extension Lead (${userEmail || 'anonymous'})`,
+                email: userEmail || null,
+                notes: `Source URL: ${url} | Selected Text: ${selectedText}`
+            }]).catch(err => console.error('Supabase Extension Lead Insert Warning:', err.message));
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Extension lead captured and saved successfully",
+            data: { url, selectedText }
+        });
+    } catch (error) {
+        console.error('Extension Lead API Error:', error);
+        return res.status(500).json({ success: false, error: 'Internal server error processing extension lead.' });
+    }
+});
+
+// ==========================================
+// 4. AI Chat & Function Calling Handler (/api/chat)
 // ==========================================
 const chatTools = [
     {
@@ -268,14 +296,14 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // ==========================================
-// 4. Omnichannel Router (/api/omnichannel)
+// 5. Omnichannel Router (/api/omnichannel)
 // ==========================================
 app.get('/api/omnichannel', (req, res) => {
     return res.status(200).json({ success: true, status: 'Omnichannel router active', activeGateways: 8 });
 });
 
 // ==========================================
-// 5. Fallback Catch-All Route
+// 6. Fallback Catch-All Route
 // ==========================================
 app.all('*', (req, res) => {
     return res.status(200).send('Garfield Executive API Engine Online');
