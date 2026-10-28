@@ -77,7 +77,7 @@ app.post(['/api/whatsapp-webhook', '/whatsapp-webhook'], async (req, res) => {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            text: `💬 *WhatsApp High-Net-Worth Inquiry*\n*From:* \`${senderPhone}\`\n*Message:* ${messageText}`
+                            text: `*WhatsApp High-Net-Worth Inquiry*\n*From:* \`${senderPhone}\`\n*Message:* ${messageText}`
                         })
                     }).catch(err => console.error('Slack WhatsApp Notification Error:', err));
                 }
@@ -139,7 +139,7 @@ app.post(['/api/telegram-webhook', '/telegram-webhook', '/api/index', '/index', 
 
         let replyText = "";
         if (userText.startsWith('/start')) {
-            replyText = `👑 Welcome to Garfield AI Executive Bot!\n\nWe provide sub-150ms institutional deal flow and 8-channel omnichannel distribution. Please input your enterprise requirements below.`;
+            replyText = `Welcome to Garfield AI Executive Bot!\n\nWe provide sub-150ms institutional deal flow and 8-channel omnichannel distribution. Please input your enterprise requirements below.`;
         } else {
             const geminiApiKey = process.env.GEMINI_API_KEY;
             if (geminiApiKey) {
@@ -154,12 +154,12 @@ app.post(['/api/telegram-webhook', '/telegram-webhook', '/api/index', '/index', 
                         })
                     });
                     const geminiData = await geminiRes.json();
-                    replyText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || "👑 Garfield AI Executive has received your inquiry. Our executive concierge will connect shortly.";
+                    replyText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || "Garfield AI Executive has received your inquiry. Our executive concierge will connect shortly.";
                 } catch (e) {
-                    replyText = "👑 Garfield AI Executive has received your inquiry.";
+                    replyText = "Garfield AI Executive has received your inquiry.";
                 }
             } else {
-                replyText = `👑 Garfield AI Executive received your message: "${userText}"`;
+                replyText = `Garfield AI Executive received your message: "${userText}"`;
             }
         }
 
