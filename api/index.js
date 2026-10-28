@@ -1,12 +1,10 @@
 /**
  * Garfield AI Executive - Unified Enterprise Master Router (api/index.js)
- * Consolidates all enterprise endpoints into a single Serverless Function.
+ * Consolidates all enterprise endpoints (WhatsApp, Telegram, AI Chat, Omnichannel) into a single Serverless Function.
  */
 
 import { createClient } from '@supabase/supabase-js';
-import { verifyKey } from 'discord-interactions';
 import express from 'express';
-import crypto from 'crypto';
 
 const app = express();
 
@@ -41,7 +39,6 @@ app.get(['/api/whatsapp-webhook', '/whatsapp-webhook'], (req, res) => {
 
     console.log(`[WhatsApp Webhook GET] Mode: ${mode}, Token: ${token}, Challenge: ${challenge}`);
 
-    // 強制回傳 200 OK 與 text/plain 格式的純文字 challenge
     if (mode === 'subscribe' || challenge) {
         res.setHeader('Content-Type', 'text/plain');
         return res.status(200).send(String(challenge));
@@ -65,7 +62,6 @@ app.post(['/api/whatsapp-webhook', '/whatsapp-webhook'], async (req, res) => {
 
                 console.log(`Received WhatsApp message from ${senderPhone}: ${messageText}`);
 
-                // 同步記錄到 Supabase
                 if (supabase) {
                     await supabase.from('leads').insert([{
                         client_id: 'turtle_english',
@@ -75,7 +71,6 @@ app.post(['/api/whatsapp-webhook', '/whatsapp-webhook'], async (req, res) => {
                     }]).catch(err => console.error('Supabase WhatsApp Lead Insert Warning:', err.message));
                 }
 
-                // 同步發送告警到 Slack
                 const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
                 if (slackWebhookUrl) {
                     fetch(slackWebhookUrl, {
@@ -87,7 +82,6 @@ app.post(['/api/whatsapp-webhook', '/whatsapp-webhook'], async (req, res) => {
                     }).catch(err => console.error('Slack WhatsApp Notification Error:', err));
                 }
 
-                // 透過 WhatsApp 官方 API 自動回覆客戶
                 const token = process.env.WHATSAPP_TOKEN;
                 const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
 
@@ -119,7 +113,81 @@ app.post(['/api/whatsapp-webhook', '/whatsapp-webhook'], async (req, res) => {
 });
 
 // ==========================================
-// 2. AI Chat & Function Calling Handler (/api/chat)
+// 2. Telegram Webhook Handler (/api/telegram-webhook)
+// ==========================================
+app.post(['/api/telegram-webhook', '/telegram-webhook'], async (req, res) => {
+    try {
+        const update = req.body;
+        if (!update || !update.message) {
+            return res.status(200).json({ ok: true });
+        }
+
+        const message = update.message;
+        const chatId = message.chat.id;
+        const userText = message.text || '[Non-text message]';
+        const userName = message.from?.first_name || message.from?.username || 'Telegram User';
+
+        console.log(`Received Telegram message from ${userName} (${chatId}): ${userText}`);
+
+        // 同步記錄到 Supabase
+        if (supabase) {
+            await supabase.from('leads').insert([{
+                client_id: 'turtle_english',
+                name: `Telegram Lead (${userName})`,
+                notes: `ChatId: ${chatId} | Inquiry: ${userText}`
+            }]).catch(err => console.error('Supabase Telegram Lead Insert Warning:', err.message));
+        }
+
+        // 決定回覆內容 (如果是 /start 指令給予專屬歡迎詞，其他交由 Gemini 智慧處理)
+        let replyText = "";
+        if (userText.startsWith('/start')) {
+            replyText = `👑 歡迎使用 Garfield AI Executive 機器人！\n\n我們提供 sub-150ms 的高階閉環對接與 8 頻道全渠道分發。請直接輸入您的企業需求，我們將為您即時處理。`;
+        } else {
+            // 呼叫 Gemini AI 產生智慧回應
+            const geminiApiKey = process.env.GEMINI_API_KEY;
+            if (geminiApiKey) {
+                try {
+                    const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`;
+                    const geminiRes = await fetch(geminiEndpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            system_instruction: { parts: [{ text: "You are Garfield AI Executive VIP concierge on Telegram. Professional, efficient, and sophisticated." }] },
+                            contents: [{ role: 'user', parts: [{ text: userText }] }]
+                        })
+                    });
+                    const geminiData = await geminiRes.json();
+                    replyText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || "👑 Garfield AI Executive 已收到您的諮詢，我們的專屬執行長管家將盡速與您聯繫。";
+                } catch (e) {
+                    replyText = "👑 Garfield AI Executive 已收到您的諮詢。";
+                }
+            } else {
+                replyText = `👑 Garfield AI Executive 收到您的訊息：「${userText}」`;
+            }
+        }
+
+        // 透過 Telegram Bot API 回傳訊息
+        const botToken = process.env.TELEGRAM_BOT_TOKEN;
+        if (botToken) {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: replyText
+                })
+            }).catch(err => console.error('Telegram SendMessage API Error:', err));
+        }
+
+        return res.status(200).json({ ok: true });
+    } catch (error) {
+        console.error('Telegram Webhook Internal Error:', error);
+        return res.status(200).json({ ok: true }); // 避免 Telegram 重複發送失敗的 webhook
+    }
+});
+
+// ==========================================
+// 3. AI Chat & Function Calling Handler (/api/chat)
 // ==========================================
 const chatTools = [
     {
@@ -204,14 +272,14 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // ==========================================
-// 3. Omnichannel Router (/api/omnichannel)
+// 4. Omnichannel Router (/api/omnichannel)
 // ==========================================
 app.get('/api/omnichannel', (req, res) => {
     return res.status(200).json({ success: true, status: 'Omnichannel router active', activeGateways: 8 });
 });
 
 // ==========================================
-// 4. Fallback Catch-All Route
+// 5. Fallback Catch-All Route
 // ==========================================
 app.all('*', (req, res) => {
     return res.status(200).send('Garfield Executive API Engine Online');
