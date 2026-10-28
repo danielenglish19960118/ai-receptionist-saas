@@ -86,7 +86,7 @@ app.post(['/api/whatsapp-webhook', '/whatsapp-webhook'], async (req, res) => {
                 const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
 
                 if (token && phoneNumberId) {
-                    const replyText = `您好，我是 Garfield AI Executive 執行長管家。已收到您的諮詢：「${messageText}」。我們的專業團隊將立即為您處理。`;
+                    const replyText = `Hello, I am the Garfield AI Executive Concierge. We have received your inquiry: "${messageText}". Our professional team will process it immediately.`;
                     await fetch(`https://graph.facebook.com/v17.0/${phoneNumberId}/messages`, {
                         method: 'POST',
                         headers: {
@@ -113,9 +113,9 @@ app.post(['/api/whatsapp-webhook', '/whatsapp-webhook'], async (req, res) => {
 });
 
 // ==========================================
-// 2. Telegram Webhook Handler (/api/telegram-webhook)
+// 2. Telegram Webhook Handler (Multi-route support to prevent 404)
 // ==========================================
-app.post(['/api/telegram-webhook', '/telegram-webhook'], async (req, res) => {
+app.post(['/api/telegram-webhook', '/telegram-webhook', '/api/index', '/index', '/'], async (req, res) => {
     try {
         const update = req.body;
         if (!update || !update.message) {
@@ -129,7 +129,6 @@ app.post(['/api/telegram-webhook', '/telegram-webhook'], async (req, res) => {
 
         console.log(`Received Telegram message from ${userName} (${chatId}): ${userText}`);
 
-        // 同步記錄到 Supabase
         if (supabase) {
             await supabase.from('leads').insert([{
                 client_id: 'turtle_english',
@@ -138,12 +137,10 @@ app.post(['/api/telegram-webhook', '/telegram-webhook'], async (req, res) => {
             }]).catch(err => console.error('Supabase Telegram Lead Insert Warning:', err.message));
         }
 
-        // 決定回覆內容 (如果是 /start 指令給予專屬歡迎詞，其他交由 Gemini 智慧處理)
         let replyText = "";
         if (userText.startsWith('/start')) {
-            replyText = `👑 歡迎使用 Garfield AI Executive 機器人！\n\n我們提供 sub-150ms 的高階閉環對接與 8 頻道全渠道分發。請直接輸入您的企業需求，我們將為您即時處理。`;
+            replyText = `👑 Welcome to Garfield AI Executive Bot!\n\nWe provide sub-150ms institutional deal flow and 8-channel omnichannel distribution. Please input your enterprise requirements below.`;
         } else {
-            // 呼叫 Gemini AI 產生智慧回應
             const geminiApiKey = process.env.GEMINI_API_KEY;
             if (geminiApiKey) {
                 try {
@@ -157,16 +154,15 @@ app.post(['/api/telegram-webhook', '/telegram-webhook'], async (req, res) => {
                         })
                     });
                     const geminiData = await geminiRes.json();
-                    replyText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || "👑 Garfield AI Executive 已收到您的諮詢，我們的專屬執行長管家將盡速與您聯繫。";
+                    replyText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || "👑 Garfield AI Executive has received your inquiry. Our executive concierge will connect shortly.";
                 } catch (e) {
-                    replyText = "👑 Garfield AI Executive 已收到您的諮詢。";
+                    replyText = "👑 Garfield AI Executive has received your inquiry.";
                 }
             } else {
-                replyText = `👑 Garfield AI Executive 收到您的訊息：「${userText}」`;
+                replyText = `👑 Garfield AI Executive received your message: "${userText}"`;
             }
         }
 
-        // 透過 Telegram Bot API 回傳訊息
         const botToken = process.env.TELEGRAM_BOT_TOKEN;
         if (botToken) {
             await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -182,7 +178,7 @@ app.post(['/api/telegram-webhook', '/telegram-webhook'], async (req, res) => {
         return res.status(200).json({ ok: true });
     } catch (error) {
         console.error('Telegram Webhook Internal Error:', error);
-        return res.status(200).json({ ok: true }); // 避免 Telegram 重複發送失敗的 webhook
+        return res.status(200).json({ ok: true });
     }
 });
 
