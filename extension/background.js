@@ -40,9 +40,12 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
             console.log("Lead synced successfully:", result);
             
-            // 成功回饋
-            chrome.action.setBadgeText({ text: "OK" });
-            setTimeout(() => chrome.action.setBadgeText({ text: "" }), 2000);
+            // 成功回饋（相容性檢查 + 安全保護）
+            const actionApi = chrome.action || chrome.browserAction;
+            if (actionApi && typeof actionApi.setBadgeText === 'function') {
+                actionApi.setBadgeText({ text: "OK" });
+                setTimeout(() => actionApi.setBadgeText({ text: "" }), 2000);
+            }
 
         } catch (error) {
             console.error("Failed to sync lead to backend:", error);
