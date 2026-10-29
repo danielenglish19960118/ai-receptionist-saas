@@ -214,11 +214,11 @@ app.post(['/api/extension/lead', '/extension/lead'], async (req, res) => {
 // 4. Gumroad Webhook Handler & Client Activation
 // ==========================================
 
-// A. Gumroad Ping / Webhook Receiver
-app.post(['/api/gumroad-webhook', '/gumroad-webhook'], async (req, res) => {
+// A. Gumroad Ping / Webhook Receiver (Supports multiple path variations)
+app.post(['/api/gumroad-webhook', '/api/webhooks/gumroad', '/gumroad-webhook'], async (req, res) => {
     try {
         const saleData = req.body;
-        const buyerEmail = saleData.email || saleData.purchaser_email;
+        const buyerEmail = saleData.email || saleData.purchaser_email || saleData?.payload?.email;
 
         if (!buyerEmail) {
             return res.status(400).json({ error: 'No email found in webhook data' });
@@ -227,12 +227,17 @@ app.post(['/api/gumroad-webhook', '/gumroad-webhook'], async (req, res) => {
         console.log(`[Gumroad Webhook] Sale received for email: ${buyerEmail}`);
 
         if (supabase) {
-            await supabase.from('paid_customers').upsert([
+            const { error } = await supabase.from('paid_customers').upsert([
                 { email: buyerEmail, status: 'paid', updated_at: new Date() }
             ], { onConflict: 'email' });
+
+            if (error) {
+                console.error('Supabase Paid Customer Upsert Error:', error);
+                return res.status(500).json({ error: error.message });
+            }
         }
 
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ success: true, email: buyerEmail });
     } catch (error) {
         console.error('Gumroad Webhook Error:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
