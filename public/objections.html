@@ -65,6 +65,18 @@
             <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">06. 10,000+ Modules</a>
         </div>
 
+        <!-- 🎯 全站統一標準化的黃金標題與標籤 Header 區塊 -->
+        <div class="space-y-3 text-center max-w-3xl mx-auto pt-2">
+            <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full shadow-sm">
+                <i class="fa-solid fa-crown text-amber-400 text-xs"></i>
+                <span class="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider">GARFIELD EXECUTIVE AI • 300% CLOSING VELOCITY ENGINE</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">Absolute Revenue Conversion & Sub-130ms Voice Automation</h1>
+            <p class="text-xs md:text-sm text-slate-300 font-mono leading-relaxed">
+                Deploy autonomous AI executive receptionists across all 8 enterprise channels, neutralize high-stakes buyer resistance instantly, and lock in your growth with a 100% third-party escrow guarantee.
+            </p>
+        </div>
+
         <!-- 🌐 8-Channel Omnichannel Status Panel (Click any channel to open Sub-Page Modal) -->
         <div class="bg-garfield-panel p-6 md:p-8 rounded-3xl border border-amber-500/30 space-y-4 shadow-xl font-mono text-xs">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/10 pb-4 gap-2">
@@ -120,7 +132,7 @@
                         <i class="fa-solid fa-shield-cat text-amber-400 text-xs"></i>
                         <span class="text-xs font-mono font-bold text-amber-300 uppercase">Absolute Deal Reversal & Sub-Page Engine</span>
                     </div>
-                    <h1 class="text-3xl md:text-4xl font-black text-white">AI Objection Destroyer & Sub-Page Generator</h1>
+                    <h2 class="text-2xl md:text-3xl font-black text-white">AI Objection Destroyer & Sub-Page Generator</h2>
                     <p class="text-xs md:text-sm text-slate-300 font-mono mt-1 max-w-2xl">
                         Click any executive resistance pattern below to instantly open its dedicated interactive Sub-Page Terminal.
                     </p>
@@ -167,11 +179,11 @@
                     <span class="text-amber-400 font-bold uppercase tracking-wider flex items-center gap-2">
                         <i class="fa-solid fa-terminal text-xs"></i> SUB-PAGE ROUTING CONSOLE
                     </span>
-                    <span class="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 text-[10px]">ALL SUB-PAGES READY</span>
+                    <span class="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 text-[10px] font-bold">ALL SUB-PAGES READY</span>
                 </div>
                 <div class="space-y-4 text-slate-300 leading-relaxed text-xs">
                     <p class="bg-black/70 p-5 rounded-2xl border border-white/10">
-                        Click any of the 4 executive resistance patterns on the left or any of the 8 channels at the top to instantly trigger a dedicated **Sub-Page Modal Terminal** with live Vapi speech synthesis scripts and webhook telemetry.
+                        Click any of the 4 executive resistance patterns on the left or any of the 8 channels at the top to instantly trigger a dedicated <strong>Sub-Page Modal Terminal</strong> with live Vapi speech synthesis scripts and webhook telemetry.
                     </p>
                 </div>
             </div>
@@ -199,7 +211,7 @@
     </main>
 
     <!-- 🌐 Dynamic Sub-Page Modal Terminal -->
-    <div id="subPageModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div id="subPageModal" onclick="closeSubPageModalOnOverlay(event)" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
         <div class="bg-garfield-panel border border-amber-500/50 w-full max-w-2xl rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl font-mono text-xs relative animate-in fade-in zoom-in duration-200">
             <button onclick="closeSubPageModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-lg font-bold cursor-pointer">
                 <i class="fa-solid fa-xmark"></i>
@@ -286,8 +298,11 @@
             document.getElementById('modalSubPageCategory').innerText = data.category;
             document.getElementById('modalSubPageScript').innerText = data.script;
             document.getElementById('modalSandboxLink').href = `trial.html?objection=${key}`;
-            document.getElementById('subPageModal').classList.remove('hidden');
-            document.getElementById('subPageModal').classList.add('flex');
+            const modal = document.getElementById('subPageModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
         }
 
         function openChannelSubPage(channelId) {
@@ -297,14 +312,31 @@
             document.getElementById('modalSubPageCategory').innerText = data.category;
             document.getElementById('modalSubPageScript').innerText = data.script;
             document.getElementById('modalSandboxLink').href = `vip.html?channel=${channelId}`;
-            document.getElementById('subPageModal').classList.remove('hidden');
-            document.getElementById('subPageModal').classList.add('flex');
+            const modal = document.getElementById('subPageModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
         }
 
         function closeSubPageModal() {
-            document.getElementById('subPageModal').classList.add('hidden');
-            document.getElementById('subPageModal').classList.remove('flex');
+            const modal = document.getElementById('subPageModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
         }
+
+        function closeSubPageModalOnOverlay(e) {
+            if (e.target.id === 'subPageModal') {
+                closeSubPageModal();
+            }
+        }
+
+        // 支援 Esc 鍵關閉彈窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeSubPageModal();
+        });
 
         function renderObjectionNodes() {
             const grid = document.getElementById('objectionNodesGrid');
