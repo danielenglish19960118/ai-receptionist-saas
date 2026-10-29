@@ -8,10 +8,10 @@ import express from 'express';
 
 const app = express();
 
-// Initialize Supabase Client
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
-const supabase = (supabaseUrl && supabaseAnonKey) ? createClient(supabaseUrl, supabaseAnonKey) : null;
+// Initialize Supabase Client (優先使用 SUPABASE_SERVICE_ROLE_KEY 繞過 RLS 限制)
+const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 // Middleware for general JSON parsing
 app.use(express.json());
@@ -214,13 +214,14 @@ app.post(['/api/extension/lead', '/extension/lead'], async (req, res) => {
 // 4. Gumroad Webhook Handler & Client Activation
 // ==========================================
 
-// A. Gumroad Ping / Webhook Receiver (Supports multiple path variations)
+// A. Gumroad Ping / Webhook Receiver (Supports multiple path variations and robust email extraction)
 app.post(['/api/gumroad-webhook', '/api/webhooks/gumroad', '/gumroad-webhook'], async (req, res) => {
     try {
-        const saleData = req.body;
+        const saleData = req.body || {};
         const buyerEmail = saleData.email || saleData.purchaser_email || saleData?.payload?.email;
 
         if (!buyerEmail) {
+            console.error('[Gumroad Webhook] Missing email in payload:', req.body);
             return res.status(400).json({ error: 'No email found in webhook data' });
         }
 
