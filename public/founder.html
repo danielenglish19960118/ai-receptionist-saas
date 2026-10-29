@@ -83,14 +83,14 @@
             <blockquote class="text-slate-100 text-base md:text-xl font-bold italic border-l-4 border-amber-400 pl-6 py-2 leading-relaxed">
                 "If our AI voice concierges do not increase your qualified deal closing speed by at least 300% within 30 days, you receive a 100% full escrow refund—no questions asked, no bureaucratic delay."
             </blockquote>
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-t border-white/10 pt-4 mt-6 gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-t border-white/10 pt-4 mt-6 gap-4 font-mono">
                 <div>
                     <span class="text-sm font-extrabold text-white block">Director Yang Cheng-han (楊承翰)</span>
                     <span class="text-xs text-amber-400 font-mono">Founder & Managing Director, Garfield Enterprise Inc.</span>
                 </div>
-                <div class="font-mono text-xs text-right">
-                    <span class="text-slate-400 block">Verification Status</span>
-                    <span class="text-emerald-400 font-bold">✔ Digitally Signed & Notarized</span>
+                <div class="text-right">
+                    <span class="text-slate-400 block text-xs">Verification Status</span>
+                    <span class="text-emerald-400 font-bold text-xs">✔ Digitally Signed & Notarized</span>
                 </div>
             </div>
         </div>
@@ -200,7 +200,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div class="lg:col-span-5 bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6">
                 <h3 class="font-bold text-white text-base border-b border-white/10 pb-3">Verify Digital Guarantee Hash</h3>
-                <form onsubmit="verifyFounderHash(event)" class="space-y-4">
+                <form onsubmit="verifyFounderHash(event)" class="space-y-4 font-mono text-xs">
                     <div>
                         <label class="text-xs font-bold text-slate-300 block mb-1">Enter Contract Serial Number</label>
                         <input type="text" id="contractSerial" required value="GARFIELD-EXEC-2026-VAL" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none font-mono" />
@@ -229,7 +229,7 @@
     </main>
 
     <!-- 🌐 Dynamic 8-Channel Omnichannel Sub-Page Modal Terminal -->
-    <div id="channelSubPageModal" style="display: none;" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md items-center justify-center p-4">
+    <div id="channelSubPageModal" onclick="closeModalOnOverlay(event)" style="display: none;" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md items-center justify-center p-4">
         <div class="bg-garfield-panel border border-amber-500/50 w-full max-w-2xl rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl font-mono text-xs relative animate-in fade-in zoom-in duration-200">
             <button onclick="closeChannelSubPageModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-lg font-bold cursor-pointer">
                 <i class="fa-solid fa-xmark"></i>
@@ -268,7 +268,7 @@
         © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a> | <a href="terms.html" class="underline ml-2 cursor-pointer">Terms of Service</a>
     </footer>
 
-    <!-- JS Core Libraries -->
+    <!-- JS Core Libraries & Scripts -->
     <script src="script.js"></script>
     <script>
         const founderChannelSubPages = {
@@ -303,13 +303,24 @@
             }
         }
 
+        function closeModalOnOverlay(e) {
+            if (e.target.id === 'channelSubPageModal') {
+                closeChannelSubPageModal();
+            }
+        }
+
+        // 支援 Esc 鍵關閉彈窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeChannelSubPageModal();
+        });
+
         // Digital Signature Hash Verification Simulator with Omnichannel Dispatch
         function verifyFounderHash(e) {
             e.preventDefault();
             const serial = document.getElementById('contractSerial').value;
             const output = document.getElementById('hashOutput');
             
-            output.innerHTML = `<div class="text-amber-400 animate-pulse font-mono text-xs">🔍 Querying cryptographic audit log and broadcasting across Slack/Discord for ${serial}...</div>`;
+            output.innerHTML = `<div class="text-amber-400 animate-pulse font-mono text-xs py-6 text-center">🔍 Querying cryptographic audit log and broadcasting across Slack/Discord for ${serial}...</div>`;
             
             setTimeout(() => {
                 output.innerHTML = `
