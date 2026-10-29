@@ -156,7 +156,7 @@
                     <span>Simulate Guaranteed Vault Lock</span>
                     <span class="text-[10px] text-emerald-400 font-mono font-bold">Zero Risk</span>
                 </h3>
-                <form onsubmit="simulateEscrowLock(event)" class="space-y-4">
+                <form onsubmit="simulateEscrowLock(event)" class="space-y-4 font-mono text-xs">
                     <div>
                         <label class="text-xs font-bold text-slate-300 block mb-1">Select Enterprise Tier</label>
                         <select id="escrowTier" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none cursor-pointer">
@@ -239,7 +239,7 @@
     </main>
 
     <!-- 🌐 Dynamic 8-Channel Omnichannel Sub-Page Modal Terminal -->
-    <div id="channelSubPageModal" style="display: none;" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md items-center justify-center p-4">
+    <div id="channelSubPageModal" onclick="closeModalOnOverlay(event)" style="display: none;" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md items-center justify-center p-4">
         <div class="bg-garfield-panel border border-amber-500/50 w-full max-w-2xl rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl font-mono text-xs relative animate-in fade-in zoom-in duration-200">
             <button onclick="closeChannelSubPageModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-lg font-bold cursor-pointer">
                 <i class="fa-solid fa-xmark"></i>
@@ -278,7 +278,7 @@
         © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a> | <a href="terms.html" class="underline ml-2 cursor-pointer">Terms of Service</a>
     </footer>
 
-    <!-- JS Core Libraries -->
+    <!-- JS Core Libraries & Scripts -->
     <script src="script.js"></script>
     <script>
         const escrowChannelSubPages = {
@@ -313,6 +313,17 @@
             }
         }
 
+        function closeModalOnOverlay(e) {
+            if (e.target.id === 'channelSubPageModal') {
+                closeChannelSubPageModal();
+            }
+        }
+
+        // 支援 Esc 鍵關閉彈窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeChannelSubPageModal();
+        });
+
         // Escrow Lock Simulator Function
         function simulateEscrowLock(e) {
             e.preventDefault();
@@ -321,10 +332,11 @@
             const badge = document.getElementById('escrowBadge');
             
             badge.innerText = "Simulating Lock...";
-            results.innerHTML = `<div class="text-amber-400 animate-pulse">🔒 Securing third-party escrow vault & generating compliance certificate...</div>`;
+            results.innerHTML = `<div class="text-amber-400 animate-pulse py-8 text-center">🔒 Securing third-party escrow vault & generating compliance certificate...</div>`;
             
             setTimeout(() => {
                 badge.innerText = "Verified Locked";
+                const randomHash = '0x' + Math.random().toString(16).substring(2, 10) + '...' + Math.random().toString(16).substring(2, 6);
                 results.innerHTML = `
                     <div class="bg-black/90 p-5 rounded-xl border border-amber-500/40 space-y-3">
                         <div class="flex justify-between items-center border-b border-white/10 pb-2">
@@ -334,7 +346,7 @@
                         <div class="text-slate-200">Selected Tier: <strong class="text-white">${tier === 'annual' ? '$4,997 USD (Annual Suite)' : '$15,000 USD (Enterprise Custom)'}</strong></div>
                         <div class="text-slate-300">Refund Lock Window: <strong class="text-emerald-400">30 Full Business Days</strong></div>
                         <div class="text-slate-300">Escrow Agent: <strong class="text-amber-300">Stripe Vault & Escrow.com Dual-Sign</strong></div>
-                        <div class="text-slate-400 text-[10px] pt-2 border-t border-white/10">Certificate Hash: 0x9f8e7d...a1b2c3d4 (Ready for Deployment)</div>
+                        <div class="text-slate-400 text-[10px] pt-2 border-t border-white/10">Certificate Hash: ${randomHash} (Ready for Deployment)</div>
                     </div>
                 `;
             }, 800);
