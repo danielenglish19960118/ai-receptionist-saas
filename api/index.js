@@ -1,6 +1,6 @@
 /**
  * Garfield AI Executive - Unified Enterprise Master Router (api/index.js)
- * Consolidates all enterprise endpoints (WhatsApp, Telegram, AI Chat, Chrome Extension, Omnichannel) into a single Serverless Function.
+ * Consolidates all enterprise endpoints (WhatsApp, Telegram, AI Chat, Chrome Extension, Omnichannel, Gumroad Payment & Activation) into a single Serverless Function.
  */
 
 import { createClient } from '@supabase/supabase-js';
@@ -211,7 +211,90 @@ app.post(['/api/extension/lead', '/extension/lead'], async (req, res) => {
 });
 
 // ==========================================
-// 4. AI Chat & Function Calling Handler (/api/chat)
+// 4. Gumroad Webhook Handler & Client Activation
+// ==========================================
+
+// A. Gumroad Ping / Webhook Receiver
+app.post(['/api/gumroad-webhook', '/gumroad-webhook'], async (req, res) => {
+    try {
+        const saleData = req.body;
+        const buyerEmail = saleData.email || saleData.purchaser_email;
+
+        if (!buyerEmail) {
+            return res.status(400).json({ error: 'No email found in webhook data' });
+        }
+
+        console.log(`[Gumroad Webhook] Sale received for email: ${buyerEmail}`);
+
+        if (supabase) {
+            await supabase.from('paid_customers').upsert([
+                { email: buyerEmail, status: 'paid', updated_at: new Date() }
+            ], { onConflict: 'email' });
+        }
+
+        return res.status(200).json({ success: true });
+    } catch (error) {
+        console.error('Gumroad Webhook Error:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// B. Client Self-Service Activation & Notion Binding
+app.post(['/api/activate-client', '/activate-client'], async (req, res) => {
+    try {
+        const { email, notionDatabaseId } = req.body;
+
+        if (!email || !notionDatabaseId) {
+            return res.status(400).json({ success: false, error: 'Email and Notion Database ID are required.' });
+        }
+
+        if (supabase) {
+            const { data: paidUser, error: checkError } = await supabase
+                .from('paid_customers')
+                .select('*')
+                .eq('email', email)
+                .single();
+
+            if (checkError || !paidUser) {
+                return res.status(400).json({ 
+                    success: false, 
+                    error: 'No payment record found for this email. Please ensure you have completed the purchase on Gumroad.' 
+                });
+            }
+
+            const clientKey = 'rk_live_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+            const { error: insertError } = await supabase.from('client_configs').upsert([
+                {
+                    email: email,
+                    client_key: clientKey,
+                    notion_database_id: notionDatabaseId,
+                    status: 'active',
+                    created_at: new Date()
+                }
+            ], { onConflict: 'email' });
+
+            if (insertError) {
+                console.error('Client Config Insert Error:', insertError);
+                return res.status(500).json({ success: false, error: 'Failed to save client configuration.' });
+            }
+
+            return res.status(200).json({
+                success: true,
+                message: 'Activation successful!',
+                clientKey: clientKey
+            });
+        } else {
+            return res.status(500).json({ success: false, error: 'Database connection missing.' });
+        }
+    } catch (error) {
+        console.error('Activation API Error:', error);
+        return res.status(500).json({ success: false, error: 'Internal server error during activation.' });
+    }
+});
+
+// ==========================================
+// 5. AI Chat & Function Calling Handler (/api/chat)
 // ==========================================
 const chatTools = [
     {
@@ -296,14 +379,14 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // ==========================================
-// 5. Omnichannel Router (/api/omnichannel)
+// 6. Omnichannel Router (/api/omnichannel)
 // ==========================================
 app.get('/api/omnichannel', (req, res) => {
     return res.status(200).json({ success: true, status: 'Omnichannel router active', activeGateways: 8 });
 });
 
 // ==========================================
-// 6. Fallback Catch-All Route
+// 7. Fallback Catch-All Route
 // ==========================================
 app.all('*', (req, res) => {
     return res.status(200).send('Garfield Executive API Engine Online');
