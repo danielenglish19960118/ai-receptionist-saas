@@ -27,14 +27,14 @@
 <body class="min-h-screen flex flex-col selection:bg-garfield-vipgold selection:text-black">
     <!-- Top Urgency Bar -->
     <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
-        <span>🚨 OMNICHANNEL DISPATCH & 100% ESCROW REFUND GUARANTEE CLOSES IN <strong class="text-white bg-black px-2 py-0.5 rounded">03:42:18</strong></span>
-        <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline">Claim Your Guaranteed Slot Now ➔</a>
+        <span>🚨 OMNICHANNEL DISPATCH & 100% ESCROW REFUND GUARANTEE CLOSES IN <strong class="text-white bg-black px-2 py-0.5 rounded font-mono">03:42:18</strong></span>
+        <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline cursor-pointer">Claim Your Guaranteed Slot Now ➔</a>
     </div>
 
     <!-- Header -->
     <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3">
+            <a href="index.html" class="flex items-center gap-3 cursor-pointer">
                 <div class="bg-garfield-vipgold p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">👑</div>
                 <div>
                     <span class="font-bangers text-2xl tracking-wider text-white">GARFIELD <span class="gold-gradient-text">SANDBOX</span></span>
@@ -42,8 +42,8 @@
                 </div>
             </a>
             <div class="flex items-center gap-3">
-                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Engine Status: <strong class="text-emerald-400">112ms Ready</strong></span>
-                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase">Secure License ↗</a>
+                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Engine Status: <strong class="text-emerald-400 font-bold">112ms Ready</strong></span>
+                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all cursor-pointer">Secure License ↗</a>
             </div>
         </div>
     </header>
@@ -51,25 +51,37 @@
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-10">
         <!-- Navigation Toolbar -->
         <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
-            <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🔥 Hot Buyer Finder</a>
-            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">🛡️ Objection Destroyer</a>
-            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">💸 Cost of Delay Calculator</a>
-            <a href="trial.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md">🎙️ Live Sandbox</a>
-            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">📚 Knowledge Base</a>
-            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">02. Zero Risk Escrow</a>
-            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">03. Founder's Pledge</a>
-            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">04. Instant Handoff</a>
-            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">05. VIP Portal</a>
-            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all">06. 10,000+ Modules</a>
+            <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">🔥 Hot Buyer Finder</a>
+            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">🛡️ Objection Destroyer</a>
+            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">💸 Cost of Delay Calculator</a>
+            <a href="trial.html" class="bg-amber-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md cursor-pointer">🎙️ Live Sandbox</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">📚 Knowledge Base</a>
+            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">02. Zero Risk Escrow</a>
+            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">03. Founder's Pledge</a>
+            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">04. Instant Handoff</a>
+            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">05. VIP Portal</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">06. 10,000+ Modules</a>
+        </div>
+
+        <!-- 🎯 全站統一標準化的黃金標題與標籤 Header 區塊 -->
+        <div class="space-y-3 text-center max-w-3xl mx-auto pt-2">
+            <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full shadow-sm">
+                <i class="fa-solid fa-crown text-amber-400 text-xs"></i>
+                <span class="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider">GARFIELD EXECUTIVE AI • 300% CLOSING VELOCITY ENGINE</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">Absolute Revenue Conversion & Sub-130ms Voice Automation</h1>
+            <p class="text-xs md:text-sm text-slate-300 font-mono leading-relaxed">
+                Deploy autonomous AI executive receptionists across all 8 enterprise channels, neutralize high-stakes buyer resistance instantly, and lock in your growth with a 100% third-party escrow guarantee.
+            </p>
         </div>
 
         <!-- Hero Header -->
-        <div class="space-y-3 text-center max-w-3xl mx-auto">
+        <div class="space-y-3 text-center max-w-3xl mx-auto pt-2">
             <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full">
                 <i class="fa-solid fa-headset text-amber-400 text-xs"></i>
                 <span class="text-xs font-mono font-bold text-amber-300 uppercase">Real-Time Telephony & Omnichannel Simulation Sandbox</span>
             </div>
-            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight">High-Ticket VIP Call Sandbox</h1>
+            <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight">High-Ticket VIP Call Sandbox</h2>
             <p class="text-xs md:text-sm text-slate-300 font-mono leading-relaxed">
                 Simulate executive client speech prompts and evaluate sub-150ms Vapi voice routing, semantic intent classification, and multi-endpoint omnichannel dispatch in real time.
             </p>
@@ -81,7 +93,7 @@
                 <span class="text-amber-400 font-bold flex items-center gap-2">
                     <i class="fa-solid fa-satellite-dish text-xs"></i> OMNICHANNEL LIVE VOICE DISPATCH MATRIX
                 </span>
-                <span class="text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded border border-emerald-500/25">All Channels Synced</span>
+                <span class="text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded border border-emerald-500/25 font-bold">All Channels Synced</span>
             </div>
             <p class="text-slate-300 text-[11px] leading-relaxed">
                 When you execute a telephony simulation below, the AI voice transcript and routing intent are immediately broadcast across your omnichannel stack.
@@ -126,7 +138,7 @@
                 <div class="space-y-4">
                     <div class="flex items-center justify-between border-b border-white/10 pb-3">
                         <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider">Simulate VIP Client Speech Prompt:</label>
-                        <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded border border-amber-400/20">Input Layer</span>
+                        <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded border border-amber-400/20 font-bold">Input Layer</span>
                     </div>
 
                     <textarea id="vipCallerInput" rows="5" class="w-full p-4.5 rounded-2xl bg-black/80 border border-white/15 text-white text-xs md:text-sm font-mono focus:border-amber-400 focus:outline-none leading-relaxed" placeholder="Type or select a VIP scenario below..."></textarea>
@@ -134,23 +146,23 @@
                     <div class="space-y-2">
                         <span class="text-[11px] font-mono text-slate-400 block font-bold">Select Enterprise Industry Presets:</span>
                         <div class="flex flex-wrap gap-2">
-                            <button onclick="setScenario('manda')" class="bg-white/5 hover:bg-amber-400/20 hover:border-amber-400/50 text-slate-300 text-xs font-mono font-semibold px-4 py-2.5 rounded-xl border border-white/10 transition-all flex items-center gap-2">
+                            <button onclick="setScenario('manda')" class="bg-white/5 hover:bg-amber-400/20 hover:border-amber-400/50 text-slate-300 text-xs font-mono font-semibold px-4 py-2.5 rounded-xl border border-white/10 transition-all flex items-center gap-2 cursor-pointer">
                                 🏛️ Private Wealth Escrow
                             </button>
-                            <button onclick="setScenario('jet')" class="bg-white/5 hover:bg-amber-400/20 hover:border-amber-400/50 text-slate-300 text-xs font-mono font-semibold px-4 py-2.5 rounded-xl border border-white/10 transition-all flex items-center gap-2">
+                            <button onclick="setScenario('jet')" class="bg-white/5 hover:bg-amber-400/20 hover:border-amber-400/50 text-slate-300 text-xs font-mono font-semibold px-4 py-2.5 rounded-xl border border-white/10 transition-all flex items-center gap-2 cursor-pointer">
                                 ✈️ Private Jet Charter
                             </button>
-                            <button onclick="setScenario('board')" class="bg-white/5 hover:bg-amber-400/20 hover:border-amber-400/50 text-slate-300 text-xs font-mono font-semibold px-4 py-2.5 rounded-xl border border-white/10 transition-all flex items-center gap-2">
+                            <button onclick="setScenario('board')" class="bg-white/5 hover:bg-amber-400/20 hover:border-amber-400/50 text-slate-300 text-xs font-mono font-semibold px-4 py-2.5 rounded-xl border border-white/10 transition-all flex items-center gap-2 cursor-pointer">
                                 👔 C-Suite M&A Bridge
                             </button>
-                            <button onclick="setScenario('medical')" class="bg-white/5 hover:bg-amber-400/20 hover:border-amber-400/50 text-slate-300 text-xs font-mono font-semibold px-4 py-2.5 rounded-xl border border-white/10 transition-all flex items-center gap-2">
+                            <button onclick="setScenario('medical')" class="bg-white/5 hover:bg-amber-400/20 hover:border-amber-400/50 text-slate-300 text-xs font-mono font-semibold px-4 py-2.5 rounded-xl border border-white/10 transition-all flex items-center gap-2 cursor-pointer">
                                 🏥 Concierge Medical Suite
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <button onclick="runSimulation()" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs md:text-sm py-4.5 rounded-xl shadow-lg uppercase tracking-wider transition-all transform hover:scale-[1.01]">
+                <button onclick="runSimulation()" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs md:text-sm py-4.5 rounded-xl shadow-lg uppercase tracking-wider transition-all transform hover:scale-[1.01] cursor-pointer">
                     <i class="fa-solid fa-headset mr-2"></i> Execute Live Telephony & Omnichannel Simulation ➔
                 </button>
             </div>
@@ -225,10 +237,10 @@
         <div class="space-y-4 border-t border-white/10 pt-8 text-center font-mono text-xs">
             <span class="text-slate-400">Explore All 10,000+ Deployed Programmatic Child Sub-Pages:</span>
             <div class="flex justify-center gap-4 pt-2">
-                <a href="modules.html" class="bg-amber-400 hover:bg-amber-300 text-black font-bold px-6 py-3 rounded-xl uppercase transition-all shadow-md">
+                <a href="modules.html" class="bg-amber-400 hover:bg-amber-300 text-black font-bold px-6 py-3 rounded-xl uppercase transition-all shadow-md cursor-pointer">
                     Browse 10,000+ Modules ↗
                 </a>
-                <a href="escrow.html" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-xl uppercase transition-all border border-white/10">
+                <a href="escrow.html" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-xl uppercase transition-all border border-white/10 cursor-pointer">
                     View Zero Risk Escrow ↗
                 </a>
             </div>
@@ -236,10 +248,10 @@
     </main>
 
     <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
-        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2">Privacy Policy</a> | <a href="terms.html" class="underline ml-2">Terms of Service</a>
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a> | <a href="terms.html" class="underline ml-2 cursor-pointer">Terms of Service</a>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="script.js"></script>
     <script>
         function setScenario(type) {
             const input = document.getElementById('vipCallerInput');
