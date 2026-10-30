@@ -62,7 +62,7 @@
             <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">03. Founder's Pledge</a>
             <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">04. Instant Handoff</a>
             <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">05. VIP Portal</a>
-            <a href="modules.html" class="bg-amber-400 text-black font-extrabold text-xs px-4 py-2 rounded-xl transition-all shadow-md cursor-pointer">06. 10,000+ Modules</a>
+            <a href="hooks.html" class="bg-amber-400 text-black font-extrabold text-xs px-4 py-2 rounded-xl transition-all shadow-md cursor-pointer">06. 10,000+ Hooks</a>
         </div>
 
         <!-- 🎯 全站統一標準化的黃金標題與標籤 Header 區塊 -->
@@ -192,15 +192,15 @@
         const totalPages = Math.ceil(totalItems / itemsPerPage);
         let selectedChannel = 'chrome';
 
-        const modulesChannelSubPages = {
-            1: { title: "Sub-Page: Chrome Extension Voice Hooks Telemetry", nodeTag: "Omnichannel Gateway #CHROME-MODULES-01", payload: "Monitors active browser CRM windows in real-time. Instantly indexes 10,000+ voice hooks and displays sub-150ms closing rebuttal popups." },
-            2: { title: "Sub-Page: Slack App Directory Voice Hooks Webhook", nodeTag: "Omnichannel Gateway #SLACK-MODULES-02", payload: "Streams real-time voice hook activation metrics and scenario execution data directly into executive Slack channels (#revenue-ops, #founder-escalation)." },
-            3: { title: "Sub-Page: Discord App Directory Voice Hooks Stream", nodeTag: "Omnichannel Gateway #DISCORD-MODULES-03", payload: "Dispatches automated live voice session metrics and voice hook verification data to encrypted Discord management bots." },
-            4: { title: "Sub-Page: Raycast Launcher Instant Voice Hooks Engine", nodeTag: "Omnichannel Gateway #RAYCAST-MODULES-04", payload: "Enables sub-second keyboard query execution to retrieve enterprise voice hook catalogs, scenario codes, and hot lead recovery data." },
-            5: { title: "Sub-Page: Telegram & WhatsApp Voice Hooks Gateway", nodeTag: "Omnichannel Gateway #TELEGRAM-WA-MODULES-05", payload: "Delivers high-priority push notifications and automated voice hook scenario summaries directly to mobile messaging apps." },
-            6: { title: "Sub-Page: Desktop Menu Bar Tray Voice Hooks Monitor", nodeTag: "Omnichannel Gateway #DESKTOP-TRAY-MODULES-06", payload: "Runs background desktop diagnostic monitoring for native macOS & Windows, verifying voice hook tokens and warning of latency bottlenecks." },
-            7: { title: "Sub-Page: Mobile App Companion Voice Hooks Telemetry", nodeTag: "Omnichannel Gateway #MOBILE-MODULES-07", payload: "Full mobile companion interface for C-suite executives to review real-time Vapi voice agent conversions and voice hook status on the go." },
-            8: { title: "Sub-Page: Notion Workspace Voice Hooks Sync", nodeTag: "Omnichannel Gateway #NOTION-WIDGET-MODULES-08", payload: "Automatically syncs verified voice hook scenario IDs, call duration analytics, and deal recovery data directly into enterprise Notion databases." }
+        const channelsSubPages = {
+            1: { title: "Sub-Page: Chrome Extension Voice Hooks Telemetry", nodeTag: "Omnichannel Gateway #CHROME-HOOKS-01", payload: "Monitors active browser CRM windows in real-time. Instantly indexes 10,000+ voice hooks and displays sub-150ms closing rebuttal popups." },
+            2: { title: "Sub-Page: Slack App Directory Voice Hooks Webhook", nodeTag: "Omnichannel Gateway #SLACK-HOOKS-02", payload: "Streams real-time voice hook activation metrics and scenario execution data directly into executive Slack channels (#revenue-ops, #founder-escalation)." },
+            3: { title: "Sub-Page: Discord App Directory Voice Hooks Stream", nodeTag: "Omnichannel Gateway #DISCORD-HOOKS-03", payload: "Dispatches automated live voice session metrics and voice hook verification data to encrypted Discord management bots." },
+            4: { title: "Sub-Page: Raycast Launcher Instant Voice Hooks Engine", nodeTag: "Omnichannel Gateway #RAYCAST-HOOKS-04", payload: "Enables sub-second keyboard query execution to retrieve enterprise voice hook catalogs, scenario codes, and hot lead recovery data." },
+            5: { title: "Sub-Page: Telegram & WhatsApp Voice Hooks Gateway", nodeTag: "Omnichannel Gateway #TELEGRAM-WA-HOOKS-05", payload: "Delivers high-priority push notifications and automated voice hook scenario summaries directly to mobile messaging apps." },
+            6: { title: "Sub-Page: Desktop Menu Bar Tray Voice Hooks Monitor", nodeTag: "Omnichannel Gateway #DESKTOP-TRAY-HOOKS-06", payload: "Runs background desktop diagnostic monitoring for native macOS & Windows, verifying voice hook tokens and warning of latency bottlenecks." },
+            7: { title: "Sub-Page: Mobile App Companion Voice Hooks Telemetry", nodeTag: "Omnichannel Gateway #MOBILE-HOOKS-07", payload: "Full mobile companion interface for C-suite executives to review real-time Vapi voice agent conversions and voice hook status on the go." },
+            8: { title: "Sub-Page: Notion Workspace Voice Hooks Sync", nodeTag: "Omnichannel Gateway #NOTION-WIDGET-HOOKS-08", payload: "Automatically syncs verified voice hook scenario IDs, call duration analytics, and deal recovery data directly into enterprise Notion databases." }
         };
 
         const categories = [
@@ -228,7 +228,7 @@
         }
 
         function openChannelSubPage(channelId) {
-            const data = modulesChannelSubPages[channelId];
+            const data = channelsSubPages[channelId];
             if (!data) return;
             document.getElementById('modalChannelTitle').innerText = data.title;
             document.getElementById('modalChannelNodeTag').innerText = data.nodeTag;
