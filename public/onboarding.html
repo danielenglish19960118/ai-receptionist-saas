@@ -288,6 +288,7 @@
             const contactEmail = document.getElementById('contactEmail').value.trim();
             const industry = document.getElementById('industrySector').value;
             const language = document.getElementById('language').value;
+            const voiceModel = document.getElementById('voiceModel').value;
             const description = document.getElementById('businessDescription').value.trim();
             const btn = document.getElementById('submitBtn');
             const resultBox = document.getElementById('provisioningResult');
@@ -295,11 +296,33 @@
             btn.innerText = 'Provisioning Vapi WebRTC Pipeline, 8-Channel Omnichannel & PSEO...';
             btn.disabled = true;
 
+            const payload = {
+                storeName,
+                contactEmail,
+                industry,
+                language,
+                voiceModel,
+                description,
+                timestamp: new Date().toISOString()
+            };
+
+            // 即時向 Make.com Custom Webhook 發送表單數據
+            const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/calnmda21j7pz652bl9y1use7dvjas43';
+            try {
+                fetch(MAKE_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(err => console.log('Make Webhook dispatch note:', err));
+            } catch (err) {
+                console.log('Webhook execution error:', err);
+            }
+
             try {
                 const res = await fetch('/api/create-tenant', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ storeName, contactEmail, industry, language, description })
+                    body: JSON.stringify(payload)
                 });
                 const data = await res.json();
 
