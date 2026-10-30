@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>06. 10,000+ Enterprise Voice Hooks & Omnichannel Matrix | Garfield AI Executive</title>
+    <title>Garfield AI Executive | Autonomous Revenue Capture & High-Ticket Closing Engine</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
@@ -43,7 +43,9 @@
                 </div>
             </a>
             <div class="flex items-center gap-3">
-                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400 font-bold">Visitor</strong></span>
+                <a href="portal.html" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/15 transition-all cursor-pointer">
+                    Client Portal 🔑
+                </a>
                 <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all cursor-pointer">Secure Deal ↗</a>
             </div>
         </div>
@@ -52,20 +54,25 @@
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 space-y-8">
 
         <!-- Navigation Toolbar -->
-        <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
-            <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">🔥 Hot Buyer Finder</a>
-            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">🛡️ Objection Destroyer</a>
-            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">💸 Cost of Delay</a>
-            <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">🎙️ Live Voice AI</a>
-            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">📚 Knowledge Base</a>
-            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">02. Zero-Risk Escrow</a>
-            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">03. Founder's Pledge</a>
-            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">04. Instant Handoff</a>
-            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">05. VIP Portal</a>
-            <a href="modules.html" class="bg-amber-400 text-black font-extrabold text-xs px-4 py-2 rounded-xl transition-all shadow-md cursor-pointer">06. 10,000+ Modules</a>
+        <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4 font-mono text-xs">
+            <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">🔥 Hot Buyer Finder</a>
+            <a href="portal.html" class="bg-amber-400/20 text-amber-300 hover:text-white font-bold px-4 py-2 rounded-xl border border-amber-400/40 transition-all cursor-pointer">🔑 Client Portal</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">📦 All Modules</a>
+            <a href="hooks.html" class="bg-amber-400 text-black font-extrabold px-4 py-2 rounded-xl transition-all shadow-md cursor-pointer">🔗 Module Hooks</a>
+            <a href="pricing.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">💎 Pricing Plans</a>
+            <a href="sandbox.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">🧪 Live Sandbox</a>
+            <a href="team.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">👥 Enterprise Team</a>
+            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">🛡️ Human Safety Switch</a>
+            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">💸 Revenue Loss Calculator</a>
+            <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">🎙️ Sub-150ms Voice AI</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">📚 Enterprise Integration</a>
+            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">02. 100% ROI Guarantee</a>
+            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">03. Founder's Pledge</a>
+            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">04. Slack Instant Handoff</a>
+            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">05. 3-Min Activation</a>
         </div>
 
-        <!-- 🎯 全站統一標準化的黃金標題與標籤 Header 區塊 -->
+        <!-- Header Title Section -->
         <div class="space-y-3 text-center max-w-3xl mx-auto pt-2">
             <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full shadow-sm">
                 <i class="fa-solid fa-crown text-amber-400 text-xs"></i>
@@ -77,7 +84,7 @@
             </p>
         </div>
 
-        <!-- 🌐 8-CHANNEL OMNICHANNEL DISTRIBUTION CONTROLLER -->
+        <!-- 8-Channel Omnichannel Controller -->
         <div class="bg-black/60 p-6 md:p-8 rounded-3xl border border-white/10 space-y-6 shadow-2xl">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
                 <div>
@@ -97,7 +104,6 @@
                 <button onclick="selectChannel('mobile', 7)" id="chanBtn-7" class="bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer">7. Mobile App</button>
                 <button onclick="selectChannel('notion', 8)" id="chanBtn-8" class="bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer">8. Notion CRM</button>
             </div>
-            <div id="omnichannelStatusBox"></div>
         </div>
 
         <!-- Control Bar -->
@@ -144,11 +150,9 @@
     </div>
 
     <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
-        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a> | <a href="terms.html" class="underline ml-2 cursor-pointer">Terms of Service</a>
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="portal.html" class="underline ml-2 text-amber-400 cursor-pointer">Client Portal Login 🔑</a> | <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a>
     </footer>
 
-    <!-- Core Script Assets -->
-    <script src="script.js"></script>
     <script>
         let currentPage = 1;
         const itemsPerPage = 20;
@@ -176,9 +180,6 @@
                         btn.className = "bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer";
                     }
                 }
-            }
-            if (typeof launchOmnichannelModule === 'function') {
-                launchOmnichannelModule(idNum);
             }
         }
 
@@ -311,7 +312,6 @@
             }
         }
 
-        // 支援 Esc 鍵關閉彈窗
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeSupremeModal();
         });
