@@ -43,7 +43,10 @@
                 </div>
             </a>
             <div class="flex items-center gap-3">
-                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-amber-400 font-bold">Visitor</strong></span>
+                <!-- 🔑 Client Portal 登入按鈕 -->
+                <a href="portal.html" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/15 transition-all cursor-pointer">
+                    Client Portal 🔑
+                </a>
                 <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all cursor-pointer">Secure Vault ↗</a>
             </div>
         </div>
@@ -54,6 +57,7 @@
         <!-- Navigation Toolbar -->
         <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4">
             <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">🔥 Hot Buyer Finder</a>
+            <a href="portal.html" class="bg-amber-400/20 text-amber-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl border border-amber-400/40 transition-all cursor-pointer">🔑 Client Portal</a>
             <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">🛡️ Objection Destroyer</a>
             <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">💸 Cost of Delay</a>
             <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">🎙️ Live Voice AI</a>
@@ -62,7 +66,6 @@
             <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">03. Founder's Pledge</a>
             <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">04. Instant Handoff</a>
             <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">05. VIP Portal</a>
-            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer">06. 10,000+ Modules</a>
         </div>
 
         <!-- 🎯 全站統一標準化的黃金標題與標籤 Header 區塊 -->
@@ -102,7 +105,7 @@
             </div>
         </div>
 
-        <!-- 🌐 8-CHANNEL DISTRIBUTION ECOSYSTEM STATUS GRID (Clickable Sub-Page Terminals) -->
+        <!-- 🌐 8-CHANNEL DISTRIBUTION ECOSYSTEM STATUS GRID -->
         <div class="bg-garfield-panel p-6 md:p-8 rounded-3xl border border-amber-500/30 space-y-4 shadow-xl font-mono text-xs">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/10 pb-4 gap-2">
                 <span class="text-amber-400 font-bold flex items-center gap-2 text-sm">
@@ -275,11 +278,10 @@
     </div>
 
     <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
-        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a> | <a href="terms.html" class="underline ml-2 cursor-pointer">Terms of Service</a>
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="portal.html" class="underline ml-2 text-amber-400 cursor-pointer">Client Portal Login 🔑</a> | <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a> | <a href="terms.html" class="underline ml-2 cursor-pointer">Terms of Service</a>
     </footer>
 
     <!-- JS Core Libraries & Scripts -->
-    <script src="script.js"></script>
     <script>
         const escrowChannelSubPages = {
             1: { title: "Sub-Page: Chrome Extension Escrow Telemetry", nodeTag: "Omnichannel Gateway #CHROME-ESCROW-01", payload: "Monitors active browser CRM windows in real-time. Instantly verifies escrow policy status and displays sub-150ms closing rebuttal popups." },
@@ -319,12 +321,10 @@
             }
         }
 
-        // 支援 Esc 鍵關閉彈窗
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeChannelSubPageModal();
         });
 
-        // Escrow Lock Simulator Function
         function simulateEscrowLock(e) {
             e.preventDefault();
             const tier = document.getElementById('escrowTier').value;
