@@ -1,6 +1,6 @@
 /**
  * Garfield AI Executive - Unified Enterprise Master Router (api/index.js)
- * Consolidates all enterprise endpoints (WhatsApp, Telegram, AI Chat, Chrome Extension, Omnichannel, Gumroad Payment & Activation) into a single Serverless Function.
+ * Consolidates all enterprise endpoints (WhatsApp, Telegram, AI Chat, Chrome Extension, Omnichannel, Gumroad Payment, Activation & Zero-Cost Auto-Mine) into a single Serverless Function.
  */
 
 import { createClient } from '@supabase/supabase-js';
@@ -115,7 +115,7 @@ app.post(['/api/whatsapp-webhook', '/whatsapp-webhook'], async (req, res) => {
 // ==========================================
 // 2. Telegram Webhook Handler (Multi-route support to prevent 404)
 // ==========================================
-app.post(['/api/telegram-webhook', '/telegram-webhook', '/api/index', '/index', '/'], async (req, res) => {
+app.post(['/api/telegram-webhook', '/telegram-webhook'], async (req, res) => {
     try {
         const update = req.body;
         if (!update || !update.message) {
@@ -211,10 +211,121 @@ app.post(['/api/extension/lead', '/extension/lead'], async (req, res) => {
 });
 
 // ==========================================
-// 4. Gumroad Webhook Handler & Client Activation
+// 4. Zero-Cost Automated Lead Prospecting Engine (/api/auto-mine)
 // ==========================================
+app.all(['/api/auto-mine', '/auto-mine'], async (req, res) => {
+    try {
+        console.log('[Auto-Mine Engine] Starting zero-cost lead prospecting task...');
 
-// A. Gumroad Ping / Webhook Receiver (Supports multiple path variations and robust email extraction)
+        // 1. Fetch Google News RSS for high-intent B2B keywords (Free public data source)
+        const searchQuery = encodeURIComponent('startup funding OR expansion OR hiring OR B2B SaaS');
+        const rssUrl = `https://news.google.com/rss/search?q=${searchQuery}&hl=en-US&gl=US&ceid=US:en`;
+
+        const rssResponse = await fetch(rssUrl);
+        if (!rssResponse.ok) {
+            throw new Error(`Failed to fetch RSS feed: ${rssResponse.statusText}`);
+        }
+        const rssText = await rssResponse.text();
+
+        // Simple XML item extractor (extracting titles and links without heavy external parser dependency)
+        const items = [];
+        const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+        let match;
+        while ((match = itemRegex.exec(rssText)) && items.length < 10) {
+            const itemContent = match[1];
+            const titleMatch = itemContent.match(/<title>([\s\S]*?)<\/title>/);
+            const linkMatch = itemContent.match(/<link>([\s\S]*?)<\/link>/);
+            const pubDateMatch = itemContent.match(/<pubDate>([\s\S]*?)<\/pubDate>/);
+
+            if (titleMatch) {
+                items.push({
+                    title: titleMatch[1].replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1').trim(),
+                    link: linkMatch ? linkMatch[1].trim() : '',
+                    pubDate: pubDateMatch ? pubDateMatch[1].trim() : ''
+                });
+            }
+        }
+
+        if (items.length === 0) {
+            return res.status(200).json({ success: true, message: 'No news items found to process.', leadsFound: 0 });
+        }
+
+        // 2. Pass articles through Gemini 1.5 Flash to filter and extract high-potential B2B prospects
+        const geminiApiKey = process.env.GEMINI_API_KEY;
+        if (!geminiApiKey) {
+            return res.status(500).json({ success: false, error: 'Gemini API Key missing for auto-mining filter.' });
+        }
+
+        const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`;
+        const prompt = `
+You are an autonomous B2B lead generation analyst. Analyze the following news headlines and identify potential corporate leads or expansion events that could benefit from an AI Executive Concierge SaaS.
+Return ONLY a valid JSON array of objects with keys: "company", "intent_reason", "source_url". If none match, return [].
+
+Headlines:
+${JSON.stringify(items, null, 2)}
+`;
+
+        const geminiRes = await fetch(geminiEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                system_instruction: { parts: [{ text: "You output strictly valid JSON array format. No markdown blocks if possible, or standard JSON." }] },
+                contents: [{ role: 'user', parts: [{ text: prompt }] }]
+            })
+        });
+
+        const geminiData = await geminiRes.json();
+        const rawText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || '[]';
+        
+        // Clean up markdown code blocks if returned by Gemini
+        const cleanedJsonText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+        let minedLeads = [];
+        try {
+            minedLeads = JSON.parse(cleanedJsonText);
+        } catch (parseErr) {
+            console.error('[Auto-Mine] Failed to parse Gemini response as JSON:', rawText);
+            minedLeads = [];
+        }
+
+        // 3. Save qualified leads into Supabase and notify Slack if configured
+        let savedCount = 0;
+        if (supabase && Array.isArray(minedLeads) && minedLeads.length > 0) {
+            for (const lead of minedLeads) {
+                await supabase.from('leads').insert([{
+                    client_id: 'turtle_english',
+                    name: lead.company || 'Mined Prospect',
+                    notes: `[Auto-Mine] Intent: ${lead.intent_reason} | Source: ${lead.source_url}`
+                }]).catch(err => console.error('Supabase Auto-Mine Lead Insert Error:', err.message));
+                savedCount++;
+            }
+        }
+
+        const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
+        if (slackWebhookUrl && savedCount > 0) {
+            await fetch(slackWebhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    text: `🎯 *Zero-Cost Auto-Mine Radar Executed*\nSuccessfully mined and saved *${savedCount}* potential B2B prospects from public RSS feeds.`
+                })
+            }).catch(err => console.error('Slack Auto-Mine Notification Error:', err));
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: `Auto-mine completed successfully. Mined and saved ${savedCount} leads.`,
+            leads: minedLeads
+        });
+
+    } catch (error) {
+        console.error('[Auto-Mine Engine Error]:', error);
+        return res.status(500).json({ success: false, error: error.message || 'Internal server error during auto-mine.' });
+    }
+});
+
+// ==========================================
+// 5. Gumroad Webhook Handler & Client Activation
+// ==========================================
 app.post(['/api/gumroad-webhook', '/api/webhooks/gumroad', '/gumroad-webhook'], async (req, res) => {
     try {
         const saleData = req.body || {};
@@ -245,7 +356,6 @@ app.post(['/api/gumroad-webhook', '/api/webhooks/gumroad', '/gumroad-webhook'], 
     }
 });
 
-// B. Client Self-Service Activation & Notion Binding
 app.post(['/api/activate-client', '/activate-client'], async (req, res) => {
     try {
         const { email, notionDatabaseId } = req.body;
@@ -300,7 +410,7 @@ app.post(['/api/activate-client', '/activate-client'], async (req, res) => {
 });
 
 // ==========================================
-// 5. AI Chat & Function Calling Handler (/api/chat)
+// 6. AI Chat & Function Calling Handler (/api/chat)
 // ==========================================
 const chatTools = [
     {
@@ -385,14 +495,14 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // ==========================================
-// 6. Omnichannel Router (/api/omnichannel)
+// 7. Omnichannel Router (/api/omnichannel)
 // ==========================================
 app.get('/api/omnichannel', (req, res) => {
     return res.status(200).json({ success: true, status: 'Omnichannel router active', activeGateways: 8 });
 });
 
 // ==========================================
-// 7. Fallback Catch-All Route
+// 8. Fallback Catch-All Route
 // ==========================================
 app.all('*', (req, res) => {
     return res.status(200).send('Garfield Executive API Engine Online');
