@@ -43,7 +43,7 @@
                 </div>
             </a>
             <div class="flex items-center gap-3">
-                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-emerald-400">Manual Calculator Active</strong></span>
+                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-emerald-400 font-bold">Manual Calculator Active</strong></span>
                 <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all cursor-pointer">Secure Deal ↗</a>
             </div>
         </div>
@@ -132,7 +132,7 @@
                 <div class="space-y-4">
                     <div class="border-b border-white/10 pb-3 flex justify-between items-center">
                         <h3 class="font-bold text-white text-sm uppercase tracking-wider">Manual Input Parameters</h3>
-                        <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Live Calculation</span>
+                        <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20 font-bold">Live Calculation</span>
                     </div>
 
                     <div class="space-y-4 font-mono text-xs">
@@ -191,7 +191,7 @@
                     <div class="bg-black/90 p-5 rounded-2xl border border-white/10 space-y-3 text-slate-300 leading-relaxed text-xs">
                         <div class="text-white font-bold flex items-center justify-between">
                             <span>Garfield Master Suite ROI Multiplier:</span>
-                            <strong class="text-amber-400 text-sm" id="resRoiMultiplier">300x Return</strong>
+                            <strong class="text-amber-400 text-sm font-bold" id="resRoiMultiplier">300x Return</strong>
                         </div>
                         <p class="text-slate-400 text-[11px]" id="resInsightText">
                             Based on your manual input, delaying AI voice automation and 8-channel omnichannel dispatch costs your firm approximately $4,166 every single day.
@@ -210,7 +210,7 @@
     </main>
 
     <!-- 🌐 Dynamic 8-Channel Omnichannel Sub-Page Modal Terminal -->
-    <div id="channelSubPageModal" style="display: none;" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md items-center justify-center p-4">
+    <div id="channelSubPageModal" onclick="closeChannelSubPageModalOnOverlay(event)" style="display: none;" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md items-center justify-center p-4">
         <div class="bg-garfield-panel border border-amber-500/50 w-full max-w-2xl rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl font-mono text-xs relative animate-in fade-in zoom-in duration-200">
             <button onclick="closeChannelSubPageModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-lg font-bold cursor-pointer">
                 <i class="fa-solid fa-xmark"></i>
@@ -283,6 +283,17 @@
                 modal.style.display = 'none';
             }
         }
+
+        function closeChannelSubPageModalOnOverlay(e) {
+            if (e.target.id === 'channelSubPageModal') {
+                closeChannelSubPageModal();
+            }
+        }
+
+        // 支援 Esc 鍵關閉彈窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeChannelSubPageModal();
+        });
 
         function calculateManualRoi() {
             const callsEl = document.getElementById('manualCalls');
