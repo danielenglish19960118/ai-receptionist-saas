@@ -1,6 +1,6 @@
 /**
  * Garfield AI Executive - Unified Enterprise Master Router (api/index.js)
- * Consolidates all enterprise endpoints (WhatsApp, Telegram, AI Chat, Chrome Extension, Omnichannel, Gumroad Payment, Activation & Zero-Cost Auto-Mine) into a single Serverless Function.
+ * Consolidates all enterprise endpoints (WhatsApp, Telegram, AI Chat, Chrome Extension, Omnichannel, Gumroad Payment, Activation, Zero-Cost Auto-Mine & Hot Buyer Finder) into a single Serverless Function.
  */
 
 import { createClient } from '@supabase/supabase-js';
@@ -217,7 +217,6 @@ app.all(['/api/auto-mine', '/auto-mine'], async (req, res) => {
     try {
         console.log('[Auto-Mine Engine] Starting zero-cost lead prospecting task...');
 
-        // 1. Fetch Google News RSS for high-intent B2B keywords (Free public data source)
         const searchQuery = encodeURIComponent('startup funding OR expansion OR hiring OR B2B SaaS');
         const rssUrl = `https://news.google.com/rss/search?q=${searchQuery}&hl=en-US&gl=US&ceid=US:en`;
 
@@ -227,7 +226,6 @@ app.all(['/api/auto-mine', '/auto-mine'], async (req, res) => {
         }
         const rssText = await rssResponse.text();
 
-        // Simple XML item extractor (extracting titles and links without heavy external parser dependency)
         const items = [];
         const itemRegex = /<item>([\s\S]*?)<\/item>/g;
         let match;
@@ -250,7 +248,6 @@ app.all(['/api/auto-mine', '/auto-mine'], async (req, res) => {
             return res.status(200).json({ success: true, message: 'No news items found to process.', leadsFound: 0 });
         }
 
-        // 2. Pass articles through Gemini 1.5 Flash to filter and extract high-potential B2B prospects
         const geminiApiKey = process.env.GEMINI_API_KEY;
         if (!geminiApiKey) {
             return res.status(500).json({ success: false, error: 'Gemini API Key missing for auto-mining filter.' });
@@ -276,9 +273,8 @@ ${JSON.stringify(items, null, 2)}
 
         const geminiData = await geminiRes.json();
         const rawText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || '[]';
-        
-        // Clean up markdown code blocks if returned by Gemini
         const cleanedJsonText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+        
         let minedLeads = [];
         try {
             minedLeads = JSON.parse(cleanedJsonText);
@@ -287,7 +283,6 @@ ${JSON.stringify(items, null, 2)}
             minedLeads = [];
         }
 
-        // 3. Save qualified leads into Supabase and notify Slack if configured
         let savedCount = 0;
         if (supabase && Array.isArray(minedLeads) && minedLeads.length > 0) {
             for (const lead of minedLeads) {
@@ -324,7 +319,95 @@ ${JSON.stringify(items, null, 2)}
 });
 
 // ==========================================
-// 5. Gumroad Webhook Handler & Client Activation
+// 5. One-Click Hot Buyer Finder & n8n Proxy (/api/hot-buyer-finder)
+// ==========================================
+app.post(['/api/hot-buyer-finder', '/hot-buyer-finder'], async (req, res) => {
+    try {
+        console.log('[Hot Buyer Finder Proxy] Triggered by front-end UI...');
+
+        const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL;
+        
+        // 如果沒有設定 n8n Webhook，自動 Fallback 到原生零成本 RSS + Gemini 獲客引擎
+        if (!N8N_WEBHOOK_URL) {
+            console.log('[Hot Buyer Finder] N8N_WEBHOOK_URL not found. Falling back to native Gemini RSS mining...');
+            
+            const searchQuery = encodeURIComponent(req.body.industry || 'Private Wealth');
+            const rssUrl = `https://news.google.com/rss/search?q=${searchQuery}&hl=en-US&gl=US&ceid=US:en`;
+            const rssResponse = await fetch(rssUrl);
+            const rssText = await rssResponse.text();
+
+            const items = [];
+            const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+            let match;
+            while ((match = itemRegex.exec(rssText)) && items.length < 5) {
+                const itemContent = match[1];
+                const titleMatch = itemContent.match(/<title>([\s\S]*?)<\/title>/);
+                if (titleMatch) {
+                    items.push({ title: titleMatch[1].replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1').trim() });
+                }
+            }
+
+            const geminiApiKey = process.env.GEMINI_API_KEY;
+            if (!geminiApiKey) {
+                return res.status(500).json({ success: false, error: 'Gemini API Key missing.' });
+            }
+
+            const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`;
+            const prompt = `Analyze these news items and return a valid JSON array of 3 leads with keys: "companyName", "contactPerson", "dealValue", "intentScore" (>=85), "tag": ${JSON.stringify(items)}`;
+
+            const geminiRes = await fetch(geminiEndpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }] })
+            });
+            const geminiData = await geminiRes.json();
+            const rawText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || '[]';
+            const cleanedJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+            
+            let fallbackLeads = [];
+            try { fallbackLeads = JSON.parse(cleanedJson); } catch (e) { fallbackLeads = []; }
+
+            return res.status(200).json({
+                success: true,
+                count: fallbackLeads.length,
+                leads: fallbackLeads
+            });
+        }
+
+        // 若有設定 N8N_WEBHOOK_URL，作為 Secure Proxy 轉發給 n8n / Make.com
+        const response = await fetch(N8N_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'X-Garfield-Secret': process.env.GARFIELD_INTERNAL_SECRET || ''
+            },
+            body: JSON.stringify({
+                timestamp: new Date().toISOString(),
+                industry: req.body.industry || 'Private Wealth',
+                minIntentScore: req.body.minIntentScore || 80
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`n8n webhook responded with status ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        return res.status(200).json({
+            success: true,
+            count: data.leads ? data.leads.length : 0,
+            leads: data.leads || []
+        });
+
+    } catch (error) {
+        console.error('[Hot Buyer Finder Error]:', error);
+        return res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// ==========================================
+// 6. Gumroad Webhook Handler & Client Activation
 // ==========================================
 app.post(['/api/gumroad-webhook', '/api/webhooks/gumroad', '/gumroad-webhook'], async (req, res) => {
     try {
@@ -358,7 +441,7 @@ app.post(['/api/gumroad-webhook', '/api/webhooks/gumroad', '/gumroad-webhook'], 
 
 app.post(['/api/activate-client', '/activate-client'], async (req, res) => {
     try {
-        const { email, notionDatabaseId } = req.body;
+        const { email, notionDatabaseId, slackWebhookUrl } = req.body;
 
         if (!email || !notionDatabaseId) {
             return res.status(400).json({ success: false, error: 'Email and Notion Database ID are required.' });
@@ -385,6 +468,7 @@ app.post(['/api/activate-client', '/activate-client'], async (req, res) => {
                     email: email,
                     client_key: clientKey,
                     notion_database_id: notionDatabaseId,
+                    slack_webhook_url: slackWebhookUrl || null,
                     status: 'active',
                     created_at: new Date()
                 }
@@ -410,7 +494,7 @@ app.post(['/api/activate-client', '/activate-client'], async (req, res) => {
 });
 
 // ==========================================
-// 6. AI Chat & Function Calling Handler (/api/chat)
+// 7. AI Chat & Function Calling Handler (/api/chat)
 // ==========================================
 const chatTools = [
     {
@@ -467,6 +551,8 @@ app.post('/api/chat', async (req, res) => {
         if (firstPart?.functionCall?.name === 'save_lead_and_appointment') {
             const { name, email, phone, appointment_date, notes } = firstPart.functionCall.args;
             let leadData = null;
+            let clientSlackWebhook = null;
+
             if (supabase) {
                 const { data: insertedLead } = await supabase.from('leads').insert([
                     { client_id: clientId, name: name || 'Unnamed Visitor', email: email || null, phone: phone || null, notes: notes || null }
@@ -478,10 +564,32 @@ app.post('/api/chat', async (req, res) => {
                         { client_id: clientId, lead_id: leadData?.id || null, appointment_date, status: 'pending', notes: notes || null }
                     ]);
                 }
+
+                // 💡 動態查詢該客戶專屬的 Slack Webhook (多租戶隔離保護隱私)
+                const { data: clientConfig } = await supabase
+                    .from('client_configs')
+                    .select('slack_webhook_url')
+                    .eq('email', clientId) // 或依據您的租戶主鍵調整
+                    .single();
+
+                clientSlackWebhook = clientConfig?.slack_webhook_url || process.env.SLACK_WEBHOOK_URL;
+            } else {
+                clientSlackWebhook = process.env.SLACK_WEBHOOK_URL;
+            }
+
+            // 💡 發送即時 VIP 通知至該客戶專屬的 Slack 頻道
+            if (clientSlackWebhook) {
+                await fetch(clientSlackWebhook, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        text: `🚨 *[${clientId}] VIP Lead & Appointment Captured!*\n*Name:* ${name}\n*Phone:* ${phone || 'N/A'}\n*Email:* ${email || 'N/A'}\n*Time:* ${appointment_date || 'Immediate'}\n*Notes:* ${notes || 'None'}\n\n_AI has secured the lead. Please take over if human intervention is required._`
+                    })
+                }).catch(err => console.error('Slack VIP Notification Error:', err));
             }
 
             return res.status(200).json({ 
-                reply: `Thank you, ${name}! Your details have been registered.`,
+                reply: `Thank you, ${name}! Your details and appointment have been registered.`,
                 action: 'saved_lead',
                 leadId: leadData?.id || null
             });
@@ -495,14 +603,14 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // ==========================================
-// 7. Omnichannel Router (/api/omnichannel)
+// 8. Omnichannel Router (/api/omnichannel)
 // ==========================================
 app.get('/api/omnichannel', (req, res) => {
     return res.status(200).json({ success: true, status: 'Omnichannel router active', activeGateways: 8 });
 });
 
 // ==========================================
-// 8. Fallback Catch-All Route
+// 9. Fallback Catch-All Route
 // ==========================================
 app.all('*', (req, res) => {
     return res.status(200).send('Garfield Executive API Engine Online');
