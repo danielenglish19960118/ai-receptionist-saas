@@ -47,9 +47,9 @@
                 <a href="portal.html" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/15 transition-all cursor-pointer">
                     Client Portal 🔑
                 </a>
-                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all cursor-pointer">
-                    Deploy AI Receptionist ↗
-                </a>
+                <button onclick="toggleChatWidget()" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all cursor-pointer">
+                    Chat with AI Receptionist 🤖
+                </button>
             </div>
         </div>
     </header>
@@ -223,6 +223,42 @@
         </div>
     </main>
 
+    <!-- 🤖 Floating AI Receptionist Chat Widget Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleChatWidget()" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black p-4 rounded-full shadow-gold-glow flex items-center gap-2 border-2 border-amber-300 transition-all scale-100 hover:scale-105 cursor-pointer">
+            <i class="fa-solid fa-headset text-xl"></i>
+            <span class="font-mono text-xs font-bold uppercase hidden sm:inline">Talk to AI Receptionist</span>
+        </button>
+    </div>
+
+    <!-- 💬 AI Receptionist Dialogue Window (n8n Webhook Connected) -->
+    <div id="aiChatWidget" class="fixed bottom-24 right-6 z-50 w-80 sm:w-96 bg-garfield-panel rounded-3xl gold-border-glow shadow-2xl flex flex-col hidden font-mono text-xs overflow-hidden h-[500px]">
+        <!-- Header -->
+        <div class="bg-black/90 p-4 border-b border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+                <span class="font-bold text-white">Garfield Executive AI</span>
+                <span class="text-[10px] text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">n8n Live</span>
+            </div>
+            <button onclick="toggleChatWidget()" class="text-slate-400 hover:text-white font-bold cursor-pointer text-sm">✕</button>
+        </div>
+
+        <!-- Chat History Area -->
+        <div id="chatMessages" class="flex-grow p-4 overflow-y-auto space-y-3">
+            <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-slate-300 max-w-[85%]">
+                Hello! I am your 24/7 Garfield Executive AI Receptionist. How can I assist you with scaling your revenue automation today?
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <form onsubmit="sendN8nChatMessage(event)" class="p-3 bg-black/80 border-t border-white/10 flex items-center gap-2">
+            <input type="text" id="userChatInput" required placeholder="Type your message..." class="flex-grow bg-white/5 border border-white/15 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-white outline-none" />
+            <button type="submit" id="chatSendBtn" class="bg-amber-400 hover:bg-amber-300 text-black font-bold p-2.5 rounded-xl cursor-pointer transition-all shrink-0">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+
     <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
         © 2026 Garfield Enterprise Inc. All rights reserved. <a href="portal.html" class="underline ml-2 text-amber-400 cursor-pointer">Client Portal Login 🔑</a> | <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a>
     </footer>
@@ -251,6 +287,9 @@
     </div>
 
     <script>
+        // 🔗 您的 n8n Webhook Test URL
+        const N8N_WEBHOOK_URL = 'https://n8n-i3uu.onrender.com/webhook-test/b58efaee-780e-4714-a783-abdfc1448cef';
+
         let currentHomeBatch = 0;
         const homeBatchSize = 16;
         const totalHomeNodes = 10000;
@@ -261,6 +300,79 @@
             3: { title: "Discord App Directory", target: "Community Operators", icon: "fa-discord", desc: "Integrated via Discord Bot API with registered Slash Commands and secure OAuth2 Linked Role verification." },
             4: { title: "Raycast / Alfred Launcher", target: "Power Operators", icon: "fa-terminal", desc: "Native script command integration triggered with 'Opt + Space' to query pipeline metrics." }
         };
+
+        function toggleChatWidget() {
+            const widget = document.getElementById('aiChatWidget');
+            if (widget.classList.contains('hidden')) {
+                widget.classList.remove('hidden');
+            } else {
+                widget.classList.add('hidden');
+            }
+        }
+
+        async function sendN8nChatMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('userChatInput');
+            const messagesContainer = document.getElementById('chatMessages');
+            const sendBtn = document.getElementById('chatSendBtn');
+            const userMsg = input.value.trim();
+
+            if (!userMsg) return;
+
+            // 1. 顯示使用者發送的訊息
+            messagesContainer.innerHTML += `
+                <div class="bg-amber-400/10 p-3 rounded-2xl border border-amber-400/30 text-amber-300 max-w-[85%] ml-auto">
+                    ${userMsg}
+                </div>
+            `;
+            input.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // 2. 顯示等待動畫
+            const loadingId = 'loading-' + Date.now();
+            messagesContainer.innerHTML += `
+                <div id="${loadingId}" class="bg-white/5 p-3 rounded-2xl border border-white/10 text-slate-400 max-w-[85%] animate-pulse flex items-center gap-2">
+                    <i class="fa-solid fa-spinner fa-spin"></i> AI Receptionist is thinking...
+                </div>
+            `;
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            sendBtn.disabled = true;
+
+            // 3. 發送請求至 n8n Webhook
+            try {
+                const response = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: userMsg, timestamp: new Date().toISOString() })
+                });
+
+                const data = await response.json();
+                document.getElementById(loadingId).remove();
+
+                // 讀取 n8n Respond to Webhook 傳回的訊息欄位（預設支援 response/output/message 等）
+                const aiReply = data.response || data.output || data.message || JSON.stringify(data);
+
+                messagesContainer.innerHTML += `
+                    <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-slate-200 max-w-[85%]">
+                        ${aiReply}
+                    </div>
+                `;
+            } catch (err) {
+                console.error('n8n webhook error:', err);
+                const loadingElem = document.getElementById(loadingId);
+                if (loadingElem) loadingElem.remove();
+
+                messagesContainer.innerHTML += `
+                    <div class="bg-red-500/10 p-3 rounded-2xl border border-red-500/30 text-red-400 max-w-[85%]">
+                        ⚠️ Received webhook request! Ensure n8n workflow active & 'Listen for test event' clicked.
+                    </div>
+                `;
+            } finally {
+                sendBtn.disabled = false;
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+        }
 
         function launchOmnichannelModule(id) {
             const info = detailedChannelArchitectures[id] || { title: "Omnichannel Gateway", target: "Enterprise Users", icon: "fa-satellite-dish", desc: "Multi-channel synchronization active." };
@@ -339,7 +451,6 @@
                 timestamp: new Date().toISOString()
             };
 
-            // 即時將 Hot Buyer 搜尋請求發送至 Make.com Custom Webhook
             const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/calnmda21j7pz652bl9y1use7dvjas43';
             try {
                 fetch(MAKE_WEBHOOK_URL, {
@@ -382,7 +493,6 @@
                     });
                     grid.innerHTML = html;
                 } else {
-                    // Fallback 模擬高意圖買家展示資料
                     grid.innerHTML = `
                         <div class="bg-black/80 p-5 rounded-2xl border border-amber-500/30 space-y-3 shadow-xl">
                             <div class="flex justify-between items-center text-[10px]">
