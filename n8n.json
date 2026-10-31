@@ -1,220 +1,256 @@
 {
-  "name": "Garfield Enterprise AI Revenue Engine",
-  "nodes": [
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "b58efaee-780e-4714-a783-abdfc1448cef",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [0, 0],
-      "id": "webhook-trigger",
-      "name": "⚡ Webhook Trigger"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "user_msg",
-              "name": "user_message",
-              "value": "={{ $json.body.message }}",
-              "type": "string"
-            },
-            {
-              "id": "session_id",
-              "name": "session_id",
-              "value": "={{ $json.body.sessionId || $json.headers['x-forwarded-for'] || 'default-session' }}",
-              "type": "string"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [220, 0],
-      "id": "parse-input",
-      "name": "🧹 Parse & Standardize Input"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT role, message FROM chat_history WHERE session_id = '{{ $json.session_id }}' ORDER BY created_at ASC LIMIT 10;"
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.5,
-      "position": [440, 0],
-      "id": "fetch-memory",
-      "name": "🧠 Redis/Supabase Memory Fetch"
-    },
-    {
-      "parameters": {
-        "model": "text-embedding-3-small",
-        "text": "={{ $node['🧹 Parse & Standardize Input'].json.user_message }}"
-      },
-      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
-      "typeVersion": 1.1,
-      "position": [440, 220],
-      "id": "generate-embedding",
-      "name": "🔍 Text Embedding Generator"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT content FROM knowledge_base ORDER BY embedding <-> '{{ $json.embedding }}' LIMIT 3;"
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.5,
-      "position": [660, 220],
-      "id": "pinecone-vector-search",
-      "name": "📚 Vector DB RAG Search"
-    },
-    {
-      "parameters": {
-        "model": "gpt-4o-mini",
-        "options": {
-          "temperature": 0.2
-        },
-        "messages": {
-          "messageValues": [
-            {
-              "role": "system",
-              "message": "你是一位頂級企業 AI 分析師。請分析以下訪客訊息與對話歷史，輸出嚴格的 JSON 格式：\n{\n  \"intent_score\": 0~100 的數字,\n  \"is_whale\": true/false (預算>5000 USD 或高階職位),\n  \"lead_name\": \"訪客姓名或未知\",\n  \"lead_email\": \"訪客Email或未知\",\n  \"lead_phone\": \"訪客電話或未知\",\n  \"summary\": \"一句話需求摘要\"\n}\n\n訪客訊息: {{ $node['🧹 Parse & Standardize Input'].json.user_message }}"
-            }
-          ]
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.6,
-      "position": [660, -200],
-      "id": "intent-evaluator",
-      "name": "🎯 Intent & Lead Evaluator AI"
-    },
-    {
-      "parameters": {
-        "model": "gpt-4o",
-        "options": {
-          "temperature": 0.7
-        },
-        "messages": {
-          "messageValues": [
-            {
-              "role": "system",
-              "message": "你是 Garfield Enterprise 24/7 AI Executive Concierge。\n請根據企業知識庫資料與上下文回覆訪客，積極引導成交與預約展示。\n\n【知識庫資料】:\n{{ $node['📚 Vector DB RAG Search'].json.content || '標準產品規格與服務條款' }}"
-            },
-            {
-              "role": "user",
-              "message": "={{ $node['🧹 Parse & Standardize Input'].json.user_message }}"
-            }
-          ]
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.6,
-      "position": [880, 0],
-      "id": "executive-ai-agent",
-      "name": "🤖 Garfield Executive AI Closing Agent"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "number": [
-            {
-              "value1": "={{ JSON.parse($node['🎯 Intent & Lead Evaluator AI'].json.message.content).intent_score }}",
-              "operation": "largerEqual",
-              "value2": 85
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [1100, -200],
-      "id": "human-safety-switch",
-      "name": "🛡️ Human Safety Switch (High Intent?)"
-    },
-    {
-      "parameters": {
-        "authentication": "webhook",
-        "content": "🚨 *VIP High-Intent Lead Alert (Whale Prospect)*\n• *Session*: `{{ $node['🧹 Parse & Standardize Input'].json.session_id }}`\n• *Intent Score*: `{{ JSON.parse($node['🎯 Intent & Lead Evaluator AI'].json.message.content).intent_score }}%`\n• *Summary*: {{ JSON.parse($node['🎯 Intent & Lead Evaluator AI'].json.message.content).summary }}\n• *Latest Message*: \"{{ $node['🧹 Parse & Standardize Input'].json.user_message }}\"\n\n⚡ *Click to Takeover via Portal*: https://your-portal-url.com/live-takeover"
-      },
-      "type": "n8n-nodes-base.slack",
-      "typeVersion": 2.2,
-      "position": [1320, -320],
-      "id": "slack-alert",
-      "name": "🔔 Slack Urgent VIP Alert"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "INSERT INTO leads (session_id, intent_score, name, email, phone, summary) VALUES ('{{ $node['🧹 Parse & Standardize Input'].json.session_id }}', {{ JSON.parse($node['🎯 Intent & Lead Evaluator AI'].json.message.content).intent_score }}, '{{ JSON.parse($node['🎯 Intent & Lead Evaluator AI'].json.message.content).lead_name }}', '{{ JSON.parse($node['🎯 Intent & Lead Evaluator AI'].json.message.content).lead_email }}', '{{ JSON.parse($node['🎯 Intent & Lead Evaluator AI'].json.message.content).lead_phone }}', '{{ JSON.parse($node['🎯 Intent & Lead Evaluator AI'].json.message.content).summary }}') ON CONFLICT (session_id) DO UPDATE SET intent_score = EXCLUDED.intent_score, summary = EXCLUDED.summary;"
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.5,
-      "position": [1320, -100],
-      "id": "supabase-crm-sync",
-      "name": "💾 Supabase / CRM Sync"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "INSERT INTO chat_history (session_id, role, message) VALUES ('{{ $node['🧹 Parse & Standardize Input'].json.session_id }}', 'user', '{{ $node['🧹 Parse & Standardize Input'].json.user_message }}'), ('{{ $node['🧹 Parse & Standardize Input'].json.session_id }}', 'assistant', '{{ $node['🤖 Garfield Executive AI Closing Agent'].json.message.content }}');"
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.5,
-      "position": [1100, 200],
-      "id": "write-memory",
-      "name": "📝 Write Chat History to Memory"
-    },
-    {
-      "parameters": {
-        "respondWith": "json",
-        "responseBody": "={\n  \"response\": \"{{ $node['🤖 Garfield Executive AI Closing Agent'].json.message.content.replace(/\"/g, '\\\\\"').replace(/\\n/g, '\\\\n') }}\",\n  \"intent_score\": {{ JSON.parse($node['🎯 Intent & Lead Evaluator AI'].json.message.content).intent_score }},\n  \"status\": \"success\"\n}"
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [1320, 100],
-      "id": "respond-to-webhook",
-      "name": "📤 Respond to Webhook"
-    }
-  ],
-  "connections": {
-    "⚡ Webhook Trigger": {
-      "main": [[{ "node": "🧹 Parse & Standardize Input", "type": "main", "index": 0 }]]
-    },
-    "🧹 Parse & Standardize Input": {
-      "main": [
-        [{ "node": "🧠 Redis/Supabase Memory Fetch", "type": "main", "index": 0 }],
-        [{ "node": "🔍 Text Embedding Generator", "type": "main", "index": 0 }],
-        [{ "node": "🎯 Intent & Lead Evaluator AI", "type": "main", "index": 0 }]
-      ]
-    },
-    "🔍 Text Embedding Generator": {
-      "main": [[{ "node": "📚 Vector DB RAG Search", "type": "main", "index": 0 }]]
-    },
-    "📚 Vector DB RAG Search": {
-      "main": [[{ "node": "🤖 Garfield Executive AI Closing Agent", "type": "main", "index": 0 }]]
-    },
-    "🧠 Redis/Supabase Memory Fetch": {
-      "main": [[{ "node": "🤖 Garfield Executive AI Closing Agent", "type": "main", "index": 0 }]]
-    },
-    "🎯 Intent & Lead Evaluator AI": {
-      "main": [[{ "node": "🛡️ Human Safety Switch (High Intent?)", "type": "main", "index": 0 }]]
-    },
-    "🛡️ Human Safety Switch (High Intent?)": {
-      "main": [
-        [{ "node": "🔔 Slack Urgent VIP Alert", "type": "main", "index": 0 }, { "node": "💾 Supabase / CRM Sync", "type": "main", "index": 0 }],
-        [{ "node": "💾 Supabase / CRM Sync", "type": "main", "index": 0 }]
-      ]
-    },
-    "🤖 Garfield Executive AI Closing Agent": {
-      "main": [
-        [{ "node": "📝 Write Chat History to Memory", "type": "main", "index": 0 }],
-        [{ "node": "📤 Respond to Webhook", "type": "main", "index": 0 }]
-      ]
-    }
-  }
+"name": "Garfield Enterprise AI Revenue Engine (Multi-AI Dynamic)",
+"nodes": [
+{
+"parameters": {
+"httpMethod": "POST",
+"path": "b58efaee-780e-4714-a783-abdfc1448cef",
+"responseMode": "responseNode",
+"options": {}
+},
+"type": "n8n-nodes-base.webhook",
+"typeVersion": 2,
+"position": [0, 0],
+"id": "webhook-trigger",
+"name": "⚡ Webhook Trigger"
+},
+{
+"parameters": {
+"assignments": {
+"assignments": [
+{
+"id": "user_msg",
+"name": "user_message",
+"value": "={{ $json.body.message }}",
+"type": "string"
+},
+{
+"id": "session_id",
+"name": "session_id",
+"value": "={{ $json.body.sessionId || $json.headers['x-forwarded-for'] || 'default-session' }}",
+"type": "string"
+},
+{
+"id": "ai_provider",
+"name": "ai_provider",
+"value": "={{ $json.body.provider || 'gemini' }}",
+"type": "string"
+}
+]
+}
+},
+"type": "n8n-nodes-base.set",
+"typeVersion": 3.4,
+"position": [220, 0],
+"id": "parse-input",
+"name": "🧹 Parse & Standardize Input"
+},
+{
+"parameters": {
+"operation": "executeQuery",
+"query": "SELECT role, message FROM chat_history WHERE session_id = '{{ $json.session_id }}' ORDER BY created_at ASC LIMIT 10;"
+},
+"type": "n8n-nodes-base.postgres",
+"typeVersion": 2.5,
+"position": [440, 0],
+"id": "fetch-memory",
+"name": "🧠 Redis/Supabase Memory Fetch"
+},
+{
+"parameters": {
+"modelName": "models/text-embedding-004"
+},
+"type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+"typeVersion": 1,
+"position": [440, 220],
+"id": "generate-embedding",
+"name": "🔍 Text Embedding Generator (Gemini Free)"
+},
+{
+"parameters": {
+"operation": "executeQuery",
+"query": "SELECT content FROM knowledge_base ORDER BY embedding <-> '{{ $json.embedding }}' LIMIT 3;"
+},
+"type": "n8n-nodes-base.postgres",
+"typeVersion": 2.5,
+"position": [660, 220],
+"id": "pinecone-vector-search",
+"name": "📚 Vector DB RAG Search"
+},
+{
+"parameters": {
+"rules": {
+"values": [
+{
+"value1": "={{ $node['🧹 Parse & Standardize Input'].json.ai_provider.toLowerCase() }}",
+"value2": "gemini",
+"outputKey": "Gemini (Free)"
+},
+{
+"value1": "={{ $node['🧹 Parse & Standardize Input'].json.ai_provider.toLowerCase() }}",
+"value2": "openai",
+"outputKey": "OpenAI"
+},
+{
+"value1": "={{ $node['🧹 Parse & Standardize Input'].json.ai_provider.toLowerCase() }}",
+"value2": "deepseek",
+"outputKey": "DeepSeek"
+}
+]
+},
+"fallbackOutput": 0
+},
+"type": "n8n-nodes-base.switch",
+"typeVersion": 3,
+"position": [660, -200],
+"id": "ai-selector-switch",
+"name": "🔀 AI Provider Switcher"
+},
+{
+"parameters": {
+"modelName": "models/gemini-1.5-flash",
+"options": {
+"temperature": 0.2
+}
+},
+"type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+"typeVersion": 1,
+"position": [880, -320],
+"id": "gemini-evaluator",
+"name": "🎯 Intent Evaluator AI (Gemini Free)"
+},
+{
+"parameters": {
+"model": "gpt-4o-mini",
+"options": {
+"temperature": 0.2
+}
+},
+"type": "@n8n/n8n-nodes-langchain.openAi",
+"typeVersion": 1.6,
+"position": [880, -200],
+"id": "openai-evaluator",
+"name": "🎯 Intent Evaluator AI (OpenAI)"
+},
+{
+"parameters": {
+"modelName": "models/gemini-1.5-pro",
+"options": {
+"temperature": 0.7
+}
+},
+"type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+"typeVersion": 1,
+"position": [880, 0],
+"id": "executive-ai-gemini",
+"name": "🤖 Garfield Executive AI Agent (Gemini Free)"
+},
+{
+"parameters": {
+"conditions": {
+"number": [
+{
+"value1": "={{ JSON.parse($json.message.content || $json.text || '{}').intent_score || 90 }}",
+"operation": "largerEqual",
+"value2": 85
+}
+]
+}
+},
+"type": "n8n-nodes-base.if",
+"typeVersion": 2.2,
+"position": [1100, -200],
+"id": "human-safety-switch",
+"name": "🛡️ Human Safety Switch (High Intent?)"
+},
+{
+"parameters": {
+"authentication": "webhook",
+"content": "🚨 VIP High-Intent Lead Alert\n• Session: `{{ $node['🧹 Parse & Standardize Input'].json.session_id }}`\n• AI Engine: `{{ $node['🧹 Parse & Standardize Input'].json.ai_provider }}`\n• Latest Message: "{{ $node['🧹 Parse & Standardize Input'].json.user_message }}""
+},
+"type": "n8n-nodes-base.slack",
+"typeVersion": 2.2,
+"position": [1320, -320],
+"id": "slack-alert",
+"name": "🔔 Slack Urgent VIP Alert"
+},
+{
+"parameters": {
+"operation": "executeQuery",
+"query": "INSERT INTO leads (session_id, intent_score, summary) VALUES ('{{ $node['🧹 Parse & Standardize Input'].json.session_id }}', 90, '{{ $node['🧹 Parse & Standardize Input'].json.user_message }}') ON CONFLICT (session_id) DO NOTHING;"
+},
+"type": "n8n-nodes-base.postgres",
+"typeVersion": 2.5,
+"position": [1320, -100],
+"id": "supabase-crm-sync",
+"name": "💾 Supabase / CRM Sync"
+},
+{
+"parameters": {
+"operation": "executeQuery",
+"query": "INSERT INTO chat_history (session_id, role, message) VALUES ('{{ $node['🧹 Parse & Standardize Input'].json.session_id }}', 'user', '{{ $node['🧹 Parse & Standardize Input'].json.user_message }}');"
+},
+"type": "n8n-nodes-base.postgres",
+"typeVersion": 2.5,
+"position": [1100, 200],
+"id": "write-memory",
+"name": "📝 Write Chat History to Memory"
+},
+{
+"parameters": {
+"respondWith": "json",
+"responseBody": "={\n  "response": "{{ $json.message.content || $json.text }}",\n  "provider_used": "{{ $node['🧹 Parse & Standardize Input'].json.ai_provider }}",\n  "status": "success"\n}"
+},
+"type": "n8n-nodes-base.respondToWebhook",
+"typeVersion": 1.1,
+"position": [1320, 100],
+"id": "respond-to-webhook",
+"name": "📤 Respond to Webhook"
+}
+],
+"connections": {
+"⚡ Webhook Trigger": {
+"main": [[{ "node": "🧹 Parse & Standardize Input", "type": "main", "index": 0 }]]
+},
+"🧹 Parse & Standardize Input": {
+"main": [
+[{ "node": "🧠 Redis/Supabase Memory Fetch", "type": "main", "index": 0 }],
+[{ "node": "🔍 Text Embedding Generator (Gemini Free)", "type": "main", "index": 0 }],
+[{ "node": "🔀 AI Provider Switcher", "type": "main", "index": 0 }]
+]
+},
+"🔍 Text Embedding Generator (Gemini Free)": {
+"main": [[{ "node": "📚 Vector DB RAG Search", "type": "main", "index": 0 }]]
+},
+"📚 Vector DB RAG Search": {
+"main": [[{ "node": "🤖 Garfield Executive AI Agent (Gemini Free)", "type": "main", "index": 0 }]]
+},
+"🧠 Redis/Supabase Memory Fetch": {
+"main": [[{ "node": "🤖 Garfield Executive AI Agent (Gemini Free)", "type": "main", "index": 0 }]]
+},
+"🔀 AI Provider Switcher": {
+"main": [
+[{ "node": "🎯 Intent Evaluator AI (Gemini Free)", "type": "main", "index": 0 }],
+[{ "node": "🎯 Intent Evaluator AI (OpenAI)", "type": "main", "index": 0 }]
+]
+},
+"🎯 Intent Evaluator AI (Gemini Free)": {
+"main": [[{ "node": "🛡️ Human Safety Switch (High Intent?)", "type": "main", "index": 0 }]]
+},
+"🎯 Intent Evaluator AI (OpenAI)": {
+"main": [[{ "node": "🛡️ Human Safety Switch (High Intent?)", "type": "main", "index": 0 }]]
+},
+"🛡️ Human Safety Switch (High Intent?)": {
+"main": [
+[{ "node": "🔔 Slack Urgent VIP Alert", "type": "main", "index": 0 }, { "node": "💾 Supabase / CRM Sync", "type": "main", "index": 0 }],
+[{ "node": "💾 Supabase / CRM Sync", "type": "main", "index": 0 }]
+]
+},
+"🤖 Garfield Executive AI Agent (Gemini Free)": {
+"main": [
+[{ "node": "📝 Write Chat History to Memory", "type": "main", "index": 0 }],
+[{ "node": "📤 Respond to Webhook", "type": "main", "index": 0 }]
+]
+}
+}
 }
