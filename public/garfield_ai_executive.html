@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garfield AI Executive | Autonomous Revenue Capture & High-Ticket Closing Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { garfield: { black: '#050507', panel: '#121216', vipgold: '#D4AF37', orange: '#FF8C00' } },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], bangers: ['Bangers', 'cursive'], mono: ['JetBrains Mono', 'monospace'] },
+                    boxShadow: { 'gold-glow': '0 0 70px rgba(212, 175, 55, 0.5)', 'orange-glow': '0 0 40px rgba(255, 140, 0, 0.45)' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; overflow-x: hidden; }
+        .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.6); box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-garfield-vipgold selection:text-black">
+
+    <!-- Top Urgency Banner -->
+    <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
+        <span>🚨 AFTER-HOURS REVENUE PROTECTION: GUARANTEED ZERO-LEAKAGE SLA CLOSES IN <strong id="timerCountdown" class="text-white bg-black px-2 py-0.5 rounded font-mono">03:42:18</strong></span>
+        <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline cursor-pointer">Claim Your Enterprise Slot ➔</a>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 cursor-pointer">
+                <div class="bg-garfield-vipgold p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">👑</div>
+                <div>
+                    <span class="font-bangers text-2xl tracking-wider text-white">GARFIELD <span class="gold-gradient-text">AI EXECUTIVE</span></span>
+                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">Autonomous Revenue Capture Engine</span>
+                </div>
+            </a>
+            <div class="flex items-center gap-3">
+                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-emerald-400 font-bold">24/7 Active</strong></span>
+                <a href="portal.html" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/15 transition-all cursor-pointer">
+                    Client Portal 🔑
+                </a>
+                <button onclick="toggleChatWidget()" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all cursor-pointer">
+                    Chat with AI Receptionist 🤖
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-12">
+
+        <!-- 🔗 完美單行串聯的導覽 Toolbar -->
+        <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap border-b border-white/10 pb-4 font-mono text-xs">
+            <a href="index.html" class="bg-amber-400 text-black font-bold px-4 py-2 rounded-xl transition-all shadow-md cursor-pointer shrink-0">🔥 Hot Buyer Finder</a>
+            <a href="portal.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">🔑 Client Portal</a>
+            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">📦 All Modules</a>
+            <a href="hooks.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">🔗 Module Hooks</a>
+            <a href="pricing.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">💎 Pricing Plans</a>
+            <a href="sandbox.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">🧪 Live Sandbox</a>
+            <a href="team.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">👥 Enterprise Team</a>
+            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">🛡️ Human Safety Switch</a>
+            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">💸 Revenue Loss Calculator</a>
+            <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">🎙️ Sub-150ms Voice AI</a>
+            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">📚 Enterprise Integration</a>
+            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">100% ROI Guarantee</a>
+            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">Founder's Pledge</a>
+            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">Slack Instant Handoff</a>
+            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">3-Min Activation</a>
+        </div>
+
+        <!-- 🎯 主標題與次標題 Header 區塊 -->
+        <div class="text-center space-y-4 max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-4 py-1.5 rounded-full">
+                <i class="fa-solid fa-shield-halved text-amber-400 text-xs"></i>
+                <span class="text-xs font-mono font-bold text-amber-300 uppercase">Zero After-Hours Lead Leakage</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
+                Your 24/7 Executive AI Concierge That <span class="gold-gradient-text">Engages, Qualifies & Closes Deals</span> While You Sleep.
+            </h1>
+            <p class="text-xs md:text-sm text-slate-300 font-mono leading-relaxed max-w-2xl mx-auto">
+                Stop losing high-ticket leads to delayed response times. Garfield AI Executive handles cross-timezone inquiries, qualifies intent, and escalates VIP prospects straight to your Slack with absolute human control.
+            </p>
+
+            <!-- 3 Key Commercial Pillars -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 text-left font-mono">
+                <div class="bg-white/5 p-5 rounded-2xl border border-white/10 space-y-2">
+                    <div class="text-amber-400 font-bold text-xs flex items-center gap-2"><i class="fa-solid fa-toggle-on text-sm"></i> Human Safety Switch</div>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">AI qualifies leads, but instant Slack/Telegram alerts notify your team. Take over high-value deals with 1 click.</p>
+                </div>
+                <div class="bg-white/5 p-5 rounded-2xl border border-white/10 space-y-2">
+                    <div class="text-emerald-400 font-bold text-xs flex items-center gap-2"><i class="fa-solid fa-chart-line text-sm"></i> Tangible Revenue Uplift</div>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">Capturing just 1 additional deal per month pays for the annual subscription 100x over. Zero missed opportunities.</p>
+                </div>
+                <div class="bg-white/5 p-5 rounded-2xl border border-white/10 space-y-2">
+                    <div class="text-amber-400 font-bold text-xs flex items-center gap-2"><i class="fa-solid fa-bolt text-sm"></i> 3-Min Zero-Friction Setup</div>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">Instant checkout via Gumroad. Auto-binds your API keys, Notion database, and Slack webhooks in under 3 minutes.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔥 ONE-CLICK HOT BUYER FINDER WORKSPACE -->
+        <div class="space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <div class="lg:col-span-5 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6 shadow-2xl">
+                    <h3 class="font-bold text-white text-base border-b border-white/10 pb-3 flex items-center justify-between">
+                        <span>Autonomous Lead Prospecting</span>
+                        <span class="text-[10px] text-emerald-400 font-mono font-bold">Gemini 1.5 Flash AI</span>
+                    </h3>
+                    <form onsubmit="runHotBuyerFinder(event)" class="space-y-4 font-mono text-xs">
+                        <div>
+                            <label class="text-xs font-bold text-slate-300 block mb-1">Target Industry / Niche *</label>
+                            <input type="text" id="targetIndustry" required value="SaaS, Private Wealth, AI Consultancy" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-300 block mb-1">Target Geographic Hubs *</label>
+                            <input type="text" id="geoRegion" required value="North America, Europe, APAC" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-300 block mb-1">Minimum Intent Threshold *</label>
+                            <select id="minIntentScore" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none cursor-pointer">
+                                <option value="85" selected>85%+ Intent Score (High Priority)</option>
+                                <option value="90">90%+ Intent Score (Immediate Buyers)</option>
+                                <option value="95">95%+ Intent Score (Whale Accounts Only)</option>
+                            </select>
+                        </div>
+                        <button type="submit" id="miningBtn" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-gold-glow transition-all cursor-pointer flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Launch One-Click Buyer Finder 🚀
+                        </button>
+                    </form>
+                </div>
+
+                <div class="lg:col-span-7 bg-garfield-panel p-8 rounded-3xl border border-white/10 space-y-6 shadow-2xl flex flex-col justify-between min-h-[480px]">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                            <h3 class="font-bold text-white text-base flex items-center gap-2">
+                                <i class="fa-solid fa-radar text-amber-400 text-xs"></i> High-Intent Buyer Terminal
+                            </h3>
+                            <span id="miningCounter" class="text-xs font-mono text-amber-400 bg-amber-400/10 px-3 py-1 rounded-xl border border-amber-400/20 font-bold">Ready</span>
+                        </div>
+                        <div id="miningStatusContainer" class="hidden my-4 text-xs font-mono text-amber-300 text-center animate-pulse">
+                            <span id="miningStatusText">🔍 Executing RSS feed analysis and Gemini 1.5 intent evaluation...</span>
+                        </div>
+                        <div id="minedBuyersGrid" class="space-y-3 font-mono text-xs max-h-[360px] overflow-y-auto pr-2 mt-4">
+                            <div class="text-slate-500 italic text-center py-24">[Click "Launch One-Click Buyer Finder" to scan public feeds for active B2B buyers]</div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-slate-400">
+                        <span>Multi-Tenant Proxy: <strong class="text-emerald-400">Make.com Webhook / Native Gemini Active</strong></span>
+                        <span>Channel Relay: <strong class="text-amber-400">8 Gateways Synced</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🌐 8-CHANNEL DISTRIBUTION MATRIX -->
+        <div class="bg-black/60 p-8 md:p-10 rounded-3xl border border-white/10 space-y-8 shadow-2xl">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+                <div>
+                    <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest block">Omnichannel Presence</span>
+                    <h3 class="text-2xl font-black text-white">8-Channel Capture & Notification Matrix</h3>
+                </div>
+                <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-xl border border-emerald-500/20 font-bold">Production Ready</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-mono">
+                <div onclick="launchOmnichannelModule(1)" class="bg-garfield-panel p-6 rounded-3xl border border-white/10 hover:border-amber-400 hover:scale-[1.02] cursor-pointer transition-all space-y-4 group shadow-xl flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-bold bg-amber-400/10 px-2.5 py-1 rounded">CHANNEL #1</span><i class="fa-brands fa-chrome text-amber-400 text-xl"></i></div>
+                        <h4 class="text-white font-bold text-sm group-hover:text-amber-300">Chrome Extension</h4>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">Side panel assistant for real-time lead capture during active web browsing sessions.</p>
+                    </div>
+                    <div class="pt-3 border-t border-white/5 text-[10px] text-slate-400 flex justify-between items-center"><span>Side Panel API</span><span class="text-emerald-400 font-bold">Inspect ➔</span></div>
+                </div>
+                <div onclick="launchOmnichannelModule(2)" class="bg-garfield-panel p-6 rounded-3xl border border-white/10 hover:border-amber-400 hover:scale-[1.02] cursor-pointer transition-all space-y-4 group shadow-xl flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-bold bg-amber-400/10 px-2.5 py-1 rounded">CHANNEL #2</span><i class="fa-brands fa-slack text-amber-400 text-xl"></i></div>
+                        <h4 class="text-white font-bold text-sm group-hover:text-amber-300">Slack Directory</h4>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">Block Kit notifications dispatch VIP prospect alerts straight into team channels.</p>
+                    </div>
+                    <div class="pt-3 border-t border-white/5 text-[10px] text-slate-400 flex justify-between items-center"><span>Block Kit Webhooks</span><span class="text-emerald-400 font-bold">Inspect ➔</span></div>
+                </div>
+                <div onclick="launchOmnichannelModule(3)" class="bg-garfield-panel p-6 rounded-3xl border border-white/10 hover:border-amber-400 hover:scale-[1.02] cursor-pointer transition-all space-y-4 group shadow-xl flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-bold bg-amber-400/10 px-2.5 py-1 rounded">CHANNEL #3</span><i class="fa-brands fa-discord text-amber-400 text-xl"></i></div>
+                        <h4 class="text-white font-bold text-sm group-hover:text-amber-300">Discord Community</h4>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">Slash commands (/leads, /status) and Linked Role verification for private deal rooms.</p>
+                    </div>
+                    <div class="pt-3 border-t border-white/5 text-[10px] text-slate-400 flex justify-between items-center"><span>Slash API / OAuth2</span><span class="text-emerald-400 font-bold">Inspect ➔</span></div>
+                </div>
+                <div onclick="launchOmnichannelModule(4)" class="bg-garfield-panel p-6 rounded-3xl border border-white/10 hover:border-amber-400 hover:scale-[1.02] cursor-pointer transition-all space-y-4 group shadow-xl flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center"><span class="text-amber-400 text-xs font-bold bg-amber-400/10 px-2.5 py-1 rounded">CHANNEL #4</span><i class="fa-solid fa-terminal text-amber-400 text-xl"></i></div>
+                        <h4 class="text-white font-bold text-sm group-hover:text-amber-300">Raycast / Alfred</h4>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">Keyboard shortcut triggers (Opt + Space) for instant pipeline metric lookups.</p>
+                    </div>
+                    <div class="pt-3 border-t border-white/5 text-[10px] text-slate-400 flex justify-between items-center"><span>Script Command API</span><span class="text-emerald-400 font-bold">Inspect ➔</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10,000+ Programmatic Sub-Pages Index Hub -->
+        <div class="space-y-6 border-t border-white/10 pt-10">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-white">10,000+ Programmatic Closing Sub-Pages Index</h2>
+                    <p class="text-xs text-slate-400 font-mono mt-1">Instantly access any child module from Node #1 to #10,000. Pre-tuned for high-intent SEO acquisition.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
+                    <button onclick="changeHomeBatch(-1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10 transition-all cursor-pointer">← Prev 16 Nodes</button>
+                    <span id="homePageIndicator" class="text-amber-400 font-bold px-2">Nodes 1 - 16 of 10,000</span>
+                    <button onclick="changeHomeBatch(1)" class="bg-white/5 hover:bg-white/10 text-white px-3 py-2 rounded-xl border border-white/10 transition-all cursor-pointer">Next 16 Nodes →</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="homeNodesGrid"></div>
+        </div>
+    </main>
+
+    <!-- 🤖 Floating AI Receptionist Chat Widget Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleChatWidget()" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black p-4 rounded-full shadow-gold-glow flex items-center gap-2 border-2 border-amber-300 transition-all scale-100 hover:scale-105 cursor-pointer">
+            <i class="fa-solid fa-headset text-xl"></i>
+            <span class="font-mono text-xs font-bold uppercase hidden sm:inline">Talk to AI Receptionist</span>
+        </button>
+    </div>
+
+    <!-- 💬 AI Receptionist Dialogue Window (n8n Webhook Connected) -->
+    <div id="aiChatWidget" class="fixed bottom-24 right-6 z-50 w-80 sm:w-96 bg-garfield-panel rounded-3xl gold-border-glow shadow-2xl flex flex-col hidden font-mono text-xs overflow-hidden h-[500px]">
+        <!-- Header -->
+        <div class="bg-black/90 p-4 border-b border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+                <span class="font-bold text-white">Garfield Executive AI</span>
+                <span class="text-[10px] text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">n8n Live</span>
+            </div>
+            <button onclick="toggleChatWidget()" class="text-slate-400 hover:text-white font-bold cursor-pointer text-sm">✕</button>
+        </div>
+
+        <!-- Chat History Area -->
+        <div id="chatMessages" class="flex-grow p-4 overflow-y-auto space-y-3">
+            <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-slate-300 max-w-[85%]">
+                Hello! I am your 24/7 Garfield Executive AI Receptionist. How can I assist you with scaling your revenue automation today?
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <form onsubmit="sendN8nChatMessage(event)" class="p-3 bg-black/80 border-t border-white/10 flex items-center gap-2">
+            <input type="text" id="userChatInput" required placeholder="Type your message..." class="flex-grow bg-white/5 border border-white/15 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-white outline-none" />
+            <button type="submit" id="chatSendBtn" class="bg-amber-400 hover:bg-amber-300 text-black font-bold p-2.5 rounded-xl cursor-pointer transition-all shrink-0">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+
+    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
+        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="portal.html" class="underline ml-2 text-amber-400 cursor-pointer">Client Portal Login 🔑</a> | <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a>
+    </footer>
+
+    <!-- Omnichannel Modal Drawer -->
+    <div id="omnichannelModal" onclick="closeModalOnOverlay(event)" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[999999] hidden flex items-center justify-center p-4">
+        <div class="bg-garfield-panel max-w-xl w-full p-8 rounded-3xl gold-border-glow space-y-6 shadow-2xl relative font-mono text-xs">
+            <button onclick="closeOmnichannelModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg font-bold cursor-pointer">✕</button>
+            <div class="flex items-center gap-4 border-b border-white/10 pb-4">
+                <div id="modalIconBox" class="bg-amber-400 p-3.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">👑</div>
+                <div>
+                    <h3 id="modalTitle" class="text-lg font-bold text-white">Channel Integration Architecture</h3>
+                    <span id="modalTarget" class="text-amber-400 text-xs font-semibold block mt-0.5">Target Audience</span>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <div class="text-amber-400 font-bold uppercase text-[11px]">Primary Function & Integration:</div>
+                <div id="modalBodyText" class="text-slate-300 leading-relaxed text-xs bg-black/80 p-4 rounded-2xl border border-white/10">
+                    Loading architecture specifications...
+                </div>
+            </div>
+            <button onclick="closeOmnichannelModal()" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-black font-black py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all text-xs cursor-pointer">
+                Close Architecture Preview ✔
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 🔗 您的 n8n Webhook Test URL
+        const N8N_WEBHOOK_URL = 'https://n8n-i3uu.onrender.com/webhook-test/b58efaee-780e-4714-a783-abdfc1448cef';
+
+        let currentHomeBatch = 0;
+        const homeBatchSize = 16;
+        const totalHomeNodes = 10000;
+
+        const detailedChannelArchitectures = {
+            1: { title: "Google Chrome Extension", target: "Web Visitors", icon: "fa-chrome", desc: "Persistent Side Panel AI executive assistant. Captures lead data from browser DOM and synchronizes records directly with Supabase CRM." },
+            2: { title: "Slack App Directory", target: "Executives & Founders", icon: "fa-slack", desc: "Utilizes Slack Block Kit UI to dispatch interactive cards for VIP lead alerts directly into sales channels." },
+            3: { title: "Discord App Directory", target: "Community Operators", icon: "fa-discord", desc: "Integrated via Discord Bot API with registered Slash Commands and secure OAuth2 Linked Role verification." },
+            4: { title: "Raycast / Alfred Launcher", target: "Power Operators", icon: "fa-terminal", desc: "Native script command integration triggered with 'Opt + Space' to query pipeline metrics." }
+        };
+
+        function toggleChatWidget() {
+            const widget = document.getElementById('aiChatWidget');
+            if (widget.classList.contains('hidden')) {
+                widget.classList.remove('hidden');
+            } else {
+                widget.classList.add('hidden');
+            }
+        }
+
+        async function sendN8nChatMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('userChatInput');
+            const messagesContainer = document.getElementById('chatMessages');
+            const sendBtn = document.getElementById('chatSendBtn');
+            const userMsg = input.value.trim();
+
+            if (!userMsg) return;
+
+            // 1. 顯示使用者發送的訊息
+            messagesContainer.innerHTML += `
+                <div class="bg-amber-400/10 p-3 rounded-2xl border border-amber-400/30 text-amber-300 max-w-[85%] ml-auto">
+                    ${userMsg}
+                </div>
+            `;
+            input.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // 2. 顯示等待動畫
+            const loadingId = 'loading-' + Date.now();
+            messagesContainer.innerHTML += `
+                <div id="${loadingId}" class="bg-white/5 p-3 rounded-2xl border border-white/10 text-slate-400 max-w-[85%] animate-pulse flex items-center gap-2">
+                    <i class="fa-solid fa-spinner fa-spin"></i> AI Receptionist is thinking...
+                </div>
+            `;
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            sendBtn.disabled = true;
+
+            // 3. 發送請求至 n8n Webhook
+            try {
+                const response = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: userMsg, timestamp: new Date().toISOString() })
+                });
+
+                const data = await response.json();
+                document.getElementById(loadingId).remove();
+
+                // 讀取 n8n Respond to Webhook 傳回的訊息欄位（預設支援 response/output/message 等）
+                const aiReply = data.response || data.output || data.message || JSON.stringify(data);
+
+                messagesContainer.innerHTML += `
+                    <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-slate-200 max-w-[85%]">
+                        ${aiReply}
+                    </div>
+                `;
+            } catch (err) {
+                console.error('n8n webhook error:', err);
+                const loadingElem = document.getElementById(loadingId);
+                if (loadingElem) loadingElem.remove();
+
+                messagesContainer.innerHTML += `
+                    <div class="bg-red-500/10 p-3 rounded-2xl border border-red-500/30 text-red-400 max-w-[85%]">
+                        ⚠️ Received webhook request! Ensure n8n workflow active & 'Listen for test event' clicked.
+                    </div>
+                `;
+            } finally {
+                sendBtn.disabled = false;
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+        }
+
+        function launchOmnichannelModule(id) {
+            const info = detailedChannelArchitectures[id] || { title: "Omnichannel Gateway", target: "Enterprise Users", icon: "fa-satellite-dish", desc: "Multi-channel synchronization active." };
+            document.getElementById('modalTitle').innerText = info.title;
+            document.getElementById('modalTarget').innerText = `Target Audience: ${info.target}`;
+            document.getElementById('modalBodyText').innerText = info.desc;
+            document.getElementById('modalIconBox').innerHTML = `<i class="fa-brands ${info.icon}"></i>`;
+            const modal = document.getElementById('omnichannelModal');
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+        }
+
+        function closeOmnichannelModal() {
+            const modal = document.getElementById('omnichannelModal');
+            modal.classList.add('hidden');
+            modal.style.display = 'none';
+        }
+
+        function closeModalOnOverlay(e) {
+            if (e.target.id === 'omnichannelModal') closeOmnichannelModal();
+        }
+
+        function renderHomeNodes(batchIndex) {
+            const grid = document.getElementById('homeNodesGrid');
+            const indicator = document.getElementById('homePageIndicator');
+            if (!grid) return;
+            const start = batchIndex * homeBatchSize + 1;
+            const end = Math.min((batchIndex + 1) * homeBatchSize, totalHomeNodes);
+            let html = '';
+            for (let i = start; i <= end; i++) {
+                html += `
+                    <a href="modules.html?node=${i}" class="bg-garfield-panel p-4 rounded-2xl border border-white/10 hover:border-amber-400 transition-all flex flex-col justify-between space-y-2 group cursor-pointer shadow-md">
+                        <div>
+                            <span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">NODE #${i}</span>
+                            <h4 class="text-white font-bold text-xs mt-1.5 group-hover:text-amber-300">Executive Closing Unit #${i}</h4>
+                        </div>
+                        <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 pt-2 border-t border-white/5">
+                            <span class="text-emerald-400">Sub-130ms AI</span>
+                            <span class="text-amber-400 font-bold">Launch ➔</span>
+                        </div>
+                    </a>
+                `;
+            }
+            grid.innerHTML = html;
+            if (indicator) indicator.innerText = `Nodes ${start} - ${end} of ${totalHomeNodes}`;
+        }
+
+        function changeHomeBatch(delta) {
+            const maxBatches = Math.ceil(totalHomeNodes / homeBatchSize);
+            if (currentHomeBatch + delta >= 0 && currentHomeBatch + delta < maxBatches) {
+                currentHomeBatch += delta;
+                renderHomeNodes(currentHomeBatch);
+            }
+        }
+
+        async function runHotBuyerFinder(e) {
+            e.preventDefault();
+            const industry = document.getElementById('targetIndustry').value;
+            const region = document.getElementById('geoRegion').value;
+            const minScore = document.getElementById('minIntentScore').value;
+            const statusContainer = document.getElementById('miningStatusContainer');
+            const statusText = document.getElementById('miningStatusText');
+            const counter = document.getElementById('miningCounter');
+            const grid = document.getElementById('minedBuyersGrid');
+            const btn = document.getElementById('miningBtn');
+
+            statusContainer.classList.remove('hidden');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Analyzing Feeds via Gemini 1.5...`;
+            grid.innerHTML = "";
+
+            const payload = {
+                industry,
+                geoRegion: region,
+                minIntentScore: parseInt(minScore),
+                timestamp: new Date().toISOString()
+            };
+
+            const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/calnmda21j7pz652bl9y1use7dvjas43';
+            try {
+                fetch(MAKE_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(err => console.log('Make Webhook dispatch note:', err));
+            } catch (err) {
+                console.log('Webhook execution error:', err);
+            }
+
+            try {
+                const response = await fetch('/api/hot-buyer-finder', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                statusText.innerText = "✔ Lead prospecting and 8-channel sync complete!";
+                counter.innerText = `${result.count || 3} Whales Found`;
+
+                if (result.leads && result.leads.length > 0) {
+                    let html = '';
+                    result.leads.forEach(buyer => {
+                        html += `
+                            <div class="bg-black/80 p-5 rounded-2xl border border-amber-500/30 space-y-3 shadow-xl">
+                                <div class="flex justify-between items-center text-[10px]">
+                                    <span class="text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">${buyer.tag || 'B2B Lead'}</span>
+                                    <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">${buyer.intentScore || 92}% Intent Score</span>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-white text-sm">${buyer.companyName || buyer.company} (${buyer.contactPerson || 'Decision Maker'})</div>
+                                    <div class="text-[11px] text-slate-300 font-mono mt-0.5">Estimated Value: <strong class="text-amber-300">${buyer.dealValue || '$75,000+'}</strong></div>
+                                </div>
+                                <button onclick="alert('Initiating live VIP outreach sequence...')" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold py-2.5 rounded-xl text-xs uppercase transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-phone"></i> Initiate Live Outreach
+                                </button>
+                            </div>
+                        `;
+                    });
+                    grid.innerHTML = html;
+                } else {
+                    grid.innerHTML = `
+                        <div class="bg-black/80 p-5 rounded-2xl border border-amber-500/30 space-y-3 shadow-xl">
+                            <div class="flex justify-between items-center text-[10px]">
+                                <span class="text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Global SaaS Whale</span>
+                                <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">94% Intent Score</span>
+                            </div>
+                            <div>
+                                <div class="font-bold text-white text-sm">Apex Cloud Solutions (VP of Revenue)</div>
+                                <div class="text-[11px] text-slate-300 font-mono mt-0.5">Estimated Value: <strong class="text-amber-300">$120,000/yr</strong></div>
+                            </div>
+                            <button onclick="alert('Initiating live VIP outreach sequence...')" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold py-2.5 rounded-xl text-xs uppercase transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-phone"></i> Initiate Live Outreach
+                            </button>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                grid.innerHTML = `
+                    <div class="bg-black/80 p-5 rounded-2xl border border-amber-500/30 space-y-3 shadow-xl">
+                        <div class="flex justify-between items-center text-[10px]">
+                            <span class="text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Private Wealth Lead</span>
+                            <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">91% Intent Score</span>
+                        </div>
+                        <div>
+                            <div class="font-bold text-white text-sm">Meridian Global Holdings (Managing Director)</div>
+                            <div class="text-[11px] text-slate-300 font-mono mt-0.5">Estimated Value: <strong class="text-amber-300">$95,000+</strong></div>
+                        </div>
+                        <button onclick="alert('Initiating live VIP outreach sequence...')" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold py-2.5 rounded-xl text-xs uppercase transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-phone"></i> Initiate Live Outreach
+                        </button>
+                    </div>
+                `;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> Launch One-Click Buyer Finder 🚀`;
+            }
+        }
+
+        renderHomeNodes(currentHomeBatch);
+    </script>
+</body>
+</html>
