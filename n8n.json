@@ -1,17 +1,16 @@
 {
-  "name": "Garfield Enterprise AI Revenue Engine (Fully Connected)",
+  "name": "Garfield Enterprise AI Revenue Engine",
   "nodes": [
     {
       "parameters": {
         "httpMethod": "POST",
         "path": "b58efaee-780e-4714-a783-abdfc1448cef",
-        "responseMode": "responseNode",
-        "options": {}
+        "responseMode": "responseNode"
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [0, 0],
-      "id": "node-webhook",
+      "id": "webhook-trigger",
       "name": "⚡ Webhook Trigger"
     },
     {
@@ -19,22 +18,16 @@
         "assignments": {
           "assignments": [
             {
-              "id": "user_msg",
               "name": "user_message",
-              "value": "={{ $json.body.message }}",
-              "type": "string"
+              "value": "={{ $json.body.message }}"
             },
             {
-              "id": "session_id",
               "name": "session_id",
-              "value": "={{ $json.body.sessionId || $json.headers['x-forwarded-for'] || 'default-session' }}",
-              "type": "string"
+              "value": "={{ $json.body.sessionId || 'default-session' }}"
             },
             {
-              "id": "ai_provider",
               "name": "provider",
-              "value": "={{ $json.body.provider || 'gemini' }}",
-              "type": "string"
+              "value": "={{ $json.body.provider || 'gemini' }}"
             }
           ]
         }
@@ -42,24 +35,13 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [220, 0],
-      "id": "node-parse-input",
+      "id": "parse-input",
       "name": "🧹 Parse & Standardize Input"
     },
     {
       "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT role, message FROM chat_history WHERE session_id = '{{ $json.session_id }}' ORDER BY created_at ASC LIMIT 10;"
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.5,
-      "position": [440, 0],
-      "id": "node-fetch-memory",
-      "name": "🧠 Redis/Supabase Memory Fetch"
-    },
-    {
-      "parameters": {
         "dataType": "string",
-        "value1": "={{ $node['🧹 Parse & Standardize Input'].json.provider }}",
+        "value1": "={{ $json.provider }}",
         "rules": {
           "rules": [
             {
@@ -75,136 +57,136 @@
               "output": 2
             }
           ]
-        },
-        "fallbackOutput": 0
+        }
       },
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
-      "position": [660, 0],
-      "id": "node-ai-switcher",
+      "position": [440, 0],
+      "id": "ai-switcher",
       "name": "🔀 AI Provider Switcher"
     },
     {
       "parameters": {
-        "modelName": "models/gemini-1.5-flash",
-        "options": {}
+        "modelName": "models/gemini-1.5-flash"
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
-      "position": [900, -200],
-      "id": "node-gemini-ai",
-      "name": "🎯 Intent Evaluator AI (Gemini Free)"
+      "position": [680, -180],
+      "id": "gemini-ai",
+      "name": "Gemini Free AI"
     },
     {
       "parameters": {
-        "model": "gpt-4o-mini",
-        "options": {
-          "temperature": 0.2
-        }
+        "model": "gpt-4o-mini"
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1,
-      "position": [900, 0],
-      "id": "node-openai-ai",
-      "name": "🎯 Intent Evaluator AI (OpenAI)"
+      "position": [680, 0],
+      "id": "openai-ai",
+      "name": "OpenAI"
     },
     {
       "parameters": {
-        "model": "deepseek-chat",
-        "options": {}
+        "model": "deepseek-chat"
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1,
-      "position": [900, 200],
-      "id": "node-deepseek-ai",
-      "name": "🎯 Intent Evaluator AI (DeepSeek)"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "number": [
-            {
-              "value1": "={{ $json.intent_score || 80 }}",
-              "operation": "largerEqual",
-              "value2": 85
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [1140, 0],
-      "id": "node-safety-switch",
-      "name": "🛡️ Human Safety Switch (High Intent?)"
-    },
-    {
-      "parameters": {
-        "authentication": "webhook",
-        "content": "🚨 *VIP High-Intent Lead Alert*\n• *Session*: `{{ $node['🧹 Parse & Standardize Input'].json.session_id }}`\n• *Message*: \"{{ $node['🧹 Parse & Standardize Input'].json.user_message }}\""
-      },
-      "type": "n8n-nodes-base.slack",
-      "typeVersion": 2.2,
-      "position": [1380, -120],
-      "id": "node-slack-alert",
-      "name": "🔔 Slack Urgent VIP Alert"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "INSERT INTO leads (session_id, user_message) VALUES ('{{ $node['🧹 Parse & Standardize Input'].json.session_id }}', '{{ $node['🧹 Parse & Standardize Input'].json.user_message }}');"
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.5,
-      "position": [1380, 120],
-      "id": "node-supabase-sync",
-      "name": "💾 Supabase / CRM Sync"
+      "position": [680, 180],
+      "id": "deepseek-ai",
+      "name": "DeepSeek"
     },
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "={\n  \"status\": \"success\",\n  \"provider_used\": \"{{ $node['🧹 Parse & Standardize Input'].json.provider }}\",\n  \"message\": \"Processed successfully\"\n}"
+        "responseBody": "={\n  \"status\": \"success\",\n  \"provider\": \"{{ $json.provider }}\"\n}"
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [1600, 0],
-      "id": "node-respond-webhook",
+      "position": [920, 0],
+      "id": "respond-webhook",
       "name": "📤 Respond to Webhook"
     }
   ],
   "connections": {
     "⚡ Webhook Trigger": {
-      "main": [[{ "node": "🧹 Parse & Standardize Input", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "🧹 Parse & Standardize Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "🧹 Parse & Standardize Input": {
-      "main": [[{ "node": "🧠 Redis/Supabase Memory Fetch", "type": "main", "index": 0 }]]
-    },
-    "🧠 Redis/Supabase Memory Fetch": {
-      "main": [[{ "node": "🔀 AI Provider Switcher", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "🔀 AI Provider Switcher",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "🔀 AI Provider Switcher": {
       "main": [
-        [{ "node": "🎯 Intent Evaluator AI (Gemini Free)", "type": "main", "index": 0 }],
-        [{ "node": "🎯 Intent Evaluator AI (OpenAI)", "type": "main", "index": 0 }],
-        [{ "node": "🎯 Intent Evaluator AI (DeepSeek)", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Gemini Free AI",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "DeepSeek",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "🎯 Intent Evaluator AI (Gemini Free)": {
-      "main": [[{ "node": "🛡️ Human Safety Switch (High Intent?)", "type": "main", "index": 0 }]]
-    },
-    "🎯 Intent Evaluator AI (OpenAI)": {
-      "main": [[{ "node": "🛡️ Human Safety Switch (High Intent?)", "type": "main", "index": 0 }]]
-    },
-    "🎯 Intent Evaluator AI (DeepSeek)": {
-      "main": [[{ "node": "🛡️ Human Safety Switch (High Intent?)", "type": "main", "index": 0 }]]
-    },
-    "🛡️ Human Safety Switch (High Intent?)": {
+    "Gemini Free AI": {
       "main": [
-        [{ "node": "🔔 Slack Urgent VIP Alert", "type": "main", "index": 0 }, { "node": "💾 Supabase / CRM Sync", "type": "main", "index": 0 }],
-        [{ "node": "💾 Supabase / CRM Sync", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "📤 Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "💾 Supabase / CRM Sync": {
-      "main": [[{ "node": "📤 Respond to Webhook", "type": "main", "index": 0 }]]
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "📤 Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek": {
+      "main": [
+        [
+          {
+            "node": "📤 Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   }
 }
