@@ -1,6 +1,6 @@
 /**
  * Garfield AI Executive - Unified Enterprise Master Router (api/index.js)
- * Consolidates all enterprise endpoints (WhatsApp, Telegram, AI Chat, Chrome Extension, Omnichannel, Gumroad Payment, Activation, Zero-Cost Auto-Mine & Hot Buyer Finder) into a single Serverless Function.
+ * Consolidates all enterprise endpoints (WhatsApp, Telegram, AI Chat, Chrome Extension, Omnichannel, Universal Payment Gateways, Activation, Zero-Cost Auto-Mine & Hot Buyer Finder) into a single Serverless Function.
  */
 
 import { createClient } from '@supabase/supabase-js';
@@ -8,7 +8,7 @@ import express from 'express';
 
 const app = express();
 
-// Initialize Supabase Client (優先使用 SUPABASE_SERVICE_ROLE_KEY 繞過 RLS 限制)
+// Initialize Supabase Client (優先使用 SUPABASE_SERVICE_ROLE_KEY 繞過 RLS 限制)[cite: 11]
 const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 // ==========================================
-// 1. WhatsApp Webhook Handler (/api/whatsapp-webhook)
+// 1. WhatsApp Webhook Handler (/api/whatsapp-webhook)[cite: 11]
 // ==========================================
 app.get(['/api/whatsapp-webhook', '/whatsapp-webhook'], (req, res) => {
     const mode = req.query['hub.mode'];
@@ -113,7 +113,7 @@ app.post(['/api/whatsapp-webhook', '/whatsapp-webhook'], async (req, res) => {
 });
 
 // ==========================================
-// 2. Telegram Webhook Handler (Multi-route support to prevent 404)
+// 2. Telegram Webhook Handler (/api/telegram-webhook)[cite: 11]
 // ==========================================
 app.post(['/api/telegram-webhook', '/telegram-webhook'], async (req, res) => {
     try {
@@ -183,7 +183,7 @@ app.post(['/api/telegram-webhook', '/telegram-webhook'], async (req, res) => {
 });
 
 // ==========================================
-// 3. Chrome Extension Lead Capture Handler (/api/extension/lead)
+// 3. Chrome Extension Lead Capture Handler (/api/extension/lead)[cite: 11]
 // ==========================================
 app.post(['/api/extension/lead', '/extension/lead'], async (req, res) => {
     try {
@@ -211,7 +211,7 @@ app.post(['/api/extension/lead', '/extension/lead'], async (req, res) => {
 });
 
 // ==========================================
-// 4. Zero-Cost Automated Lead Prospecting Engine (/api/auto-mine)
+// 4. Zero-Cost Automated Lead Prospecting Engine (/api/auto-mine)[cite: 11]
 // ==========================================
 app.all(['/api/auto-mine', '/auto-mine'], async (req, res) => {
     try {
@@ -319,7 +319,7 @@ ${JSON.stringify(items, null, 2)}
 });
 
 // ==========================================
-// 5. One-Click Hot Buyer Finder & n8n Proxy (/api/hot-buyer-finder)
+// 5. One-Click Hot Buyer Finder & n8n Proxy (/api/hot-buyer-finder)[cite: 11]
 // ==========================================
 app.post(['/api/hot-buyer-finder', '/hot-buyer-finder'], async (req, res) => {
     try {
@@ -327,7 +327,6 @@ app.post(['/api/hot-buyer-finder', '/hot-buyer-finder'], async (req, res) => {
 
         const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL;
         
-        // 如果沒有設定 n8n Webhook，自動 Fallback 到原生零成本 RSS + Gemini 獲客引擎
         if (!N8N_WEBHOOK_URL) {
             console.log('[Hot Buyer Finder] N8N_WEBHOOK_URL not found. Falling back to native Gemini RSS mining...');
             
@@ -374,7 +373,6 @@ app.post(['/api/hot-buyer-finder', '/hot-buyer-finder'], async (req, res) => {
             });
         }
 
-        // 若有設定 N8N_WEBHOOK_URL，作為 Secure Proxy 轉發給 n8n / Make.com
         const response = await fetch(N8N_WEBHOOK_URL, {
             method: 'POST',
             headers: { 
@@ -407,38 +405,103 @@ app.post(['/api/hot-buyer-finder', '/hot-buyer-finder'], async (req, res) => {
 });
 
 // ==========================================
-// 6. Gumroad Webhook Handler & Client Activation
+// 6. Universal Payment Gateway Webhook Handler (/api/payment-webhook)
+// 支援: LINE Pay, Google Pay, Apple Pay, PayPal, Lemon Squeezy, Gumroad, 綠界 ECPay, 藍新 NewebPay
 // ==========================================
-app.post(['/api/gumroad-webhook', '/api/webhooks/gumroad', '/gumroad-webhook'], async (req, res) => {
+app.post(['/api/payment-webhook', '/payment-webhook', '/api/gumroad-webhook', '/gumroad-webhook'], async (req, res) => {
     try {
-        const saleData = req.body || {};
-        const buyerEmail = saleData.email || saleData.purchaser_email || saleData?.payload?.email;
+        const rawBody = req.body;
+        let paymentData = {
+            provider: 'unknown',
+            orderId: '',
+            customerEmail: '',
+            amount: 0,
+            status: 'pending'
+        };
 
-        if (!buyerEmail) {
-            console.error('[Gumroad Webhook] Missing email in payload:', req.body);
-            return res.status(400).json({ error: 'No email found in webhook data' });
+        // 1. 判斷並解析 LINE Pay 來源 (通常帶有 info, transactionId 等特徵)
+        if (rawBody.info && (rawBody.returnCode !== undefined || rawBody.transactionId)) {
+            paymentData.provider = 'linepay';
+            paymentData.orderId = rawBody.orderId || rawBody.info?.orderId || '';
+            paymentData.customerEmail = rawBody.customerEmail || rawBody.info?.customerEmail || 'linepay_user@anonymous.com';
+            paymentData.amount = rawBody.info?.amount || rawBody.amount || 0;
+            paymentData.status = (String(rawBody.returnCode) === '0000' || rawBody.status === 'SUCCESS') ? 'success' : 'failed';
+        }
+        // 2. 判斷並解析 Google Pay / Apple Pay 來源 (透過 Stripe 或通用 Payment Intent 結構)
+        else if (rawBody.object === 'event' && (rawBody.data?.object?.payment_method_types?.includes('card') || rawBody.type?.includes('payment_intent'))) {
+            const pi = rawBody.data?.object || {};
+            const walletType = pi.payment_method_details?.card?.wallet?.type; // 'google_pay' 或 'apple_pay'
+            paymentData.provider = walletType ? walletType : 'google_apple_pay';
+            paymentData.orderId = pi.id || '';
+            paymentData.customerEmail = pi.receipt_email || pi.customer_email || 'wallet_user@anonymous.com';
+            paymentData.amount = pi.amount_received ? pi.amount_received / 100 : 0;
+            paymentData.status = pi.status === 'succeeded' ? 'success' : 'failed';
+        }
+        // 3. 判斷並解析 Lemon Squeezy 來源
+        else if (req.headers['x-event-signature'] || rawBody?.meta?.event_name?.includes('subscription') || rawBody?.data?.type === 'orders') {
+            paymentData.provider = 'lemonsqueezy';
+            paymentData.orderId = rawBody.data?.id;
+            paymentData.customerEmail = rawBody.data?.attributes?.user_email;
+            paymentData.amount = rawBody.data?.attributes?.total ? rawBody.data.attributes.total / 100 : 0;
+            paymentData.status = (rawBody.data?.attributes?.status === 'paid' || rawBody.meta?.event_name === 'order_created') ? 'success' : 'failed';
+        }
+        // 4. 判斷並解析 Gumroad 來源
+        else if (rawBody.resource_name === 'sale' || rawBody.permalink || rawBody.sale_id) {
+            paymentData.provider = 'gumroad';
+            paymentData.orderId = rawBody.sale_id || rawBody.order_number;
+            paymentData.customerEmail = rawBody.email || rawBody.purchaser_email;
+            paymentData.amount = rawBody.price ? rawBody.price / 100 : 0;
+            paymentData.status = 'success';
+        }
+        // 5. 判斷並解析 PayPal 來源
+        else if (rawBody.event_type && rawBody.event_type.startsWith('PAYMENT.')) {
+            paymentData.provider = 'paypal';
+            paymentData.orderId = rawBody.resource?.id;
+            paymentData.customerEmail = rawBody.resource?.payer?.email_address;
+            paymentData.amount = rawBody.resource?.amount?.total ? parseFloat(rawBody.resource.amount.total) : 0;
+            paymentData.status = 'success';
+        }
+        // 6. 判斷並解析台灣綠界 ECPay / 藍新 NewebPay 來源
+        else if (rawBody.MerchantID && (rawBody.RtnCode !== undefined || rawBody.Status !== undefined)) {
+            const isEcPay = rawBody.TradeNo !== undefined;
+            paymentData.provider = isEcPay ? 'ecpay' : 'newebpay';
+            paymentData.orderId = rawBody.MerchantTradeNo;
+            paymentData.customerEmail = rawBody.Email || rawBody.BuyerEmail || '';
+            paymentData.amount = parseFloat(rawBody.TradeAmt || rawBody.Amt || 0);
+            paymentData.status = (String(rawBody.RtnCode) === '1' || rawBody.Status === 'SUCCESS') ? 'success' : 'failed';
         }
 
-        console.log(`[Gumroad Webhook] Sale received for email: ${buyerEmail}`);
+        console.log(`[Payment Webhook] Detected Provider: ${paymentData.provider}, Status: ${paymentData.status}, Email: ${paymentData.customerEmail}`);
 
-        if (supabase) {
-            const { error } = await supabase.from('paid_customers').upsert([
-                { email: buyerEmail, status: 'paid', updated_at: new Date() }
-            ], { onConflict: 'email' });
+        if (paymentData.status === 'success' && paymentData.customerEmail) {
+            if (supabase) {
+                await supabase.from('paid_customers').upsert([
+                    { email: paymentData.customerEmail, status: 'paid', updated_at: new Date() }
+                ], { onConflict: 'email' }).catch(err => console.error('Supabase Payment Upsert Error:', err.message));
+            }
 
-            if (error) {
-                console.error('Supabase Paid Customer Upsert Error:', error);
-                return res.status(500).json({ error: error.message });
+            const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
+            if (slackWebhookUrl) {
+                await fetch(slackWebhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        text: `💰 *New Enterprise Payment Received!* (${paymentData.provider.toUpperCase()})\n*Customer:* \`${paymentData.customerEmail}\`\n*Amount:* \`${paymentData.amount}\`\n*Order ID:* \`${paymentData.orderId}\``
+                    })
+                }).catch(err => console.error('Slack Payment Notification Error:', err));
             }
         }
 
-        return res.status(200).json({ success: true, email: buyerEmail });
+        return res.status(200).json({ status: 'received', provider: paymentData.provider, processed: true });
     } catch (error) {
-        console.error('Gumroad Webhook Error:', error);
-        return res.status(500).json({ error: 'Internal Server Error' });
+        console.error('[Payment Webhook Error]:', error);
+        return res.status(500).json({ error: error.message || 'Internal payment processing error' });
     }
 });
 
+// ==========================================
+// 7. Client Activation API (/api/activate-client)[cite: 11]
+// ==========================================
 app.post(['/api/activate-client', '/activate-client'], async (req, res) => {
     try {
         const { email, notionDatabaseId, slackWebhookUrl } = req.body;
@@ -457,7 +520,7 @@ app.post(['/api/activate-client', '/activate-client'], async (req, res) => {
             if (checkError || !paidUser) {
                 return res.status(400).json({ 
                     success: false, 
-                    error: 'No payment record found for this email. Please ensure you have completed the purchase on Gumroad.' 
+                    error: 'No payment record found for this email. Please ensure you have completed the purchase.' 
                 });
             }
 
@@ -494,7 +557,7 @@ app.post(['/api/activate-client', '/activate-client'], async (req, res) => {
 });
 
 // ==========================================
-// 7. AI Chat & Function Calling Handler (/api/chat)
+// 8. AI Chat & Function Calling Handler (/api/chat)[cite: 11]
 // ==========================================
 const chatTools = [
     {
@@ -565,11 +628,10 @@ app.post('/api/chat', async (req, res) => {
                     ]);
                 }
 
-                // 💡 動態查詢該客戶專屬的 Slack Webhook (多租戶隔離保護隱私)
                 const { data: clientConfig } = await supabase
                     .from('client_configs')
                     .select('slack_webhook_url')
-                    .eq('email', clientId) // 或依據您的租戶主鍵調整
+                    .eq('email', clientId)
                     .single();
 
                 clientSlackWebhook = clientConfig?.slack_webhook_url || process.env.SLACK_WEBHOOK_URL;
@@ -577,7 +639,6 @@ app.post('/api/chat', async (req, res) => {
                 clientSlackWebhook = process.env.SLACK_WEBHOOK_URL;
             }
 
-            // 💡 發送即時 VIP 通知至該客戶專屬的 Slack 頻道
             if (clientSlackWebhook) {
                 await fetch(clientSlackWebhook, {
                     method: 'POST',
@@ -603,14 +664,14 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // ==========================================
-// 8. Omnichannel Router (/api/omnichannel)
+// 9. Omnichannel Router (/api/omnichannel)[cite: 11]
 // ==========================================
 app.get('/api/omnichannel', (req, res) => {
     return res.status(200).json({ success: true, status: 'Omnichannel router active', activeGateways: 8 });
 });
 
 // ==========================================
-// 9. Fallback Catch-All Route
+// 10. Fallback Catch-All Route[cite: 11]
 // ==========================================
 app.all('*', (req, res) => {
     return res.status(200).send('Garfield Executive API Engine Online');
