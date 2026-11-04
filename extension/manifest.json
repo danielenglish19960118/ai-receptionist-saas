@@ -1,14 +1,21 @@
 {
   "manifest_version": 3,
-  "name": "Garfield Lead Capture",
-  "version": "1.0",
-  "description": "Capture web selections and sync with Garfield Executive Backend",
+  "name": "Garfield Executive Lead Capture",
+  "version": "2.0.0",
+  "description": "Capture web selections and sync with Garfield Executive Multi-Gateway Backend",
   "permissions": [
     "contextMenus",
     "activeTab",
     "storage"
   ],
+  "host_permissions": [
+    "https://*.vercel.app/*",
+    "http://localhost/*"
+  ],
   "background": {
     "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Garfield CRM Capture"
   }
 }
