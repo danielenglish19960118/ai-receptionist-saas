@@ -1,349 +1,206 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garfield AI Executive | Autonomous Revenue Capture & High-Ticket Closing Engine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { garfield: { black: '#050507', panel: '#121216', vipgold: '#D4AF37', orange: '#FF8C00' } },
-                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], bangers: ['Bangers', 'cursive'], mono: ['JetBrains Mono', 'monospace'] },
-                    boxShadow: { 'gold-glow': '0 0 70px rgba(212, 175, 55, 0.5)' }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #F4F4F5; overflow-x: hidden; }
-        .gold-gradient-text { background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.6); box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); }
-    </style>
-</head>
-<body class="min-h-screen flex flex-col selection:bg-amber-400 selection:text-black">
+// 🔗 您的 Make.com Webhook Proxy 網址
+const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/calnmda21j7pz652bl9y1use7dvjas43';
 
-    <!-- Top Urgency Banner -->
-    <div class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-black py-2.5 px-6 text-center text-xs font-black tracking-wider uppercase flex items-center justify-center gap-4 shadow-2xl animate-pulse">
-        <span>🚨 OMNICHANNEL DISPATCH: 10,000+ SOVEREIGN VOICE HOOKS LIBRARY ACTIVE & SYNCED</span>
-        <a href="vip.html" class="hidden md:inline font-mono text-[11px] underline cursor-pointer">Claim Enterprise License ➔</a>
-    </div>
+let currentPage = 1;
+const itemsPerPage = 20;
+const totalItems = 10000;
+const totalPages = Math.ceil(totalItems / itemsPerPage);
+let selectedChannel = 'chrome';
 
-    <!-- Header -->
-    <header class="bg-garfield-black/95 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3 cursor-pointer">
-                <div class="bg-garfield-vipgold p-2.5 rounded-2xl text-black font-extrabold text-2xl shadow-gold-glow">👑</div>
-                <div>
-                    <span class="font-bangers text-2xl text-white">GARFIELD <span class="gold-gradient-text">OMNICHANNEL HOOKS</span></span>
-                    <span class="block text-[10px] text-amber-300 font-extrabold tracking-widest uppercase">8-Channel Enterprise Closing Scenario Library</span>
-                </div>
-            </a>
-            <div class="flex items-center gap-3">
-                <a href="portal.html" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/15 transition-all cursor-pointer">
-                    Client Portal 🔑
-                </a>
-                <a href="vip.html" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase transition-all cursor-pointer">Secure Deal ↗</a>
-            </div>
-        </div>
-    </header>
+const categories = [
+    'Private Wealth & Escrow Vault', 
+    'Luxury Jet & Automotive Concierge', 
+    'Concierge Medical & Bio-Optimization', 
+    'C-Suite Executive M&A & Advisory', 
+    'Enterprise Cloud AI & Sovereign Infrastructure', 
+    'Global Ultra-Luxury Real Estate'
+];
 
-    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 space-y-8">
+function saveOmniEmail() {
+    const email = document.getElementById('omniClientEmail').value.trim();
+    if (!email) {
+        alert('Please enter a valid email address!');
+        return;
+    }
+    alert(`✔ Business email (${email}) successfully bound to ${selectedChannel.toUpperCase()} gateway!`);
+}
 
-        <!-- Navigation Toolbar -->
-        <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4 font-mono text-xs">
-            <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">🔥 Hot Buyer Finder</a>
-            <a href="portal.html" class="bg-amber-400/20 text-amber-300 hover:text-white font-bold px-4 py-2 rounded-xl border border-amber-400/40 transition-all cursor-pointer">🔑 Client Portal</a>
-            <a href="modules.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">📦 All Modules</a>
-            <a href="hooks.html" class="bg-amber-400 text-black font-extrabold px-4 py-2 rounded-xl transition-all shadow-md cursor-pointer">🔗 Module Hooks</a>
-            <a href="pricing.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">💎 Pricing Plans</a>
-            <a href="sandbox.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">🧪 Live Sandbox</a>
-            <a href="team.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">👥 Enterprise Team</a>
-            <a href="objections.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">🛡️ Human Safety Switch</a>
-            <a href="roi.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">💸 Revenue Loss Calculator</a>
-            <a href="trial.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">🎙️ Sub-150ms Voice AI</a>
-            <a href="knowledge.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">📚 Enterprise Integration</a>
-            <a href="escrow.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">02. 100% ROI Guarantee</a>
-            <a href="founder.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">03. Founder's Pledge</a>
-            <a href="support.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">04. Slack Instant Handoff</a>
-            <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">05. 3-Min Activation</a>
-        </div>
-
-        <!-- Header Title Section -->
-        <div class="space-y-3 text-center max-w-3xl mx-auto pt-2">
-            <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full shadow-sm">
-                <i class="fa-solid fa-crown text-amber-400 text-xs"></i>
-                <span class="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider">GARFIELD EXECUTIVE AI • 300% CLOSING VELOCITY ENGINE</span>
-            </div>
-            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">Absolute Revenue Conversion & Sub-130ms Voice Automation</h1>
-            <p class="text-xs md:text-sm text-slate-300 font-mono leading-relaxed">
-                Deploy autonomous AI executive receptionists across all 8 enterprise channels, neutralize high-stakes buyer resistance instantly, and lock in your growth with a 100% third-party escrow guarantee.
-            </p>
-        </div>
-
-        <!-- 8-Channel Omnichannel Controller -->
-        <div class="bg-black/60 p-6 md:p-8 rounded-3xl border border-white/10 space-y-6 shadow-2xl">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
-                <div>
-                    <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest block">Omnichannel Presence</span>
-                    <h2 class="text-xl font-bold text-white">8-Channel Distribution Matrix & Hook Binding</h2>
-                </div>
-                <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20 font-bold">8/8 Gateways Active</span>
-            </div>
-
-            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 font-mono text-[11px]">
-                <button onclick="selectChannel('chrome', 1)" id="chanBtn-1" class="bg-amber-400 text-black font-bold p-3 rounded-2xl border border-amber-400 transition-all text-center truncate shadow-md cursor-pointer">1. Chrome Ext.</button>
-                <button onclick="selectChannel('slack', 2)" id="chanBtn-2" class="bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer">2. Slack App</button>
-                <button onclick="selectChannel('discord', 3)" id="chanBtn-3" class="bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer">3. Discord Bot</button>
-                <button onclick="selectChannel('raycast', 4)" id="chanBtn-4" class="bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer">4. Raycast</button>
-                <button onclick="selectChannel('telegram', 5)" id="chanBtn-5" class="bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer">5. Telegram</button>
-                <button onclick="selectChannel('desktop', 6)" id="chanBtn-6" class="bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer">6. Desktop Tray</button>
-                <button onclick="selectChannel('mobile', 7)" id="chanBtn-7" class="bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer">7. Mobile App</button>
-                <button onclick="selectChannel('notion', 8)" id="chanBtn-8" class="bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer">8. Notion CRM</button>
-            </div>
-        </div>
-
-        <!-- Control Bar -->
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
-            <div>
-                <span class="text-xs font-mono font-bold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20 uppercase">Enterprise Scale Hook Index</span>
-                <h2 class="text-2xl font-black text-white mt-2">10,000+ Interactive Voice Hooks Library</h2>
-                <p class="text-xs text-slate-400 font-mono mt-1">Browse through 10,000 dynamically indexed voice closing patterns. Click any scenario to test live with sub-130ms response.</p>
-            </div>
-            <div class="flex items-center gap-3 w-full md:w-auto">
-                <input type="text" id="hookSearchInput" onkeyup="filterHooks()" placeholder="Search hook # or keyword..." class="bg-black/60 border border-white/15 px-4 py-2.5 text-xs text-white rounded-xl font-mono outline-none w-48 md:w-64 focus:border-amber-400" />
-                <input type="number" id="jumpPageInput" min="1" max="500" placeholder="Page (1-500)" class="bg-black/60 border border-white/15 px-3 py-2.5 text-xs text-white rounded-xl font-mono outline-none w-28 focus:border-amber-400" />
-                <button onclick="jumpToPage()" class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs px-4 py-2.5 rounded-xl uppercase transition-all shadow-md cursor-pointer">Go ➔</button>
-            </div>
-        </div>
-
-        <!-- Hooks Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="hooksGrid"></div>
-
-        <!-- Pagination Controls -->
-        <div class="flex items-center justify-between border-t border-white/10 pt-6 font-mono text-xs">
-            <button onclick="changePage(-1)" id="prevBtn" class="bg-white/5 hover:bg-white/10 text-white font-bold px-4 py-2.5 rounded-xl border border-white/10 transition-all cursor-pointer">← Previous 20</button>
-            <span id="pageIndicator" class="text-amber-400 font-bold">Page 1 of 500 (Hooks 1 - 20 of 10,000)</span>
-            <button onclick="changePage(1)" id="nextBtn" class="bg-white/5 hover:bg-white/10 text-white font-bold px-4 py-2.5 rounded-xl border border-white/10 transition-all cursor-pointer">Next 20 →</button>
-        </div>
-    </main>
-
-    <!-- Modal for Testing Voice Hook Scenarios -->
-    <div id="supremeModal" onclick="closeModalOnOverlay(event)" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-6 z-50 hidden">
-        <div class="bg-garfield-panel max-w-xl w-full p-8 rounded-3xl gold-border-glow space-y-6 relative shadow-2xl font-mono text-xs">
-            <button onclick="closeSupremeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white font-mono text-lg cursor-pointer">✕</button>
-            <div class="space-y-2">
-                <span id="modalPageTag" class="text-xs font-mono font-bold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20 uppercase">Closing Hook Scenario</span>
-                <h3 id="modalPageTitle" class="text-xl font-black text-white">Scenario Detail</h3>
-            </div>
-            <div id="modalPageDesc" class="text-xs font-mono text-slate-300 leading-relaxed bg-black/60 p-4 rounded-xl border border-white/10 space-y-3">
-                Fetching live API configuration...
-            </div>
-            <div class="flex justify-end gap-3 pt-2">
-                <button onclick="closeSupremeModal()" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-all cursor-pointer">Close</button>
-                <a href="trial.html" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-gold-glow uppercase cursor-pointer">Launch in Live Sandbox ➔</a>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-black border-t border-white/10 py-6 text-center text-xs text-slate-500">
-        © 2026 Garfield Enterprise Inc. All rights reserved. <a href="portal.html" class="underline ml-2 text-amber-400 cursor-pointer">Client Portal Login 🔑</a> | <a href="privacy.html" class="underline ml-2 cursor-pointer">Privacy Policy</a>
-    </footer>
-
-    <script>
-        let currentPage = 1;
-        const itemsPerPage = 20;
-        const totalItems = 10000;
-        const totalPages = Math.ceil(totalItems / itemsPerPage);
-        let selectedChannel = 'chrome';
-
-        const categories = [
-            'Private Wealth & Escrow Vault', 
-            'Luxury Jet & Automotive Concierge', 
-            'Concierge Medical & Bio-Optimization', 
-            'C-Suite Executive M&A & Advisory', 
-            'Enterprise Cloud AI & Sovereign Infrastructure', 
-            'Global Ultra-Luxury Real Estate'
-        ];
-
-        function selectChannel(chanKey, idNum) {
-            selectedChannel = chanKey;
-            for (let i = 1; i <= 8; i++) {
-                const btn = document.getElementById(`chanBtn-${i}`);
-                if (btn) {
-                    if (i === idNum) {
-                        btn.className = "bg-amber-400 text-black font-bold p-3 rounded-2xl border border-amber-400 transition-all text-center truncate shadow-md cursor-pointer";
-                    } else {
-                        btn.className = "bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer";
-                    }
-                }
-            }
-        }
-
-        function renderHooks(page, searchQuery = '') {
-            const grid = document.getElementById('hooksGrid');
-            if (!grid) return;
-            const startId = (page - 1) * itemsPerPage + 1;
-            const endId = Math.min(page * itemsPerPage, totalItems);
-            let html = '';
-
-            for (let i = startId; i <= endId; i++) {
-                const category = categories[(i - 1) % categories.length];
-                const hookName = `Voice Hook Scenario #${i}`;
-                const pattern = `Pattern #${i}: High-intent conversational triggers -> Direct secure bridge dispatch.`;
-
-                if (searchQuery && !hookName.toLowerCase().includes(searchQuery.toLowerCase()) && !String(i).includes(searchQuery)) {
-                    continue;
-                }
-
-                html += `
-                    <div onclick="inspectHookScenario(${i})" class="bg-[#121216] p-5 rounded-2xl border border-white/10 hover:border-amber-400 transition-all cursor-pointer shadow-lg flex flex-col justify-between space-y-3 group">
-                        <div>
-                            <div class="flex justify-between items-center text-[10px] font-mono">
-                                <span class="text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">HOOK #${i}</span>
-                                <span class="text-slate-500 truncate max-w-[120px]">${category}</span>
-                            </div>
-                            <h3 class="font-bold text-white text-sm mt-2 group-hover:text-amber-300 transition-colors">${hookName}</h3>
-                            <p class="text-[11px] font-mono text-slate-400 mt-1 line-clamp-2">${pattern}</p>
-                        </div>
-                        <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono">
-                            <span class="text-amber-400"><i class="fa-solid fa-hand-pointer mr-1"></i> Test Scenario</span>
-                            <span class="text-emerald-400">&lt; 130ms</span>
-                        </div>
-                    </div>
-                `;
-            }
-
-            if (html === '') {
-                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 font-mono text-xs">No matching voice hooks found on page ${page}.</div>`;
+async function selectChannel(chanKey, idNum) {
+    selectedChannel = chanKey;
+    for (let i = 1; i <= 8; i++) {
+        const btn = document.getElementById(`chanBtn-${i}`);
+        if (btn) {
+            if (i === idNum) {
+                btn.className = "bg-amber-400 text-black font-bold p-3 rounded-2xl border border-amber-400 transition-all text-center truncate shadow-md cursor-pointer";
             } else {
-                grid.innerHTML = html;
-            }
-
-            const indicator = document.getElementById('pageIndicator');
-            if (indicator) indicator.innerText = `Page ${page} of ${totalPages} (Hooks ${startId} - ${endId} of ${totalItems})`;
-        }
-
-        async function inspectHookScenario(hookId) {
-            const tag = document.getElementById('modalPageTag');
-            const titleEl = document.getElementById('modalPageTitle');
-            const desc = document.getElementById('modalPageDesc');
-            const modal = document.getElementById('supremeModal');
-
-            if (tag && titleEl && desc && modal) {
-                tag.innerText = `HOOK SCENARIO #${hookId} • OMNICHANNEL: ${selectedChannel.toUpperCase()}`;
-                titleEl.innerText = `Enterprise Voice Hook Scenario #${hookId}`;
-                desc.innerHTML = `<div class="text-amber-400 animate-pulse py-6 text-center font-mono">📡 Fetching real-time scenario config from Vercel Serverless Edge for ${selectedChannel}...</div>`;
-                modal.classList.remove('hidden');
-
-                try {
-                    const res = await fetch(`/api/voice-hook?id=${hookId}&channel=${selectedChannel}`);
-                    const data = await res.json();
-                    
-                    if (data.success) {
-                        desc.innerHTML = `
-                            <div class="space-y-2">
-                                <div class="flex justify-between border-b border-white/10 pb-1">
-                                    <span class="text-slate-400">Scenario Code:</span>
-                                    <strong class="text-amber-300">${data.scenarioCode}</strong>
-                                </div>
-                                <div class="flex justify-between border-b border-white/10 pb-1">
-                                    <span class="text-slate-400">Category:</span>
-                                    <strong class="text-white">${data.category}</strong>
-                                </div>
-                                <div class="flex justify-between border-b border-white/10 pb-1">
-                                    <span class="text-slate-400">Channel Binding:</span>
-                                    <strong class="text-emerald-400">${data.activeDistributionChannel}</strong>
-                                </div>
-                                <div class="flex justify-between border-b border-white/10 pb-1">
-                                    <span class="text-slate-400">Estimated Deal Value:</span>
-                                    <strong class="text-amber-400">${data.targetMetrics?.estimatedValue || '$300,000+ ARR'}</strong>
-                                </div>
-                                <div class="pt-2">
-                                    <span class="text-slate-400 block mb-1">System Prompt Script:</span>
-                                    <p class="text-slate-200 italic bg-black/80 p-3 rounded-lg border border-amber-400/20">${data.systemScript || 'You are the Garfield AI Executive VIP concierge.'}</p>
-                                </div>
-                            </div>
-                        `;
-                    } else {
-                        throw new Error('API returned fallback mode');
-                    }
-                } catch (e) {
-                    const category = categories[(hookId - 1) % categories.length];
-                    desc.innerHTML = `
-                        <div class="space-y-2 font-mono text-xs">
-                            <div class="flex justify-between border-b border-white/10 pb-1">
-                                <span class="text-slate-400">Scenario Code:</span>
-                                <strong class="text-amber-300">EXEC-HOOK-#${hookId}</strong>
-                            </div>
-                            <div class="flex justify-between border-b border-white/10 pb-1">
-                                <span class="text-slate-400">Category:</span>
-                                <strong class="text-white">${category}</strong>
-                            </div>
-                            <div class="flex justify-between border-b border-white/10 pb-1">
-                                <span class="text-slate-400">Channel Binding:</span>
-                                <strong class="text-emerald-400">${selectedChannel.toUpperCase()} Gateway</strong>
-                            </div>
-                            <div class="flex justify-between border-b border-white/10 pb-1">
-                                <span class="text-slate-400">Estimated Deal Value:</span>
-                                <strong class="text-amber-400">$300,000+ ARR (Tier-1 Whale)</strong>
-                            </div>
-                            <div class="pt-2">
-                                <span class="text-slate-400 block mb-1">System Prompt Script:</span>
-                                <p class="text-slate-200 italic bg-black/80 p-3 rounded-lg border border-amber-400/20">"Scenario #${hookId} features unrefutable objection scripts, sub-130ms voice response pipelines, and instant escrow closing hooks synchronized across ${selectedChannel}."</p>
-                            </div>
-                        </div>
-                    `;
-                }
+                btn.className = "bg-white/5 text-slate-300 hover:text-white p-3 rounded-2xl border border-white/10 transition-all text-center truncate cursor-pointer";
             }
         }
+    }
 
-        function closeSupremeModal() {
-            const modal = document.getElementById('supremeModal');
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function closeModalOnOverlay(e) {
-            if (e.target.id === 'supremeModal') {
-                closeSupremeModal();
-            }
-        }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeSupremeModal();
+    const email = document.getElementById('omniClientEmail')?.value.trim() || 'anonymous@executive.com';
+    try {
+        await fetch(MAKE_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                type: 'omnichannel_gateway_switch',
+                channel: selectedChannel,
+                email: email,
+                timestamp: new Date().toISOString()
+            })
         });
+    } catch (err) {
+        console.log('Webhook dispatch note:', err);
+    }
+}
 
-        function changePage(delta) {
-            const searchInput = document.getElementById('hookSearchInput');
-            if (currentPage + delta >= 1 && currentPage + delta <= totalPages) {
-                currentPage += delta;
-                renderHooks(currentPage, searchInput ? searchInput.value : '');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+function renderHooks(page, searchQuery = '') {
+    const grid = document.getElementById('hooksGrid');
+    if (!grid) return;
+    const startId = (page - 1) * itemsPerPage + 1;
+    const endId = Math.min(page * itemsPerPage, totalItems);
+    let html = '';
+
+    for (let i = startId; i <= endId; i++) {
+        const category = categories[(i - 1) % categories.length];
+        const hookName = `Voice Hook Scenario #${i}`;
+        const pattern = `Pattern #${i}: High-intent conversational triggers -> Direct secure bridge dispatch via Make.com Proxy.`;
+
+        if (searchQuery && !hookName.toLowerCase().includes(searchQuery.toLowerCase()) && !String(i).includes(searchQuery)) {
+            continue;
         }
 
-        function jumpToPage() {
-            const input = document.getElementById('jumpPageInput');
-            const searchInput = document.getElementById('hookSearchInput');
-            if (!input) return;
-            const val = parseInt(input.value);
-            if (val >= 1 && val <= totalPages) {
-                currentPage = val;
-                renderHooks(currentPage, searchInput ? searchInput.value : '');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+        html += `
+            <div onclick="inspectHookScenario(${i})" class="bg-[#121216] p-5 rounded-2xl border border-white/10 hover:border-amber-400 transition-all cursor-pointer shadow-lg flex flex-col justify-between space-y-3 group">
+                <div>
+                    <div class="flex justify-between items-center text-[10px] font-mono">
+                        <span class="text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">HOOK #${i}</span>
+                        <span class="text-slate-500 truncate max-w-[120px]">${category}</span>
+                    </div>
+                    <h3 class="font-bold text-white text-sm mt-2 group-hover:text-amber-300 transition-colors">${hookName}</h3>
+                    <p class="text-[11px] font-mono text-slate-400 mt-1 line-clamp-2">${pattern}</p>
+                </div>
+                <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono">
+                    <span class="text-amber-400"><i class="fa-solid fa-hand-pointer mr-1"></i> Test Scenario</span>
+                    <span class="text-emerald-400">&lt; 130ms</span>
+                </div>
+            </div>
+        `;
+    }
+
+    if (html === '') {
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 font-mono text-xs">No matching voice hooks found on page ${page}.</div>`;
+    } else {
+        grid.innerHTML = html;
+    }
+
+    const indicator = document.getElementById('pageIndicator');
+    if (indicator) indicator.innerText = `Page ${page} of ${totalPages} (Hooks ${startId} - ${endId} of ${totalItems})`;
+}
+
+async function inspectHookScenario(hookId) {
+    const tag = document.getElementById('modalPageTag');
+    const titleEl = document.getElementById('modalPageTitle');
+    const desc = document.getElementById('modalPageDesc');
+    const modal = document.getElementById('supremeModal');
+    const email = document.getElementById('omniClientEmail')?.value.trim() || 'anonymous@executive.com';
+
+    if (tag && titleEl && desc && modal) {
+        tag.innerText = `HOOK SCENARIO #${hookId} • OMNICHANNEL: ${selectedChannel.toUpperCase()}`;
+        titleEl.innerText = `Enterprise Voice Hook Scenario #${hookId}`;
+        desc.innerHTML = `<div class="text-amber-400 animate-pulse py-6 text-center font-mono">📡 Transmitting request via Make.com Webhook Proxy (${selectedChannel})...</div>`;
+        modal.classList.remove('hidden');
+
+        try {
+            await fetch(MAKE_WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: 'inspect_hook_scenario',
+                    hookId: hookId,
+                    channel: selectedChannel,
+                    email: email,
+                    timestamp: new Date().toISOString()
+                })
+            });
+        } catch (err) {
+            console.log('Webhook note:', err);
         }
 
-        function filterHooks() {
-            const searchInput = document.getElementById('hookSearchInput');
-            const query = searchInput ? searchInput.value : '';
-            renderHooks(currentPage, query);
-        }
+        const category = categories[(hookId - 1) % categories.length];
+        desc.innerHTML = `
+            <div class="space-y-2 font-mono text-xs">
+                <div class="flex justify-between border-b border-white/10 pb-1">
+                    <span class="text-slate-400">Scenario Code:</span>
+                    <strong class="text-amber-300">EXEC-HOOK-#${hookId}</strong>
+                </div>
+                <div class="flex justify-between border-b border-white/10 pb-1">
+                    <span class="text-slate-400">Category:</span>
+                    <strong class="text-white">${category}</strong>
+                </div>
+                <div class="flex justify-between border-b border-white/10 pb-1">
+                    <span class="text-slate-400">Channel Binding:</span>
+                    <strong class="text-emerald-400">${selectedChannel.toUpperCase()} Gateway</strong>
+                </div>
+                <div class="flex justify-between border-b border-white/10 pb-1">
+                    <span class="text-slate-400">Client Email:</span>
+                    <strong class="text-amber-400">${email}</strong>
+                </div>
+                <div class="flex justify-between border-b border-white/10 pb-1">
+                    <span class="text-slate-400">Estimated Deal Value:</span>
+                    <strong class="text-amber-400">$300,000+ ARR (Tier-1 Whale)</strong>
+                </div>
+                <div class="pt-2">
+                    <span class="text-slate-400 block mb-1">System Prompt Script:</span>
+                    <p class="text-slate-200 italic bg-black/80 p-3 rounded-lg border border-amber-400/20">"Scenario #${hookId} features unrefutable objection scripts, sub-130ms voice response pipelines, and instant escrow closing hooks synchronized across ${selectedChannel} via Make.com Proxy."</p>
+                </div>
+            </div>
+        `;
+    }
+}
 
-        renderHooks(currentPage);
-    </script>
-</body>
-</html>
+function closeSupremeModal() {
+    const modal = document.getElementById('supremeModal');
+    if (modal) modal.classList.add('hidden');
+}
+
+function closeModalOnOverlay(e) {
+    if (e.target.id === 'supremeModal') {
+        closeSupremeModal();
+    }
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSupremeModal();
+});
+
+function changePage(delta) {
+    const searchInput = document.getElementById('hookSearchInput');
+    if (currentPage + delta >= 1 && currentPage + delta <= totalPages) {
+        currentPage += delta;
+        renderHooks(currentPage, searchInput ? searchInput.value : '');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function jumpToPage() {
+    const input = document.getElementById('jumpPageInput');
+    const searchInput = document.getElementById('hookSearchInput');
+    if (!input) return;
+    const val = parseInt(input.value);
+    if (val >= 1 && val <= totalPages) {
+        currentPage = val;
+        renderHooks(currentPage, searchInput ? searchInput.value : '');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function filterHooks() {
+    const searchInput = document.getElementById('hookSearchInput');
+    const query = searchInput ? searchInput.value : '';
+    renderHooks(currentPage, query);
+}
+
+// 初始化執行
+renderHooks(currentPage);
