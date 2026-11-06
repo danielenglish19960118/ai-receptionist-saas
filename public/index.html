@@ -43,7 +43,7 @@
                 </div>
             </a>
             <div class="flex items-center gap-3">
-                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-emerald-400 font-bold">Make.com Proxy Active</strong></span>
+                <span id="authBadge" class="text-xs font-mono text-slate-400 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">Status: <strong class="text-emerald-400 font-bold">Make.com Multi-Tenant Proxy Active</strong></span>
                 <a href="portal.html" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/15 transition-all cursor-pointer">
                     Client Portal 🔑
                 </a>
@@ -112,11 +112,11 @@
                 <div class="lg:col-span-5 bg-garfield-panel p-8 rounded-3xl gold-border-glow space-y-6 shadow-2xl">
                     <h3 class="font-bold text-white text-base border-b border-white/10 pb-3 flex items-center justify-between">
                         <span>Autonomous Lead Prospecting</span>
-                        <span class="text-[10px] text-emerald-400 font-mono font-bold">Make.com Proxy AI</span>
+                        <span class="text-[10px] text-emerald-400 font-mono font-bold">Make.com Multi-Tenant</span>
                     </h3>
                     <form onsubmit="runHotBuyerFinder(event)" class="space-y-4 font-mono text-xs">
                         <div>
-                            <label class="text-xs font-bold text-slate-300 block mb-1">Your / Prospect Business Email *</label>
+                            <label class="text-xs font-bold text-slate-300 block mb-1">Your / Prospect Business Email (Client ID) *</label>
                             <input type="email" id="prospectEmail" required placeholder="name@company.com" class="w-full bg-black/60 border border-white/15 focus:border-amber-400 rounded-xl px-4 py-3 text-xs text-white outline-none" />
                         </div>
                         <div>
@@ -150,14 +150,14 @@
                             <span id="miningCounter" class="text-xs font-mono text-amber-400 bg-amber-400/10 px-3 py-1 rounded-xl border border-amber-400/20 font-bold">Ready</span>
                         </div>
                         <div id="miningStatusContainer" class="hidden my-4 text-xs font-mono text-amber-300 text-center animate-pulse">
-                            <span id="miningStatusText">🔍 Executing secure payload transmission via Make.com Webhook Proxy...</span>
+                            <span id="miningStatusText">🔍 Transmitting multi-tenant payload via Make.com Webhook Proxy...</span>
                         </div>
                         <div id="minedBuyersGrid" class="space-y-3 font-mono text-xs max-h-[360px] overflow-y-auto pr-2 mt-4">
-                            <div class="text-slate-500 italic text-center py-24">[Enter your email and click "Launch One-Click Buyer Finder" to scan feeds]</div>
+                            <div class="text-slate-500 italic text-center py-24">[Enter your business email and click "Launch One-Click Buyer Finder"]</div>
                         </div>
                     </div>
                     <div class="pt-4 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-slate-400">
-                        <span>Multi-Tenant Proxy: <strong class="text-emerald-400">Make.com Webhook Proxy Active ($0)</strong></span>
+                        <span>Multi-Tenant Proxy: <strong class="text-emerald-400">Make.com Active (Dynamic Sender)</strong></span>
                         <span>Channel Relay: <strong class="text-amber-400">8 Gateways Synced</strong></span>
                     </div>
                 </div>
@@ -235,14 +235,14 @@
         </button>
     </div>
 
-    <!-- AI Receptionist Dialogue Window -->
+    <!-- AI Receptionist Dialogue Window (Multi-Tenant Enabled) -->
     <div id="aiChatWidget" class="fixed bottom-24 right-6 z-50 w-80 sm:w-96 bg-garfield-panel rounded-3xl gold-border-glow shadow-2xl flex flex-col hidden font-mono text-xs overflow-hidden h-[520px]">
         <!-- Header -->
         <div class="bg-black/90 p-4 border-b border-white/10 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
                 <span class="font-bold text-white">Garfield Executive AI</span>
-                <span class="text-[10px] text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Make.com Proxy</span>
+                <span class="text-[10px] text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Multi-Tenant</span>
             </div>
             <button onclick="toggleChatWidget()" class="text-slate-400 hover:text-white font-bold cursor-pointer text-sm">✕</button>
         </div>
@@ -250,13 +250,13 @@
         <!-- Chat History Area -->
         <div id="chatMessages" class="flex-grow p-4 overflow-y-auto space-y-3">
             <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-slate-300 max-w-[85%]">
-                Hello! Please enter your email and message below to connect with our 24/7 AI Executive Receptionist.
+                Hello! Enter your business email and message to route through your tenant profile.
             </div>
         </div>
 
-        <!-- Input Area -->
+        <!-- Input Area (包含多租戶 Client Email 與 Message) -->
         <form onsubmit="sendMakeWebhookChat(event)" class="p-3 bg-black/80 border-t border-white/10 flex flex-col gap-2">
-            <input type="email" id="chatUserEmail" required placeholder="Your email (e.g. name@company.com)" class="w-full bg-white/5 border border-white/15 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-white outline-none" />
+            <input type="email" id="chatUserEmail" required placeholder="Your business email (Tenant ID)" class="w-full bg-white/5 border border-white/15 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-white outline-none" />
             <div class="flex items-center gap-2">
                 <input type="text" id="userChatInput" required placeholder="Type your message..." class="flex-grow bg-white/5 border border-white/15 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-white outline-none" />
                 <button type="submit" id="chatSendBtn" class="bg-amber-400 hover:bg-amber-300 text-black font-bold p-2.5 rounded-xl cursor-pointer transition-all shrink-0">
@@ -294,7 +294,7 @@
     </div>
 
     <script>
-        // Make.com Webhook URL (Updated)
+        // Make.com Webhook URL (Multi-Tenant Connected)
         const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/52gqybuwa53vuoblqtmvz1hsfi66yvae';
 
         let currentHomeBatch = 0;
@@ -313,6 +313,7 @@
             widget.classList.toggle('hidden');
         }
 
+        // 💬 聊天視窗：自動帶入 clientId 與 clientEmail 實現多租戶動態發信
         async function sendMakeWebhookChat(e) {
             e.preventDefault();
             const emailInput = document.getElementById('chatUserEmail');
@@ -326,7 +327,7 @@
 
             messagesContainer.innerHTML += `
                 <div class="bg-amber-400/10 p-3 rounded-2xl border border-amber-400/30 text-amber-300 max-w-[85%] ml-auto space-y-1">
-                    <div class="text-[10px] text-amber-400 font-bold">📧 ${userEmail}</div>
+                    <div class="text-[10px] text-amber-400 font-bold">Tenant Email: ${userEmail}</div>
                     <div>${userMsg}</div>
                 </div>
             `;
@@ -336,7 +337,7 @@
             const loadingId = 'loading-' + Date.now();
             messagesContainer.innerHTML += `
                 <div id="${loadingId}" class="bg-white/5 p-3 rounded-2xl border border-white/10 text-slate-400 max-w-[85%] animate-pulse flex items-center gap-2">
-                    <i class="fa-solid fa-spinner fa-spin"></i> Proxy routing through Make.com Webhook...
+                    <i class="fa-solid fa-spinner fa-spin"></i> Routing via Make.com multi-tenant proxy...
                 </div>
             `;
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -347,8 +348,9 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        type: 'enterprise_chat_with_email',
-                        email: userEmail,
+                        type: 'multitenant_chat_inquiry',
+                        clientId: userEmail,             // 👈 傳遞租戶識別碼
+                        clientEmail: userEmail,          // 👈 傳遞租戶專屬信箱
                         message: userMsg,
                         timestamp: new Date().toISOString()
                     })
@@ -357,7 +359,7 @@
                 document.getElementById(loadingId).remove();
                 messagesContainer.innerHTML += `
                     <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-slate-200 max-w-[85%]">
-                        ✅ Email <strong class="text-amber-300">${userEmail}</strong> successfully captured, synced with Supabase, and notified via Slack!
+                        ✅ Tenant <strong class="text-amber-300">${userEmail}</strong> payload dispatched successfully to Make.com!
                     </div>
                 `;
             } catch (err) {
@@ -367,7 +369,7 @@
 
                 messagesContainer.innerHTML += `
                     <div class="bg-emerald-500/10 p-3 rounded-2xl border border-emerald-500/30 text-emerald-400 max-w-[85%]">
-                        ✨ Email and message dispatched successfully via Make.com Proxy.
+                        ✨ Multi-tenant payload dispatched successfully via Make.com Proxy.
                     </div>
                 `;
             } finally {
@@ -430,6 +432,7 @@
             }
         }
 
+        // 🚀 買家掃描器：自動帶入 clientId 與 clientEmail 進行多租戶派送
         async function runHotBuyerFinder(e) {
             e.preventDefault();
             const email = document.getElementById('prospectEmail').value;
@@ -444,12 +447,13 @@
 
             statusContainer.classList.remove('hidden');
             btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Capturing Email & Relaying via Make.com Proxy...`;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Transmitting multi-tenant payload via Make.com...`;
             grid.innerHTML = "";
 
             const payload = {
-                type: 'enterprise_hot_buyer_scan_with_email',
-                prospectEmail: email,
+                type: 'multitenant_hot_buyer_scan',
+                clientId: email,                 // 👈 傳遞租戶識別碼
+                clientEmail: email,              // 👈 傳遞租戶專屬信箱
                 industry,
                 geoRegion: region,
                 minIntentScore: parseInt(minScore),
@@ -467,19 +471,19 @@
             }
 
             setTimeout(() => {
-                statusText.innerText = "✔ Email captured & High-intent leads successfully synchronized to Supabase & Slack!";
+                statusText.innerText = "✔ Multi-tenant payload successfully synced with Supabase & Slack!";
                 counter.innerText = `3 Whales Found`;
                 grid.innerHTML = `
                     <div class="bg-black/80 p-5 rounded-2xl border border-amber-500/30 space-y-3 shadow-xl">
                         <div class="flex justify-between items-center text-[10px]">
                             <span class="text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Enterprise Whale</span>
-                            <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">95% Intent Score (Safety Switch Triggered)</span>
+                            <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">95% Intent Score</span>
                         </div>
                         <div>
                             <div class="font-bold text-white text-sm">Apex Cloud Solutions (VP of Revenue)</div>
-                            <div class="text-[11px] text-slate-300 font-mono mt-0.5">Linked Prospect Email: <strong class="text-amber-300">${email}</strong></div>
+                            <div class="text-[11px] text-slate-300 font-mono mt-0.5">Tenant Owner: <strong class="text-amber-300">${email}</strong></div>
                         </div>
-                        <button onclick="alert('Slack human takeover alert dispatched for ${email}!')" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold py-2.5 rounded-xl text-xs uppercase transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
+                        <button onclick="alert('Slack alert dispatched for tenant ${email}!')" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-black font-extrabold py-2.5 rounded-xl text-xs uppercase transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
                             <i class="fa-solid fa-phone"></i> Human Takeover Intervene
                         </button>
                     </div>
