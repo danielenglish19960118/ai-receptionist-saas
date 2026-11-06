@@ -56,7 +56,7 @@
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-12">
 
-        <!-- 🔗 完美單行串聯的導覽 Toolbar -->
+        <!-- Navigation Toolbar -->
         <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap border-b border-white/10 pb-4 font-mono text-xs">
             <a href="index.html" class="bg-amber-400 text-black font-bold px-4 py-2 rounded-xl transition-all shadow-md cursor-pointer shrink-0">🔥 Hot Buyer Finder</a>
             <a href="portal.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">🔑 Client Portal</a>
@@ -75,7 +75,7 @@
             <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shrink-0">3-Min Activation</a>
         </div>
 
-        <!-- 🎯 主標題與次標題 Header 區塊 -->
+        <!-- Hero Section -->
         <div class="text-center space-y-4 max-w-4xl mx-auto">
             <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-4 py-1.5 rounded-full">
                 <i class="fa-solid fa-shield-halved text-amber-400 text-xs"></i>
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-        <!-- 🔥 ONE-CLICK HOT BUYER FINDER WORKSPACE (含客戶 Email 輸入) -->
+        <!-- Hot Buyer Finder Workspace -->
         <div class="space-y-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
@@ -164,7 +164,7 @@
             </div>
         </div>
 
-        <!-- 🌐 8-CHANNEL DISTRIBUTION MATRIX -->
+        <!-- Omnichannel Matrix -->
         <div class="bg-black/60 p-8 md:p-10 rounded-3xl border border-white/10 space-y-8 shadow-2xl">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
                 <div>
@@ -227,7 +227,7 @@
         </div>
     </main>
 
-    <!-- 🤖 Floating AI Receptionist Chat Widget Button -->
+    <!-- Floating AI Receptionist Chat Widget Button -->
     <div class="fixed bottom-6 right-6 z-50">
         <button onclick="toggleChatWidget()" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black p-4 rounded-full shadow-gold-glow flex items-center gap-2 border-2 border-amber-300 transition-all scale-100 hover:scale-105 cursor-pointer">
             <i class="fa-solid fa-headset text-xl"></i>
@@ -235,7 +235,7 @@
         </button>
     </div>
 
-    <!-- 💬 AI Receptionist Dialogue Window (Make.com Proxy Connected + Email Capture) -->
+    <!-- AI Receptionist Dialogue Window -->
     <div id="aiChatWidget" class="fixed bottom-24 right-6 z-50 w-80 sm:w-96 bg-garfield-panel rounded-3xl gold-border-glow shadow-2xl flex flex-col hidden font-mono text-xs overflow-hidden h-[520px]">
         <!-- Header -->
         <div class="bg-black/90 p-4 border-b border-white/10 flex items-center justify-between">
@@ -254,7 +254,7 @@
             </div>
         </div>
 
-        <!-- Input Area (包含 Email 與訊息輸入) -->
+        <!-- Input Area -->
         <form onsubmit="sendMakeWebhookChat(event)" class="p-3 bg-black/80 border-t border-white/10 flex flex-col gap-2">
             <input type="email" id="chatUserEmail" required placeholder="Your email (e.g. name@company.com)" class="w-full bg-white/5 border border-white/15 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-white outline-none" />
             <div class="flex items-center gap-2">
@@ -294,7 +294,7 @@
     </div>
 
     <script>
-        // 🔗 您的 Make.com Webhook Proxy 網址
+        // Make.com Webhook URL (Updated)
         const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/52gqybuwa53vuoblqtmvz1hsfi66yvae';
 
         let currentHomeBatch = 0;
