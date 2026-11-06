@@ -51,7 +51,7 @@
     </header>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-10">
-        <!-- 🔗 完美統一的全站導覽 Toolbar -->
+        <!-- Toolbar -->
         <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4 font-mono text-xs">
             <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">🔥 Hot Buyer Finder</a>
             <a href="portal.html" class="bg-amber-400/20 text-amber-300 hover:text-white font-bold px-4 py-2 rounded-xl border border-amber-400/40 transition-all cursor-pointer">🔑 Client Portal</a>
@@ -70,7 +70,7 @@
             <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">05. 3-Min Activation</a>
         </div>
 
-        <!-- 🎯 統一標準化的主標題與次標題 Header 區塊 -->
+        <!-- Master Header -->
         <div class="space-y-3 text-center max-w-3xl mx-auto pt-2">
             <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full shadow-sm">
                 <i class="fa-solid fa-crown text-amber-400 text-xs"></i>
@@ -82,7 +82,7 @@
             </p>
         </div>
 
-        <!-- Hero Sub-Header -->
+        <!-- Sub-Header -->
         <div class="space-y-3 text-center max-w-2xl mx-auto pt-2">
             <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full">
                 <i class="fa-solid fa-headset text-amber-400 text-xs"></i>
@@ -94,7 +94,7 @@
             </p>
         </div>
 
-        <!-- Detailed 8-Channel Omnichannel Ecosystem Status Panel -->
+        <!-- 8-Channel Panel -->
         <div class="bg-garfield-panel p-6 md:p-8 rounded-3xl border border-amber-500/30 space-y-4 shadow-xl font-mono text-xs">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/10 pb-4 gap-2">
                 <span class="text-amber-400 font-bold flex items-center gap-2 text-sm">
@@ -140,7 +140,6 @@
                 </button>
             </div>
             
-            <!-- Dynamic Inspector Output -->
             <div id="omnichannelStatusBox" class="hidden mt-3 bg-black/80 p-4 rounded-2xl border border-amber-500/30 text-slate-300 text-[11px] animate-in fade-in duration-200">
                 <div class="flex justify-between items-center border-b border-white/10 pb-2 mb-2">
                     <span id="inspectorTitle" class="font-bold text-amber-300">Gateway Inspector</span>
@@ -150,9 +149,8 @@
             </div>
         </div>
 
-        <!-- Escalation Handoff Simulator -->
+        <!-- Simulator -->
         <div class="bg-[#121216] rounded-3xl p-6 md:p-8 gold-border-glow grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch shadow-2xl">
-            <!-- Left Panel -->
             <div class="lg:col-span-7 flex flex-col justify-between gap-6">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between border-b border-white/10 pb-3">
@@ -186,7 +184,6 @@
                 </button>
             </div>
 
-            <!-- Right Panel -->
             <div class="lg:col-span-5 bg-black/90 rounded-2xl p-6 border border-white/10 font-mono text-xs flex flex-col justify-between space-y-6">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between border-b border-white/10 pb-3">
@@ -222,7 +219,6 @@
             </div>
         </div>
 
-        <!-- Navigation Anchor -->
         <div class="space-y-4 border-t border-white/10 pt-8 text-center font-mono text-xs">
             <span class="text-slate-400">Explore All 10,000+ Deployed Programmatic Child Sub-Pages:</span>
             <div class="flex justify-center gap-4 pt-2">
@@ -286,7 +282,6 @@
             const box = document.getElementById('vipResultBox');
 
             if (!input || !badge || !box) return;
-
             const prompt = input.value.trim();
 
             if (!prompt) {
@@ -296,7 +291,6 @@
 
             badge.innerText = "ESCALATING";
             badge.className = "bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full border border-amber-500/40 font-bold text-[10px] animate-pulse";
-
             box.innerHTML = `<p class="text-amber-400 font-mono text-xs animate-pulse">⚡ Transferring conversation state & broadcasting dossier across 8 escalation gateways...</p>`;
 
             setTimeout(() => {
@@ -315,7 +309,7 @@
                         <div class="text-[11px] space-y-1 text-slate-400 pt-1">
                             <div>Event: <span class="text-slate-200">"${prompt.substring(0, 50)}..."</span></div>
                             <div>Status: <strong class="text-emerald-400">WARM TRANSFER SUCCESSFUL</strong></div>
-                            <div>Audit Hash: <span class="text-amber-400 font-mono">0x${Math.floor(Math.random()*0xFFFFFF).toString(16).toUpperCase()}</span></div>
+                            <div>Audit Hash: <span class="text-amber-400 font-mono">0x${Math.floor(Math.random()*0xFFFFFF).toString(16).toUpperCase().padStart(6, '0')}</span></div>
                         </div>
                     </div>
                 `;
