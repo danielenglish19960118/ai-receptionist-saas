@@ -1,5 +1,5 @@
 // 🔗 您的 Make.com Webhook Proxy 網址
-const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/calnmda21j7pz652bl9y1use7dvjas43';
+const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/52gqybuwa53vuoblqtmvz1hsfi66yvae';
 
 let currentPage = 1;
 const itemsPerPage = 20;
