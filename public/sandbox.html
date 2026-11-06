@@ -51,7 +51,7 @@
     </header>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10 flex flex-col gap-10">
-        <!-- 🔗 完美統一的全站導覽 Toolbar -->
+        <!-- Toolbar Navigation -->
         <div class="flex flex-wrap gap-2 border-b border-white/10 pb-4 font-mono text-xs">
             <a href="index.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">🔥 Hot Buyer Finder</a>
             <a href="portal.html" class="bg-amber-400/20 text-amber-300 hover:text-white font-bold px-4 py-2 rounded-xl border border-amber-400/40 transition-all cursor-pointer">🔑 Client Portal</a>
@@ -70,7 +70,7 @@
             <a href="vip.html" class="bg-white/5 text-slate-300 hover:text-white font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">05. 3-Min Activation</a>
         </div>
 
-        <!-- 🎯 統一標準化的主標題與次標題 Header 區塊 -->
+        <!-- Master Banner Header -->
         <div class="space-y-3 text-center max-w-3xl mx-auto pt-2">
             <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full shadow-sm">
                 <i class="fa-solid fa-crown text-amber-400 text-xs"></i>
@@ -82,7 +82,7 @@
             </p>
         </div>
 
-        <!-- Hero Sub-Header -->
+        <!-- Sub Header -->
         <div class="space-y-3 text-center max-w-3xl mx-auto pt-2">
             <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full">
                 <i class="fa-solid fa-headset text-amber-400 text-xs"></i>
@@ -94,7 +94,7 @@
             </p>
         </div>
 
-        <!-- Detailed 8-Channel Omnichannel Ecosystem Status Panel -->
+        <!-- 8-Channel Omnichannel Ecosystem -->
         <div class="bg-garfield-panel p-6 md:p-8 rounded-3xl border border-amber-500/30 space-y-4 shadow-xl font-mono text-xs">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/10 pb-4 gap-2">
                 <span class="text-amber-400 font-bold flex items-center gap-2 text-sm">
@@ -140,8 +140,7 @@
                 </button>
             </div>
             
-            <!-- Dynamic Inspector Panel Output -->
-            <div id="omnichannelStatusBox" class="hidden mt-3 bg-black/80 p-4 rounded-2xl border border-amber-500/30 text-slate-300 text-[11px] animate-in fade-in duration-200">
+            <div id="omnichannelStatusBox" class="hidden mt-3 bg-black/80 p-4 rounded-2xl border border-amber-500/30 text-slate-300 text-[11px]">
                 <div class="flex justify-between items-center border-b border-white/10 pb-2 mb-2">
                     <span id="inspectorTitle" class="font-bold text-amber-300">Gateway Inspector</span>
                     <button onclick="document.getElementById('omnichannelStatusBox').classList.add('hidden')" class="text-slate-400 hover:text-white font-bold cursor-pointer">✕ Close</button>
@@ -150,10 +149,9 @@
             </div>
         </div>
 
-        <!-- Interactive Sandbox Grid Workspace -->
+        <!-- Interactive Sandbox Grid -->
         <div class="bg-[#121216] rounded-3xl p-6 md:p-8 gold-border-glow grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch shadow-2xl">
-            
-            <!-- Left Panel: Caller Input & Scenario Selector -->
+            <!-- Left Panel -->
             <div class="lg:col-span-7 flex flex-col justify-between gap-6">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between border-b border-white/10 pb-3">
@@ -187,7 +185,7 @@
                 </button>
             </div>
 
-            <!-- Right Panel: Telephony Output Log & Real-Time Metrics -->
+            <!-- Right Panel -->
             <div class="lg:col-span-5 bg-black/90 rounded-2xl p-6 border border-white/10 font-mono text-xs flex flex-col justify-between space-y-6">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between border-b border-white/10 pb-3">
@@ -206,7 +204,6 @@
                     </div>
                 </div>
 
-                <!-- Deep Telephony Telemetry Details -->
                 <div class="pt-4 border-t border-white/10 space-y-2 text-[10px] text-slate-400">
                     <div class="flex justify-between items-center">
                         <span>Vapi Edge Latency:</span>
@@ -221,48 +218,6 @@
                         <strong class="text-white font-mono">100% 30-Day Guaranteed</strong>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Detailed Technical Architecture Section -->
-        <div class="bg-garfield-panel p-8 md:p-10 rounded-3xl border border-white/10 space-y-6">
-            <h2 class="text-2xl font-black text-white border-b border-white/10 pb-4 flex items-center justify-between">
-                <span>Under The Hood: Sub-150ms Telephony & 8-Channel Omnichannel Pipeline</span>
-                <span class="text-xs font-mono text-amber-400">Architecture v4.9</span>
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
-                <div class="bg-black/60 p-5 rounded-2xl border border-white/10 space-y-3">
-                    <div class="text-amber-400 font-bold uppercase text-sm">1. Semantic Intent Detection</div>
-                    <p class="text-slate-300 leading-relaxed text-[11px]">
-                        The incoming caller's voice stream is processed by Vapi WebRTC edge nodes in under 40ms. Semantic intent is classified into high-net-worth priorities without speech pause latency.
-                    </p>
-                </div>
-                <div class="bg-black/60 p-5 rounded-2xl border border-white/10 space-y-3">
-                    <div class="text-amber-400 font-bold uppercase text-sm">2. Neural Tone Synthesis</div>
-                    <p class="text-slate-300 leading-relaxed text-[11px]">
-                        Our custom Garfield Executive voice model responds with human-grade authoritative intonation, automatically deploying closing hooks that dismantle price hesitations.
-                    </p>
-                </div>
-                <div class="bg-black/60 p-5 rounded-2xl border border-white/10 space-y-3">
-                    <div class="text-amber-400 font-bold uppercase text-sm">3. 8-Channel Omnichannel Dispatch</div>
-                    <p class="text-slate-300 leading-relaxed text-[11px]">
-                        Instantly dispatches verified call transcripts and lead hashes to Chrome Extensions, Slack Channels, Discord War Rooms, Raycast Launchers, WhatsApp API, Desktop Trays, Mobile Apps, and Notion Workspaces simultaneously.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Programmatic SEO Sub-Nodes Navigation Anchor -->
-        <div class="space-y-4 border-t border-white/10 pt-8 text-center font-mono text-xs">
-            <span class="text-slate-400">Explore All 10,000+ Deployed Programmatic Child Sub-Pages:</span>
-            <div class="flex justify-center gap-4 pt-2">
-                <a href="modules.html" class="bg-amber-400 hover:bg-amber-300 text-black font-bold px-6 py-3 rounded-xl uppercase transition-all shadow-md cursor-pointer">
-                    Browse 10,000+ Modules ↗
-                </a>
-                <a href="escrow.html" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-xl uppercase transition-all border border-white/10 cursor-pointer">
-                    View Zero Risk Escrow ↗
-                </a>
             </div>
         </div>
     </main>
