@@ -11,8 +11,8 @@ async function runTask() {
         // 1. 範例：呼叫 OpenAI 或執行原本 n8n 的核心邏輯
         console.log('Executing AI intelligence check...');
         
-        // 2. 範例：將處理結果寫入 Supabase 資料庫
-        const response = await fetch(`${SUPABASE_URL}/rest/v1/your_table_name`, {
+        // 2. 將 your_table_name 替換為真實的資料表名稱，例如 client_configs
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/client_configs`, {
             method: 'POST',
             headers: {
                 'apikey': SUPABASE_KEY,
@@ -21,14 +21,16 @@ async function runTask() {
                 'Prefer': 'return=minimal'
             },
             body: JSON.stringify({
-                title: 'GitHub Actions Automated Run',
-                status: 'success',
-                created_at: new Date().toISOString()
+                // 請根據您的資料表欄位調整寫入的內容
+                client_id: 'github_action_test',
+                sender_email: 'system@automation.local',
+                api_key: 'test_key'
             })
         });
 
         if (!response.ok) {
-            throw new Error(`Supabase error: ${response.statusText}`);
+            const errorText = await response.text();
+            throw new Error(`Supabase error: ${response.statusText} - ${errorText}`);
         }
 
         console.log('Task completed and successfully synced to Supabase!');
